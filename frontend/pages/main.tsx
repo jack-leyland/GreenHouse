@@ -6,7 +6,7 @@ import Navbar from "../components/navbar";
 const Main = () => {
   return (
     <div className="grid place-items-center">
-      <div className="w-5/6 h-[600px] text-[90px] font-extrabold text-black grid place-items-center rounded-lg mt-[40px] bg-green-300">
+      <div className="w-5/6 h-full text-4xl font-extrabold text-black grid place-items-center rounded-lg mt-[40px] bg-green-300">
         MUCH DATA, MUCH CONTENT
       </div>
     </div>
