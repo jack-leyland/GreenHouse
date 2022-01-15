@@ -1,25 +1,32 @@
-name: Build Docker image and deploy to Heroku
-
+name: Build Docker Image and Deploy to Heroku
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - main
 jobs:
-  build:
+  app1:
+    name: Build and deploy app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Login to Heroku Container registry
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build and push Docker to Heroku
         env:
+          HEROKU_APP_NAME: epc-site-backend
+          DOCKERFILE_DIRECTORY: "backend"
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-      - name: Build and push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push -a epc-site-backend web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -a epc-site-backend web
+          DOCKERFILE_NAME: "Dockerfile"
+          DOCKER_OPTIONS: "--no-cache"
+        run: |
+          cd ${DOCKERFILE_DIRECTORY}
+          echo ${HEROKU_API_KEY} | docker login \
+            --username=${HEROKU_EMAIL} \
+            registry.heroku.com \
+            --password-stdin
+          docker build \
+            --file ${DOCKERFILE_NAME} \
+            ${DOCKER_OPTIONS} \
+            --tag registry.heroku.com/${HEROKU_APP_NAME}/web .
+          heroku container:push web --app ${HEROKU_APP_NAME}
+          heroku container:release web --app ${HEROKU_APP_NAME}
