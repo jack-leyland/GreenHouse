@@ -52,6 +52,6 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "backend" 
           stack: "container"
-          # healthcheck: "https://epc-site-backend.herokuapp.com/ping"
-          # delay: 5
-          # rollbackonhealthcheckfailed: true
+          healthcheck: "https://epc-site-backend.herokuapp.com/ping"
+          delay: 10
+          rollbackonhealthcheckfailed: true
