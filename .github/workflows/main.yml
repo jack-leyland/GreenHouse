@@ -53,5 +53,5 @@ jobs:
           appdir: "backend" 
           stack: "container"
           healthcheck: "https://epc-site-backend.herokuapp.com/ping"
-          delay: 10
-          rollbackonhealthcheckfailed: true
+          delay: 20
+          # rollbackonhealthcheckfailed: true
