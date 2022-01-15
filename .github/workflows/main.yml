@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths: 
+      - "backend/"
+      - "!frontend/"
 
 jobs:
   # isort:
@@ -36,16 +39,20 @@ jobs:
     name: Black Formatting Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: rickstaa/action-black@v1
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: black formatter
+        uses: rickstaa/action-black@v1
         with:
           black_args: ". --check"
   build:
     name: Builder Docker Image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "epc-site-backend"
