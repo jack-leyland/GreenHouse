@@ -30,9 +30,7 @@ jobs:
         uses: dkershner6/vercel-set-env-action@v1
         with:
           token: ${{ secrets.VERCEL_TOKEN }}
-          teamId: ${{ secrets.VERCEL_TEAM_ID }} 
-          projectName: nexturl # project name in Vercel
-          envVariableKeys: MONGODB_URL,MONGODB_DB
+          projectName: ${{secrets.VERCEL_PROJECT_NAME}} # project name in Vercel
         # env:
           # MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - name: deploy site to vercel      
