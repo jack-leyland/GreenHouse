@@ -1,12 +1,9 @@
-name: Deploy to Heroku
+name: Deploy
 
 on:
   push:
     branches:
       - main
-    paths: 
-      - "backend/"
-      - "!frontend/"
 
 jobs:
   # isort:
@@ -20,9 +17,37 @@ jobs:
   #     - uses: jamescurtin/isort-action@master
   #       with:
   #           requirementsFiles: "requirements.txt"
+  nextjs-vercel: 
+    name: Deploy Next.js to Vercel
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set environment variables in Vercel
+        uses: dkershner6/vercel-set-env-action@v1
+        with:
+          token: ${{ secrets.VERCEL_TOKEN }}
+          teamId: ${{ secrets.VERCEL_TEAM_ID }} 
+          projectName: nexturl # project name in Vercel
+          envVariableKeys: MONGODB_URL,MONGODB_DB
+        # env:
+          # MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      - name: deploy site to vercel      
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}} 
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}      
   flake8-lint:
     name: Flake8 Linting Test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Check out source repository
         uses: actions/checkout@v2
@@ -38,6 +63,9 @@ jobs:
   black-formatting:
     name: Black Formatting Test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Check out source repository
         uses: actions/checkout@v2
@@ -45,9 +73,13 @@ jobs:
         uses: rickstaa/action-black@v1
         with:
           black_args: ". --check"
-  build:
+
+  build-docker:
     name: Builder Docker Image
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Check out source repository
         uses: actions/checkout@v2
@@ -62,3 +94,4 @@ jobs:
           # healthcheck: "https://epc-site-backend.herokuapp.com/ping"
           # delay: 20
           # rollbackonhealthcheckfailed: true
+ 
