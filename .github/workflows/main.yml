@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Heroku
 
 on:
   push:
@@ -6,8 +6,20 @@ on:
       - main
 
 jobs:
-  test:
-    name: runner / black formatter
+  flake8-lint:
+    name: Flake8 Linting Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v2
+      - name: Set up Python environment
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
+  black-formatting:
+    name: Black Formatting Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +27,7 @@ jobs:
         with:
           black_args: ". --check"
   build:
+    name: Builder Docker Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,4 +39,4 @@ jobs:
           appdir: "backend" 
           stack: "container"
           healthcheck: "https://epc-site-backend.herokuapp.com/ping"
-          rollbackonhealthcheckfailed: true
+          # rollbackonhealthcheckfailed: true
