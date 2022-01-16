@@ -10,7 +10,7 @@ const Landing = () => {
     <div className="w-screen h-screen flex justify-center">
       <div className="h-1/2 relative top-1/3 grid place-items-center">
         <span className="w-full text-green-500 font-sans font-extrabold text-8xl ">
-          Great App Name Inc.
+          Make America Great Again App Name Inc.
         </span>
         <div className="relative rounded-full w-4/6 h-1/5 border-2 border-gray-400 pl-2 focus-within:border-gray-600">
           <SearchIcon className="fill-[none] stroke-gray-400 w-5 pt-1" />
