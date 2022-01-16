@@ -16,13 +16,6 @@ python3 -m venv .venv
 python -m venv .venv
 ```
 
-## Install Dependencies
-
-```sh
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-```
-
 ## Activate virtual environment
 
 #### Windows
@@ -31,10 +24,23 @@ pip install -r requirements-dev.txt
 . .venv/Scripts/activate
 ```
 
+Alternatively, try
+```sh
+.venv\Scripts\activate.bat
+```
+
+
 ### macOS (probably Linux too)
 
 ```sh
  source .venv/bin/activate
+```
+
+## Install Dependencies
+
+```sh
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
 ## Create a local .env file and place in the api folder
