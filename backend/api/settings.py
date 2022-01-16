@@ -33,6 +33,11 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "epc-site-backend.herokuapp.com"]
 
+CORS_ALLOWED_ORIGINS = [
+    "localhost",
+    "127.0.0.1",
+    "epc-site-backend.herokuapp.com",
+]
 
 # Application definition
 
