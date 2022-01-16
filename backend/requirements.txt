@@ -6,3 +6,4 @@ black==21.11b1
 flake8==4.0.1
 isort==5.10.1
 django-environ==0.8.1
+django-cors-headers==3.11.0

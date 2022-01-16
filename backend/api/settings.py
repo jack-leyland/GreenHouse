@@ -39,13 +39,12 @@ CORS_ALLOWED_ORIGINS = [
     "epc-site-backend.herokuapp.com",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    "localhost",
+    "127.0.0.1",
+    "https://epc-site-backend.herokuapp.com",
+]
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CSRF_TRUSTED_ORIGINS = ["localhost", "127.0.0.1", "epc-site-backend.herokuapp.com"]
-
-CSRF_TRUSTED_ORIGINS = ["epc-site-backend.herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,9 +54,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
