@@ -17,6 +17,21 @@ jobs:
   #     - uses: jamescurtin/isort-action@master
   #       with:
   #           requirementsFiles: "requirements.txt"
+  prettier:
+    name: Run Prettier formatter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write **/*.{js,tsx}
   nextjs-vercel: 
     name: Deploy Next.js to Vercel
     runs-on: ubuntu-latest
@@ -77,7 +92,7 @@ jobs:
         uses: rickstaa/action-black@v1
         with:
           black_args: ". --check"
-
+  
   build-docker:
     name: Builder Docker Image
     runs-on: ubuntu-latest
