@@ -93,11 +93,6 @@ db_from_env = dj_database_url.config(
 )
 DATABASES["default"].update(db_from_env)
 
-# Check if we are connected to Heroku Postgres DB
-from django import db
-
-print(db.connections.databases)
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
