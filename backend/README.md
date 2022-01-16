@@ -1,37 +1,59 @@
-# Initial Setup
+# Setup
 
-## Python
+## Create a virtual environment
 
-Download and install Python [3.10.1]{https://www.python.org/downloads/release/python-3101/}
+### macOS/Linux
 
-Make sure you add to path on installation.
-
-Confirm it is by running
-
-```
-$ python -V
-```
-
-## Docker
-
-Download and install [Docker]{https://www.docker.com/get-started}
-
-To test, build the new image and spin up a new container:
-
-```
-$ docker build -t web:latest .
-$ docker run -d --name django-heroku -e "PORT=8765" -e "DEBUG=1" -p 8007:8765 web:latest
-```
-
-Stop then remove the running container again:
-
-```
-$ docker stop django-heroku
-$ docker rm django-heroku
-```
-
-# Create a local .env file with Django Secret Keys
+You may need to run sudo apt-get install python3-venv first
 
 ```sh
-SECRET_KEY = <key>
+python3 -m venv .venv
 ```
+
+### Windows
+
+```sh
+python -m venv .venv
+```
+
+## Install Dependencies
+
+```sh
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+```
+
+## Activate virtual environment
+
+#### Windows
+
+```sh
+. .venv/Scripts/activate
+```
+
+### macOS (probably Linux too)
+
+```sh
+ source .venv/bin/activate
+```
+
+## Create a local .env file and place in the api folder
+
+```sh
+SECRET_KEY=<secret>
+DATABASE_URL=<server address from Heroku>
+DEBUG=TRUE
+```
+
+# Run the server
+
+```sh
+python manage.py runserver
+```
+
+Navigate to /admin and login to use admin panel
+
+## Database
+
+To view the Heroku Postgres database you can use [PgWeb]{https://github.com/sosedoff/pgweb}
+Download and run, then go the browser window running and login using the Heroku DB Credentials
