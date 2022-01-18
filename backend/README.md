@@ -25,10 +25,10 @@ python -m venv .venv
 ```
 
 Alternatively, try
+
 ```sh
 .venv\Scripts\activate.bat
 ```
-
 
 ### macOS (probably Linux too)
 
@@ -50,6 +50,11 @@ SECRET_KEY=<secret>
 DATABASE_URL=<server address from Heroku>
 DEBUG=TRUE
 ```
+
+## Fix graphene 2.15.0 issue with Django 4.0
+
+Navigate to backend/.venv/Lib/site-packages/graphene_django/utils/utils.py
+On lines 6 and 29, change force_text to force_str
 
 # Run the server
 
