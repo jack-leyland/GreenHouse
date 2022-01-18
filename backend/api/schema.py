@@ -1,9 +1,7 @@
 import graphene
 
 class Query(graphene.ObjectType):
-    pass
+    hello = graphene.String(default_value="Hi!")
 
-class Mutation(graphene.ObjectType):
-    pass
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query)

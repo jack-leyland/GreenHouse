@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "graphene_django",
-    # "graph",
 ]
 
 MIDDLEWARE = [
@@ -145,5 +144,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Graphene setup
 GRAPHENE = {
-    "SCHEMA": "django_root.schema.schema"
+    "SCHEMA": "api.schema.schema"
 }
