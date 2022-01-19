@@ -34,14 +34,14 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "epc-site-backend.herokuapp.com"]
 
 CORS_ALLOWED_ORIGINS = [
-    "localhost",
-    "127.0.0.1",
-    "epc-site-backend.herokuapp.com",
+    "http://localhost",
+    "http://127.0.0.1",
+    "https://epc-site-backend.herokuapp.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "localhost",
-    "127.0.0.1",
+    "http://localhost",
+    "http://127.0.0.1",
     "https://epc-site-backend.herokuapp.com",
 ]
 
@@ -151,6 +151,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Graphene setup
-GRAPHENE = {
-    "SCHEMA": "api.schema.schema"
-}
+GRAPHENE = {"SCHEMA": "api.schema.schema"}

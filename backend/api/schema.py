@@ -3,11 +3,12 @@ import requests
 import json
 
 headers = {
-    'Accept': 'application/json',
-    'Authorization': 'Basic amFycnlkLmNoZXNvQGdtYWlsLmNvbTpkMzEwOWRmYmI4ZDI2OWZiZDkxMjFlY2U0NGMxNjY2NTA1MDBiM2Jm'
+    "Accept": "application/json",
+    "Authorization": "Basic amFycnlkLmNoZXNvQGdtYWlsLmNvbTpkMzEwOWRmYmI4ZDI2OWZiZDkxMjFlY2U0NGMxNjY2NTA1MDBiM2Jm",
 }
 
 payload = {}
+
 
 class Query(ObjectType):
     address = String(name=String(default_value="N/A"))
@@ -19,7 +20,10 @@ class Query(ObjectType):
         response = requests.request("GET", url, headers=headers, data=payload)
         responseJSON = response.json()["rows"]
 
-        data = [{"address" : item["address"], "lmk-key" : item["lmk-key"]} for item in responseJSON]
+        data = [
+            {"address": item["address"], "lmk-key": item["lmk-key"]}
+            for item in responseJSON
+        ]
         return json.dumps(data)
 
     def resolve_certificate(root, info, name):
@@ -27,7 +31,8 @@ class Query(ObjectType):
         response = requests.request("GET", url, headers=headers, data=payload)
         responseJSON = response.json()
 
-        if (not responseJSON): return {"Error": "Invalid LMK key" }
+        if not responseJSON:
+            return {"Error": "Invalid LMK key"}
 
         return responseJSON["rows"][0]
 
@@ -36,8 +41,10 @@ class Query(ObjectType):
         response = requests.request("GET", url, headers=headers, data=payload)
         responseJSON = response.json()
 
-        if (not responseJSON): return {"Error": "Invalid LMK key" }
+        if not responseJSON:
+            return {"Error": "Invalid LMK key"}
 
         return responseJSON["rows"]
+
 
 schema = Schema(query=Query)
