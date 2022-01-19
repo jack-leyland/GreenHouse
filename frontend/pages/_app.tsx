@@ -1,17 +1,11 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import type { ReactNode, ReactElement } from "react";
-import type { NextPage } from "next";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import type { ReactNode, ReactElement } from 'react';
+import type { NextPage } from 'next';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: "", // Add graphql server uri when ready
+  uri: 'http://localhost:8000/graphql', // Add graphql server uri when ready
   cache: new InMemoryCache(),
 });
 
