@@ -10,13 +10,15 @@ export default function SearchBar({ searchTextValue }: Props) {
 
   //what to do when placeholder overflows? Pop prompt underneath
   return (
-    <div className="relative w-[30vw] h-[50px] border-2 border-darkGrey rounded-md left-[20vw] top-[20vh] flex focus-within:border-black">
+    <div className="flex">
       <input
         maxLength={6}
         placeholder={searchTextValue}
-        className="peer order-last textGrey pl-[1%] outline-0 w-[calc(100%-36px)] rounded-md font-searchTextFont text-landingSearch"
+        className=" placeholder-darkGrey outline-0 w-[18vw] h-[55px] bg-lightGrey rounded-l-sm pl-[15px] font-logoFont font-medium"
       ></input>
-      <SearchIcon className="w-[35px] pl-[1%] stroke-2 stroke-darkGrey peer-focus:stroke-black" />
+      <button type="button" className="w-[6vw] h-[55px] rounded-r-sm bg-black text-white font-logoFont font-normal">
+        Search
+      </button>
     </div>
   );
 }

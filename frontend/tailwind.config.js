@@ -8,7 +8,10 @@ module.exports = {
       'landingSearch': '1.1rem'
     },
     borderRadius: {
-      'md': '9px',
+      'sm': '6px',
+    },
+    placeholderColor: {
+      'darkGrey':'#444444',
     },
     extend: {
       colors:{
@@ -18,11 +21,11 @@ module.exports = {
         'skyBlue':'#2DE1FC',
         'deepGreen': '#214F4B',
         'textGrey':'#B1B1B1',
-        'darkGrey':'#989898'
+        'darkGrey':'#989898',
+        'lightGrey': '#f7f7f7'
       },
       fontFamily: {
-        logoFont: ['Dongle', 'sans-serif'],
-        searchTextFont: ['Rubik', 'sans-serif']
+        logoFont: ['Inter', 'sans-serif'],
       },
     },
   },

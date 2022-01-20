@@ -15,13 +15,14 @@ const GET_ADDRESSES = gql`
 
 const Landing = () => {
   return (
-    <div>
-      <Logo className="pt-[5vh] block m-auto w-[45vw]" />
-      <Leaf className="absolute bottom-[0] right-[calc(0%-4.5vw)] w-[35vw]" />
+    <>
+    <div className="absolute top-[25vh] w-full text-black font-logoFont font-black text-[6rem] text-center tracking-tight">GreenHouse</div>
+    <div className='absolute top-[calc(50vh-7.5vh-27.5px)] w-full flex justify-center'>
       <SearchBar
-        searchTextValue={'Enter your postcode to see how you compare'}
+        searchTextValue={'Search by Postcode'}
       />
     </div>
+    </>
   );
 };
 
