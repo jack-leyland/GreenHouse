@@ -6,7 +6,7 @@ interface props {
 
 export default function PageTitle({children} : props) {
     return(
-        <div className="mt-9 ml-9 pb-6 mr-9 border-b-2 border-neutral-100">
+        <div className="mt-9 ml-9 pb-2 mr-9 border-b-2 border-neutral-300">
             {children}
         </div>
     )
