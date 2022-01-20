@@ -23,7 +23,7 @@ jobs:
         with:
           # This part is also where you can pass other options, for example:
           prettier_options: --write **/*.{js,tsx}
-  nextjs-vercel: 
+  nextjs-vercel:
     name: Deploy Next.js to Vercel
     runs-on: ubuntu-latest
     defaults:
@@ -45,13 +45,13 @@ jobs:
           ENV_VAR2: envVar2Value
           TARGET_ENV_VAR2: preview,development
           TYPE_ENV_VAR2: plain
-      - name: deploy site to vercel      
+      - name: deploy site to vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--prod' #Optional
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}} 
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}      
+          vercel-args: "--prod" #Optional
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
   flake8-lint:
     name: Flake8 Linting Test
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          max-line-length: "100"
+          max-line-length: "120"
 
   black-formatting:
     name: Black Formatting Test
@@ -111,9 +111,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "epc-site-backend"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          appdir: "backend" 
+          appdir: "backend"
           stack: "container"
           # healthcheck: "https://epc-site-backend.herokuapp.com/ping"
           # delay: 20
           # rollbackonhealthcheckfailed: true
- 

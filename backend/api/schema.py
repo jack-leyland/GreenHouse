@@ -1,10 +1,20 @@
 from graphene import ObjectType, String, Schema
 import requests
 import json
+import environ
+import os
+
+# Set the project base directory
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+EPC_API_KEY = os.environ.get("EPC_API_KEY")
 
 headers = {
     "Accept": "application/json",
-    "Authorization": "Basic amFycnlkLmNoZXNvQGdtYWlsLmNvbTpkMzEwOWRmYmI4ZDI2OWZiZDkxMjFlY2U0NGMxNjY2NTA1MDBiM2Jm",
+    "Authorization": f"Basic {EPC_API_KEY}",
 }
 
 payload = {}

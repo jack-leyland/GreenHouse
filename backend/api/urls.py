@@ -21,5 +21,5 @@ from .views import ping
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ping/", ping, name="ping"),
-    path("graphql", GraphQLView.as_view(graphiql=True)),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 ]
