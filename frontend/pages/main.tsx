@@ -1,23 +1,32 @@
 import type { ReactElement } from "react";
-import Router from "next/router";
 import Layout from "../components/layout";
-import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
+import Card from "../components/card";
+import PageTitle from "../components/pageTitle";
 
 const Main = () => {
   return (
-    <div className="grid place-items-center">
-      <div className="w-5/6 h-full text-4xl font-extrabold text-black grid place-items-center rounded-lg mt-[40px] bg-green-300">
-        MUCH DATA, MUCH CONTENT
+    <>
+      <div className="w-full">
+        <PageTitle>
+          <div>
+            <h1 className="text-2xl pb-2">Overview</h1>
+            <h3 className="text-sm">Address...</h3>
+          </div>
+        </PageTitle>
+
       </div>
-    </div>
+    </>
   );
 };
 
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <Navbar />
-      {page}
+      <div className = "flex">
+        <Sidebar />
+        {page}
+      </div>
     </Layout>
   );
 };
