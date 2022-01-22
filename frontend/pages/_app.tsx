@@ -8,6 +8,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import { AppContextWrapper } from '../context/state';
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
@@ -28,9 +29,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <ApolloProvider client={client}>
-      {getLayout(<Component {...pageProps} />)}
-    </ApolloProvider>
+    <AppContextWrapper>
+      <ApolloProvider client={client}>
+        {getLayout(<Component {...pageProps} />)}
+      </ApolloProvider>
+    </AppContextWrapper>
   );
 }
 

@@ -5,7 +5,8 @@ import { gql, useLazyQuery } from '@apollo/client';
 import Circle from '../assets/circle.svg';
 import House from '../assets/house.svg';
 import SearchBar from '../components/search-bar';
-import AddressModal from '../components/address-list';
+import AddressModal from '../components/address-modal';
+import { useAppContext } from '../context/state';
 
 const GET_ADDRESSES = gql`
   query Address($queryFormattedPostcode: String!) {
@@ -47,12 +48,13 @@ const Landing = () => {
   const [loadAddresses, { called, loading, error, data }] = useLazyQuery(
     GET_ADDRESSES,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-and-network',
     }
   );
   const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
+  const GlobalContext = useAppContext();
 
-  const handleSubmit = (): void => {
+  const handleSearchSubmit = (): void => {
     if (!isValidPostcode(searchBoxText)) {
       setIsInputError(true);
     } else {
@@ -66,15 +68,27 @@ const Landing = () => {
 
   const handleSearchInput = (inputValue: string) => {
     setSearchBoxText(inputValue);
-    if (!inputValue) setIsInputError(false);
+    if (!inputValue) {
+      setIsInputError(false)
+      setIsQueryError(false)};
   };
 
-  //TODO:
-  // Handle Loading State
-  // How to deal with query errors?
-  // Make Address component
-  if (error) console.log(error);
-  console.log(data);
+  const handleBack = ():void => {
+    setIsInputError(false);
+    setActiveAddressModal(false);
+    setIsQueryError(false)
+  }
+
+  const handleSelection = (lmk: string):void => {
+    GlobalContext.setActiveLmk(lmk);
+    //Route to dashboard here
+  }
+
+  if (error) {
+    setIsQueryError(true);
+  };
+
+
   return (
     <>
       <div
@@ -92,7 +106,7 @@ const Landing = () => {
               searchTextValue={'Search by Postcode'}
               width={'w-[30vw] max-w-[325px]'}
               inputHandler={handleSearchInput}
-              submitHandler={handleSubmit}
+              submitHandler={handleSearchSubmit}
               isError={isInputError}
             />
           )}
@@ -101,6 +115,8 @@ const Landing = () => {
               isLoading={loading}
               isError={isQueryError}
               data={data?.address}
+              backHandler={handleBack}
+              selectionHandler={handleSelection}
             />
           ) : null}
         </div>
