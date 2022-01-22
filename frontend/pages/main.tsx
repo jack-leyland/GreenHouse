@@ -3,6 +3,10 @@ import Layout from "../components/layout";
 import Sidebar from "../components/sidebar";
 import Card from "../components/card";
 import PageTitle from "../components/pageTitle";
+import Lottie from 'react-lottie-player'
+
+import loadingLottieJson from '../public/assets/animation/loadingLottie.json'
+import errorJson from '../public/assets/animation/loadingLottie.json'
 
 import { gql, useQuery } from '@apollo/client';
 const GET_CERTIFICATES = gql`
@@ -104,7 +108,38 @@ return (
               </Card>
             </div>
         </div>
-        : null
+        : 
+        <>
+        {
+          loading ?
+          <div className="w-full flex flex-col justify-center items-center">
+            <h1 className="animate-fade text-3xl font-bold pb-2">Loading...</h1>
+              <Lottie
+                loop
+                animationData={loadingLottieJson}
+                play
+                style={{ width: 150, height: 150 }}
+              />
+          </div>
+        :
+        <>
+        {
+          error && !data ?
+          <div className="w-full flex flex-col justify-center items-center">
+            <h1 className="animate-fade text-3xl font-bold pb-2">Opps, there was an error, try again later...</h1>
+              <Lottie
+                loop
+                animationData={errorJson}
+                play
+                style={{ width: 150, height: 150 }}
+              />
+          </div>
+        :
+          null     
+        }
+        </>    
+        }
+        </>
       }
   </>
 );
