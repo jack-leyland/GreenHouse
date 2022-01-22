@@ -5,8 +5,8 @@ import Card from "../components/card";
 import PageTitle from "../components/pageTitle";
 import Lottie from 'react-lottie-player'
 
-import loadingLottieJson from '../public/assets/animation/loadingLottie.json'
-import errorJson from '../public/assets/animation/loadingLottie.json'
+import loadingJson from '../public/assets/animation/loading.json'
+import errorJson from '../public/assets/animation/error.json'
 
 import { gql, useQuery } from '@apollo/client';
 const GET_CERTIFICATES = gql`
@@ -116,7 +116,7 @@ return (
             <h1 className="animate-fade text-3xl font-bold pb-2">Loading...</h1>
               <Lottie
                 loop
-                animationData={loadingLottieJson}
+                animationData={loadingJson}
                 play
                 style={{ width: 150, height: 150 }}
               />
