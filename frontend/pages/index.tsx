@@ -32,7 +32,6 @@ const isValidPostcode = (postcode: string): boolean => {
   // allows some non-real postcodes: https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes
   let formatted = formatPostcode(postcode);
   if (!formatted) return false;
-  console.log(formatted);
   let postcodeRegex = new RegExp(
     '^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|' +
       '(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y]' +
@@ -45,8 +44,12 @@ const Landing = () => {
   const [searchBoxText, setSearchBoxText] = useState<string>('');
   const [isInputError, setIsInputError] = useState<boolean>(false);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [loadAddresses, { called, loading, error, data }] =
-    useLazyQuery(GET_ADDRESSES);
+  const [loadAddresses, { called, loading, error, data }] = useLazyQuery(
+    GET_ADDRESSES,
+    {
+      fetchPolicy: 'no-cache',
+    }
+  );
   const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
 
   const handleSubmit = (): void => {
@@ -71,7 +74,7 @@ const Landing = () => {
   // How to deal with query errors?
   // Make Address component
   if (error) console.log(error);
-
+  console.log(data);
   return (
     <>
       <div
@@ -94,7 +97,11 @@ const Landing = () => {
             />
           )}
           {activeAddressModal ? (
-            <AddressModal isLoading={true} isError={isQueryError} data={data} />
+            <AddressModal
+              isLoading={loading}
+              isError={isQueryError}
+              data={data?.address}
+            />
           ) : null}
         </div>
         {isInputError ? (
