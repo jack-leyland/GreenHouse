@@ -11,7 +11,7 @@ import errorJson from '../public/assets/animation/error.json'
 import { gql, useQuery } from '@apollo/client';
 const GET_CERTIFICATES = gql`
   {
-    certificate(name: "b30ef8fbb974a1d8164964c489bfed5b663166a9b4ecee46bf0d80f441e23207")
+    certificate(name: "b30ef8fbb974a1d8164964c489bfed5b663166a9b4ecee46bf0d80f441e2320")
   }
 `;
 
@@ -112,7 +112,7 @@ return (
         <>
         {
           loading ?
-          <div className="w-full flex flex-col justify-center items-center">
+          <div className="w-full flex flex-col justify-center items-center bg-slate-50">
             <h1 className="animate-fade text-3xl font-bold pb-2">Loading...</h1>
               <Lottie
                 loop
@@ -125,7 +125,7 @@ return (
         <>
         {
           error && !data ?
-          <div className="w-full flex flex-col justify-center items-center">
+          <div className="w-full flex flex-col justify-center items-center bg-slate-50">
             <h1 className="animate-fade text-3xl font-bold pb-2">Opps, there was an error, try again later...</h1>
               <Lottie
                 loop
