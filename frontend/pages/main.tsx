@@ -20,6 +20,19 @@ if(data){
   epcData = JSON.parse(data.certificate)
 }
 
+interface ColorDictionary<Value> {
+  [id: string]: Value;
+}
+const epcColorDictionary: ColorDictionary<string>  = {
+  "A": "green-700",
+  "B": "green-300",
+  "C": "lime-700",
+  "D": "yellow-300",
+  "E": "amber-500",
+  "F": "orange-600",
+  "G": "red-700"
+}
+
 return (
   <>
       {
@@ -31,17 +44,17 @@ return (
           />
           <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
                 {/*Style these cards based on the epc band*/}
-              <Card style={"col-start-1 col-end-3"}>
+              <Card style={"col-start-1 col-end-3"} backgroundColor={epcColorDictionary[epcData["current-energy-rating"]]}>
                 <div>
                   <h3>Current Energy Rating</h3>
-                  <div>{epcData["current-energy-rating"]}</div>
+                  <div className="p-2 font-bold text-3xl">{epcData["current-energy-rating"]}</div>
                 </div>
               </Card>
               {/*Style these cards based on the epc band*/}
-              <Card style={`col-start-3 col-end-5`}>
+              <Card style={`col-start-3 col-end-5`} backgroundColor={epcColorDictionary[epcData["current-energy-rating"]]}>
                 <div>
                   <h3>Potential Energy Rating</h3>
-                  <div>{epcData["potential-energy-rating"]}</div>
+                  <div className="p-2 font-bold text-3xl">{epcData["potential-energy-rating"]}</div>
                 </div>
               </Card>
               <Card style={"col-start-5 col-end-7"}>
@@ -102,7 +115,7 @@ return (
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <div className = "flex">
+      <div className = "flex m-4 shadow-2xl rounded-2xl overflow-hidden">
         <Sidebar />
         {page}
       </div>
