@@ -2,7 +2,7 @@ import React from "react";
 
 interface props {
     icon: React.ReactChild | React.ReactChildren;
-    label: String
+    label: string
   }
 
 export default function SidebarItem({icon, label} : props) {

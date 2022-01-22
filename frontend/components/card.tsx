@@ -2,7 +2,7 @@ import React from "react";
 
 interface props {
     children: React.ReactChild | React.ReactChildren;
-    style: String
+    style: string
   }
 
 export default function Card({children, style} : props) {
