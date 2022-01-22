@@ -1,15 +1,19 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import type { ReactNode, ReactElement } from "react";
-import type { NextPage } from "next";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import type { ReactNode, ReactElement } from 'react';
+import type { NextPage } from 'next';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-} from "@apollo/client";
+  createHttpLink,
+} from '@apollo/client';
+import { AppContextWrapper } from '../context/state';
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql/",
+  link: new (createHttpLink as any)({
+    uri: 'http://localhost:8000/graphql',
+  }),
   cache: new InMemoryCache(),
 });
 
@@ -25,9 +29,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <ApolloProvider client={client}>
-      {getLayout(<Component {...pageProps} />)}
-    </ApolloProvider>
+    <AppContextWrapper>
+      <ApolloProvider client={client}>
+        {getLayout(<Component {...pageProps} />)}
+      </ApolloProvider>
+    </AppContextWrapper>
   );
 }
 

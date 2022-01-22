@@ -30,9 +30,10 @@ class Query(ObjectType):
         response = requests.request("GET", url, headers=headers, data=payload)
         responseJSON = response.json()["rows"]
         data = [
-            {"address": item["address"], "lmk-key": item["lmk-key"]}
+            {"address": item["address"], "lmk": item["lmk-key"]}
             for item in responseJSON
         ]
+
         return json.dumps(data)
 
     def resolve_certificate(root, info, name):

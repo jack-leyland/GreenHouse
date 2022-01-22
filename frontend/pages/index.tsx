@@ -1,32 +1,144 @@
-import type { ReactElement } from "react";
-import Router from "next/router";
-import Layout from "../components/layout";
-import SearchIcon from "../public/assets/search-icon.svg";
+import { ReactElement, useEffect, useState } from 'react';
+import Router from 'next/router';
+import Layout from '../components/layout';
+import { gql, useLazyQuery } from '@apollo/client';
+import Circle from '../assets/circle.svg';
+import House from '../assets/house.svg';
+import SearchBar from '../components/search-bar';
+import AddressModal from '../components/address-modal';
+import { useAppContext } from '../context/state';
+
+const GET_ADDRESSES = gql`
+  query Address($queryFormattedPostcode: String!) {
+    address(name: $queryFormattedPostcode)
+  }
+`;
+
+const formatPostcode = (postcode: string): string => {
+  let strippedPostcode = postcode.replace(/\s+/g, '');
+  if (strippedPostcode.length < 5 || strippedPostcode.length > 7) return '';
+  let arr = [...strippedPostcode];
+  if (strippedPostcode.length == 5) {
+    arr.splice(2, 0, ' ');
+  } else if (strippedPostcode.length == 6) {
+    arr.splice(3, 0, ' ');
+  } else if (strippedPostcode.length == 7) {
+    arr.splice(4, 0, ' ');
+  }
+  let formatted = arr.join('');
+  return formatted;
+};
+
+const isValidPostcode = (postcode: string): boolean => {
+  // allows some non-real postcodes: https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes
+  let formatted = formatPostcode(postcode);
+  if (!formatted) return false;
+  let postcodeRegex = new RegExp(
+    '^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|' +
+      '(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y]' +
+      '[0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$'
+  );
+  return postcodeRegex.test(formatted);
+};
 
 const Landing = () => {
-  const text: string = "Type anything and press enter";
+  const [searchBoxText, setSearchBoxText] = useState<string>('');
+  const [isInputError, setIsInputError] = useState<boolean>(false);
+  const [isQueryError, setIsQueryError] = useState<boolean>(false);
+  const [loadAddresses, { called, loading, error, data }] = useLazyQuery(
+    GET_ADDRESSES,
+    {
+      fetchPolicy: 'cache-and-network',
+    }
+  );
+  const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
+  const GlobalContext = useAppContext();
+
+  const handleSearchSubmit = (): void => {
+    if (!isValidPostcode(searchBoxText)) {
+      setIsInputError(true);
+    } else {
+      let formatted = formatPostcode(searchBoxText);
+      let queryFormattedPostcode = formatted.replace(/\s+/g, '');
+      setIsInputError(false);
+      loadAddresses({ variables: { queryFormattedPostcode } });
+      setActiveAddressModal(true);
+    }
+  };
+
+  const handleSearchInput = (inputValue: string) => {
+    setSearchBoxText(inputValue);
+    if (!inputValue) {
+      setIsInputError(false)
+      setIsQueryError(false)};
+  };
+
+  const handleBack = ():void => {
+    setIsInputError(false);
+    setActiveAddressModal(false);
+    setIsQueryError(false)
+  }
+
+  const handleSelection = (lmk: string):void => {
+    GlobalContext.setActiveLmk(lmk);
+    //Route to dashboard here
+  }
+
+  if (error) {
+    setIsQueryError(true);
+  };
+
 
   return (
-    <div className="w-screen h-screen flex justify-center">
-      <div className="h-1/2 relative top-1/3 grid place-items-center">
-        <span className="w-full text-green-500 font-sans font-extrabold text-8xl ">
-          Make America Great Again App Name Inc.
-        </span>
-        <div className="relative rounded-full w-4/6 h-1/5 border-2 border-gray-400 pl-2 focus-within:border-gray-600">
-          <SearchIcon className="fill-[none] stroke-gray-400 w-5 pt-1" />
-          <input
-            className="absolute text-gray-500 rounded-sm top-0 w-1/3 h-full ml-6 outline-0"
-            placeholder="Type anything and press enter"
-            onKeyUp={(e) => e.key === "Enter" && Router.push("/main")}
-          ></input>
+    <>
+      <div
+        className={
+          'w-full h-[100vh] flex-col content-center transistion-all duration-500 ' +
+          (activeAddressModal ? 'mt-[2vh]' : 'mt-[calc(50vh-199px-7.5vh)]')
+        }
+      >
+        <div className="text-black font-logoFont font-black text-[6rem] text-center tracking-tight">
+          GreenHouse
         </div>
+        <div className="flex justify-center">
+          {activeAddressModal ? null : (
+            <SearchBar
+              searchTextValue={'Search by Postcode'}
+              width={'w-[30vw] max-w-[325px]'}
+              inputHandler={handleSearchInput}
+              submitHandler={handleSearchSubmit}
+              isError={isInputError}
+            />
+          )}
+          {activeAddressModal ? (
+            <AddressModal
+              isLoading={loading}
+              isError={isQueryError}
+              data={data?.address}
+              backHandler={handleBack}
+              selectionHandler={handleSelection}
+            />
+          ) : null}
+        </div>
+        {isInputError ? (
+          <div className="w-full flex justify-center mt-[2px] text-red-500 font-logoFont">
+            Please enter a valid UK Postcode
+          </div>
+        ) : null}
       </div>
-    </div>
+      {/* <House className="absolute z-10 left-[calc(50vw-75px)] top-[65vh] w-[150px] h-[150px]" /> */}
+      <Circle
+        className={
+          'absolute top left-[calc(50%-40vw)] w-[80vw] fill-lightGreen transition-all duration-500 ' +
+          (activeAddressModal ? 'top-[75vh]' : 'top-[55vh]')
+        }
+      />
+    </>
   );
 };
 
 Landing.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <Layout title={'GreenHouse'}>{page}</Layout>;
 };
 
 export default Landing;
