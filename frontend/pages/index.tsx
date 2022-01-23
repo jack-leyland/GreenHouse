@@ -1,18 +1,23 @@
 import { ReactElement, useEffect, useState } from 'react';
 import Router from 'next/router';
 import Layout from '../components/layout';
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import Circle from '../assets/circle.svg';
 import House from '../assets/house.svg';
 import SearchBar from '../components/search-bar';
-import AddressModal from '../components/address-modal';
+import AddressModal from '../components/addressModal';
 import { useAppContext } from '../context/state';
 
 const GET_ADDRESSES = gql`
-  query Address($queryFormattedPostcode: String!) {
-    address(name: $queryFormattedPostcode)
+  query Address($queryParam: String!) {
+    address(name: $queryParam)
   }
 `;
+
+type AddressObject = {
+  address: string;
+  lmk: string;
+};
 
 const formatPostcode = (postcode: string): string => {
   let strippedPostcode = postcode.replace(/\s+/g, '');
@@ -45,14 +50,21 @@ const Landing = () => {
   const [searchBoxText, setSearchBoxText] = useState<string>('');
   const [isInputError, setIsInputError] = useState<boolean>(false);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [loadAddresses, { called, loading, error, data }] = useLazyQuery(
-    GET_ADDRESSES,
-    {
-      fetchPolicy: 'cache-and-network',
-    }
-  );
+  const [queryData, setQueryData] = useState<Array<AddressObject>>([]);
+  const [queryParam, setQueryParam] = useState<string>('')
   const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
   const GlobalContext = useAppContext();
+  
+  //Reset active lmk on component mount only, will make sure state is clean when using browser back button
+  useEffect(() => {
+    GlobalContext.setActiveLmk('');
+  }, [])
+
+  const { loading, error, data } = useQuery(
+    GET_ADDRESSES, {
+      skip: !queryParam || isQueryError,
+      variables: {queryParam}
+    });
 
   const handleSearchSubmit = (): void => {
     if (!isValidPostcode(searchBoxText)) {
@@ -60,8 +72,8 @@ const Landing = () => {
     } else {
       let formatted = formatPostcode(searchBoxText);
       let queryFormattedPostcode = formatted.replace(/\s+/g, '');
+      setQueryParam(queryFormattedPostcode);
       setIsInputError(false);
-      loadAddresses({ variables: { queryFormattedPostcode } });
       setActiveAddressModal(true);
     }
   };
@@ -76,18 +88,28 @@ const Landing = () => {
   const handleBack = ():void => {
     setIsInputError(false);
     setActiveAddressModal(false);
-    setIsQueryError(false)
+    setIsQueryError(false);
+    setQueryParam('');
   }
 
   const handleSelection = (lmk: string):void => {
     GlobalContext.setActiveLmk(lmk);
-    //Route to dashboard here
+    Router.push('/main')
   }
 
-  if (error) {
-    setIsQueryError(true);
-  };
+  useEffect(() => {
+    if (error) {
+      setIsQueryError(true);
+      console.log(error)
+      }
+  }, [error]);
 
+  useEffect(() => {
+    if (data) {
+      let parsedData = JSON.parse(data.address)
+      setQueryData(parsedData);
+    }
+  },[data])
 
   return (
     <>
@@ -114,7 +136,7 @@ const Landing = () => {
             <AddressModal
               isLoading={loading}
               isError={isQueryError}
-              data={data?.address}
+              data={queryData}
               backHandler={handleBack}
               selectionHandler={handleSelection}
             />

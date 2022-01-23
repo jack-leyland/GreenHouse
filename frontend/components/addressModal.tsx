@@ -7,7 +7,7 @@ type AddressObject = {
 };
 
 type Props = {
-  data: string;
+  data: Array<AddressObject>;
   isLoading: boolean;
   isError: boolean;
   backHandler: () => void;
@@ -15,16 +15,9 @@ type Props = {
 };
 
 export default function AddressList({ data, isLoading, isError, backHandler, selectionHandler }: Props) {
-  const [loading, setLoading] = useState<boolean>(isLoading);
-  const [err, setErr] = useState<boolean>(isError);
-  const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
-
-    useEffect(() => {
-      if (data) {
-        let parsedData = JSON.parse(data)
-        setAddressData(parsedData);
-      }
-    }, [data]);
+  // const [loading, setLoading] = useState<boolean>(isLoading);
+  // const [err, setErr] = useState<boolean>(isError);
+  // const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
 
   return (
     <div className="border-2 h-[50vh] w-[35vw] max-w-[450px] rounded-sm border-lightGrey bg-lightGrey drop-shadow-md">
@@ -41,8 +34,8 @@ export default function AddressList({ data, isLoading, isError, backHandler, sel
             Loading Addresses...
           </div>
         ) : null}
-        {addressData && !isLoading
-          ? addressData.map((item: AddressObject) => {
+        {data && !isLoading
+          ? data.map((item: AddressObject) => {
               return (
                 <div
                   key={item.lmk}
