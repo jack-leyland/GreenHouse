@@ -19,14 +19,6 @@ export default function AddressList({ data, isLoading, isError, backHandler, sel
   const [err, setErr] = useState<boolean>(isError);
   const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
 
-  //     useEffect(() => {
-  //       setLoading(isLoading);
-  //     }, [isLoading]);
-
-  //   useEffect(() => {
-  //     setLoading(isError);
-  //   }, [isError]);
-
     useEffect(() => {
       if (data) {
         let parsedData = JSON.parse(data)
@@ -66,7 +58,7 @@ export default function AddressList({ data, isLoading, isError, backHandler, sel
             })
           : null}
           {isError ? <div className="w-[100%] h-[100%] flex items-center justify-center">
-            Something went wrong fetching addresses
+            Uh oh! Something went wrong fetching addresses
           </div> : null}
       </div>
     </div>
