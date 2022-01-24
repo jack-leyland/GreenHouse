@@ -56,11 +56,6 @@ const Landing = () => {
   const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
   const GlobalContext = useAppContext();
 
-  //Reset active lmk on component mount only, will make sure state is clean when using browser back button
-  useEffect(() => {
-    GlobalContext.setActiveLmk('');
-  }, []);
-
   const { loading, error, data } = useQuery(GET_ADDRESSES, {
     skip: !queryParam || isQueryError,
     variables: { queryParam },
@@ -106,8 +101,6 @@ const Landing = () => {
     }
   }, [error]);
 
-  console.log(isQueryError);
-
   useEffect(() => {
     if (data) {
       let parsedData = JSON.parse(data.address);
@@ -116,7 +109,7 @@ const Landing = () => {
   }, [data]);
 
   return (
-    <div className={"overflow-hidden h-screen w-screen"}>
+    <div className={'overflow-hidden h-screen w-screen'}>
       <div
         className={
           'w-full h-[100vh] flex-col content-center transistion-all duration-500 ' +

@@ -33,8 +33,6 @@ export default function AddressList({
     setErr(isError);
   }, [isError]);
 
-  console.log(err);
-
   useEffect(() => {
     if (data) {
       setAddressData(data);
