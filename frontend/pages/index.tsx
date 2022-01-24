@@ -116,7 +116,7 @@ const Landing = () => {
   }, [data]);
 
   return (
-    <>
+    <div className={"overflow-hidden h-screen w-screen"}>
       <div
         className={
           'w-full h-[100vh] flex-col content-center transistion-all duration-500 ' +
@@ -155,11 +155,11 @@ const Landing = () => {
       {/* <House className="absolute z-10 left-[calc(50vw-75px)] top-[65vh] w-[150px] h-[150px]" /> */}
       <Circle
         className={
-          'absolute top left-[calc(50%-40vw)] w-[80vw] fill-lightGreen transition-all duration-500 ' +
+          'fixed top left-[calc(50%-40vw)] w-[80vw] fill-lightGreen transition-all duration-500 ' +
           (activeAddressModal ? 'top-[75vh]' : 'top-[55vh]')
         }
       />
-    </>
+    </div>
   );
 };
 

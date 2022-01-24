@@ -34,7 +34,7 @@ export default function SearchBar({
   const defaultBorderStyling =
     'border-2 border-lightGrey focus:border-l-black focus:border-t-black focus:border-b-black';
   return (
-    <div className={containerStyling}>
+    <div className={containerStyling + (errorState ? ' animate-shake' : '')}>
       <input
         type="text"
         maxLength={10}
@@ -49,13 +49,13 @@ export default function SearchBar({
           }
         }}
         className={
-          'z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] bg-lightGrey rounded-l-sm pl-[15px] font-logoFont font-medium ' +
+          'z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] bg-lightGrey rounded-l-default pl-[15px] font-logoFont font-medium ' +
           (errorState ? errorBorderStyling : defaultBorderStyling)
         }
       ></input>
       <button
         type="button"
-        className="z-10 h-[55px] w-[25%] relative right-[2px] rounded-r-sm bg-black text-white font-logoFont font-normal"
+        className="z-10 h-[55px] w-[25%] relative right-[2px] rounded-r-default bg-black text-white font-logoFont font-normal"
         onClick={submitHandler}
       >
         Search

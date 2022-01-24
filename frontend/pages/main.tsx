@@ -38,13 +38,13 @@ const Main = () => {
     [id: string]: Value;
   }
   const epcColorDictionary: ColorDictionary<string> = {
-    A: 'green-700',
-    B: 'green-300',
-    C: 'lime-700',
-    D: 'yellow-300',
-    E: 'amber-500',
-    F: 'orange-600',
-    G: 'red-700',
+    A: 'bg-green-700',
+    B: 'bg-green-300',
+    C: 'bg-lime-700',
+    D: 'bg-yellow-300',
+    E: 'bg-amber-500',
+    F: 'bg-orange-600',
+    G: 'bg-red-700',
   };
 
   return (
@@ -55,10 +55,7 @@ const Main = () => {
           <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
             {/*Style these cards based on the epc band*/}
             <Card
-              style={'col-start-1 col-end-3'}
-              backgroundColor={
-                epcColorDictionary[epcData['current-energy-rating']]
-              }
+              style={'col-start-1 col-end-3 ' + epcColorDictionary[epcData['current-energy-rating']]}     
             >
               <div>
                 <h3>Current Energy Rating</h3>
@@ -69,10 +66,7 @@ const Main = () => {
             </Card>
             {/*Style these cards based on the epc band*/}
             <Card
-              style={`col-start-3 col-end-5`}
-              backgroundColor={
-                epcColorDictionary[epcData['current-energy-rating']]
-              }
+              style={"col-start-3 col-end-5 " + epcColorDictionary[epcData['potential-energy-rating']]}
             >
               <div>
                 <h3>Potential Energy Rating</h3>
@@ -129,14 +123,14 @@ const Main = () => {
         <>
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
-              <h1 className="animate-fade text-3xl font-bold pb-2">
+              <h1 className="animate-fade text-3xl italic pb-2">
                 Loading...
               </h1>
               <Lottie
                 loop
                 animationData={loadingJson}
                 play
-                style={{ width: 150, height: 150 }}
+                style={{ width: 250, height: 250 }}
               />
             </div>
           ) : (
@@ -165,7 +159,7 @@ const Main = () => {
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <div className="flex m-4 shadow-2xl rounded-2xl overflow-hidden">
+      <div className=" pb-[7.5vh] flex m-4 shadow-2xl rounded-2xl overflow-hidden">
         <Sidebar />
         {page}
       </div>
