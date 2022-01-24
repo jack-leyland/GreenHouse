@@ -7,6 +7,7 @@ import House from '../assets/house.svg';
 import SearchBar from '../components/search-bar';
 import AddressModal from '../components/addressModal';
 import { useAppContext } from '../context/state';
+import { ifError } from 'assert';
 
 const GET_ADDRESSES = gql`
   query Address($queryParam: String!) {
@@ -51,20 +52,19 @@ const Landing = () => {
   const [isInputError, setIsInputError] = useState<boolean>(false);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [queryData, setQueryData] = useState<Array<AddressObject>>([]);
-  const [queryParam, setQueryParam] = useState<string>('')
+  const [queryParam, setQueryParam] = useState<string>('');
   const [activeAddressModal, setActiveAddressModal] = useState<boolean>(false);
   const GlobalContext = useAppContext();
-  
+
   //Reset active lmk on component mount only, will make sure state is clean when using browser back button
   useEffect(() => {
     GlobalContext.setActiveLmk('');
-  }, [])
+  }, []);
 
-  const { loading, error, data } = useQuery(
-    GET_ADDRESSES, {
-      skip: !queryParam || isQueryError,
-      variables: {queryParam}
-    });
+  const { loading, error, data } = useQuery(GET_ADDRESSES, {
+    skip: !queryParam || isQueryError,
+    variables: { queryParam },
+  });
 
   const handleSearchSubmit = (): void => {
     if (!isValidPostcode(searchBoxText)) {
@@ -81,35 +81,39 @@ const Landing = () => {
   const handleSearchInput = (inputValue: string) => {
     setSearchBoxText(inputValue);
     if (!inputValue) {
-      setIsInputError(false)
-      setIsQueryError(false)};
+      setIsInputError(false);
+      setIsQueryError(false);
+    }
   };
 
-  const handleBack = ():void => {
+  const handleBack = (): void => {
     setIsInputError(false);
     setActiveAddressModal(false);
     setIsQueryError(false);
     setQueryParam('');
-  }
+    setSearchBoxText('');
+  };
 
-  const handleSelection = (lmk: string):void => {
+  const handleSelection = (lmk: string): void => {
     GlobalContext.setActiveLmk(lmk);
-    Router.push('/main')
-  }
+    Router.push('/main');
+  };
 
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error)
-      }
+      console.log(error);
+    }
   }, [error]);
+
+  console.log(isQueryError);
 
   useEffect(() => {
     if (data) {
-      let parsedData = JSON.parse(data.address)
+      let parsedData = JSON.parse(data.address);
       setQueryData(parsedData);
     }
-  },[data])
+  }, [data]);
 
   return (
     <>

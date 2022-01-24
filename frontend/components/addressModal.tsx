@@ -21,9 +21,25 @@ export default function AddressList({
   backHandler,
   selectionHandler,
 }: Props) {
-  // const [loading, setLoading] = useState<boolean>(isLoading);
-  // const [err, setErr] = useState<boolean>(isError);
-  // const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
+  const [loading, setLoading] = useState<boolean>(isLoading);
+  const [err, setErr] = useState<boolean>(isError);
+  const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
+
+  useEffect(() => {
+    setLoading(isLoading);
+  }, [isLoading]);
+
+  useEffect(() => {
+    setErr(isError);
+  }, [isError]);
+
+  console.log(err);
+
+  useEffect(() => {
+    if (data) {
+      setAddressData(data);
+    }
+  }, [data]);
 
   return (
     <div className="h-[50vh] w-[35vw] max-w-[450px] rounded-sm border-lightGrey bg-lightGrey drop-shadow-md">
@@ -35,13 +51,13 @@ export default function AddressList({
         Select your address
       </div>
       <div className=" h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounde">
-        {isLoading ? (
+        {loading ? (
           <div className="w-[100%] h-[100%] flex items-center justify-center">
             Loading Addresses...
           </div>
         ) : null}
-        {data && !isLoading
-          ? data.map((item: AddressObject) => {
+        {addressData && !isLoading
+          ? addressData.map((item: AddressObject) => {
               return (
                 <div
                   key={item.lmk}
@@ -55,7 +71,7 @@ export default function AddressList({
               );
             })
           : null}
-        {isError ? (
+        {err ? (
           <div className="w-[100%] h-[100%] flex items-center justify-center text-center">
             Uh oh! Something went wrong fetching addresses
           </div>
