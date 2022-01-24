@@ -14,18 +14,24 @@ type Props = {
   selectionHandler: (lmk: string) => void;
 };
 
-export default function AddressList({ data, isLoading, isError, backHandler, selectionHandler }: Props) {
+export default function AddressList({
+  data,
+  isLoading,
+  isError,
+  backHandler,
+  selectionHandler,
+}: Props) {
   // const [loading, setLoading] = useState<boolean>(isLoading);
   // const [err, setErr] = useState<boolean>(isError);
   // const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
 
   return (
-    <div className="border-2 h-[50vh] w-[35vw] max-w-[450px] rounded-sm border-lightGrey bg-lightGrey drop-shadow-md">
+    <div className="h-[50vh] w-[35vw] max-w-[450px] rounded-sm border-lightGrey bg-lightGrey drop-shadow-md">
       <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-sm font-bold font-logoFont">
-        <BackButton 
+        <BackButton
           className="h-[35px] w-[35px] fill-black absolute left-[10px] transistion-all duration-100 hover:h-[45px] hover:w-[45px]"
           onClick={backHandler}
-          />
+        />
         Select your address
       </div>
       <div className=" h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounde">
@@ -40,19 +46,20 @@ export default function AddressList({ data, isLoading, isError, backHandler, sel
                 <div
                   key={item.lmk}
                   className="h-[45px] w-[100%] pl-[10px] font- logoFont flex items-center rounded-sm cursor-pointer hover:bg-lightGreen/25"
-                  onClick={(e: React.MouseEvent<HTMLDivElement>):void => {
-                    selectionHandler(item.lmk)
+                  onClick={(e: React.MouseEvent<HTMLDivElement>): void => {
+                    selectionHandler(item.lmk);
                   }}
                 >
                   {item.address}
                 </div>
-                
               );
             })
           : null}
-          {isError ? <div className="w-[100%] h-[100%] flex items-center justify-center">
+        {isError ? (
+          <div className="w-[100%] h-[100%] flex items-center justify-center text-center">
             Uh oh! Something went wrong fetching addresses
-          </div> : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );
