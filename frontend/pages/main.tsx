@@ -163,7 +163,7 @@ const Main = () => {
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout title="Address Dashboard" footerFixed={false}>
-      <div className=" pb-[7.5vh] flex m-4 shadow-2xl rounded-2xl overflow-hidden">
+      <div className="flex overflow-hidden shadow-xl">
         <Sidebar />
         {page}
       </div>
