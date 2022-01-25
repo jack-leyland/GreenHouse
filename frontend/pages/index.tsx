@@ -157,7 +157,11 @@ const Landing = () => {
 };
 
 Landing.getLayout = function getLayout(page: ReactElement) {
-  return <Layout title={'GreenHouse'}>{page}</Layout>;
+  return (
+    <Layout title={'GreenHouse'} footerFixed={true}>
+      {page}
+    </Layout>
+  );
 };
 
 export default Landing;

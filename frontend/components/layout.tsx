@@ -5,12 +5,13 @@ import Footer from './footer';
 
 type Props = {
   children: ReactNode;
+  footerFixed: boolean;
   title?: string;
 };
 
 // Must pass Layout a title prop based on page it is being applied to
 // This function wraps a page in the footer and applies the Head html
-export default function Layout({ children, title }: Props) {
+export default function Layout({ children, title, footerFixed }: Props) {
   return (
     <>
       <Head>
@@ -25,7 +26,7 @@ export default function Layout({ children, title }: Props) {
       <main>{children}</main>
 
       <footer>
-        <Footer />
+        <Footer fixed={footerFixed} />
       </footer>
     </>
   );

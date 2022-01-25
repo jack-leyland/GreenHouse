@@ -55,7 +55,10 @@ const Main = () => {
           <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
             {/*Style these cards based on the epc band*/}
             <Card
-              style={'col-start-1 col-end-3 ' + epcColorDictionary[epcData['current-energy-rating']]}     
+              style={
+                'col-start-1 col-end-3 ' +
+                epcColorDictionary[epcData['current-energy-rating']]
+              }
             >
               <div>
                 <h3>Current Energy Rating</h3>
@@ -66,7 +69,10 @@ const Main = () => {
             </Card>
             {/*Style these cards based on the epc band*/}
             <Card
-              style={"col-start-3 col-end-5 " + epcColorDictionary[epcData['potential-energy-rating']]}
+              style={
+                'col-start-3 col-end-5 ' +
+                epcColorDictionary[epcData['potential-energy-rating']]
+              }
             >
               <div>
                 <h3>Potential Energy Rating</h3>
@@ -123,9 +129,7 @@ const Main = () => {
         <>
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
-              <h1 className="animate-fade text-3xl italic pb-2">
-                Loading...
-              </h1>
+              <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
               <Lottie
                 loop
                 animationData={loadingJson}
@@ -158,7 +162,7 @@ const Main = () => {
 
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout>
+    <Layout title="Address Dashboard" footerFixed={false}>
       <div className=" pb-[7.5vh] flex m-4 shadow-2xl rounded-2xl overflow-hidden">
         <Sidebar />
         {page}
