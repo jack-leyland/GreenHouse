@@ -22,7 +22,14 @@ module.exports = {
         'deepGreen': '#214F4B',
         'textGrey':'#B1B1B1',
         'darkGrey':'#989898',
-        'lightGrey': '#f7f7f7'
+        'lightGrey': '#f7f7f7',
+        'epcG': '#e9153b',
+        'epcF': '#ef8023',
+        'epcE': '#fcaa65',
+        'epcD': '#ffd500',
+        'epcC': '#8dce46',
+        'epcB': '#19b459',
+        'epcA': '#008054'
       },
       fontFamily: {
         logoFont: ['Inter', 'sans-serif'],

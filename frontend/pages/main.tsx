@@ -38,13 +38,13 @@ const Main = () => {
     [id: string]: Value;
   }
   const epcColorDictionary: ColorDictionary<string> = {
-    A: 'bg-green-700',
-    B: 'bg-green-300',
-    C: 'bg-lime-700',
-    D: 'bg-yellow-300',
-    E: 'bg-amber-500',
-    F: 'bg-orange-600',
-    G: 'bg-red-700',
+    A: 'bg-epcA',
+    B: 'bg-epcB',
+    C: 'bg-epcC',
+    D: 'bg-epcD',
+    E: 'bg-epcE',
+    F: 'bg-epcF',
+    G: 'bg-epcG',
   };
 
   return (
@@ -53,10 +53,10 @@ const Main = () => {
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
           <PageTitle title={'Overview'} subtitle={epcData['address']} />
           <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
-            {/*Style these cards based on the epc band*/}
+            
             <Card
               style={
-                'col-start-1 col-end-3 ' +
+                'col-start-1 col-end-3 text-white ' +
                 epcColorDictionary[epcData['current-energy-rating']]
               }
             >
@@ -67,10 +67,10 @@ const Main = () => {
                 </div>
               </div>
             </Card>
-            {/*Style these cards based on the epc band*/}
+
             <Card
               style={
-                'col-start-3 col-end-5 ' +
+                'col-start-3 col-end-5 text-white ' +
                 epcColorDictionary[epcData['potential-energy-rating']]
               }
             >
