@@ -8,6 +8,9 @@ import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
 import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
+import {BarChart, XAxis, Tooltip, Bar, Pie, PieChart} from "recharts"
+import ChartContainer from "../components/chartContainer";
+import Map from "../assets/gb.svg"
 
 import { gql, useQuery } from '@apollo/client';
 
@@ -27,8 +30,6 @@ const Main = () => {
     variables: { queryParam },
   });
 
-  console.log(queryParam);
-
   let epcData;
   if (data) {
     epcData = JSON.parse(data.certificate);
@@ -46,6 +47,48 @@ const Main = () => {
     F: 'bg-epcF',
     G: 'bg-epcG',
   };
+
+  //For testing charts
+  const barData = [
+    {  
+      Walls: 200,
+      Floors: 100 
+    }
+  ]
+  const barData2 = [
+    {  
+      Walls: 200,
+      Floors: 100,
+      Windows: 250
+    }
+  ]
+  const pieData = [
+    {
+      "name": "Group A",
+      "value": 400
+    },
+    {
+      "name": "Group B",
+      "value": 300
+    },
+    {
+      "name": "Group C",
+      "value": 300
+    },
+    {
+      "name": "Group D",
+      "value": 200
+    },
+    {
+      "name": "Group E",
+      "value": 278
+    },
+    {
+      "name": "Group F",
+      "value": 189
+    }
+  ];
+  
 
   return (
     <>
@@ -105,23 +148,44 @@ const Main = () => {
               </div>
             </Card>
 
-            <Card style={'col-start-1 col-end-4 row-start-4 row-end-6'}>
-              <div>
+            <Card style={'col-start-1 col-end-4 row-start-4 row-end-6'}>           
+                <>
                 <h3>Spending</h3>
-                <div></div>
-              </div>
+                  <ChartContainer>
+                    <BarChart width={350} height={350} data={barData}>
+                        <XAxis dataKey="name" />
+                        <Tooltip />
+                        <Bar dataKey="Walls" fill="#8884d8" />
+                        <Bar dataKey="Floors" fill="#82ca9d" />
+                      </BarChart>
+                  </ChartContainer>
+                </>
             </Card>
 
             <Card style={'col-start-4 col-end-7 row-start-4 row-end-6'}>
-              <div>
+              <>
                 <h3>C02 Production</h3>
-              </div>
+                <ChartContainer>
+                  <PieChart width={730} height={250}>
+                    <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" label/>
+                  </PieChart>    
+                </ChartContainer>
+              </>
             </Card>
 
             <Card style={'col-start-7 col-end-10 row-start-4 row-end-6'}>
-              <div>
+              <>
                 <h3>Potential Savings</h3>
-              </div>
+                <ChartContainer>
+                    <BarChart width={350} height={350} data={barData2}>
+                      <XAxis dataKey="name" />
+                      <Tooltip />
+                      <Bar dataKey="Walls" fill="#8884d8" />
+                      <Bar dataKey="Floors" fill="#82ca9d" />
+                      <Bar dataKey="Windows" fill="#85cb6d" />
+                    </BarChart>
+                  </ChartContainer>
+              </>
             </Card>
           </div>
         </div>
