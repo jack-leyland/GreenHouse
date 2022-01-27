@@ -8,9 +8,8 @@ import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
 import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
-import {BarChart, XAxis, Tooltip, Bar, Pie, PieChart} from "recharts"
+import {BarChart, XAxis, Tooltip, Bar, Pie, PieChart, RadarChart, Radar, PolarAngleAxis, PolarGrid, Legend, PolarRadiusAxis} from "recharts"
 import ChartContainer from "../components/chartContainer";
-import Map from "../assets/gb.svg"
 
 import { gql, useQuery } from '@apollo/client';
 
@@ -88,7 +87,41 @@ const Main = () => {
       "value": 189
     }
   ];
+
+  const radarData = [
+    {
+      "Feature": "Floor",
+      "house": 80,
+      "fullMark": 100
+    },
+    {
+      "Feature": "Walls",
+      "house": 60,
+      "fullMark": 100
+    },
+    {
+      "Feature": "Roof",
+      "house": 40,
+      "fullMark": 100
+    },
+    {
+      "Feature": "Windows",
+      "house": 80,
+      "fullMark": 100
+    },
+    {
+      "Feature": "Heating",
+      "house": 40,
+      "fullMark": 100
+    },
+    {
+      "Feature": "Water",
+      "house": 60,
+      "fullMark": 100
+    },
+  ]
   
+  console.log(epcData)  
 
   return (
     <>
@@ -126,20 +159,34 @@ const Main = () => {
             </Card>
             <Card style={'col-start-5 col-end-7'}>
               <div>
-                <h3>Potential Annual Savings</h3>
+                <h3>Current C02 Emissions</h3>
+                <div className="p-2 font-bold text-3xl">
+                  {epcData['co2-emissions-current']}
+                </div>
               </div>
             </Card>
             <Card style={'col-start-7 col-end-9'}>
               <div>
                 <h3>C02 Reduction Potential</h3>
+                <div className="p-2 font-bold text-3xl">
+                  {epcData['co2-emissions-potential']}
+                </div>
               </div>
             </Card>
 
             <Card style={'col-start-1 col-end-6 row-start-2 row-end-4'}>
-              <div>
+              <>
                 <h3>Your House</h3>
-                <div></div>
-              </div>
+                  <ChartContainer>
+                    <RadarChart outerRadius={90} width={730} height={250} data={radarData}>
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="Feature" />
+                      <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                      <Radar name="House" dataKey="house" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                      <Legend />
+                    </RadarChart>
+                  </ChartContainer>
+              </>
             </Card>
 
             <Card style={'col-start-6 col-end-11 row-start-2 row-end-4'}>
