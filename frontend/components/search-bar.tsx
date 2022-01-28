@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import SearchIcon from '../assets/search-icon.svg';
+import React, { useState, useEffect } from "react";
+import SearchIcon from "../assets/search-icon.svg";
 
 type Props = {
   searchTextValue: string;
@@ -16,7 +16,7 @@ export default function SearchBar({
   inputHandler,
   submitHandler,
 }: Props) {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [errorState, setErrorState] = useState(isError);
 
   useEffect(() => {
@@ -28,13 +28,13 @@ export default function SearchBar({
     inputHandler(event.target.value);
   };
 
-  const containerStyling = 'flex ' + width;
+  const containerStyling = "flex " + width;
   const errorBorderStyling =
-    'border-2 border-l-red-500 border-t-red-500 border-b-red-500 text-red-500';
+    "border-2 border-l-red-500 border-t-red-500 border-b-red-500 text-red-500";
   const defaultBorderStyling =
-    'border-2 border-lightGrey focus:border-l-black focus:border-t-black focus:border-b-black';
+    "border-2 border-lightGrey focus:border-l-black focus:border-t-black focus:border-b-black";
   return (
-    <div className={containerStyling + (errorState ? ' animate-shake' : '')}>
+    <div className={containerStyling + (errorState ? " animate-shake" : "")}>
       <input
         type="text"
         maxLength={10}
@@ -44,12 +44,12 @@ export default function SearchBar({
           handleChange(e)
         }
         onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-          if (e.key == 'Enter') {
+          if (e.key == "Enter") {
             submitHandler();
           }
         }}
         className={
-          'z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] bg-lightGrey rounded-l-default pl-[15px] font-logoFont font-medium ' +
+          "z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] bg-lightGrey rounded-l-default pl-[15px] font-logoFont font-medium " +
           (errorState ? errorBorderStyling : defaultBorderStyling)
         }
       ></input>
