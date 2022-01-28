@@ -1,18 +1,18 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import type { ReactNode, ReactElement } from 'react';
-import type { NextPage } from 'next';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import type { ReactNode, ReactElement } from "react";
+import type { NextPage } from "next";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { AppContextWrapper } from '../context/state';
+} from "@apollo/client";
+import { AppContextWrapper } from "../context/state";
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
-    uri: 'http://localhost:8000/graphql',
+    uri: "http://localhost:8000/graphql",
   }),
   cache: new InMemoryCache(),
 });
