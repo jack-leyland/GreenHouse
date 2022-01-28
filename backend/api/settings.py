@@ -36,13 +36,13 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", "epc-site-backend.herokuapp.com"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://epc-site-backend.herokuapp.com",
+    "https://epc-site-frontend.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://epc-site-backend.herokuapp.com",
+    "https://epc-site-frontend.vercel.app",
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -70,7 +70,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    #"django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
