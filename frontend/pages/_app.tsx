@@ -12,7 +12,8 @@ import { AppContextWrapper } from "../context/state";
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
-    uri: "http://localhost:8000/graphql",
+    // uri: "http://localhost:8000/graphql",
+    uri: "https://epc-site-backend.herokuapp.com/graphql",
   }),
   cache: new InMemoryCache(),
 });
