@@ -2,7 +2,7 @@ import React from "react";
 import {ResponsiveContainer} from "recharts"
 
 interface props {
-    children: React.ReactChild | React.ReactChildren,
+    children: any,
   }
 
 export default function ChartContainer({children} : props) {
