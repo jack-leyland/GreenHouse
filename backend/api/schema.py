@@ -29,11 +29,11 @@ class Query(ObjectType):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={name}"
         response = requests.request("GET", url, headers=headers, data=payload)
         responseJSON = response.json()["rows"]
-
         data = [
-            {"address": item["address"], "lmk-key": item["lmk-key"]}
+            {"address": item["address"], "lmk": item["lmk-key"]}
             for item in responseJSON
         ]
+
         return json.dumps(data)
 
     def resolve_certificate(root, info, name):
@@ -44,7 +44,7 @@ class Query(ObjectType):
         if not responseJSON:
             return {"Error": "Invalid LMK key"}
 
-        return responseJSON["rows"][0]
+        return json.dumps(responseJSON["rows"][0])
 
     def resolve_recommendations(root, info, name):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/recommendations/{name}"
@@ -54,7 +54,7 @@ class Query(ObjectType):
         if not responseJSON:
             return {"Error": "Invalid LMK key"}
 
-        return responseJSON["rows"]
+        return json.dumps(responseJSON["rows"])
 
 
 schema = Schema(query=Query)
