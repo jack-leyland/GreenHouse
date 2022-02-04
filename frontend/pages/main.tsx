@@ -134,8 +134,6 @@ const Main = () => {
     },
   ];
 
-  console.log(epcData);
-
   return (
     <>
       {data ? (

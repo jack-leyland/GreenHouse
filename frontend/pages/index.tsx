@@ -11,7 +11,7 @@ import { ifError } from "assert";
 
 const GET_ADDRESSES = gql`
   query Address($queryParam: String!) {
-    address(name: $queryParam)
+    address(postcode: $queryParam)
   }
 `;
 
