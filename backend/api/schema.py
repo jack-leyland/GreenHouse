@@ -1,10 +1,15 @@
+from backend.scripts.analysis import metrics_to_numeric
 import graphene
 from graphene import ObjectType, String, Schema
 import requests
 import json
 import environ
 import os
-import datetime
+import pandas as pd
+from datetime import datetime
+
+
+from scripts.analysis import metrics_to_numeric
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -134,9 +139,14 @@ class Query(ObjectType):
     analytics = graphene.Field(Analytics, postcode=String(default_value="N/A"))
 
     def resolve_analytics(root, info, postcode):
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/recommendations/{postcode}"
+        page_size = 5000
+        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
-        
+        data = response.json()
+        column_names = data["column-names"]
+        rows = data["rows"]
+        local_df = pd.DataFrame(data=rows, columns=column_names)
+
         average_energy_efficiency = 0
         average_environment_impact = 0
         average_energy_consumption = 0
@@ -144,7 +154,7 @@ class Query(ObjectType):
         average_lighting_cost = 0
         average_heating_cost = 0
         average_hot_water_cost =  0
-        average_datetime = datetime.datetime.strptime("2018_05_14".replace("_",""), "%Y%m%d").date()
+        average_datetime = datetime.strptime("2018_05_14".replace("_",""), "%Y%m%d").date()
          
         return Analytics(average_energy_efficiency, average_environment_impact, average_energy_consumption,  average_co2_consumption, average_lighting_cost,  average_heating_cost, average_hot_water_cost, average_datetime)
 
