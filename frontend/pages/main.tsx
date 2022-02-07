@@ -34,18 +34,20 @@ const GET_CERTIFICATES = gql`
 
 const Main = () => {
   const GlobalContext = useAppContext();
-  const [queryParam, setQueryParam] = useState<string | null>(
-    //Tries to get lmk from app context first (will be set to default "" if nothing there)
-    GlobalContext.activeLmk
-  );
-  const [hasCachedLmk, setHasCachedLmk] = useState<boolean>(false);
+  const [queryParam, setQueryParam] = useState<string | null>(null);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
   });
 
-  // On initial dashboard mount, check cache
-  useEffect(() => {}, []);
+  // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
+  useEffect(() => {
+    if (GlobalContext.activeLmk) {
+      setQueryParam(GlobalContext.activeLmk);
+    } else {
+      setQueryParam(localStorage.activeLmk);
+    }
+  }, []);
 
   //TODO: wrap in useEffect?
   let epcData;
