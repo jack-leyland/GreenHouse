@@ -22,9 +22,12 @@ export function AppContextWrapper({ children }: ContextWrapperProps) {
     setActiveLmk: setLmk,
   });
 
-  // Everytime context state changes, persist desired data in local storage
+  // Cache will only store lmks, cannot be null or empty string. On first time user vist,
+  // app will fallback to default blank lmk from context state. Otherwise, cache will contain most recently searched lmk
   useEffect(() => {
-    localStorage.setItem('activeLmk', state.activeLmk);
+    if (state.activeLmk) {
+      localStorage.setItem('activeLmk', state.activeLmk);
+    }
   }, [state]);
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
