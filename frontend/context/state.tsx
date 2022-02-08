@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from "react";
-import type { ReactNode } from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 interface AppContextState {
-  activeLmk: string | null;
+  activeLmk: string;
   setActiveLmk: (lmk: string) => void;
 }
 
@@ -18,11 +18,17 @@ export function AppContextWrapper({ children }: ContextWrapperProps) {
   };
 
   const [state, setState] = useState<AppContextState>({
-    activeLmk: "",
+    activeLmk: '',
     setActiveLmk: setLmk,
   });
 
-  console.log(state);
+  // Cache will only store lmks, cannot be null or empty string. On first time user vist,
+  // app will fallback to default blank lmk from context state. Otherwise, cache will contain most recently searched lmk
+  useEffect(() => {
+    if (state.activeLmk) {
+      localStorage.setItem('activeLmk', state.activeLmk);
+    }
+  }, [state]);
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
 }
