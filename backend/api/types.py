@@ -132,12 +132,7 @@ class Analytics(ObjectType):
 
 class Address(ObjectType):
     lmk_key = String(required=True)
-    address1 = String()
-    address2 = String()
-    address3 = String()
-    postcode = String()
-    building_reference_number = String()
-    inspection_date = String()
+    address = String()
 
 
 class Recommendation(ObjectType):

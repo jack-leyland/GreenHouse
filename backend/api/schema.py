@@ -20,7 +20,7 @@ from api.types import (
 )
 
 from api.resolvers.analytics import create_analytics
-from api.resolvers.address import create_address
+from api.resolvers.addresses import create_addresses
 from api.resolvers.certificates import create_certificate
 from api.resolvers.recommendations import create_recommendations
 
@@ -41,7 +41,7 @@ payload = {}
 
 
 class Query(ObjectType):
-    address = Field(Address, postcode=String(default_value="N/A"))
+    address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
     analytics = Field(Analytics, postcode=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
@@ -58,15 +58,17 @@ class Query(ObjectType):
         page_size = 100
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
-        data = response.json()["rows"][0]
-        return create_address(data)
+        data = response.json()["rows"]
+        if not data:
+            return {"Error": "Invalid LMK key"}
+        return create_addresses(data)
 
     def resolve_certificate(root, info, lmk):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
 
-        if not response:
+        if not data:
             return {"Error": "Invalid LMK key"}
 
         return create_certificate(data)

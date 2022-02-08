@@ -10,8 +10,11 @@ import { useAppContext } from "../context/state";
 import { ifError } from "assert";
 
 const GET_ADDRESSES = gql`
-  query Address($queryParam: String!) {
-    address(postcode: $queryParam)
+  query address($queryParam: String!) {
+    address(postcode: $queryParam){
+      lmkKey
+      address
+    }
   }
 `;
 
@@ -103,16 +106,14 @@ const Landing = () => {
 
   useEffect(() => {
     if (data) {
-      let parsedData = JSON.parse(data.address);
-      setQueryData(parsedData);
+      setQueryData(data.address);
     }
   }, [data]);
-
   return (
     <div className={"overflow-hidden h-screen w-screen"}>
       <div
         className={
-          "w-full h-[100vh] flex-col content-center transistion-all duration-500 " +
+          "w-full h-[100vh] flex-col content-center transition-all duration-500 " +
           (activeAddressModal ? "mt-[2vh]" : "mt-[calc(50vh-199px-7.5vh)]")
         }
       >
