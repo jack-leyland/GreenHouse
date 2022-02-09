@@ -47,12 +47,26 @@ class Query(ObjectType):
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
 
     def resolve_analytics(root, info, postcode):
+        if len(postcode) == 7:
+            postcode = postcode[:4]
+        else:
+            postcode = postcode[:3]
+
         page_size = 5000
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()
 
-        return create_analytics(data)
+        local_df1 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
+
+        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}&from={page_size}"
+        response = requests.request("GET", url, headers=headers, data=payload)
+        data = response.json()
+
+        local_df2 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
+
+        result = pd.concat([local_df1, local_df2])
+        return create_analytics(result)
 
     def resolve_address(root, info, postcode):
         page_size = 100

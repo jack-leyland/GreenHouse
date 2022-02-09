@@ -6,19 +6,20 @@ from scripts.analysis import (
     current_metrics,
     potential_metrics,
     generate_normalised_data,
+    convert_to_rating,
 )
 
 
-def create_analytics(data):
-    local_df = pd.DataFrame(data=data["rows"], columns=data["column-names"])
-
+def create_analytics(local_df):
     # Convert metrics to numbers to allow for calculations
     metrics_to_numeric(local_df, current_metrics)
     metrics_to_numeric(local_df, potential_metrics)
     metrics_to_numeric(local_df, ["total-floor-area"])
     generate_normalised_data(local_df, current_metrics, "total-floor-area")
+    convert_to_rating(local_df, "lighting-energy-eff")
 
     analytics = Analytics()
+    analytics.number_of_houses = len(local_df)
     analytics.mean_current_energy_efficiency = local_df[
         "current-energy-efficiency"
     ].mean()
@@ -32,6 +33,7 @@ def create_analytics(data):
     analytics.mean_current_lighting_cost = local_df["lighting-cost-current"].mean()
     analytics.mean_current_heating_cost = local_df["heating-cost-current"].mean()
     analytics.mean_current_hot_water_cost = local_df["hot-water-cost-current"].mean()
+    analytics.mean_lighting_energy_eff = local_df["lighting-energy-eff"].mean()
     analytics.mean_potential_energy_efficiency = local_df[
         "potential-energy-efficiency"
     ].mean()

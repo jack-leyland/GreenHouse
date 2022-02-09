@@ -1,3 +1,4 @@
+from numpy import NaN, average
 import pandas as pd
 
 metrics = [
@@ -59,3 +60,18 @@ def generate_normalised_data(dataframe, currents, normalise):
     for current in currents:
         label = current + "-per-" + normalise
         dataframe[label] = dataframe[current] / dataframe[normalise]
+
+def convert_to_rating(dataframe, metric):
+    rating_number = {
+        "": NaN,
+        "N/A": NaN,
+        "NO DATA!": NaN,
+        "Very Poor": 1,
+        "Poor": 2,
+        "Average": 3,
+        "Good": 4,
+        "Very Good": 5,
+    }
+    
+    dataframe[metric].replace(rating_number, inplace=True)
+    
