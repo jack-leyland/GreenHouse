@@ -1,13 +1,13 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/card';
-import PageTitle from '../components/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../public/assets/animation/loading.json';
-import errorJson from '../public/assets/animation/error.json';
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/card";
+import PageTitle from "../components/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../public/assets/animation/loading.json";
+import errorJson from "../public/assets/animation/error.json";
 import {
   BarChart,
   XAxis,
@@ -21,10 +21,10 @@ import {
   PolarGrid,
   Legend,
   PolarRadiusAxis,
-} from 'recharts';
-import ChartContainer from '../components/chartContainer';
+} from "recharts";
+import ChartContainer from "../components/chartContainer";
 
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from "@apollo/client";
 
 const GET_CERTIFICATES = gql`
   query Certificate($queryParam: String!) {
@@ -59,13 +59,13 @@ const Main = () => {
     [id: string]: Value;
   }
   const epcColorDictionary: ColorDictionary<string> = {
-    A: 'bg-epcA',
-    B: 'bg-epcB',
-    C: 'bg-epcC',
-    D: 'bg-epcD',
-    E: 'bg-epcE',
-    F: 'bg-epcF',
-    G: 'bg-epcG',
+    A: "bg-epcA",
+    B: "bg-epcB",
+    C: "bg-epcC",
+    D: "bg-epcD",
+    E: "bg-epcE",
+    F: "bg-epcF",
+    G: "bg-epcG",
   };
 
   //For testing charts
@@ -84,59 +84,59 @@ const Main = () => {
   ];
   const pieData = [
     {
-      name: 'Group A',
+      name: "Group A",
       value: 400,
     },
     {
-      name: 'Group B',
+      name: "Group B",
       value: 300,
     },
     {
-      name: 'Group C',
+      name: "Group C",
       value: 300,
     },
     {
-      name: 'Group D',
+      name: "Group D",
       value: 200,
     },
     {
-      name: 'Group E',
+      name: "Group E",
       value: 278,
     },
     {
-      name: 'Group F',
+      name: "Group F",
       value: 189,
     },
   ];
 
   const radarData = [
     {
-      Feature: 'Floor',
+      Feature: "Floor",
       house: 80,
       fullMark: 100,
     },
     {
-      Feature: 'Walls',
+      Feature: "Walls",
       house: 60,
       fullMark: 100,
     },
     {
-      Feature: 'Roof',
+      Feature: "Roof",
       house: 40,
       fullMark: 100,
     },
     {
-      Feature: 'Windows',
+      Feature: "Windows",
       house: 80,
       fullMark: 100,
     },
     {
-      Feature: 'Heating',
+      Feature: "Heating",
       house: 40,
       fullMark: 100,
     },
     {
-      Feature: 'Water',
+      Feature: "Water",
       house: 60,
       fullMark: 100,
     },
@@ -146,53 +146,53 @@ const Main = () => {
     <>
       {data ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle title={'Overview'} subtitle={epcData['address']} />
+          <PageTitle title={"Overview"} subtitle={epcData["address"]} />
           <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
             <Card
               style={
-                'col-start-1 col-end-3 text-white ' +
-                epcColorDictionary[epcData['current-energy-rating']]
+                "col-start-1 col-end-3 text-white " +
+                epcColorDictionary[epcData["current-energy-rating"]]
               }
             >
               <div>
                 <h3>Current Energy Rating</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {epcData['current-energy-rating']}
+                  {epcData["current-energy-rating"]}
                 </div>
               </div>
             </Card>
 
             <Card
               style={
-                'col-start-3 col-end-5 text-white ' +
-                epcColorDictionary[epcData['potential-energy-rating']]
+                "col-start-3 col-end-5 text-white " +
+                epcColorDictionary[epcData["potential-energy-rating"]]
               }
             >
               <div>
                 <h3>Potential Energy Rating</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {epcData['potential-energy-rating']}
+                  {epcData["potential-energy-rating"]}
                 </div>
               </div>
             </Card>
-            <Card style={'col-start-5 col-end-7'}>
+            <Card style={"col-start-5 col-end-7"}>
               <div>
                 <h3>Current C02 Emissions</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {epcData['co2-emissions-current']}
+                  {epcData["co2-emissions-current"]}
                 </div>
               </div>
             </Card>
-            <Card style={'col-start-7 col-end-9'}>
+            <Card style={"col-start-7 col-end-9"}>
               <div>
                 <h3>C02 Reduction Potential</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {epcData['co2-emissions-potential']}
+                  {epcData["co2-emissions-potential"]}
                 </div>
               </div>
             </Card>
 
-            <Card style={'col-start-1 col-end-6 row-start-2 row-end-4'}>
+            <Card style={"col-start-1 col-end-6 row-start-2 row-end-4"}>
               <>
                 <h3>Your House</h3>
                 <ChartContainer>
@@ -218,13 +218,13 @@ const Main = () => {
               </>
             </Card>
 
-            <Card style={'col-start-6 col-end-11 row-start-2 row-end-4'}>
+            <Card style={"col-start-6 col-end-11 row-start-2 row-end-4"}>
               <div>
                 <h3>Map</h3>
               </div>
             </Card>
 
-            <Card style={'col-start-1 col-end-4 row-start-4 row-end-6'}>
+            <Card style={"col-start-1 col-end-4 row-start-4 row-end-6"}>
               <>
                 <h3>Spending</h3>
                 <ChartContainer>
@@ -238,7 +238,7 @@ const Main = () => {
               </>
             </Card>
 
-            <Card style={'col-start-4 col-end-7 row-start-4 row-end-6'}>
+            <Card style={"col-start-4 col-end-7 row-start-4 row-end-6"}>
               <>
                 <h3>C02 Production</h3>
                 <ChartContainer>
@@ -258,7 +258,7 @@ const Main = () => {
               </>
             </Card>
 
-            <Card style={'col-start-7 col-end-10 row-start-4 row-end-6'}>
+            <Card style={"col-start-7 col-end-10 row-start-4 row-end-6"}>
               <>
                 <h3>Potential Savings</h3>
                 <ChartContainer>
