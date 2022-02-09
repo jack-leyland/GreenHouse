@@ -23,7 +23,7 @@ class Certificate(ObjectType):
     potential_energy_rating = String()
     mainheat_energy_eff = String()
     windows_env_eff = String()
-    lighting_energy_eff = String()
+    lighting_energy_eff = Int()
     environment_impact_potential = Float()
     glazed_type = String()
     heating_cost_current = Float()

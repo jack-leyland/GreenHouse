@@ -1,4 +1,5 @@
 from api.types import Certificate
+from scripts.analysis import rating_number
 
 
 def create_certificate(data):
@@ -14,7 +15,7 @@ def create_certificate(data):
     certificate.potential_energy_rating = data["potential-energy-rating"]
     certificate.mainheat_energy_eff = data["mainheat-energy-eff"]
     certificate.windows_env_eff = data["windows-env-eff"]
-    certificate.lighting_energy_eff = data["lighting-energy-eff"]
+    certificate.lighting_energy_eff = rating_number[data["lighting-energy-eff"]]
     certificate.environment_impact_potential = data["environment-impact-potential"]
     certificate.glazed_type = data["glazed-type"]
     certificate.heating_cost_current = data["heating-cost-current"]
