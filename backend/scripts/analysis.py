@@ -75,3 +75,8 @@ def generate_normalised_data(dataframe, currents, normalise):
 def convert_to_rating(dataframe, metric):
     dataframe[metric].replace(rating_number, inplace=True)
     
+def verify_number(data):
+    if data:
+        return data
+
+    return None

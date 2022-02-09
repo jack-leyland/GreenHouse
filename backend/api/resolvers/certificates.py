@@ -1,15 +1,17 @@
 from api.types import Certificate
-from scripts.analysis import rating_number
+from scripts.analysis import rating_number, verify_number
+
+from datetime import datetime
 
 
 def create_certificate(data):
     certificate = Certificate()
-    certificate.low_energy_fixed_light_count = data["low-energy-fixed-light-count"]
+    certificate.low_energy_fixed_light_count = verify_number(data["low-energy-fixed-light-count"])
     certificate.address = data["address"]
-    certificate.uprn_source = data["uprn-source"]
+    certificate.uprn_source =    data["uprn-source"]
     certificate.floor_height = data["floor-height"]
     certificate.heating_cost_potential = data["heating-cost-potential"]
-    certificate.unheated_corridor_length = data["unheated-corridor-length"]
+    certificate.unheated_corridor_length = verify_number(data["unheated-corridor-length"])
     certificate.hot_water_cost_potential = data["hot-water-cost-potential"]
     certificate.construction_age_band = data["construction-age-band"]
     certificate.potential_energy_rating = data["potential-energy-rating"]
@@ -41,7 +43,7 @@ def create_certificate(data):
     certificate.number_open_fireplaces = data["number-open-fireplaces"]
     certificate.windows_description = data["windows-description"]
     certificate.glazed_area = data["glazed-area"]
-    certificate.inspection_date = data["inspection-date"]
+    certificate.inspection_date = datetime.strptime(data["inspection-date"].replace("-",""), "%Y%m%d").date()
     certificate.mains_gas_flag = data["mains-gas-flag"]
     certificate.co2_emiss_curr_per_floor_area = data["co2-emiss-curr-per-floor-area"]
     certificate.address1 = data["address1"]
@@ -72,7 +74,7 @@ def create_certificate(data):
     certificate.mainheat_env_eff = data["mainheat-env-eff"]
     certificate.multi_glaze_proportion = data["multi-glaze-proportion"]
     certificate.main_heating_controls = data["main-heating-controls"]
-    certificate.lodgement_datetime = data["lodgement-datetime"]
+    certificate.lodgement_datetime = datetime.strptime(data["lodgement-datetime"].replace("-",""), "%Y%m%d %H:%M:%S")
     certificate.flat_top_storey = data["flat-top-storey"]
     certificate.current_energy_rating = data["current-energy-rating"]
     certificate.secondheat_description = data["secondheat-description"]
@@ -83,7 +85,7 @@ def create_certificate(data):
     certificate.energy_consumption_current = data["energy-consumption-current"]
     certificate.mainheat_description = data["mainheat-description"]
     certificate.lighting_cost_current = data["lighting-cost-current"]
-    certificate.lodgement_date = data["lodgement-date"]
+    certificate.lodgement_date = datetime.strptime(data["lodgement-date"].replace("-",""), "%Y%m%d").date()
     certificate.extension_count = data["extension-count"]
     certificate.mainheatc_env_eff = data["mainheatc-env-eff"]
     certificate.lmk_key = data["lmk-key"]

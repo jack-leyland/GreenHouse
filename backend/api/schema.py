@@ -6,11 +6,9 @@ from graphene import (
     List,
 )
 import requests
-import json
 import environ
 import os
 import pandas as pd
-from datetime import datetime
 
 from api.types import (
     Certificate,
@@ -69,7 +67,7 @@ class Query(ObjectType):
         return create_analytics(result)
 
     def resolve_address(root, info, postcode):
-        page_size = 100
+        page_size = 1000
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"]

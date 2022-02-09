@@ -1,8 +1,6 @@
 from graphene import (
     ObjectType,
     String,
-    Schema,
-    Field,
     List,
     Int,
     Float,
@@ -79,11 +77,11 @@ class Certificate(ObjectType):
     lighting_cost_potential = Float()
     mainheat_env_eff = String()
     multi_glaze_proportion = Float()
-    main_heating_controls = Float()
+    main_heating_controls = String()
     lodgement_datetime = DateTime()
     flat_top_storey = String()
     current_energy_rating = String()
-    secondheat_description = Float()
+    secondheat_description = String()
     walls_env_eff = String()
     transaction_type = String()
     uprn = String()
