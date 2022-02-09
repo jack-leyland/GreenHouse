@@ -106,7 +106,6 @@ const Landing = () => {
   useEffect(() => {
     if (data) {
       setQueryData(data.address);
-      console.log(data);
     }
   }, [data]);
   return (
