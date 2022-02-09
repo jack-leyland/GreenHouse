@@ -72,9 +72,11 @@ def generate_normalised_data(dataframe, currents, normalise):
         label = current + "-per-" + normalise
         dataframe[label] = dataframe[current] / dataframe[normalise]
 
+
 def convert_to_rating(dataframe, metric):
     dataframe[metric].replace(rating_number, inplace=True)
-    
+
+
 def verify_number(data):
     if data:
         return data
