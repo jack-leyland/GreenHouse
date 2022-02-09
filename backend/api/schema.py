@@ -67,7 +67,7 @@ class Query(ObjectType):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
-
+        print(data)
         if not data:
             return {"Error": "Invalid LMK key"}
 
