@@ -1,3 +1,4 @@
+from numpy import NaN
 import pandas as pd
 
 metrics = [
@@ -33,6 +34,17 @@ potential_metrics = [
     "hot-water-cost-potential",
 ]
 
+rating_number = {
+    "": NaN,
+    "N/A": NaN,
+    "NO DATA!": NaN,
+    "Very Poor": 1,
+    "Poor": 2,
+    "Average": 3,
+    "Good": 4,
+    "Very Good": 5,
+}
+
 
 def metrics_to_numeric(dataframe, metrics):
     """
@@ -59,3 +71,14 @@ def generate_normalised_data(dataframe, currents, normalise):
     for current in currents:
         label = current + "-per-" + normalise
         dataframe[label] = dataframe[current] / dataframe[normalise]
+
+
+def convert_to_rating(dataframe, metric):
+    dataframe[metric].replace(rating_number, inplace=True)
+
+
+def verify_number(data):
+    if data:
+        return data
+
+    return None

@@ -72,7 +72,7 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          max-line-length: "120"
+          max-line-length: "130"
 
   black-formatting:
     name: Black Formatting Test
