@@ -1,7 +1,7 @@
 // Use this file to store frequently used types and interfaces and import them into components as needed. 
 // Types for specific component Props should still be defined in the component file itself.
 
-export interface epcCertificateObject extends Object {
+export interface epcCertificateResponse extends Object {
     lowEnergyFixedLightCount: number;
     address: string;
     uprnSource: string;
@@ -94,6 +94,110 @@ export interface epcCertificateObject extends Object {
     wallsDescription: string;
     hotwaterDescription: string;
   };
+
+  export interface epcCertificateObject extends Object {
+    PageTitle: {
+      address: string;
+      address2: string;
+      address3: string;
+      postcode: string;
+      posttown: string;
+      county: string;
+      localAuthorityName: string;
+      propertyType: string;
+      builtForm: string;
+      constructionAgeBand: string;
+      totalFloorArea: number;
+      energyTariff: string;
+      floorLevel: string;
+      flatStoreyCount: string;
+      flatTopStorey: string;
+      inspectionDate: Date;
+    },
+    Main: {
+      co2EmissionsCurrent: number;
+      co2EmissionsPotential: number;
+      potentialEnergyRating: string;
+      currentEnergyRating: string;
+    }
+    House: {
+      environmental: {
+        environmentImpactPotential: number;
+        environmentImpactCurrent: number;
+        energyConsumptionPotential: number;
+        energyConsumptionCurrent: number;
+      },
+      roof: {
+        roofDescription: string;
+        roofEnergyEff: string;
+        roofEnvEff: string;
+      },
+      windows: {
+        windowsDescription: string;
+        windowsEnvEff: string;
+        windowsEnergyEff: string;
+        glazedType: string;
+        glazedArea: string;
+        multiGlazeProportion: number;
+      },
+      heating: {
+        general: {
+          mainsGasFlag: string;
+          numberHeatedRooms: number;
+          heatLossCorridor: string;
+          unheatedCorridorLength: number;
+          heatingCostPotential: number;
+          heatingCostCurrent: number;
+        },
+        mainHeating: {
+          mainHeatDescription: string;
+          mainHeatEnvEff: string;
+          mainHeatEnergyEff: string;
+          mainFuel: string;
+        },
+        mainHeatingControls: {
+          mainHeatControlDescription: string;
+          mainHeatControlEnergyEff: string;
+          mainHeatControlEnvEff: string;
+        },
+        secondaryHeating: {
+          secondheatDescription: number;
+          secondaryHeatingEnergyEff: string;
+          //secondary heating environ efficiency is missing
+        },
+      },
+      lighting: {
+        lowEnergyLighting: number;
+        lightingEnergyEff: string;
+        lightingEnvEff: string;
+        lightingCostPotential: number;
+        lightingCostCurrent: number;
+      },
+      walls: {
+        wallsDescription: string;
+        wallsEnergyEff: string;
+        wallsEnvEff: string;
+      },
+      water: {
+        hotWaterDescription: string;
+        hotWaterEnvEff: string;
+        hotWaterEnergyEff: string;
+        hotWaterCostPotential: number;
+        hotWaterCostCurrent: number;
+      },
+      floor: {
+        floorDescription: string;
+        floorEnergyEff: string;
+        floorEnvEff: string;
+      },
+      other: {
+        photoSupply: string;
+        solarWaterHeatingFlag: string;
+        mechanicalVentilation: string;
+      },
+    },
+  };
+
 
   export interface epcAnalyticsObject {
     meanCurrentEnergyEfficiency: number;

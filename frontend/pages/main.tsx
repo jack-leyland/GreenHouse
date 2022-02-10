@@ -11,14 +11,16 @@ import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
 import { useQuery } from '@apollo/client';
-import type { epcCertificateObject } from '../types';
+import type { epcCertificateObject, epcCertificateResponse } from '../types';
 import { sendData } from 'next/dist/server/api-utils';
 
 interface ColorDictionary<Value> {
   [id: string]: Value;
 }
 
-function packageDashboardDataByComponent(data: epcCertificateObject): Object {
+function packageDashboardDataByComponent(
+  data: epcCertificateResponse
+): epcCertificateObject {
   let componentPackagedData = {
     PageTitle: {
       address: data.address,
@@ -33,7 +35,16 @@ function packageDashboardDataByComponent(data: epcCertificateObject): Object {
       constructionAgeBand: data.constructionAgeBand,
       totalFloorArea: data.totalFloorArea,
       energyTariff: data.energyTariff,
-      //faulty storey fields go here later (and inspection date)
+      floorLevel: data.floorLevel,
+      flatStoreyCount: data.flatStoreyCount,
+      flatTopStorey: data.flatTopStorey,
+      inspectionDate: data.inspectionDate,
+    },
+    Main: {
+      co2EmissionsCurrent: data.co2EmissionsCurrent,
+      co2EmissionsPotential: data.co2EmissionsPotential,
+      potentialEnergyRating: data.potentialEnergyRating,
+      currentEnergyRating: data.currentEnergyRating,
     },
     House: {
       environmental: {
@@ -61,6 +72,8 @@ function packageDashboardDataByComponent(data: epcCertificateObject): Object {
           numberHeatedRooms: data.numberHeatedRooms,
           heatLossCorridor: data.heatLossCorridor,
           unheatedCorridorLength: data.unheatedCorridorLength,
+          heatingCostPotential: data.heatingCostPotential,
+          heatingCostCurrent: data.heatingCostCurrent,
         },
         mainHeating: {
           mainHeatDescription: data.mainheatDescription,
@@ -83,6 +96,8 @@ function packageDashboardDataByComponent(data: epcCertificateObject): Object {
         lowEnergyLighting: data.lowEnergyLighting,
         lightingEnergyEff: data.lightingEnergyEff,
         lightingEnvEff: data.lightingEnvEff,
+        lightingCostPotential: data.lightingCostPotential,
+        lightingCostCurrent: data.lightingCostCurrent,
       },
       walls: {
         wallsDescription: data.wallsDescription,
@@ -93,6 +108,8 @@ function packageDashboardDataByComponent(data: epcCertificateObject): Object {
         hotWaterDescription: data.hotwaterDescription,
         hotWaterEnvEff: data.hotWaterEnvEff,
         hotWaterEnergyEff: data.hotWaterEnergyEff,
+        hotWaterCostCurrent: data.hotWaterCostCurrent,
+        hotWaterCostPotential: data.hotWaterCostPotential,
       },
       floor: {
         floorDescription: data.floorDescription,
@@ -114,7 +131,7 @@ const Main = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
   //type checking happens when this object is pacakged in above function, so any is fine here
-  const [dashboardData, setDashboardData] = useState<any>({});
+  const [dashboardData, setDashboardData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
@@ -134,7 +151,6 @@ const Main = () => {
     if (data) {
       let packagedData = packageDashboardDataByComponent(data.certificate);
       setDashboardData(packagedData);
-      console.log(packagedData);
     }
   }, [data]);
 
@@ -158,36 +174,31 @@ const Main = () => {
     <>
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle
-            title={'Overview'}
-            subtitle={dashboardData.address}
-            postcode={dashboardData.postcode}
-          />
+          <PageTitle title={'Overview'} data={dashboardData.PageTitle} />
           <div className="grid grid-cols-10 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
             <Card
               style={
                 'col-start-1 col-end-3 row-start-1 text-white ' +
-                epcColorDictionary[dashboardData.currentEnergyRating]
+                epcColorDictionary[dashboardData.Main.currentEnergyRating]
               }
             >
               <div>
                 <h3>Current Energy Rating</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {dashboardData.currentEnergyRating}
+                  {dashboardData.Main.currentEnergyRating}
                 </div>
               </div>
             </Card>
-
             <Card
               style={
                 'col-start-3 col-end-5 row-start-1 text-white ' +
-                epcColorDictionary[dashboardData.potentialEnergyRating]
+                epcColorDictionary[dashboardData.Main.potentialEnergyRating]
               }
             >
               <div>
                 <h3>Potential Energy Rating</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {dashboardData.potentialEnergyRating}
+                  {dashboardData.Main.potentialEnergyRating}
                 </div>
               </div>
             </Card>
@@ -195,7 +206,7 @@ const Main = () => {
               <div>
                 <h3>Current C02 Emissions</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {dashboardData.co2EmissionsCurrent}
+                  {dashboardData.Main.co2EmissionsCurrent}
                 </div>
               </div>
             </Card>
@@ -203,7 +214,7 @@ const Main = () => {
               <div>
                 <h3>C02 Reduction Potential</h3>
                 <div className="p-2 font-bold text-3xl">
-                  {dashboardData.co2EmissionsPotential}
+                  {dashboardData.Main.co2EmissionsPotential}
                 </div>
               </div>
             </Card>

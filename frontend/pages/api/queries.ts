@@ -71,6 +71,16 @@ export const GET_CERTIFICATES = gql`
       photoSupply
       solarWaterHeatingFlag
       mechanicalVentilation
+      floorLevel
+      flatStoreyCount
+      flatTopStorey
+      inspectionDate
+      heatingCostPotential
+      hotWaterCostPotential
+      heatingCostCurrent
+      hotWaterCostCurrent
+      lightingCostPotential
+      lightingCostCurrent
     }
   }
 `;
