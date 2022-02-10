@@ -1,3 +1,4 @@
+from email.mime import base
 from graphene import (
     ObjectType,
     String,
@@ -49,34 +50,33 @@ class Query(ObjectType):
             postcode = postcode[:4]
         else:
             postcode = postcode[:3]
-
+        base_url = "https://epc.opendatacommunities.org/api/v1/domestic/"
         page_size = 5000
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
+        url = f"{base_url}search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()
-
         local_df1 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
-
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}&from={page_size}"
+        url = f"search?postcode={postcode}&size={page_size}&from={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()
-
         local_df2 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
-
         result = pd.concat([local_df1, local_df2])
         return create_analytics(result)
 
     def resolve_address(root, info, postcode):
         page_size = 1000
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
+        base_url = "https://epc.opendatacommunities.org/api/v1/domestic/"
+        url = f"{base_url}search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"]
+
         if not data:
             return {"Error": "Invalid LMK key"}
         return create_addresses(data)
 
     def resolve_certificate(root, info, lmk):
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
+        base_url = "https://epc.opendatacommunities.org/api/v1/domestic/"
+        url = f"{base_url}certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
 
@@ -86,11 +86,11 @@ class Query(ObjectType):
         return create_certificate(data)
 
     def resolve_recommendations(root, info, lmk):
-        url = (
-            f"https://epc.opendatacommunities.org/api/v1/domestic/recommendations/{lmk}"
-        )
+        base_url = "https://epc.opendatacommunities.org/api/v1/domestic/"
+        url = f"{base_url}recommendations/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"]
+
         if not data:
             return {"Error": "Invalid LMK key"}
 

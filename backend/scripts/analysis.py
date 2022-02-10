@@ -1,4 +1,4 @@
-from numpy import NaN, average
+from numpy import NaN
 import pandas as pd
 
 metrics = [

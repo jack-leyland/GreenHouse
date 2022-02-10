@@ -1,5 +1,3 @@
-import pandas as pd
-
 from api.types import Analytics
 from scripts.analysis import (
     metrics_to_numeric,
