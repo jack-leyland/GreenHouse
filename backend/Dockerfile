@@ -1,5 +1,7 @@
 # pull official base image
-FROM python:3.10-alpine
+FROM nickgryg/alpine-pandas as base
+
+FROM base as builder
 
 # set work directory
 WORKDIR /app
