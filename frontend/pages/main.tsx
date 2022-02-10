@@ -10,14 +10,111 @@ import { useAppContext } from '../context/state';
 import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import type { epcCertificateObject } from '../types';
 import { sendData } from 'next/dist/server/api-utils';
+
+interface ColorDictionary<Value> {
+  [id: string]: Value;
+}
+
+function packageDashboardDataByComponent(data: epcCertificateObject): Object {
+  let componentPackagedData = {
+    PageTitle: {
+      address: data.address,
+      address2: data.address2,
+      address3: data.address3,
+      postcode: data.postcode,
+      posttown: data.posttown,
+      county: data.county,
+      localAuthorityName: data.localAuthorityLabel,
+      propertyType: data.propertyType,
+      builtForm: data.builtForm,
+      constructionAgeBand: data.constructionAgeBand,
+      totalFloorArea: data.totalFloorArea,
+      energyTariff: data.energyTariff,
+      //faulty storey fields go here later (and inspection date)
+    },
+    House: {
+      environmental: {
+        environmentImpactPotential: data.environmentImpactPotential,
+        environmentImpactCurrent: data.environmentImpactCurrent,
+        energyConsumptionPotential: data.energyConsumptionPotential,
+        energyConsumptionCurrent: data.energyConsumptionCurrent,
+      },
+      roof: {
+        roofDescription: data.roofDescription,
+        roofEnergyEff: data.roofEnergyEff,
+        roofEnvEff: data.roofEnvEff,
+      },
+      windows: {
+        windowsDescription: data.windowsDescription,
+        windowsEnvEff: data.windowsEnvEff,
+        windowsEnergyEff: data.windowsEnergyEff,
+        glazedType: data.glazedType,
+        glazedArea: data.glazedArea,
+        multiGlazeProportion: data.multiGlazeProportion,
+      },
+      heating: {
+        general: {
+          mainsGasFlag: data.mainsGasFlag,
+          numberHeatedRooms: data.numberHeatedRooms,
+          heatLossCorridor: data.heatLossCorridor,
+          unheatedCorridorLength: data.unheatedCorridorLength,
+        },
+        mainHeating: {
+          mainHeatDescription: data.mainheatDescription,
+          mainHeatEnvEff: data.mainheatEnvEff,
+          mainHeatEnergyEff: data.mainheatEnergyEff,
+          mainFuel: data.mainFuel,
+        },
+        mainHeatingControls: {
+          mainHeatControlDescription: data.mainheatcontDescription,
+          mainHeatControlEnergyEff: data.mainheatcEnergyEff,
+          mainHeatControlEnvEff: data.mainheatcEnvEff,
+        },
+        secondaryHeating: {
+          secondheatDescription: data.secondheatDescription,
+          secondaryHeatingEnergyEff: data.sheatingEnergyEff,
+          //secondary heating environ efficiency is missing
+        },
+      },
+      lighting: {
+        lowEnergyLighting: data.lowEnergyLighting,
+        lightingEnergyEff: data.lightingEnergyEff,
+        lightingEnvEff: data.lightingEnvEff,
+      },
+      walls: {
+        wallsDescription: data.wallsDescription,
+        wallsEnergyEff: data.wallsEnergyEff,
+        wallsEnvEff: data.wallsEnvEff,
+      },
+      water: {
+        hotWaterDescription: data.hotwaterDescription,
+        hotWaterEnvEff: data.hotWaterEnvEff,
+        hotWaterEnergyEff: data.hotWaterEnergyEff,
+      },
+      floor: {
+        floorDescription: data.floorDescription,
+        floorEnergyEff: data.floorEnergyEff,
+        floorEnvEff: data.floorEnvEff,
+      },
+      other: {
+        photoSupply: data.photoSupply,
+        solarWaterHeatingFlag: data.solarWaterHeatingFlag,
+        mechanicalVentilation: data.mechanicalVentilation,
+      },
+    },
+  };
+
+  return componentPackagedData;
+}
 
 const Main = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
-  const [dashboardData, setDashboardData] = useState<epcCertificateObject>();
+  //type checking happens when this object is pacakged in above function, so any is fine here
+  const [dashboardData, setDashboardData] = useState<any>({});
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
@@ -35,7 +132,9 @@ const Main = () => {
 
   useEffect(() => {
     if (data) {
-      setDashboardData(data.certificate);
+      let packagedData = packageDashboardDataByComponent(data.certificate);
+      setDashboardData(packagedData);
+      console.log(packagedData);
     }
   }, [data]);
 
@@ -46,9 +145,6 @@ const Main = () => {
     }
   }, [error]);
 
-  interface ColorDictionary<Value> {
-    [id: string]: Value;
-  }
   const epcColorDictionary: ColorDictionary<string> = {
     A: 'bg-epcA',
     B: 'bg-epcB',
@@ -58,17 +154,6 @@ const Main = () => {
     F: 'bg-epcF',
     G: 'bg-epcG',
   };
-  //   {/*style={
-  //   'col-start-1 col-end-3 text-white ' +
-  //   epcColorDictionary[epcData['current-energy-rating']]
-  // }*/}
-
-  // style={
-  //   'col-start-3 col-end-5 text-white ' +
-  //   epcColorDictionary[epcData['potential-energy-rating']]
-  // }
-  //subtitle={epcData['address']
-  console.log(dashboardData);
   return (
     <>
       {dashboardData ? (

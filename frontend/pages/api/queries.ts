@@ -14,11 +14,63 @@ export const GET_CERTIFICATES = gql`
   query certificate($queryParam: String!) {
     certificate(lmk: $queryParam) {
       address
+      address2
+      address3
+      localAuthorityLabel
+      posttown
+      county
       currentEnergyRating
       postcode
       potentialEnergyRating
       co2EmissionsCurrent
       co2EmissionsPotential
+      co2EmissCurrPerFloorArea
+      propertyType
+      builtForm
+      constructionAgeBand
+      totalFloorArea
+      energyTariff
+      environmentImpactPotential
+      environmentImpactCurrent
+      energyConsumptionPotential
+      energyConsumptionCurrent
+      roofDescription
+      roofEnergyEff
+      roofEnvEff
+      windowsDescription
+      windowsEnvEff
+      windowsEnergyEff
+      glazedType
+      glazedArea
+      multiGlazeProportion
+      mainsGasFlag
+      numberHeatedRooms
+      heatLossCorridor
+      unheatedCorridorLength
+      mainheatDescription
+      mainheatEnvEff
+      mainheatEnergyEff
+      mainFuel
+      mainheatcontDescription
+      mainheatcEnergyEff
+      mainheatcEnvEff
+      secondheatDescription
+      sheatingEnergyEff
+      lowEnergyLighting
+      lightingEnergyEff
+      lightingEnvEff
+      wallsDescription
+      wallsEnergyEff
+      wallsEnvEff
+      hotwaterDescription
+      hotWaterEnvEff
+      hotWaterEnergyEff
+      floorDescription
+      floorEnergyEff
+      floorEnvEff
+      photoSupply
+      solarWaterHeatingFlag
+      mechanicalVentilation
     }
   }
 `;
@@ -31,7 +83,7 @@ export const GET_CERTIFICATES = gql`
 // unheatedCorridorLength
 // hotWaterCostPotential
 // constructionAgeBand
-// potentialEnergyRating
+// potentialEnergyRatingco2EmissCurrPerFloorArea
 // mainheatEnergyEff
 // windowsEnvEff
 // lightingEnergyEff
