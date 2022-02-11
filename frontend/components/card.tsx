@@ -7,6 +7,7 @@ interface props {
   letterColor?: string;
   disableHoverAnimation: boolean;
   onHover?: Dispatch<SetStateAction<boolean>>;
+  onClick?: Dispatch<SetStateAction<boolean>>;
   showShadow: boolean;
 }
 
@@ -14,6 +15,7 @@ export default function Card({
   children,
   style,
   onHover,
+  onClick,
   disableHoverAnimation,
   showShadow,
 }: props) {
@@ -29,6 +31,7 @@ export default function Card({
       className={cardStyle}
       onMouseEnter={() => (onHover ? onHover(true) : null)}
       onMouseLeave={() => (onHover ? onHover(false) : null)}
+      onClick={() => (onClick ? onClick(true) : null)}
     >
       <div className="p-3 text-xs h-full w-full">{children}</div>
     </div>

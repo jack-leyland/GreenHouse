@@ -264,7 +264,9 @@ const Main = () => {
           )}
 
           <div className="ml-9">Your House</div>
-          <House />
+          <House 
+            data={dashboardData}
+          />
         </div>
       ) : (
         <>
