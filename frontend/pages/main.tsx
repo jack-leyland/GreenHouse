@@ -182,92 +182,95 @@ const Main = () => {
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
           <PageTitle title={'Overview'} data={dashboardData.PageTitle} />
+          <div className="h-full flex flex-col">
           {!environmentalSummaryActive ? (
-            <div className="grid grid-cols-10 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
-              <Card
-                style={'col-start-1 col-end-3 row-start-1'}
-                disableHoverAnimation={false}
-                showShadow={true}
-              >
-                <div>
-                  <h3>Current Energy Rating</h3>
-                  <div
-                    className={
-                      'p-2 font-bold text-3xl ' +
-                      epcColorDictionary[dashboardData.Main.currentEnergyRating]
-                    }
-                  >
-                    {dashboardData.Main.currentEnergyRating}
+              <div className="grid grid-cols-10 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
+                <Card
+                  style={'col-start-1 col-end-3 row-start-1'}
+                  disableHoverAnimation={false}
+                  showShadow={true}
+                >
+                  <div>
+                    <h3>Current Energy Rating</h3>
+                    <div
+                      className={
+                        'p-2 font-bold text-3xl ' +
+                        epcColorDictionary[dashboardData.Main.currentEnergyRating]
+                      }
+                    >
+                      {dashboardData.Main.currentEnergyRating}
+                    </div>
                   </div>
-                </div>
-              </Card>
-              <Card
-                style={'col-start-3 col-end-5 row-start-1 '}
-                disableHoverAnimation={false}
-                showShadow={true}
-              >
-                <div>
-                  <h3>Potential Energy Rating</h3>
-                  <div
-                    className={
-                      'p-2 font-bold text-3xl ' +
-                      epcColorDictionary[
-                        dashboardData.Main.potentialEnergyRating
-                      ]
-                    }
-                  >
-                    {dashboardData.Main.potentialEnergyRating}
+                </Card>
+                <Card
+                  style={'col-start-3 col-end-5 row-start-1 '}
+                  disableHoverAnimation={false}
+                  showShadow={true}
+                >
+                  <div>
+                    <h3>Potential Energy Rating</h3>
+                    <div
+                      className={
+                        'p-2 font-bold text-3xl ' +
+                        epcColorDictionary[
+                          dashboardData.Main.potentialEnergyRating
+                        ]
+                      }
+                    >
+                      {dashboardData.Main.potentialEnergyRating}
+                    </div>
                   </div>
-                </div>
-              </Card>
-              <Card
-                style={'col-start-5 col-end-7 row-start-1'}
-                disableHoverAnimation={true}
-                showShadow={false}
-              >
-                <div>
-                  <h3>
-                    Current C0<sup>2</sup> Emissions
-                  </h3>
-                  <div className="p-2 font-bold text-3xl">
-                    {dashboardData.Main.co2EmissionsCurrent}{' '}
-                    <span className="text-sm font-semibold">tons/year</span>
+                </Card>
+                <Card
+                  style={'col-start-5 col-end-7 row-start-1'}
+                  disableHoverAnimation={true}
+                  showShadow={false}
+                >
+                  <div>
+                    <h3>
+                      Current C0<sup>2</sup> Emissions
+                    </h3>
+                    <div className="p-2 font-bold text-3xl">
+                      {dashboardData.Main.co2EmissionsCurrent}{' '}
+                      <span className="text-sm font-semibold">tons/year</span>
+                    </div>
                   </div>
-                </div>
-              </Card>
-              <Card
-                style={'col-start-7 col-end-9 row-start-1'}
-                disableHoverAnimation={true}
-                showShadow={false}
-              >
-                <div>
-                  <h3>
-                    C0<sup>2</sup> Reduction Potential
-                  </h3>
-                  <div className="p-2 font-bold text-3xl">
-                    {dashboardData.Main.co2EmissionsPotential}{' '}
-                    <span className="text-sm font-semibold">tons/year</span>
+                </Card>
+                <Card
+                  style={'col-start-7 col-end-9 row-start-1'}
+                  disableHoverAnimation={true}
+                  showShadow={false}
+                >
+                  <div>
+                    <h3>
+                      C0<sup>2</sup> Reduction Potential
+                    </h3>
+                    <div className="p-2 font-bold text-3xl">
+                      {dashboardData.Main.co2EmissionsPotential}{' '}
+                      <span className="text-sm font-semibold">tons/year</span>
+                    </div>
                   </div>
-                </div>
-              </Card>
-              <button
-                className="col-start-9 col-end-11 row-start-1 text-white rounded-default bg-emerald opacity-70 hover:opacity-100"
-                onClick={handleEnvironmentalSummaryButton}
-              >
-                See your environmental summary
-              </button>
+                </Card>
+                <button
+                  className="col-start-9 col-end-11 row-start-1 text-white rounded-default bg-emerald opacity-70 hover:opacity-100"
+                  onClick={handleEnvironmentalSummaryButton}
+                >
+                  See your environmental summary
+                </button>
+              </div>
+            ) : (
+              <EnvironmentalSummary
+                environmentalData={dashboardData.House.environmental}
+              />
+            )}
+              <div className="h-full relative">
+                <div className="ml-9">Your House</div>
+                <House 
+                  data={dashboardData}
+                />
+              </div>
             </div>
-          ) : (
-            <EnvironmentalSummary
-              environmentalData={dashboardData.House.environmental}
-            />
-          )}
-
-          <div className="ml-9">Your House</div>
-          <House 
-            data={dashboardData}
-          />
-        </div>
+          </div>
       ) : (
         <>
           {loading ? (

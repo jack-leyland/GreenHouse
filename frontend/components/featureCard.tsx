@@ -14,7 +14,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Walls':
         return (
             <Card
-                style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+                style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
                 disableHoverAnimation={true}
                 showShadow={true}
             >   
@@ -34,7 +34,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Roof':
         return (
               <Card
-              style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+              style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
               disableHoverAnimation={true}
               showShadow={true}
           >   
@@ -54,7 +54,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Floor':
         return (
             <Card
-                style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+                style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
                 disableHoverAnimation={true}
                 showShadow={true}
             >   
@@ -75,7 +75,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Lighting':
         return (
             <Card
-            style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
             disableHoverAnimation={true}
             showShadow={true}
           >
@@ -97,14 +97,10 @@ export default function FeatureCard({data, type}: props) {
     case 'Heating':
         return (
             <Card
-            style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
             disableHoverAnimation={true}
             showShadow={true}
             >
-
-
-
-
             <>
                 <div>
                 <div className='text-xl font-bold p-2'>{type}</div>
@@ -140,7 +136,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Water':
         return (
             <Card
-            style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
             disableHoverAnimation={true}
             showShadow={true}
           >
@@ -162,7 +158,7 @@ export default function FeatureCard({data, type}: props) {
     case 'Windows':
         return (
             <Card
-            style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
             disableHoverAnimation={true}
             showShadow={true}
           >
