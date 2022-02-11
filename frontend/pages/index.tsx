@@ -116,7 +116,7 @@ const Landing = () => {
           (activeAddressModal ? 'mt-[2vh]' : 'mt-[calc(50vh-199px-7.5vh)]')
         }
       >
-        <div className="text-black font-logoFont font-black text-[6rem] text-center tracking-tight">
+        <div className="text-zinc-900 font-logoFont font-black text-[6rem] text-center tracking-tight">
           GreenHouse
         </div>
         <div className="flex justify-center">

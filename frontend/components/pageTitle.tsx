@@ -39,7 +39,7 @@ export default function PageTitle({ title, data }: props) {
   return (
     <>
       <div className="mt-9 ml-9 pb-2 mr-9 border-b-2 border-neutral-300">
-        <h1 className="text-2xl pb-2 font-semibold text-black">{title}</h1>
+        <h1 className="text-2xl pb-2 font-semibold text-zinc-800">{title}</h1>
         <div className="w-full flex items-center h-[30px]">
           <h3 className="text-md w-1/2">{fullAddressString}</h3>
           <h3 className="text-md w-[30%] text-center">
