@@ -22,6 +22,8 @@ from api.resolvers.addresses import create_addresses
 from api.resolvers.certificates import create_certificate
 from api.resolvers.recommendations import create_recommendations
 
+import google
+
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -95,6 +97,24 @@ class Query(ObjectType):
             return {"Error": "Invalid LMK key"}
 
         return create_recommendations(data)
+
+    def resolve_big_query(root, info, postcode):
+        client = google.bigquery.Client()
+
+        query = """
+            SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL 
+            FROM `arcane-sentinel-340313.test_epc.cambridge`
+            WHERE CONSTRUCTION_AGE_BAND IS NOT NULL
+            AND NOT (CONSTRUCTION_AGE_BAND = 'INVALID!')
+            AND NOT (CONSTRUCTION_AGE_BAND = 'NO DATA!')
+            AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
+        """
+
+        query_job = client.query(query)
+
+        print("The query data:")
+        for row in query_job:
+            print("name={}, count={}".format(row[0], row["total_people"]))
 
 
 schema = Schema(query=Query)
