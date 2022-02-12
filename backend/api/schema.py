@@ -22,7 +22,7 @@ from api.resolvers.addresses import create_addresses
 from api.resolvers.certificates import create_certificate
 from api.resolvers.recommendations import create_recommendations
 
-import google
+from google.cloud import bigquery
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -99,7 +99,7 @@ class Query(ObjectType):
         return create_recommendations(data)
 
     def resolve_big_query(root, info, postcode):
-        client = google.bigquery.Client()
+        client = bigquery.Client()
 
         query = """
             SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL 
