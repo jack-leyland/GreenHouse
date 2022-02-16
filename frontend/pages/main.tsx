@@ -184,6 +184,7 @@ const Main = () => {
           <PageTitle title={'Overview'} data={dashboardData.PageTitle} />
           <div className="h-full flex flex-col">
           {!environmentalSummaryActive ? (
+            <div>
               <div className="grid grid-cols-10 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
                 <Card
                   style={'col-start-1 col-end-3 row-start-1'}
@@ -258,13 +259,13 @@ const Main = () => {
                   See your environmental summary
                 </button>
               </div>
+            </div>
             ) : (
               <EnvironmentalSummary
                 environmentalData={dashboardData.House.environmental}
               />
             )}
-              <div className="h-full relative">
-                <div className="ml-9">Your House</div>
+              <div className="h-full relative pt-2">
                 <House 
                   data={dashboardData}
                 />

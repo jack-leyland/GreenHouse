@@ -98,7 +98,7 @@ function ExpandedDisplay(props: any) {
   }, [props]);
 
   let divBaseStyle = 'mr-[8px] inline-block';
-  let spanDarkLabel = 'text-gray-800 font-bold';
+  let spanDarkLabel = 'text-zinc-800 font-bold';
 
   return (
     <div className="w-full flex-wrap mt-[5px]">

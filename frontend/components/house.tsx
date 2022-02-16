@@ -16,7 +16,7 @@ export default function House({data}: props) {
   const [sidePanelType, setSidePanelType] = useState<string>('');
 
   return (
-    <div className="flex w-full h-full p-6 gap-6 pr-12 pb-12 absolute">      
+    <div className="flex w-full h-full px-6 gap-6 pb-12 absolute">      
       <div className="grid grid-cols-6 grid-rows-7 w-full gap-2">
         {/*Roof*/}
         <div className="house-card-roof col-start-1 col-end-7 row-start-0 row-end-0 roof animate-fade hover:scale-105 hover:cursor-pointer rounded-lg"
@@ -66,7 +66,7 @@ export default function House({data}: props) {
             setSidePanelType('Windows')
           }}
         >
-          <div className="h-0 flex justify-center">
+          <div className="flex justify-center h-full items-center">
             <GiWindow size={20} />
           </div>
         </Card>
@@ -79,7 +79,7 @@ export default function House({data}: props) {
             setSidePanelType('Water')
           }}
         >
-          <div className="h-0 flex justify-center">
+          <div className="flex justify-center h-full items-center">
             <GiWaterDrop size={20} />
           </div>
         </Card>
@@ -92,7 +92,7 @@ export default function House({data}: props) {
             setSidePanelType('Heating')
           }}
         >
-          <div className="h-0 flex justify-center">
+          <div className="flex justify-center h-full items-center">
             <GiFireplace size={20} />
           </div>
         </Card>
@@ -105,29 +105,25 @@ export default function House({data}: props) {
             setSidePanelType('Lighting')
           }}
         >
-          <div className="h-0 flex justify-center">
+          <div className="flex justify-center h-full items-center">
             <BsLightbulb size={20} />
           </div>
         </Card>
       </div>
       
-      <div className="w-1/2">
+      
         {sidePanelType ? (
+          <div className="w-1/2">
             <FeatureCard
               data={data}
               type={sidePanelType}
             />
+            </div>
         ) : (
-          <Card
-            style={'overflow-scroll'}
-            disableHoverAnimation={true}
-            showShadow={true}
-          >
-            <div>Hover one of the house features to find out more...</div>
-          </Card>
+          null
         )
         }
-      </div>
+      
     </div>
   );
 }
