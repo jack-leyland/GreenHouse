@@ -16,4 +16,24 @@ body {
   border-bottom: 70px solid #a19595;
   border-left: 80px solid transparent;
   box-shadow: 0 16px 10px -17px rgb(0 0 0 0);
+  transform: scale(1.1);
+}
+.roof:hover {
+  transform: scale(1.2) !important;
+}
+
+.wall {
+  background-color: silver;
+  background-image: linear-gradient(335deg, #cbc9c8 23px, transparent 23px),
+    linear-gradient(155deg, #e8e5e4 23px, transparent 23px),
+    linear-gradient(335deg, #d0cdcc 23px, transparent 23px),
+    linear-gradient(155deg, #e8e5e4 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+.floor {
+  background-image: linear-gradient(#d6c2b6 0.1em, transparent 0.1em);
+  background-size: 100% 0.4em;
+  border-radius: 0px !important;
 }

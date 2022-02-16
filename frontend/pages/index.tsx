@@ -3,7 +3,6 @@ import Router from 'next/router';
 import Layout from '../components/layout';
 import { gql, useQuery } from '@apollo/client';
 import Circle from '../assets/circle.svg';
-import House from '../assets/house.svg';
 import SearchBar from '../components/search-bar';
 import AddressModal from '../components/addressModal';
 import { useAppContext } from '../context/state';
