@@ -101,11 +101,7 @@ class Query(ObjectType):
 
         return create_recommendations(data)
 
-<<<<<<< HEAD
     def resolve_big_query(root, info):
-=======
-    def resolve_big_query(root, info, postcode):
->>>>>>> a99f8ab884ffa5cf8ba0333f96b05a97c6b88f2b
         client = bigquery.Client()
 
         query = """
@@ -127,7 +123,7 @@ class Query(ObjectType):
                 create_bqstorage_client=True,
             )
         )
-        print(local_df)
+
         return create_bquery(local_df)
 
 schema = Schema(query=Query)
