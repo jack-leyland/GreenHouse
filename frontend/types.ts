@@ -96,7 +96,7 @@ export interface epcCertificateResponse extends Object {
   };
 
   export interface epcCertificateObject extends Object {
-    PageTitle: {
+    ExtraInfo: {
       address: string;
       address2: string;
       address3: string;
@@ -232,3 +232,17 @@ export interface epcCertificateResponse extends Object {
     improvementId : string;
     improvementIdText : string;
   }
+  
+  interface ColorDictionary<Value> {
+    [id: string]: Value;
+  }
+
+  export const epcColorDictionary: ColorDictionary<string> = {
+    A: 'text-epcA',
+    B: 'text-epcB',
+    C: 'text-epcC',
+    D: 'text-epcD',
+    E: 'text-epcE',
+    F: 'text-epcF',
+    G: 'text-epcG',
+  };

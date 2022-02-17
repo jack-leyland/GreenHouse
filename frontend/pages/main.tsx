@@ -5,25 +5,22 @@ import Sidebar from '../components/sidebar';
 import Card from '../components/card';
 import House from '../components/house';
 import PageTitle from '../components/pageTitle';
-import EnvironmentalSummary from '../components/enivornmentalSummary';
 import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
 import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
 import { useQuery } from '@apollo/client';
-import type { epcCertificateObject, epcCertificateResponse } from '../types';
-import { sendData } from 'next/dist/server/api-utils';
+import type { epcCertificateObject, epcCertificateResponse, epcColorDictionary } from '../types';
+import Modal from '../components/modal';
+import ExtraHouseInfo from '../components/extraHouseInfo';
 
-interface ColorDictionary<Value> {
-  [id: string]: Value;
-}
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
 ): epcCertificateObject {
   let componentPackagedData = {
-    PageTitle: {
+    ExtraInfo: {
       address: data.address,
       address2: data.address2,
       address3: data.address3,
@@ -134,6 +131,7 @@ const Main = () => {
   //type checking happens when this object is pacakged in above function, so any is fine here
   const [dashboardData, setDashboardData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
+  const [showModal , setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -164,26 +162,22 @@ const Main = () => {
     }
   }, [error]);
 
-  const epcColorDictionary: ColorDictionary<string> = {
-    A: 'text-epcA',
-    B: 'text-epcB',
-    C: 'text-epcC',
-    D: 'text-epcD',
-    E: 'text-epcE',
-    F: 'text-epcF',
-    G: 'text-epcG',
-  };
-
-  function handleEnvironmentalSummaryButton() {
-    setEnvironmentalSummaryActive(true);
+  let fullAddressString = '';
+  if(dashboardData) {
+    let addressElements = [
+      dashboardData.ExtraInfo.address,
+      dashboardData.ExtraInfo.localAuthorityName,
+      dashboardData.ExtraInfo.posttown,
+      dashboardData.ExtraInfo.postcode,
+    ];
+    fullAddressString = addressElements.join(', ');
   }
+
   return (
     <>
       {dashboardData ? (
-
-
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle title={'Dashboard'} data={dashboardData.PageTitle} />
+          <PageTitle title={'Dashboard'} subtitle={fullAddressString} onClick={() => setShowModal(true)}/>
 
           <div className="h-full grid grid-cols-10 grid-rows-6 p-8 gap-4">
 
@@ -207,25 +201,32 @@ const Main = () => {
                 </div>
             </Card>
 
-
             <Card
                 style={"relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"}
                 disableHoverAnimation={true}
                 showShadow={false}
             >
-                <div className="flex justify-center h-full w-full">
-                 
-                        <House 
-                            data={dashboardData}
-                            />
-                </div>
+            <div className="flex justify-center h-full w-full">
+              <House 
+                  data={dashboardData}
+                  />
+            </div>
             </Card>
+            
           </div>
+
+          {
+            showModal ? (
+            <Modal hideModal={() => setShowModal(false)}>
+              <ExtraHouseInfo
+                data={dashboardData.ExtraInfo}
+              />
+            </Modal>
+            ) :
+            null
+          }
+
         </div>
-
-
-
-
       ) : (
         <>
           {loading ? (
