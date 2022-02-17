@@ -143,3 +143,7 @@ class Recommendation(ObjectType):
     improvement_descr_text = String()
     improvement_id = String()
     improvement_id_text = String()
+
+#test
+class Big_Query(ObjectType):
+    co2_average = Float()

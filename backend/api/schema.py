@@ -15,14 +15,16 @@ from api.types import (
     Analytics,
     Address,
     Recommendation,
+    Big_Query
 )
 
 from api.resolvers.analytics import create_analytics
 from api.resolvers.addresses import create_addresses
 from api.resolvers.certificates import create_certificate
 from api.resolvers.recommendations import create_recommendations
+from api.resolvers.big_query import create_bquery
 
-import google
+from google.cloud import bigquery
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 EPC_API_KEY = os.environ.get("EPC_API_KEY")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="api/.google_credentials.json"
 
 headers = {
     "Accept": "application/json",
@@ -39,12 +42,12 @@ headers = {
 
 payload = {}
 
-
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
     analytics = Field(Analytics, postcode=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
+    big_query = Field(Big_Query)
 
     def resolve_analytics(root, info, postcode):
         if len(postcode) == 7:
@@ -98,8 +101,8 @@ class Query(ObjectType):
 
         return create_recommendations(data)
 
-    def resolve_big_query(root, info, postcode):
-        client = google.bigquery.Client()
+    def resolve_big_query(root, info):
+        client = bigquery.Client()
 
         query = """
             SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL 
@@ -110,11 +113,17 @@ class Query(ObjectType):
             AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
         """
 
-        query_job = client.query(query)
-
-        print("The query data:")
-        for row in query_job:
-            print("name={}, count={}".format(row[0], row["total_people"]))
-
+        local_df = (
+            client.query(query)
+            .result()
+            .to_dataframe(
+                # Optionally, explicitly request to use the BigQuery Storage API. As of
+                # google-cloud-bigquery version 1.26.0 and above, the BigQuery Storage
+                # API is used by default.
+                create_bqstorage_client=True,
+            )
+        )
+        print(local_df)
+        return create_bquery(local_df)
 
 schema = Schema(query=Query)
