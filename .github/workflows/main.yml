@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-      - develop
 
 jobs:
   prettier:
@@ -101,7 +97,7 @@ jobs:
           base: ${{ github.head_ref }} # Creates pull request onto pull request or commit branch
           branch: actions/black
   build-docker:
-    name: Builder Docker Image
+    name: Build Docker Image
     runs-on: ubuntu-latest
     defaults:
       run:
