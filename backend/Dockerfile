@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 ENV DEBUG 1
 
 # install psycopg2
-RUN apk-get install \
+RUN apt-get install \
   && apt-get add --virtual build-essential gcc python3-dev musl-dev \
   && apt-get add postgresql-dev \
   && pip install psycopg2
