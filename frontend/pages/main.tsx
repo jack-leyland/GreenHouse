@@ -34,14 +34,22 @@ const GET_CERTIFICATES = gql`
 
 const Main = () => {
   const GlobalContext = useAppContext();
-  const [queryParam, setQueryParam] = useState<string | null>(
-    GlobalContext.activeLmk
-  );
+  const [queryParam, setQueryParam] = useState<string | null>(null);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
   });
 
+  // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
+  useEffect(() => {
+    if (GlobalContext.activeLmk) {
+      setQueryParam(GlobalContext.activeLmk);
+    } else {
+      setQueryParam(localStorage.activeLmk);
+    }
+  }, []);
+
+  //TODO: wrap in useEffect?
   let epcData;
   if (data) {
     epcData = JSON.parse(data.certificate);
@@ -133,8 +141,6 @@ const Main = () => {
       fullMark: 100,
     },
   ];
-
-  console.log(epcData);
 
   return (
     <>

@@ -6,3 +6,5 @@ db.sqlite3
 .env
 data/
 /api/__pycache__/
+.DS_Store
+/api/.google_credentials.json

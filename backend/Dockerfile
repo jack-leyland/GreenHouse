@@ -1,5 +1,7 @@
 # pull official base image
-FROM python:3.10-alpine
+FROM nickgryg/alpine-pandas as base
+
+FROM base as builder
 
 # set work directory
 WORKDIR /app
@@ -11,9 +13,9 @@ ENV DEBUG 1
 
 # install psycopg2
 RUN apk update \
-    && apk add --virtual build-essential gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    && pip install psycopg2
+  && apk add --virtual build-essential gcc python3-dev musl-dev \
+  && apk add postgresql-dev \
+  && pip install psycopg2
 
 # install dependencies
 COPY ./requirements.txt .
