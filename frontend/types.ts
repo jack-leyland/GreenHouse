@@ -115,8 +115,8 @@ export interface epcCertificateResponse extends Object {
       inspectionDate: Date;
     },
     Main: {
-      co2EmissionsCurrent: number;
-      co2EmissionsPotential: number;
+      currentEnergyEfficiency: number;
+      potentialEnergyEfficiency: number;
       potentialEnergyRating: string;
       currentEnergyRating: string;
     }
@@ -126,6 +126,8 @@ export interface epcCertificateResponse extends Object {
         environmentImpactCurrent: number;
         energyConsumptionPotential: number;
         energyConsumptionCurrent: number;
+        co2EmissionsCurrent: number;
+        co2EmissionsPotential: number;
       },
       roof: {
         roofDescription: string;
@@ -233,16 +235,26 @@ export interface epcCertificateResponse extends Object {
     improvementIdText : string;
   }
   
-  interface ColorDictionary<Value> {
+  interface EPCDictionary<Value> {
     [id: string]: Value;
   }
 
-  export const epcColorDictionary: ColorDictionary<string> = {
-    A: 'text-epcA',
-    B: 'text-epcB',
-    C: 'text-epcC',
-    D: 'text-epcD',
-    E: 'text-epcE',
-    F: 'text-epcF',
-    G: 'text-epcG',
+  export const epcColorDictionary: EPCDictionary<string> = {
+    A: 'epcA',
+    B: 'epcB',
+    C: 'epcC',
+    D: 'epcD',
+    E: 'epcE',
+    F: 'epcF',
+    G: 'epcG',
+  };
+
+  export const epcIndexDictionary: EPCDictionary<number> = {
+    A: 1,
+    B: 2,
+    C: 3,
+    D: 4,
+    E: 5,
+    F: 6,
+    G: 7,
   };

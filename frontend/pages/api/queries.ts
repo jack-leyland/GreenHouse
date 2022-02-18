@@ -81,6 +81,8 @@ export const GET_CERTIFICATES = gql`
       hotWaterCostCurrent
       lightingCostPotential
       lightingCostCurrent
+      currentEnergyEfficiency
+      potentialEnergyEfficiency
     }
   }
 `;
