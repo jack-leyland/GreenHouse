@@ -1,5 +1,5 @@
 # pull official base image
-FROM nickgryg/alpine-pandas as base
+FROM python:3.10-buster as base
 
 FROM base as builder
 
@@ -19,6 +19,7 @@ RUN apk update \
 
 # install dependencies
 COPY ./requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # copy project
