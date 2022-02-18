@@ -113,7 +113,6 @@ class Analytics(ObjectType):
     mean_current_lighting_cost = Float()
     mean_current_heating_cost = Float()
     mean_current_hot_water_cost = Float()
-    mean_lighting_energy_eff = Float()
     mean_potential_energy_efficiency = Float()
     mean_potential_environment_impact = Float()
     mean_potential_energy_consumption = Float()
@@ -128,6 +127,25 @@ class Analytics(ObjectType):
     normalised_current_lighting_cost = List(Float)
     normalised_current_heating_cost = List(Float)
     normalised_current_hot_water_cost = List(Float)
+
+    #average ratings for house tile comparisons
+    mean_low_energy_lighting = Float()
+    mean_lighting_energy_eff = Float()
+    mean_lighting_environmental_eff = Float()
+    mean_walls_energy_eff = Float()
+    mean_walls_environmental_eff = Float()
+    mean_water_energy_eff = Float()
+    mean_water_environmental_eff = Float()
+    mean_floor_energy_eff = Float()
+    mean_floor_environmental_eff = Float()
+    mean_roof_energy_eff = Float()
+    mean_roof_environmental_eff = Float()
+    mean_main_heating_energy_eff = Float()
+    mean_main_heating_environmental_eff = Float()
+    mean_main_heating_controls_energy_eff = Float()
+    mean_main_heating_controls_environmental_eff = Float()
+    mean_second_heating_energy_eff = Float()
+    mean_second_heating_environmental_eff = Float()
 
 
 class Address(ObjectType):
