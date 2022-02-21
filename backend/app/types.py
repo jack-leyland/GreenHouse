@@ -15,8 +15,13 @@ class Certificate(ObjectType):
     uprn_source = String()
     floor_height = Float()
     heating_cost_potential = Float()
+    heating_cost_adjusted_potential = Float()
     unheated_corridor_length = Float()
     hot_water_cost_potential = Float()
+    hot_water_cost_adjusted_potential = Float()
+    total_current_cost = Float() #computed from hot water + lighting + heating
+    total_potential_cost = Float() #computed from adjusted versions of the above
+    total_adjusted_potential_cost = Float() #computed from adjusted versions of the above
     construction_age_band = String()
     potential_energy_rating = String()
     mainheat_energy_eff = Float()
@@ -75,6 +80,7 @@ class Certificate(ObjectType):
     walls_energy_eff = Float()
     photo_supply = Float()
     lighting_cost_potential = Float()
+    lighting_cost_adjusted_potential = Float()
     mainheat_env_eff = Float()
     multi_glaze_proportion = Float()
     main_heating_controls = String()
