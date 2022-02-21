@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./card";
 import Lottie from "react-lottie-player";
-const StarRatings:any = require("react-star-ratings");
+const StarRatings: any = require("react-star-ratings");
 import json from "../public/assets/animation/up-arrow.json";
 import { epcCertificateObject } from "../types";
 
