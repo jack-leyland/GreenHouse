@@ -167,8 +167,9 @@ class Recommendation(ObjectType):
 class Big_Query(ObjectType):
     co2_average = Float()
 
+
 class Improvement(ObjectType):
     lmk_key = String(required=True)
     cost = Float()
-    date = Date()
+    date = String()
     improvement_id = String()

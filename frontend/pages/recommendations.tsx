@@ -4,7 +4,7 @@ import Card from "../components/card";
 import Layout from "../components/layout";
 import PageTitle from "../components/pageTitle";
 import Sidebar from "../components/sidebar";
-import Recommendation from "../components/recommendation";
+import Recommendation from "../components/recommendationCard";
 import { useAppContext } from "../context/state";
 import { epcRecommendationObject } from "../types";
 
@@ -52,7 +52,7 @@ const Recommendations = () => {
     <section className="text-gray-600 body-font overflow-hidden h-screen">
       <div className="container px-5 mx-auto py-24 flex flex-row overflow-x-scroll flex-nowrap h-full">
         {/* <div className="flex -m-4 flex-row overflow-x-scroll w-full"> */}
-        {queryData.map((item, key) => {
+        {queryData.map((item: epcRecommendationObject, key: number) => {
           return <Recommendation recs={item} key={key} />;
         })}
         {/* </div> */}

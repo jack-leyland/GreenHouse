@@ -16,24 +16,15 @@ interface props {
 }
 
 const ADD_IMPROVEMENT = gql`
-  mutation addImprovement(
-    $lmkKey: String!
-    $improvementId: String!
-    $date: String!
-    $cost: Float!
-  ) {
-    addImprovements(
-      improvement: {
-        lmkKey: $lmkKey
-        improvementId: $improvementId
-        date: $date
-        cost: $cost
+  mutation addImprovement($lmkKey: String!, $date: String!, $cost: Float!, $improvementId: String!) {
+    addImprovement(lmkKey: $lmkKey, date: $date, cost: $cost, improvementId: $improvementId) {
+      ok
+      improvement{
+        lmkKey
+        date
+        cost
+        improvementId
       }
-    ) {
-      lmkKey
-      improvementId
-      cost
-      date
     }
   }
 `;
@@ -74,7 +65,7 @@ export default function Recommendation(props: props) {
           className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded"
         >
           I've done this!
-          <svg
+          {/* <svg
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -84,7 +75,7 @@ export default function Recommendation(props: props) {
             viewBox="0 0 24 24"
           >
             <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
+          </svg> */}
         </button>
         <p className="text-xs text-gray-500 mt-3"></p>
       </div>
@@ -110,14 +101,12 @@ export default function Recommendation(props: props) {
                   addImprovement({
                     variables: {
                       lmkKey: values.lmkKey,
-                      date: values.date,
+                      date: JSON.stringify(values.date),
                       cost: values.cost,
                       improvementId: values.improvementId,
                     },
                   });
                   setTimeout(() => {
-                    console.log(values);
-                    // alert(JSON.stringify(values, null, 2));
                     setSubmitting(false);
                   }, 500);
                 }}
@@ -128,6 +117,7 @@ export default function Recommendation(props: props) {
                     <Field
                       id="cost"
                       name="cost"
+                      disabled={data ? true : false}
                       className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                   </div>
@@ -137,6 +127,7 @@ export default function Recommendation(props: props) {
                       id="date"
                       name="date"
                       type="date"
+                      disabled={data ? true : false}
                       className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                   </div>
@@ -146,14 +137,16 @@ export default function Recommendation(props: props) {
                       id="agree"
                       name="agree"
                       type="checkbox"
+                      disabled={data ? true : false}
                       className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                   </div>
                   <button
                     type="submit"
+                    disabled={data ? true : false}
                     className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
                   >
-                    Submit
+                    {data ? "You've already told us!" : "Submit"}
                   </button>
                 </Form>
               </Formik>

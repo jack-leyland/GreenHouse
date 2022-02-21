@@ -7,7 +7,7 @@ from graphene import (
     Mutation,
     Float,
     Boolean,
-    Int, 
+    Int,
     Date,
 )
 import requests
@@ -15,7 +15,16 @@ import environ
 import os
 import pandas as pd
 
-from api.types import Certificate, Analytics, Address, Recommendation, Big_Query, Improvement
+# from google.cloud import bigquery
+
+from api.types import (
+    Certificate,
+    Analytics,
+    Address,
+    Recommendation,
+    Big_Query,
+    Improvement,
+)
 
 from api.resolvers.analytics import create_analytics
 from api.resolvers.addresses import create_addresses
@@ -23,7 +32,6 @@ from api.resolvers.certificates import create_certificate
 from api.resolvers.recommendations import create_recommendations
 from api.resolvers.big_query import create_bquery
 
-from google.cloud import bigquery
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,22 +53,26 @@ payload = {}
 class AddImprovement(Mutation):
     class Arguments:
         cost = Float()
-        date = Date()
+        date = String()
         lmk_key = String()
         improvement_id = String()
-        
+
     ok = Boolean()
     improvement = Field(lambda: Improvement)
-    
+
     def mutate(root, info, cost, date, lmk_key, improvement_id):
         print(cost, date, lmk_key, improvement_id)
-        improvement = Improvement(cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id)
+        improvement = Improvement(
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+        )
         ok = True
         return AddImprovement(improvement=improvement, ok=ok)
 
+
 class Mutation(ObjectType):
     add_improvement = AddImprovement.Field()
-    
+
+
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
