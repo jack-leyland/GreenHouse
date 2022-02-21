@@ -114,7 +114,6 @@ class Query(ObjectType):
                 create_bqstorage_client=True,
             )
         )
-        print(local_df)
         return create_bquery(local_df)
 
 
