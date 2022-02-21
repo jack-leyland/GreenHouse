@@ -22,7 +22,6 @@ export default function FeatureCard({data, type}: props) {
                 disableHoverAnimation={true}
                 showShadow={true}
             >   
-                <>
                 <div>
                     <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                     <div className='p-2 text-sm'>
@@ -50,7 +49,6 @@ export default function FeatureCard({data, type}: props) {
                       </div>
                     </div>
                 </div>
-                </>
             </Card>
         )
 
@@ -61,7 +59,6 @@ export default function FeatureCard({data, type}: props) {
               disableHoverAnimation={true}
               showShadow={true}
           >   
-            <>
               <div>
                   <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                   <div className='p-2 text-sm'>
@@ -89,7 +86,6 @@ export default function FeatureCard({data, type}: props) {
                     </div>
                   </div>
               </div>
-            </>
           </Card>
         )
 
@@ -100,7 +96,6 @@ export default function FeatureCard({data, type}: props) {
           disableHoverAnimation={true}
           showShadow={true}
         >   
-          <>
             <div>
                 <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                 <div className='p-2 text-sm'>
@@ -128,7 +123,6 @@ export default function FeatureCard({data, type}: props) {
                   </div>
                 </div>
             </div>
-          </>
         </Card>
       )
 
@@ -140,18 +134,36 @@ export default function FeatureCard({data, type}: props) {
             disableHoverAnimation={true}
             showShadow={true}
           >
-            <>
-              <div>
-                <div className='text-xl font-bold p-2'>{type}</div>
-                <div className='p-2'>
+            <div>
+                <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                <div className='p-2 text-sm'>
                   <div className='py-2'><b>Lighting Cost Current:</b> {data?.House.lighting.lightingCostCurrent ? data?.House.lighting.lightingCostCurrent : 'N/A'}</div>
                   <div className='py-2'><b>Lighting Cost Potential:</b> {data?.House.lighting.lightingCostPotential ? data?.House.lighting.lightingCostPotential : 'N/A'}</div>
-                  <div className='py-2'><b>Lighting Energy Efficiency:</b> {data?.House.lighting.lightingEnergyEff? data?.House.lighting.lightingEnergyEff  : 'N/A'}</div>
-                  <div className='py-2'><b>Lighting Environmental Efficiency:</b> {data?.House.lighting.lightingEnvEff ? data?.House.lighting.lightingEnvEff : 'N/A'}</div>
                   <div className='py-2'><b>Low Energy Lighting:</b> {data?.House.lighting.lowEnergyLighting ? data?.House.lighting.lowEnergyLighting : 'N/A'}</div>
+                  
+                  <div className='py-2 flex'>
+                    <b className="pr-2" >Energy Efficiency:</b>
+                    <StarRatings
+                      rating={data?.House.lighting.lightingEnergyEff? data?.House.lighting.lightingEnergyEff : 0}
+                      starRatedColor="green"
+                      numberOfStars={5}
+                      name='rating'
+                      starDimension="15px"
+                    />  
+                  </div>
+                  
+                  <div className='py-2 flex items-center'>
+                    <b className="pr-2">Environmental Efficiency:</b>
+                    <StarRatings
+                      rating={data?.House.lighting.lightingEnvEff ? data?.House.lighting.lightingEnvEff : 0}
+                      starRatedColor="green"
+                      numberOfStars={5}
+                      name='rating'
+                      starDimension="15px"
+                    />  
+                  </div>
                 </div>
-              </div>
-            </>
+            </div>
           </Card>
         )
 
@@ -201,18 +213,36 @@ export default function FeatureCard({data, type}: props) {
             disableHoverAnimation={true}
             showShadow={true}
           >
-            <>
-              <div>
-                <div className='text-xl font-bold p-2'>{type}</div>
-                <div className='p-2'>
-                  <div className='py-2'><b>Hot Water Cost Current:</b> {data?.House.water.hotWaterCostCurrent ? data?.House.water.hotWaterCostCurrent : 'N/A'}</div>
-                  <div className='py-2'><b>Hot Water Cost Potential:</b> {data?.House.water.hotWaterCostPotential ? data?.House.water.hotWaterCostPotential : 'N/A'}</div>
-                  <div className='py-2'><b>Description:</b> {data?.House.water.hotWaterDescription? data?.House.water.hotWaterDescription  : 'N/A'}</div>
-                  <div className='py-2'><b>Hot Water Environmental Efficiency:</b> {data?.House.water.hotWaterEnvEff ? data?.House.water.hotWaterEnvEff : 'N/A'}</div>
-                  <div className='py-2'><b>Hot Water Energy Lighting:</b> {data?.House.water.hotWaterEnergyEff ? data?.House.water.hotWaterEnergyEff : 'N/A'}</div>
+            <div>
+                <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                <div className='p-2 text-sm'>
+                <div className='py-2'><b>Description:</b> {data?.House.water.hotWaterDescription? data?.House.water.hotWaterDescription: 'N/A'}</div>
+                <div className='py-2'><b>Hot Water Cost Current:</b> {data?.House.water.hotWaterCostCurrent ? data?.House.water.hotWaterCostCurrent : 'N/A'}</div>
+                <div className='py-2'><b>Hot Water Cost Potential:</b> {data?.House.water.hotWaterCostPotential ? data?.House.water.hotWaterCostPotential : 'N/A'}</div>
+
+                  <div className='py-2 flex'>
+                    <b className="pr-2" >Energy Efficiency:</b>
+                    <StarRatings
+                      rating={data?.House.water.hotWaterEnergyEff ? data?.House.water.hotWaterEnergyEff : 0}
+                      starRatedColor="green"
+                      numberOfStars={5}
+                      name='rating'
+                      starDimension="15px"
+                    />  
+                  </div>
+                  
+                  <div className='py-2 flex items-center'>
+                    <b className="pr-2">Environmental Efficiency:</b>
+                    <StarRatings
+                      rating={data?.House.water.hotWaterEnvEff ? data?.House.water.hotWaterEnvEff : 0}
+                      starRatedColor="green"
+                      numberOfStars={5}
+                      name='rating'
+                      starDimension="15px"
+                    />  
+                  </div>
                 </div>
-              </div>
-            </>
+            </div>
           </Card>
         )
 
@@ -223,31 +253,50 @@ export default function FeatureCard({data, type}: props) {
             disableHoverAnimation={true}
             showShadow={true}
           >
-            <>
-              <div>
-                <div className='text-xl font-bold p-2'>{type}</div>
-                <div className='p-2'>
+            <div>
+                  <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                  <div className='p-2 text-sm'>
+                  <div className='py-2'><b>Description:</b> {data?.House.windows.windowsDescription? data?.House.windows.windowsDescription : 'N/A'}</div>
+                    
                   <div className='py-2'><b>Glazed Area: </b> {data?.House.windows.glazedArea ? data?.House.windows.glazedArea  : 'N/A'}</div>
                   <div className='py-2'><b>Glazed Type: </b> {data?.House.windows.glazedType ? data?.House.windows.glazedType  : 'N/A'}</div>
                   <div className='py-2'><b>Multi Glaze Proportion: </b> {data?.House.windows.multiGlazeProportion ? data?.House.windows.multiGlazeProportion : 'N/A'}</div>
-                  <div className='py-2'><b>Windows Description: </b> {data?.House.windows.windowsDescription? data?.House.windows.windowsDescription : 'N/A'}</div>
-                  <div className='py-2'><b>Windows Energy Efficiency:</b> {data?.House.windows.windowsEnergyEff ? data?.House.windows.windowsEnergyEff : 'N/A'}</div>
-                  <div className='py-2'><b>Windows Environmental  Efficiency:</b> {data?.House.windows.windowsEnvEff ? data?.House.windows.windowsEnvEff : 'N/A'}</div>
-                </div>
+   
+
+                    <div className='py-2 flex'>
+                      <b className="pr-2" >Energy Efficiency:</b>
+                      <StarRatings
+                        rating={data?.House.windows.windowsEnergyEff ? data?.House.windows.windowsEnergyEff : 0}
+                        starRatedColor="green"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension="15px"
+                      />  
+                    </div>
+                    
+                    <div className='py-2 flex items-center'>
+                      <b className="pr-2">Environmental Efficiency:</b>
+                      <StarRatings
+                        rating={data?.House.windows.windowsEnvEff ? data?.House.windows.windowsEnvEff : 0}
+                        starRatedColor="green"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension="15px"
+                      />  
+                    </div>
+                  </div>
               </div>
-            </>
           </Card>
         )
       default:
         return (
             <Card
-              style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
+              style={'col-start-7 col-end-10 row-start-1 row-end-7'}
               disableHoverAnimation={true}
               showShadow={true}
             >
               <>
                 <div>
-                  <div className='font-bold p-2'>{type}</div>
                   <div className='text-xl text-center p-2 flex flex-col items-center justify-center'>
                     <Lottie
                       loop
