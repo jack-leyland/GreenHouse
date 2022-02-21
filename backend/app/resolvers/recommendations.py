@@ -1,4 +1,4 @@
-from api.types import Recommendation
+from app.types import Recommendation
 
 
 def create_recommendations(data):

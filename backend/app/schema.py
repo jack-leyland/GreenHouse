@@ -7,8 +7,6 @@ from graphene import (
     Mutation,
     Float,
     Boolean,
-    Int,
-    Date,
 )
 import requests
 import environ
@@ -17,7 +15,7 @@ import pandas as pd
 
 # from google.cloud import bigquery
 
-from api.types import (
+from app.types import (
     Certificate,
     Analytics,
     Address,
@@ -26,12 +24,12 @@ from api.types import (
     Improvement,
 )
 
-from api.resolvers.analytics import create_analytics
-from api.resolvers.addresses import create_addresses
-from api.resolvers.certificates import create_certificate
-from api.resolvers.recommendations import create_recommendations
-from api.resolvers.big_query import create_bquery
-
+from app.resolvers.analytics import create_analytics
+from app.resolvers.addresses import create_addresses
+from app.resolvers.certificates import create_certificate
+from app.resolvers.recommendations import create_recommendations
+from app.resolvers.big_query import create_bquery
+from app.models import CompletedRecommendation
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,7 +63,12 @@ class AddImprovement(Mutation):
         improvement = Improvement(
             cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
         )
+        db_improvement = CompletedRecommendation(
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+        )
+        db_improvement.save()
         ok = True
+
         return AddImprovement(improvement=improvement, ok=ok)
 
 

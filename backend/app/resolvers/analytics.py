@@ -1,4 +1,4 @@
-from api.types import Analytics
+from app.types import Analytics
 from scripts.analysis import (
     metrics_to_numeric,
     current_metrics,

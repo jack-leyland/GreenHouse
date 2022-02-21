@@ -1,4 +1,4 @@
-from api.types import Big_Query
+from app.types import Big_Query
 
 
 def create_bquery(data):
