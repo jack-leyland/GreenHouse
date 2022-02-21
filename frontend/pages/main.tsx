@@ -11,9 +11,16 @@ import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
 import { useQuery } from '@apollo/client';
-import type { epcCertificateObject, epcCertificateResponse, epcColorDictionary } from '../types';
+import type { epcCertificateObject, epcCertificateResponse} from '../types';
+import EpcChart from '../components/epcChart';
 import Modal from '../components/modal';
 import ExtraHouseInfo from '../components/extraHouseInfo';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import ChartContainer from '../components/chartContainer';
+import {RiMoneyPoundCircleFill} from 'react-icons/ri';
+import {AiFillQuestionCircle} from 'react-icons/ai';
+import {BsFillTreeFill} from 'react-icons/bs';
+import {MdOutlineFlipCameraAndroid} from 'react-icons/md';
 
 
 function packageDashboardDataByComponent(
@@ -39,10 +46,10 @@ function packageDashboardDataByComponent(
       inspectionDate: data.inspectionDate,
     },
     Main: {
-      co2EmissionsCurrent: data.co2EmissionsCurrent,
-      co2EmissionsPotential: data.co2EmissionsPotential,
       potentialEnergyRating: data.potentialEnergyRating,
       currentEnergyRating: data.currentEnergyRating,
+      currentEnergyEfficiency: data.currentEnergyEfficiency,
+      potentialEnergyEfficiency: data.potentialEnergyEfficiency,
     },
     House: {
       environmental: {
@@ -50,6 +57,8 @@ function packageDashboardDataByComponent(
         environmentImpactCurrent: data.environmentImpactCurrent,
         energyConsumptionPotential: data.energyConsumptionPotential,
         energyConsumptionCurrent: data.energyConsumptionCurrent,
+        co2EmissionsCurrent: data.co2EmissionsCurrent,
+        co2EmissionsPotential: data.co2EmissionsPotential,
       },
       roof: {
         roofDescription: data.roofDescription,
@@ -173,33 +182,90 @@ const Main = () => {
     fullAddressString = addressElements.join(', ');
   }
 
+
+  const data1 = [
+    {
+      name: "C02 Production",
+      Current: 3000,
+      Potential: 1398,
+    },
+  ]
+
+
+  console.log(data)
+
   return (
     <>
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
           <PageTitle title={'Dashboard'} subtitle={fullAddressString} onClick={() => setShowModal(true)}/>
 
-          <div className="h-full grid grid-cols-10 grid-rows-6 p-8 gap-4">
+          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
+            
+            <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
 
-            <Card
-                style={'col-start-1 col-end-6 row-start-1 row-end-4 border'}
-                disableHoverAnimation={true}
-                showShadow={false}
-            >
-                <div>
-                <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0">Overview</h3>
-                </div>
-            </Card>
+            
+              <Card
+                  style={'border'}
+                  disableHoverAnimation={true}
+                  showShadow={false}
+              >
+                  <div className="h-full">
+                  <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">Overview <MdOutlineFlipCameraAndroid size={25}/> </h3>
+                    <div className="py-2 px-1 h-full">
+                      <EpcChart
+                          currentEfficiency={dashboardData.Main.currentEnergyEfficiency}
+                          potentialEfficiency={dashboardData.Main.potentialEnergyEfficiency}
+                      />
+                    </div>
+                  </div>
+              </Card>
 
-            <Card
-                style={'col-start-1 col-end-6 row-start-4 row-end-7 border'}
-                disableHoverAnimation={true}
-                showShadow={false}
-            >
-                <div>
-                <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">Environmental</h3>
-                </div>
-            </Card>
+              <Card
+                  style={'border'}
+                  disableHoverAnimation={true}
+                  showShadow={false}
+              >
+                  <div className="h-full">
+                    <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">Environmental</h3>
+                    <div className="py-2 px-1 h-full">
+                        <div className="flex h-3/4">
+                          <div className="w-5/12">
+                            <div className="flex items-center mx-1"><span className="mr-2">Carbon Production</span><AiFillQuestionCircle size={10}/></div>
+                            <div className="h-full flex justify-center items-center pt-4">
+                                <BarChart layout="horizontal" width={150} height={175} data={data1}>
+                                  {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                                  <XAxis type="category" dataKey="name"/>
+                                  <Tooltip />
+                                  <Bar dataKey="Current" fill="#e9153b" />
+                                  <Bar dataKey="Potential" fill="#19b45a" />
+                                </BarChart>
+                            </div>               
+                          </div>
+
+                          <div className="w-7/12 border border-r-0 border-y-0">
+                            <div className="pb-1 underline text-sm px-4">How you compare:</div>
+                            <div>
+                              <div className="px-4 py-1">
+                                <div className="py-1">You are in the bottom/top % of emitters in your area, and emit ... less/more than the average U.K. household</div>
+                                <div className="py-2 font-bold">Your current emsssions are equilvalent to:</div>
+                                <div className="flex">
+                                  <span>
+                                    <BsFillTreeFill/>
+                                  </span>
+                                  
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </Card>
+
+            </div>
+
 
             <Card
                 style={"relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"}

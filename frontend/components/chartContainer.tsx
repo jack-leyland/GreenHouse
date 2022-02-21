@@ -7,7 +7,7 @@ interface props {
 
 export default function ChartContainer({ children }: props) {
   return (
-    <div className="w-full, h-5/6 relative mt-5">
+    <div className="w-full h-5/6 relative p-8">
       <ResponsiveContainer>{children}</ResponsiveContainer>
     </div>
   );
