@@ -5,29 +5,25 @@ import Sidebar from '../components/sidebar';
 import Card from '../components/card';
 import House from '../components/house';
 import PageTitle from '../components/pageTitle';
+import EnvironmentalSummary from '../components/enivornmentalSummary';
 import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
 import loadingJson from '../public/assets/animation/loading.json';
 import errorJson from '../public/assets/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
 import { useQuery } from '@apollo/client';
-import type { epcCertificateObject, epcCertificateResponse} from '../types';
-import EpcChart from '../components/epcChart';
-import Modal from '../components/modal';
-import ExtraHouseInfo from '../components/extraHouseInfo';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import ChartContainer from '../components/chartContainer';
-import {RiMoneyPoundCircleFill} from 'react-icons/ri';
-import {AiFillQuestionCircle} from 'react-icons/ai';
-import {BsFillTreeFill} from 'react-icons/bs';
-import {MdOutlineFlipCameraAndroid} from 'react-icons/md';
+import type { epcCertificateObject, epcCertificateResponse } from '../types';
+import { sendData } from 'next/dist/server/api-utils';
 
+interface ColorDictionary<Value> {
+  [id: string]: Value;
+}
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
 ): epcCertificateObject {
   let componentPackagedData = {
-    ExtraInfo: {
+    PageTitle: {
       address: data.address,
       address2: data.address2,
       address3: data.address3,
@@ -46,10 +42,10 @@ function packageDashboardDataByComponent(
       inspectionDate: data.inspectionDate,
     },
     Main: {
+      co2EmissionsCurrent: data.co2EmissionsCurrent,
+      co2EmissionsPotential: data.co2EmissionsPotential,
       potentialEnergyRating: data.potentialEnergyRating,
       currentEnergyRating: data.currentEnergyRating,
-      currentEnergyEfficiency: data.currentEnergyEfficiency,
-      potentialEnergyEfficiency: data.potentialEnergyEfficiency,
     },
     House: {
       environmental: {
@@ -57,8 +53,6 @@ function packageDashboardDataByComponent(
         environmentImpactCurrent: data.environmentImpactCurrent,
         energyConsumptionPotential: data.energyConsumptionPotential,
         energyConsumptionCurrent: data.energyConsumptionCurrent,
-        co2EmissionsCurrent: data.co2EmissionsCurrent,
-        co2EmissionsPotential: data.co2EmissionsPotential,
       },
       roof: {
         roofDescription: data.roofDescription,
@@ -140,7 +134,6 @@ const Main = () => {
   //type checking happens when this object is pacakged in above function, so any is fine here
   const [dashboardData, setDashboardData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [showModal , setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -171,128 +164,114 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
-  if(dashboardData) {
-    let addressElements = [
-      dashboardData.ExtraInfo.address,
-      dashboardData.ExtraInfo.localAuthorityName,
-      dashboardData.ExtraInfo.posttown,
-      dashboardData.ExtraInfo.postcode,
-    ];
-    fullAddressString = addressElements.join(', ');
+  const epcColorDictionary: ColorDictionary<string> = {
+    A: 'text-epcA',
+    B: 'text-epcB',
+    C: 'text-epcC',
+    D: 'text-epcD',
+    E: 'text-epcE',
+    F: 'text-epcF',
+    G: 'text-epcG',
+  };
+
+  function handleEnvironmentalSummaryButton() {
+    setEnvironmentalSummaryActive(true);
   }
-
-
-  const data1 = [
-    {
-      name: "C02 Production",
-      Current: 3000,
-      Potential: 1398,
-    },
-  ]
-
-
-  console.log(data)
-
   return (
     <>
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle title={'Dashboard'} subtitle={fullAddressString} onClick={() => setShowModal(true)}/>
-
-          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
-            
-            <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
-
-            
-              <Card
-                  style={'border'}
-                  disableHoverAnimation={true}
-                  showShadow={false}
-              >
-                  <div className="h-full">
-                  <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">Overview <MdOutlineFlipCameraAndroid size={25}/> </h3>
-                    <div className="py-2 px-1 h-full">
-                      <EpcChart
-                          currentEfficiency={dashboardData.Main.currentEnergyEfficiency}
-                          potentialEfficiency={dashboardData.Main.potentialEnergyEfficiency}
-                      />
+          <PageTitle title={'Overview'} data={dashboardData.PageTitle} />
+          <div className="h-full flex flex-col">
+          {!environmentalSummaryActive ? (
+            <div>
+              <div className="grid grid-cols-10 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
+                <Card
+                  style={'col-start-1 col-end-3 row-start-1'}
+                  disableHoverAnimation={false}
+                  showShadow={true}
+                >
+                  <div>
+                    <h3>Current Energy Rating</h3>
+                    <div
+                      className={
+                        'p-2 font-bold text-3xl ' +
+                        epcColorDictionary[dashboardData.Main.currentEnergyRating]
+                      }
+                    >
+                      {dashboardData.Main.currentEnergyRating}
                     </div>
                   </div>
-              </Card>
-
-              <Card
-                  style={'border'}
+                </Card>
+                <Card
+                  style={'col-start-3 col-end-5 row-start-1 '}
+                  disableHoverAnimation={false}
+                  showShadow={true}
+                >
+                  <div>
+                    <h3>Potential Energy Rating</h3>
+                    <div
+                      className={
+                        'p-2 font-bold text-3xl ' +
+                        epcColorDictionary[
+                          dashboardData.Main.potentialEnergyRating
+                        ]
+                      }
+                    >
+                      {dashboardData.Main.potentialEnergyRating}
+                    </div>
+                  </div>
+                </Card>
+                <Card
+                  style={'col-start-5 col-end-7 row-start-1'}
                   disableHoverAnimation={true}
                   showShadow={false}
-              >
-                  <div className="h-full">
-                    <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">Environmental</h3>
-                    <div className="py-2 px-1 h-full">
-                        <div className="flex h-3/4">
-                          <div className="w-5/12">
-                            <div className="flex items-center mx-1"><span className="mr-2">Carbon Production</span><AiFillQuestionCircle size={10}/></div>
-                            <div className="h-full flex justify-center items-center pt-4">
-                                <BarChart layout="horizontal" width={150} height={175} data={data1}>
-                                  {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                                  <XAxis type="category" dataKey="name"/>
-                                  <Tooltip />
-                                  <Bar dataKey="Current" fill="#e9153b" />
-                                  <Bar dataKey="Potential" fill="#19b45a" />
-                                </BarChart>
-                            </div>               
-                          </div>
-
-                          <div className="w-7/12 border border-r-0 border-y-0">
-                            <div className="pb-1 underline text-sm px-4">How you compare:</div>
-                            <div>
-                              <div className="px-4 py-1">
-                                <div className="py-1">You are in the bottom/top % of emitters in your area, and emit ... less/more than the average U.K. household</div>
-                                <div className="py-2 font-bold">Your current emsssions are equilvalent to:</div>
-                                <div className="flex">
-                                  <span>
-                                    <BsFillTreeFill/>
-                                  </span>
-                                  
-                                
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                >
+                  <div>
+                    <h3>
+                      Current C0<sup>2</sup> Emissions
+                    </h3>
+                    <div className="p-2 font-bold text-3xl">
+                      {dashboardData.Main.co2EmissionsCurrent}{' '}
+                      <span className="text-sm font-semibold">tons/year</span>
+                    </div>
                   </div>
-              </Card>
-
+                </Card>
+                <Card
+                  style={'col-start-7 col-end-9 row-start-1'}
+                  disableHoverAnimation={true}
+                  showShadow={false}
+                >
+                  <div>
+                    <h3>
+                      C0<sup>2</sup> Reduction Potential
+                    </h3>
+                    <div className="p-2 font-bold text-3xl">
+                      {dashboardData.Main.co2EmissionsPotential}{' '}
+                      <span className="text-sm font-semibold">tons/year</span>
+                    </div>
+                  </div>
+                </Card>
+                {/*<button
+                  className="col-start-9 col-end-11 row-start-1 text-white rounded-default bg-emerald opacity-70 hover:opacity-100"
+                  onClick={handleEnvironmentalSummaryButton}
+                >
+                  See your environmental summary
+                </button>*/}
+              </div>
             </div>
-
-
-            <Card
-                style={"relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"}
-                disableHoverAnimation={true}
-                showShadow={false}
-            >
-            <div className="flex justify-center h-full w-full">
-              <House 
-                  data={dashboardData}
-                  />
-            </div>
-            </Card>
-            
-          </div>
-
-          {
-            showModal ? (
-            <Modal hideModal={() => setShowModal(false)}>
-              <ExtraHouseInfo
-                data={dashboardData.ExtraInfo}
+            ) : (
+              <EnvironmentalSummary
+                environmentalData={dashboardData.House.environmental}
               />
-            </Modal>
-            ) :
-            null
-          }
-
-        </div>
+            )}
+              <div className="h-1/2 w-1/2 relative pt-2">
+                <House 
+                  data={dashboardData}
+                />
+              </div>
+            </div>
+          </div>
       ) : (
         <>
           {loading ? (

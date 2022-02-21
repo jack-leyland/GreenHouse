@@ -4,21 +4,32 @@ from graphene import (
     Schema,
     Field,
     List,
+    Mutation,
+    Float,
+    Boolean,
 )
 import requests
 import environ
 import os
 import pandas as pd
 
-from api.types import Certificate, Analytics, Address, Recommendation, Big_Query
+# from google.cloud import bigquery
 
-from api.resolvers.analytics import create_analytics
-from api.resolvers.addresses import create_addresses
-from api.resolvers.certificates import create_certificate
-from api.resolvers.recommendations import create_recommendations
-from api.resolvers.big_query import create_bquery
+from app.types import (
+    Certificate,
+    Analytics,
+    Address,
+    Big_Query,
+    Improvement,
+    Recommendation,
+)
 
-from google.cloud import bigquery
+from app.resolvers.analytics import create_analytics
+from app.resolvers.addresses import create_addresses
+from app.resolvers.certificates import create_certificate
+from app.resolvers.recommendations import create_recommendations
+from app.resolvers.big_query import create_bquery
+from app.models import CompletedRecommendation
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,6 +46,34 @@ headers = {
 }
 
 payload = {}
+
+
+class AddImprovement(Mutation):
+    class Arguments:
+        cost = Float()
+        date = String()
+        lmk_key = String()
+        improvement_id = String()
+
+    ok = Boolean()
+    improvement = Field(lambda: Improvement)
+
+    def mutate(root, info, cost, date, lmk_key, improvement_id):
+        print(cost, date, lmk_key, improvement_id)
+        improvement = Improvement(
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+        )
+        db_improvement = CompletedRecommendation(
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+        )
+        db_improvement.save()
+        ok = True
+
+        return AddImprovement(improvement=improvement, ok=ok)
+
+
+class Mutation(ObjectType):
+    add_improvement = AddImprovement.Field()
 
 
 class Query(ObjectType):
@@ -79,7 +118,7 @@ class Query(ObjectType):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
-
+        print(data)
         if not data:
             return {"Error": "Invalid LMK key"}
 
@@ -96,30 +135,30 @@ class Query(ObjectType):
 
         return create_recommendations(data)
 
-    def resolve_big_query(root, info):
-        client = bigquery.Client()
+    # def resolve_big_query(root, info):
+    #     client = bigquery.Client()
 
-        query = """
-            SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL 
-            FROM `arcane-sentinel-340313.test_epc.cambridge`
-            WHERE CONSTRUCTION_AGE_BAND IS NOT NULL
-            AND NOT (CONSTRUCTION_AGE_BAND = 'INVALID!')
-            AND NOT (CONSTRUCTION_AGE_BAND = 'NO DATA!')
-            AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
-        """
+    #     query = """
+    #         SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL
+    #         FROM `arcane-sentinel-340313.test_epc.cambridge`
+    #         WHERE CONSTRUCTION_AGE_BAND IS NOT NULL
+    #         AND NOT (CONSTRUCTION_AGE_BAND = 'INVALID!')
+    #         AND NOT (CONSTRUCTION_AGE_BAND = 'NO DATA!')
+    #         AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
+    #     """
 
-        local_df = (
-            client.query(query)
-            .result()
-            .to_dataframe(
-                # Optionally, explicitly request to use the BigQuery Storage API. As of
-                # google-cloud-bigquery version 1.26.0 and above, the BigQuery Storage
-                # API is used by default.
-                create_bqstorage_client=True,
-            )
-        )
+    #     local_df = (
+    #         client.query(query)
+    #         .result()
+    #         .to_dataframe(
+    #             # Optionally, explicitly request to use the BigQuery Storage API. As of
+    #             # google-cloud-bigquery version 1.26.0 and above, the BigQuery Storage
+    #             # API is used by default.
+    #             create_bqstorage_client=True,
+    #         )
+    #     )
 
-        return create_bquery(local_df)
+    #     return create_bquery(local_df)
 
 
-schema = Schema(query=Query)
+schema = Schema(query=Query, mutation=Mutation)

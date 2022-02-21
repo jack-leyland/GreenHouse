@@ -55,7 +55,7 @@ export default function SearchBar({
       ></input>
       <button
         type="button"
-        className="z-10 h-[55px] w-[25%] relative right-[2px] rounded-r-default bg-black text-white font-logoFont font-normal"
+        className="z-10 h-[55px] w-[25%] relative right-[2px] rounded-r-default bg-zinc-900 text-white font-logoFont font-normal"
         onClick={submitHandler}
       >
         Search
