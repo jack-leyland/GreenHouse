@@ -37,3 +37,11 @@ body {
   background-size: 100% 0.4em;
   border-radius: 0px !important;
 }
+
+.rating-grid {
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.eighth-row {
+  grid-row-start: 8;
+}
