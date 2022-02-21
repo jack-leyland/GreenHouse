@@ -4,13 +4,18 @@ from graphene import (
     Schema,
     Field,
     List,
+    Mutation,
+    Float,
+    Boolean,
+    Int, 
+    Date,
 )
 import requests
 import environ
 import os
 import pandas as pd
 
-from api.types import Certificate, Analytics, Address, Recommendation, Big_Query
+from api.types import Certificate, Analytics, Address, Recommendation, Big_Query, Improvement
 
 from api.resolvers.analytics import create_analytics
 from api.resolvers.addresses import create_addresses
@@ -37,6 +42,25 @@ headers = {
 payload = {}
 
 
+class AddImprovement(Mutation):
+    class Arguments:
+        cost = Float()
+        date = Date()
+        lmk_key = String()
+        improvement_id = String()
+        
+    ok = Boolean()
+    improvement = Field(lambda: Improvement)
+    
+    def mutate(root, info, cost, date, lmk_key, improvement_id):
+        print(cost, date, lmk_key, improvement_id)
+        improvement = Improvement(cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id)
+        ok = True
+        return AddImprovement(improvement=improvement, ok=ok)
+
+class Mutation(ObjectType):
+    add_improvement = AddImprovement.Field()
+    
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
@@ -122,4 +146,4 @@ class Query(ObjectType):
         return create_bquery(local_df)
 
 
-schema = Schema(query=Query)
+schema = Schema(query=Query, mutation=Mutation)

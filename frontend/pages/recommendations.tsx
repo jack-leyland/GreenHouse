@@ -4,6 +4,7 @@ import Card from "../components/card";
 import Layout from "../components/layout";
 import PageTitle from "../components/pageTitle";
 import Sidebar from "../components/sidebar";
+import Recommendation from "../components/recommendation";
 import { useAppContext } from "../context/state";
 import { epcRecommendationObject } from "../types";
 
@@ -13,6 +14,8 @@ const GET_RECOMMENDATIONS = gql`
       lmkKey
       indicativeCost
       improvementIdText
+      improvementItem
+      improvementId
     }
   }
 `;
@@ -46,26 +49,15 @@ const Recommendations = () => {
   }, [data]);
 
   return (
-    <>
-      <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-        <div className="h-full grid grid-cols-10 grid-rows-6 p-8 gap-4">
-          {queryData.map((item, key) => {
-            return (
-              <Card
-                key={key}
-                style={"col-start-1 col-end-7"}
-                disableHoverAnimation={true}
-                showShadow={true}
-              >
-                <h3>{item.improvementIdText}</h3>
-
-                <h3>{item.indicativeCost}</h3>
-              </Card>
-            );
-          })}
-        </div>
+    <section className="text-gray-600 body-font overflow-hidden h-screen">
+      <div className="container px-5 mx-auto py-24 flex flex-row overflow-x-scroll flex-nowrap h-full">
+        {/* <div className="flex -m-4 flex-row overflow-x-scroll w-full"> */}
+        {queryData.map((item, key) => {
+          return <Recommendation recs={item} key={key} />;
+        })}
+        {/* </div> */}
       </div>
-    </>
+    </section>
   );
 };
 
