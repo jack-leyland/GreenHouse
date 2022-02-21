@@ -1,5 +1,9 @@
+from cmath import nan
+from libcst import Integer
 from numpy import NaN
 import pandas as pd
+import datetime
+import numpy as np 
 
 metrics = [
     "energy-rating",
@@ -100,7 +104,8 @@ def generate_normalised_data(dataframe, currents, normalise):
 
 def convert_to_rating(dataframe, house_rating_metrics):
     for house_rating in house_rating_metrics:
-        dataframe[house_rating].replace(rating_number, inplace=True)
+        fixed_metric = house_rating.upper().replace("-", "_") #DELETE THIS FOR NON BIGQUERY
+        dataframe[fixed_metric].replace(rating_number, inplace=True)
 
 
 def verify_number(data):
@@ -108,3 +113,26 @@ def verify_number(data):
         return data
 
     return None
+
+def timeseries_data(dataframe):
+    convert_to_rating(dataframe, house_rating_metrics)
+    dataframe.sort_values("ADDRESS")
+    differences = []
+    for i, house in dataframe.iterrows():
+        address = house["ADDRESS"]
+        if i + 1 < len(dataframe):
+            other_house_address = dataframe.iloc[i+1, dataframe.columns.get_loc("ADDRESS")]
+            if other_house_address == address:
+                year_diff_neg = int(pd.to_datetime(house["INSPECTION_DATE"]).year) - int(pd.to_datetime(dataframe.iloc[i+1, dataframe.columns.get_loc("INSPECTION_DATE")]).year)
+                difference = 0
+                if year_diff_neg < 0:
+                    difference = dataframe.iloc[i+1, dataframe.columns.get_loc("WALLS_ENERGY_EFF")] - house["WALLS_ENERGY_EFF"]
+                else:
+                    difference = house["WALLS_ENERGY_EFF"] - dataframe.iloc[i+1, dataframe.columns.get_loc("WALLS_ENERGY_EFF")]
+                year_diff = abs(year_diff_neg)
+                if year_diff > 0 and difference > 0: #EPC sometimes gives negative over time
+                    if difference / year_diff > 0 or difference / year_diff < 0:
+                        differences.append(difference / year_diff)
+    print(differences)
+    print(sum(differences))
+    return sum(differences)/len(differences) #Return average
