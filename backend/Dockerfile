@@ -1,5 +1,5 @@
 # pull official base image
-FROM nickgryg/alpine-pandas as base
+FROM python:3.10-buster as base
 
 FROM base as builder
 
@@ -11,14 +11,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 1
 
-# install psycopg2
-RUN apk update \
-  && apk add --virtual build-essential gcc python3-dev musl-dev \
-  && apk add postgresql-dev \
-  && pip install psycopg2
-
 # install dependencies
 COPY ./requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # copy project
@@ -26,7 +21,3 @@ COPY . .
 
 # collect static files
 RUN python manage.py collectstatic --noinput
-
-# add and run as non-root user
-RUN adduser -D myuser
-USER myuser
