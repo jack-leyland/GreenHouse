@@ -100,12 +100,8 @@ class Query(ObjectType):
         client = bigquery.Client()
 
         query = """
-            SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL 
+            SELECT * 
             FROM `arcane-sentinel-340313.test_epc.cambridge`
-            WHERE CONSTRUCTION_AGE_BAND IS NOT NULL
-            AND NOT (CONSTRUCTION_AGE_BAND = 'INVALID!')
-            AND NOT (CONSTRUCTION_AGE_BAND = 'NO DATA!')
-            AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
         """
 
         local_df = (
@@ -118,7 +114,7 @@ class Query(ObjectType):
                 create_bqstorage_client=True,
             )
         )
-
+        print(local_df)
         return create_bquery(local_df)
 
 
