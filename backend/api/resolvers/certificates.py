@@ -2,11 +2,6 @@ from api.types import Certificate
 from scripts.analysis import verify_number
 
 from datetime import datetime
-import os
-
-from api.resolvers.big_query import create_bquery
-from google.cloud import bigquery
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
 
 convert_efficiency = {
     "": None,
