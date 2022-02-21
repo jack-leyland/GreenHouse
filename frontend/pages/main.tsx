@@ -1,27 +1,34 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/card';
-import House from '../components/house';
-import PageTitle from '../components/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../public/assets/animation/loading.json';
-import errorJson from '../public/assets/animation/error.json';
-import { GET_CERTIFICATES } from './api/queries';
-import { useQuery } from '@apollo/client';
-import type { epcCertificateObject, epcCertificateResponse} from '../types';
-import EpcChart from '../components/epcChart';
-import Modal from '../components/modal';
-import ExtraHouseInfo from '../components/extraHouseInfo';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import ChartContainer from '../components/chartContainer';
-import {RiMoneyPoundCircleFill} from 'react-icons/ri';
-import {AiFillQuestionCircle} from 'react-icons/ai';
-import {BsFillTreeFill} from 'react-icons/bs';
-import {MdOutlineFlipCameraAndroid} from 'react-icons/md';
-
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/card";
+import House from "../components/house";
+import PageTitle from "../components/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../public/assets/animation/loading.json";
+import errorJson from "../public/assets/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import type { epcCertificateObject, epcCertificateResponse } from "../types";
+import EpcChart from "../components/epcChart";
+import Modal from "../components/modal";
+import ExtraHouseInfo from "../components/extraHouseInfo";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+import ChartContainer from "../components/chartContainer";
+import { RiMoneyPoundCircleFill } from "react-icons/ri";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { BsFillTreeFill } from "react-icons/bs";
+import { MdOutlineFlipCameraAndroid } from "react-icons/md";
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
@@ -140,7 +147,7 @@ const Main = () => {
   //type checking happens when this object is pacakged in above function, so any is fine here
   const [dashboardData, setDashboardData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [showModal , setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -171,17 +178,16 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
-  if(dashboardData) {
+  let fullAddressString = "";
+  if (dashboardData) {
     let addressElements = [
       dashboardData.ExtraInfo.address,
       dashboardData.ExtraInfo.localAuthorityName,
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(', ');
+    fullAddressString = addressElements.join(", ");
   }
-
 
   const data1 = [
     {
@@ -189,109 +195,122 @@ const Main = () => {
       Current: 3000,
       Potential: 1398,
     },
-  ]
+  ];
 
-
-  console.log(data)
+  console.log(data);
 
   return (
     <>
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle title={'Dashboard'} subtitle={fullAddressString} onClick={() => setShowModal(true)}/>
+          <PageTitle
+            title={"Dashboard"}
+            subtitle={fullAddressString}
+            onClick={() => setShowModal(true)}
+          />
 
           <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
-            
             <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
-
-            
               <Card
-                  style={'border'}
-                  disableHoverAnimation={true}
-                  showShadow={false}
+                style={"border"}
+                disableHoverAnimation={true}
+                showShadow={false}
               >
-                  <div className="h-full">
-                  <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">Overview <MdOutlineFlipCameraAndroid size={25}/> </h3>
-                    <div className="py-2 px-1 h-full">
-                      <EpcChart
-                          currentEfficiency={dashboardData.Main.currentEnergyEfficiency}
-                          potentialEfficiency={dashboardData.Main.potentialEnergyEfficiency}
-                      />
-                    </div>
+                <div className="h-full">
+                  <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
+                    Overview <MdOutlineFlipCameraAndroid size={25} />{" "}
+                  </h3>
+                  <div className="py-2 px-1 h-full">
+                    <EpcChart
+                      currentEfficiency={
+                        dashboardData.Main.currentEnergyEfficiency
+                      }
+                      potentialEfficiency={
+                        dashboardData.Main.potentialEnergyEfficiency
+                      }
+                    />
                   </div>
+                </div>
               </Card>
 
               <Card
-                  style={'border'}
-                  disableHoverAnimation={true}
-                  showShadow={false}
+                style={"border"}
+                disableHoverAnimation={true}
+                showShadow={false}
               >
-                  <div className="h-full">
-                    <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">Environmental</h3>
-                    <div className="py-2 px-1 h-full">
-                        <div className="flex h-3/4">
-                          <div className="w-5/12">
-                            <div className="flex items-center mx-1"><span className="mr-2">Carbon Production</span><AiFillQuestionCircle size={10}/></div>
-                            <div className="h-full flex justify-center items-center pt-4">
-                                <BarChart layout="horizontal" width={150} height={175} data={data1}>
-                                  {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                                  <XAxis type="category" dataKey="name"/>
-                                  <Tooltip />
-                                  <Bar dataKey="Current" fill="#e9153b" />
-                                  <Bar dataKey="Potential" fill="#19b45a" />
-                                </BarChart>
-                            </div>               
-                          </div>
+                <div className="h-full">
+                  <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">
+                    Environmental
+                  </h3>
+                  <div className="py-2 px-1 h-full">
+                    <div className="flex h-3/4">
+                      <div className="w-5/12">
+                        <div className="flex items-center mx-1">
+                          <span className="mr-2">Carbon Production</span>
+                          <AiFillQuestionCircle size={10} />
+                        </div>
+                        <div className="h-full flex justify-center items-center pt-4">
+                          <BarChart
+                            layout="horizontal"
+                            width={150}
+                            height={175}
+                            data={data1}
+                          >
+                            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                            <XAxis type="category" dataKey="name" />
+                            <Tooltip />
+                            <Bar dataKey="Current" fill="#e9153b" />
+                            <Bar dataKey="Potential" fill="#19b45a" />
+                          </BarChart>
+                        </div>
+                      </div>
 
-                          <div className="w-7/12 border border-r-0 border-y-0">
-                            <div className="pb-1 underline text-sm px-4">How you compare:</div>
-                            <div>
-                              <div className="px-4 py-1">
-                                <div className="py-1">You are in the bottom/top % of emitters in your area, and emit ... less/more than the average U.K. household</div>
-                                <div className="py-2 font-bold">Your current emsssions are equilvalent to:</div>
-                                <div className="flex">
-                                  <span>
-                                    <BsFillTreeFill/>
-                                  </span>
-                                  
-                                
-                                </div>
-                              </div>
+                      <div className="w-7/12 border border-r-0 border-y-0">
+                        <div className="pb-1 underline text-sm px-4">
+                          How you compare:
+                        </div>
+                        <div>
+                          <div className="px-4 py-1">
+                            <div className="py-1">
+                              You are in the bottom/top % of emitters in your
+                              area, and emit ... less/more than the average U.K.
+                              household
+                            </div>
+                            <div className="py-2 font-bold">
+                              Your current emsssions are equilvalent to:
+                            </div>
+                            <div className="flex">
+                              <span>
+                                <BsFillTreeFill />
+                              </span>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
                   </div>
+                </div>
               </Card>
-
             </div>
-
 
             <Card
-                style={"relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"}
-                disableHoverAnimation={true}
-                showShadow={false}
+              style={
+                "relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"
+              }
+              disableHoverAnimation={true}
+              showShadow={false}
             >
-            <div className="flex justify-center h-full w-full">
-              <House 
-                  data={dashboardData}
-                  />
-            </div>
+              <div className="flex justify-center h-full w-full">
+                <House data={dashboardData} />
+              </div>
             </Card>
-            
           </div>
 
-          {
-            showModal ? (
+          {showModal ? (
             <Modal hideModal={() => setShowModal(false)}>
-              <ExtraHouseInfo
-                data={dashboardData.ExtraInfo}
-              />
+              <ExtraHouseInfo data={dashboardData.ExtraInfo} />
             </Modal>
-            ) :
-            null
-          }
-
+          ) : null}
         </div>
       ) : (
         <>

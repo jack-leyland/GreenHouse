@@ -1,5 +1,5 @@
-import React, { ReactElement, useState, useEffect } from 'react';
-import BackButton from '../assets/arrow-left.svg';
+import React, { ReactElement, useState, useEffect } from "react";
+import BackButton from "../assets/arrow-left.svg";
 
 type AddressObject = {
   address: string;

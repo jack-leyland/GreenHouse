@@ -16,10 +16,20 @@ interface props {
 }
 
 const ADD_IMPROVEMENT = gql`
-  mutation addImprovement($lmkKey: String!, $date: String!, $cost: Float!, $improvementId: String!) {
-    addImprovement(lmkKey: $lmkKey, date: $date, cost: $cost, improvementId: $improvementId) {
+  mutation addImprovement(
+    $lmkKey: String!
+    $date: String!
+    $cost: Float!
+    $improvementId: String!
+  ) {
+    addImprovement(
+      lmkKey: $lmkKey
+      date: $date
+      cost: $cost
+      improvementId: $improvementId
+    ) {
       ok
-      improvement{
+      improvement {
         lmkKey
         date
         cost

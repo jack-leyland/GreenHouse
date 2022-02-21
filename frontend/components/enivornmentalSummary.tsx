@@ -1,5 +1,5 @@
-import React from 'react';
-import Card from '../components/card';
+import React from "react";
+import Card from "../components/card";
 
 type props = {
   environmentalData: {
@@ -14,7 +14,7 @@ export default function EnvironmentalSummary({ environmentalData }: props) {
   return (
     <div className="grid grid-cols-12 grid-rows-1 w-full h-1/10 p-6 gap-6 pr-12">
       <Card
-        style={'col-start-1 col-end-4 row-start-1'}
+        style={"col-start-1 col-end-4 row-start-1"}
         disableHoverAnimation={false}
         showShadow={true}
       >
@@ -26,7 +26,7 @@ export default function EnvironmentalSummary({ environmentalData }: props) {
         </div>
       </Card>
       <Card
-        style={'col-start-4 col-end-7 row-start-1'}
+        style={"col-start-4 col-end-7 row-start-1"}
         disableHoverAnimation={false}
         showShadow={true}
       >
@@ -38,7 +38,7 @@ export default function EnvironmentalSummary({ environmentalData }: props) {
         </div>
       </Card>
       <Card
-        style={'col-start-7 col-end-10 row-start-1'}
+        style={"col-start-7 col-end-10 row-start-1"}
         disableHoverAnimation={false}
         showShadow={true}
       >
@@ -50,7 +50,7 @@ export default function EnvironmentalSummary({ environmentalData }: props) {
         </div>
       </Card>
       <Card
-        style={'col-start-10 col-end-13 row-start-1'}
+        style={"col-start-10 col-end-13 row-start-1"}
         disableHoverAnimation={false}
         showShadow={true}
       >

@@ -41,17 +41,17 @@ module.exports = {
         widthGrow: "widthGrow 3s ease-in-out forwards",
       },
       transitionProperty: {
-        'width': 'width'
+        width: "width",
       },
       keyframes: (theme) => ({
         fadeInGrow: {
           "0%": { opacity: 0, transform: "scale(0.1)" },
           "100%": { opacity: 1, transform: "scale(1)" },
         },
-        widthGrow : {
-          "0%": { width: 0},
-          "70%": { width: 0},
-          "100%": { width: "100%"},
+        widthGrow: {
+          "0%": { width: 0 },
+          "70%": { width: 0 },
+          "100%": { width: "100%" },
         },
         shake: {
           "8%": {

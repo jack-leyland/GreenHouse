@@ -1,5 +1,5 @@
-import React from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import React from "react";
+import { Dispatch, SetStateAction } from "react";
 
 interface props {
   children?: React.ReactChild | React.ReactChildren | never[];
@@ -19,13 +19,13 @@ export default function Card({
   disableHoverAnimation,
   showShadow,
 }: props) {
-  const hover = ' hover:scale-105 ';
-  const shadowAndCursor = ' shadow-lg hover:cursor-pointer ';
+  const hover = " hover:scale-105 ";
+  const shadowAndCursor = " shadow-lg hover:cursor-pointer ";
   const cardStyle =
-    'animate-fade rounded-lg w-full h-full ' +
+    "animate-fade rounded-lg w-full h-full " +
     style +
-    (disableHoverAnimation ? '' : hover) +
-    (showShadow ? shadowAndCursor : '');
+    (disableHoverAnimation ? "" : hover) +
+    (showShadow ? shadowAndCursor : "");
   return (
     <div
       className={cardStyle}
