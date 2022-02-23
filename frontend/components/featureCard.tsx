@@ -30,7 +30,7 @@ export default function FeatureCard({data, type}: props) {
                         <b className="pr-2" >Energy Efficiency:</b>
                         <StarRatings
                           rating={data?.House.walls.wallsEnergyEff ? data.House.walls.wallsEnergyEff : 0}
-                          starRatedColor="green"
+                          starRatedColor= {parseInt(data?.House.walls.wallsEnergyEff) > 2 ? "green" : "red"}
                           numberOfStars={5}
                           name='rating'
                           starDimension="15px"
@@ -41,7 +41,7 @@ export default function FeatureCard({data, type}: props) {
                         <b className="pr-2">Environmental Efficiency:</b>
                         <StarRatings
                           rating={data?.House.walls.wallsEnvEff ? data.House.walls.wallsEnvEff : 0}
-                          starRatedColor="green"
+                          starRatedColor= {parseInt(data?.House.walls.wallsEnvEff) > 2 ? "green" : "red"}
                           numberOfStars={5}
                           name='rating'
                           starDimension="15px"
@@ -67,7 +67,7 @@ export default function FeatureCard({data, type}: props) {
                       <b className="pr-2" >Energy Efficiency:</b>
                       <StarRatings
                         rating={data?.House.roof.roofEnergyEff ? data?.House.roof.roofEnergyEff : 0}
-                        starRatedColor="green"
+                        starRatedColor={parseInt(data?.House.roof.roofEnergyEff) > 2 ? "green" : "red"}
                         numberOfStars={5}
                         name='rating'
                         starDimension="15px"
@@ -78,7 +78,7 @@ export default function FeatureCard({data, type}: props) {
                       <b className="pr-2">Environmental Efficiency:</b>
                       <StarRatings
                         rating={data?.House.roof.roofEnvEff ? data?.House.roof.roofEnvEff : 0}
-                        starRatedColor="green"
+                        starRatedColor= {parseInt(data?.House.roof.roofEnvEff) > 2 ? "green" : "red"}
                         numberOfStars={5}
                         name='rating'
                         starDimension="15px"
@@ -104,7 +104,7 @@ export default function FeatureCard({data, type}: props) {
                     <b className="pr-2" >Energy Efficiency:</b>
                     <StarRatings
                       rating={data?.House.floor.floorEnergyEff ? data?.House.floor.floorEnergyEff: 0}
-                      starRatedColor="green"
+                      starRatedColor={parseInt(data?.House.floor.floorEnergyEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -115,7 +115,7 @@ export default function FeatureCard({data, type}: props) {
                     <b className="pr-2">Environmental Efficiency:</b>
                     <StarRatings
                       rating={data?.House.floor.floorEnvEff ? data?.House.floor.floorEnvEff : 0}
-                      starRatedColor="green"
+                      starRatedColor={parseInt(data?.House.floor.floorEnvEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -144,8 +144,8 @@ export default function FeatureCard({data, type}: props) {
                   <div className='py-2 flex'>
                     <b className="pr-2" >Energy Efficiency:</b>
                     <StarRatings
-                      rating={data?.House.lighting.lightingEnergyEff? data?.House.lighting.lightingEnergyEff : 0}
-                      starRatedColor="green"
+                      rating={data?.House.lighting.lightingEnergyEff ? data?.House.lighting.lightingEnergyEff : 0}
+                      starRatedColor={parseInt(data?.House.lighting.lightingEnergyEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -156,7 +156,7 @@ export default function FeatureCard({data, type}: props) {
                     <b className="pr-2">Environmental Efficiency:</b>
                     <StarRatings
                       rating={data?.House.lighting.lightingEnvEff ? data?.House.lighting.lightingEnvEff : 0}
-                      starRatedColor="green"
+                      starRatedColor={parseInt(data?.House.lighting.lightingEnvEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -192,12 +192,12 @@ export default function FeatureCard({data, type}: props) {
                 
                     <div>Main Heating</div>
                     <div className='py-2'><b>Main :</b> {data?.House.heating.mainHeatingControls.mainHeatControlDescription ? data?.House.heating.mainHeatingControls.mainHeatControlDescription : 'N/A'}</div>
-                    <div className='py-2'><b>Unheated Corridor Length:</b> {data?.House.heating.mainHeatingControls.mainHeatControlEnergyEff? data?.House.heating.mainHeatingControls.mainHeatControlEnergyEff : 'N/A'}</div>
-                    <div className='py-2'><b>Unheated Corridor Length:</b> {data?.House.heating.mainHeatingControls.mainHeatControlEnvEff ? data?.House.heating.mainHeatingControls.mainHeatControlEnvEff : 'N/A'}</div>
+                    <div className='py-2'><b>mainHeatControlEnergyEff:</b> {data?.House.heating.mainHeatingControls.mainHeatControlEnergyEff? data?.House.heating.mainHeatingControls.mainHeatControlEnergyEff : 'N/A'}</div>
+                    <div className='py-2'><b>mainHeatControlEnvEff:</b> {data?.House.heating.mainHeatingControls.mainHeatControlEnvEff ? data?.House.heating.mainHeatingControls.mainHeatControlEnvEff : 'N/A'}</div>
                     
                     <div>Main Heating</div>
-                    <div className='py-2'><b>Unheated Corridor Length:</b> {data?.House.heating.secondaryHeating.secondaryHeatingEnergyEff ? data?.House.heating.secondaryHeating.secondaryHeatingEnergyEff : 'N/A'}</div>
-                    <div className='py-2'><b>Unheated Corridor Length:</b> {data?.House.heating.secondaryHeating.secondheatDescription? data?.House.heating.secondaryHeating.secondheatDescription : 'N/A'}</div>
+                    <div className='py-2'><b>secondaryHeatingEnergyEff:</b> {data?.House.heating.secondaryHeating.secondaryHeatingEnergyEff ? data?.House.heating.secondaryHeating.secondaryHeatingEnergyEff : 'N/A'}</div>
+                    <div className='py-2'><b>secondheatDescription:</b> {data?.House.heating.secondaryHeating.secondheatDescription? data?.House.heating.secondaryHeating.secondheatDescription : 'N/A'}</div>
                    
                 </div>
                 </div>
@@ -224,7 +224,7 @@ export default function FeatureCard({data, type}: props) {
                     <b className="pr-2" >Energy Efficiency:</b>
                     <StarRatings
                       rating={data?.House.water.hotWaterEnergyEff ? data?.House.water.hotWaterEnergyEff : 0}
-                      starRatedColor="green"
+                      starRatedColor={parseInt(data?.House.water.hotWaterEnergyEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -235,7 +235,7 @@ export default function FeatureCard({data, type}: props) {
                     <b className="pr-2">Environmental Efficiency:</b>
                     <StarRatings
                       rating={data?.House.water.hotWaterEnvEff ? data?.House.water.hotWaterEnvEff : 0}
-                      starRatedColor="green"
+                      starRatedColor={parseInt(data?.House.water.hotWaterEnvEff) > 2 ? "green" : "red"}
                       numberOfStars={5}
                       name='rating'
                       starDimension="15px"
@@ -267,7 +267,7 @@ export default function FeatureCard({data, type}: props) {
                       <b className="pr-2" >Energy Efficiency:</b>
                       <StarRatings
                         rating={data?.House.windows.windowsEnergyEff ? data?.House.windows.windowsEnergyEff : 0}
-                        starRatedColor="green"
+                        starRatedColor={parseInt(data?.House.windows.windowsEnergyEff) > 2 ? "green" : "red"}
                         numberOfStars={5}
                         name='rating'
                         starDimension="15px"
@@ -278,7 +278,7 @@ export default function FeatureCard({data, type}: props) {
                       <b className="pr-2">Environmental Efficiency:</b>
                       <StarRatings
                         rating={data?.House.windows.windowsEnvEff ? data?.House.windows.windowsEnvEff : 0}
-                        starRatedColor="green"
+                        starRatedColor={parseInt(data?.House.windows.windowsEnvEff) > 2 ? "green" : "red"}
                         numberOfStars={5}
                         name='rating'
                         starDimension="15px"
