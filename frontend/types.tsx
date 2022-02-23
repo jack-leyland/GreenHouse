@@ -1,4 +1,4 @@
-// Use this file to store frequently used types and interfaces and import them into components as needed.
+// Use this file to store frequently used types and interfaces and import them into components as needed. 
 // Types for specific component Props should still be defined in the component file itself.
 
 export interface epcCertificateResponse extends Object {
@@ -93,7 +93,7 @@ export interface epcCertificateResponse extends Object {
   lowEnergyLighting: number;
   wallsDescription: string;
   hotwaterDescription: string;
-}
+};
 
 export interface epcCertificateObject extends Object {
   ExtraInfo: {
@@ -113,25 +113,27 @@ export interface epcCertificateObject extends Object {
     flatStoreyCount: string;
     flatTopStorey: string;
     inspectionDate: Date;
-  };
+  },
   Main: {
-    co2EmissionsCurrent: number;
-    co2EmissionsPotential: number;
+    currentEnergyEfficiency: number;
+    potentialEnergyEfficiency: number;
     potentialEnergyRating: string;
     currentEnergyRating: string;
-  };
+  }
   House: {
     environmental: {
       environmentImpactPotential: number;
       environmentImpactCurrent: number;
       energyConsumptionPotential: number;
       energyConsumptionCurrent: number;
-    };
+      co2EmissionsCurrent: number;
+      co2EmissionsPotential: number;
+    },
     roof: {
       roofDescription: string;
       roofEnergyEff: string;
       roofEnvEff: string;
-    };
+    },
     windows: {
       windowsDescription: string;
       windowsEnvEff: string;
@@ -139,7 +141,7 @@ export interface epcCertificateObject extends Object {
       glazedType: string;
       glazedArea: string;
       multiGlazeProportion: number;
-    };
+    },
     heating: {
       general: {
         mainsGasFlag: string;
@@ -148,100 +150,111 @@ export interface epcCertificateObject extends Object {
         unheatedCorridorLength: number;
         heatingCostPotential: number;
         heatingCostCurrent: number;
-      };
+      },
       mainHeating: {
         mainHeatDescription: string;
         mainHeatEnvEff: string;
         mainHeatEnergyEff: string;
         mainFuel: string;
-      };
+      },
       mainHeatingControls: {
         mainHeatControlDescription: string;
         mainHeatControlEnergyEff: string;
         mainHeatControlEnvEff: string;
-      };
+      },
       secondaryHeating: {
         secondheatDescription: number;
         secondaryHeatingEnergyEff: string;
         //secondary heating environ efficiency is missing
-      };
-    };
+      },
+    },
     lighting: {
       lowEnergyLighting: number;
       lightingEnergyEff: string;
       lightingEnvEff: string;
       lightingCostPotential: number;
       lightingCostCurrent: number;
-    };
+    },
     walls: {
       wallsDescription: string;
       wallsEnergyEff: string;
       wallsEnvEff: string;
-    };
+    },
     water: {
       hotWaterDescription: string;
       hotWaterEnvEff: string;
       hotWaterEnergyEff: string;
       hotWaterCostPotential: number;
       hotWaterCostCurrent: number;
-    };
+    },
     floor: {
       floorDescription: string;
       floorEnergyEff: string;
       floorEnvEff: string;
-    };
+    },
     other: {
       photoSupply: string;
       solarWaterHeatingFlag: string;
       mechanicalVentilation: string;
-    };
-  };
-}
+    },
+  },
+};
+
 
 export interface epcAnalyticsObject {
   meanCurrentEnergyEfficiency: number;
-  meanCurrentEnvironmentImpact: number;
-  meanCurrentEnergyConsumption: number;
-  meanCurrentCo2Consumption: number;
-  meanCurrentLightingCost: number;
-  meanCurrentHeatingCost: number;
-  meanCurrentHotWaterCost: number;
-  meanPotentialEnergyEfficiency: number;
-  meanPotentialEnvironmentImpact: number;
-  meanPotentialEnergyConsumption: number;
-  meanPotentialCo2Consumption: number;
-  meanPotentialLightingCost: number;
-  meanPotentialHeatingCost: number;
-  meanPotentialHotWaterCost: number;
-  normalisedCurrentEnergyEfficiency: Array<number>;
-  normalisedCurrentEnvironmentImpact: Array<number>;
-  normalisedCurrentEnergyConsumption: Array<number>;
-  normalisedCurrentCo2Consumption: Array<number>;
-  normalisedCurrentLightingCost: Array<number>;
-  normalisedCurrentHeatingCost: Array<number>;
-  normalisedCurrentHotWaterCost: Array<number>;
+  meanCurrentEnvironmentImpact : number;
+  meanCurrentEnergyConsumption : number;
+  meanCurrentCo2Consumption : number;
+  meanCurrentLightingCost : number;
+  meanCurrentHeatingCost : number;
+  meanCurrentHotWaterCost : number;
+  meanPotentialEnergyEfficiency : number;
+  meanPotentialEnvironmentImpact : number;
+  meanPotentialEnergyConsumption : number;
+  meanPotentialCo2Consumption : number;
+  meanPotentialLightingCost : number;
+  meanPotentialHeatingCost : number;
+  meanPotentialHotWaterCost : number;
+  normalisedCurrentEnergyEfficiency : Array<number>;
+  normalisedCurrentEnvironmentImpact : Array<number>;
+  normalisedCurrentEnergyConsumption : Array<number>;
+  normalisedCurrentCo2Consumption : Array<number>;
+  normalisedCurrentLightingCost : Array<number>;
+  normalisedCurrentHeatingCost : Array<number>;
+  normalisedCurrentHotWaterCost : Array<number>;
 }
 
 export interface epcRecommendationObject {
   lmkKey: string;
   improvementItem: number;
-  indicativeCost: string;
-  improvementSummaryText: string;
-  improvementDescrText: string;
-  improvementId: string;
-  improvementIdText: string;
+  indicativeCost : string;
+  improvementSummaryText : string;
+  improvementDescrText : string;
+  improvementId : string;
+  improvementIdText : string;
 }
 
-interface ColorDictionary<Value> {
+interface EPCDictionary<Value> {
   [id: string]: Value;
 }
 
-export const epcColorDictionary: ColorDictionary<string> = {
-  A: "text-epcA",
-  B: "text-epcB",
-  C: "text-epcC",
-  D: "text-epcD",
-  E: "text-epcE",
-  F: "text-epcF",
-  G: "text-epcG",
+export const epcColorDictionary: EPCDictionary<string> = {
+  A: 'epcA',
+  B: 'epcB',
+  C: 'epcC',
+  D: 'epcD',
+  E: 'epcE',
+  F: 'epcF',
+  G: 'epcG',
+};
+
+export const epcIndexDictionary: EPCDictionary<number> = {
+  A: 2,
+  B: 3,
+  C: 4,
+  D: 5,
+  E: 6,
+  F: 7,
+  G: 8,
 };

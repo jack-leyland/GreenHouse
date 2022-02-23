@@ -1,18 +1,18 @@
 import React from 'react';
-import Card from './card';
+import Card from '../generic/card';
 import Lottie from "react-lottie-player";
-import StarRatings from 'react-star-ratings';
-import json from "../public/assets/animation/up-arrow.json";
+const StarRatings = require("react-star-ratings").default;
+import json from "../../assets/animations/animation/up-arrow.json";
 import {
     epcCertificateObject
-  } from '../types';
+  } from '../../types';
   
 
 interface props {
     type: string;
     data: epcCertificateObject;
   }
-  
+
 export default function FeatureCard({data, type}: props) {
   switch(type) {
     case 'Walls':
@@ -312,6 +312,4 @@ export default function FeatureCard({data, type}: props) {
           )
 
   }
-
-  return null;
 }

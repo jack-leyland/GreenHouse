@@ -1,24 +1,24 @@
 import type { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
-import Layout from '../components/layout';
+import Layout from '../components/generic/layout';
 import Sidebar from '../components/sidebar';
-import Card from '../components/card';
-import House from '../components/house';
-import PageTitle from '../components/pageTitle';
+import Card from '../components/generic/card';
+import House from '../components/dashboard/house';
+import PageTitle from '../components/generic/pageTitle';
 import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
-import loadingJson from '../public/assets/animation/loading.json';
-import errorJson from '../public/assets/animation/error.json';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
 import { GET_CERTIFICATES } from './api/queries';
 import { useQuery } from '@apollo/client';
 import type { epcCertificateObject, epcCertificateResponse} from '../types';
-import EpcChart from '../components/epcChart';
-import Modal from '../components/modal';
-import ExtraHouseInfo from '../components/extraHouseInfo';
-import CostSummary from '../components/costSummary';
-import EnvironmentalSummary from '../components/environmentalSummary';
-import CarbonSummary from '../components/carbonSummary';
-import FlipableCard from '../components/flipableCard';
+import EpcChart from '../components/dashboard/epcChart';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import CostSummary from '../components/dashboard/costSummary';
+import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
+import CarbonSummary from '../components/dashboard/carbonSummary';
+import FlipableCard from '../components/generic/flipableCard';
 
 
 function packageDashboardDataByComponent(

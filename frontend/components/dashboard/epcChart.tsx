@@ -1,6 +1,6 @@
 import React from 'react';
 //Might move these out of types (below)
-import {epcColorDictionary, epcIndexDictionary } from '../types';
+import {epcColorDictionary, epcIndexDictionary } from '../../types';
 import {AiFillQuestionCircle} from 'react-icons/ai';
 import ReactTooltip from 'react-tooltip';
 

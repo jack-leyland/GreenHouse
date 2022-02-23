@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import Card from './card';
+import Card from '../generic/card';
 import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
 import { BsLightbulb } from 'react-icons/bs';
 import FeatureCard from './featureCard';
-import type { epcCertificateObject} from '../types';
+import type { epcCertificateObject} from '../../types';
 
 
 interface props {
