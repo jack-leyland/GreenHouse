@@ -1,31 +1,28 @@
-import React from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction} from 'react';
 
 interface props {
   children?: React.ReactChild | React.ReactChildren | never[];
-  style: string;
-  letterColor?: string;
-  disableHoverAnimation: boolean;
+  style?: string;
+  disableHoverAnimation?: boolean;
   onHover?: Dispatch<SetStateAction<boolean>>;
   onClick?: Dispatch<SetStateAction<boolean>>;
-  showShadow: boolean;
+  showShadow?: boolean;
 }
 
 export default function Card({
   children,
-  style,
+  style = '',
   onHover,
   onClick,
-  disableHoverAnimation,
-  showShadow,
+  disableHoverAnimation = false,
+  showShadow = true,
 }: props) {
-  const hover = ' hover:scale-105 ';
-  const shadowAndCursor = ' shadow-lg hover:cursor-pointer ';
-  const cardStyle =
-    'animate-fade rounded-lg w-full h-full ' +
-    style +
+  const hover = ' hover:scale-105 hover:cursor-pointer';
+  const shadow = ' shadow-lg';
+  const cardStyle = 'animate-fade rounded-lg w-full h-full ' + style +
     (disableHoverAnimation ? '' : hover) +
-    (showShadow ? shadowAndCursor : '');
+    (showShadow ? shadow : '');
+  
   return (
     <div
       className={cardStyle}
@@ -33,7 +30,9 @@ export default function Card({
       onMouseLeave={() => (onHover ? onHover(false) : null)}
       onClick={() => (onClick ? onClick(true) : null)}
     >
-      <div className="p-3 text-xs h-full w-full">{children}</div>
+      <div className="p-3 text-xs h-full w-full">
+        {children}
+      </div>
     </div>
   );
 }
