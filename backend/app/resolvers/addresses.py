@@ -1,4 +1,4 @@
-from api.types import Address
+from app.types import Address
 
 
 def create_addresses(data):

@@ -1,4 +1,4 @@
-from api.types import Certificate
+from app.types import Certificate
 from scripts.analysis import verify_number
 
 from datetime import datetime
