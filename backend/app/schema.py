@@ -13,13 +13,13 @@ import environ
 import os
 import pandas as pd
 
-# from google.cloud import bigquery
+from google.cloud import bigquery
 
 from app.types import (
     Certificate,
     Analytics,
     Address,
-    Big_Query,
+    Timeseries,
     Improvement,
     Recommendation,
 )
@@ -28,7 +28,7 @@ from app.resolvers.analytics import create_analytics
 from app.resolvers.addresses import create_addresses
 from app.resolvers.certificates import create_certificate
 from app.resolvers.recommendations import create_recommendations
-from app.resolvers.big_query import create_bquery
+from app.resolvers.timeseries import create_timeseries
 from app.models import CompletedRecommendation
 
 # Set the project base directory
@@ -81,7 +81,7 @@ class Query(ObjectType):
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
     analytics = Field(Analytics, postcode=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
-    big_query = Field(Big_Query)
+    big_query = Field(Timeseries)
 
     def resolve_analytics(root, info, postcode):
         if len(postcode) == 7:
@@ -153,7 +153,7 @@ class Query(ObjectType):
                 create_bqstorage_client=True,
             )
         )
-        return create_bquery(local_df)
+        return create_timeseries(local_df)
 
 
 schema = Schema(query=Query, mutation=Mutation)

@@ -1,9 +1,30 @@
 from cmath import nan
 from libcst import Integer
-from numpy import NaN
+from numpy import NaN, average
 import pandas as pd
 import datetime
 import numpy as np 
+
+timeseries_metrics = [
+   "LIGHTING_ENERGY_EFF",
+    "LIGHTING_ENV_EFF",
+    "WALLS_ENERGY_EFF",
+    "WALLS_ENV_EFF",
+    "WINDOWS_ENERGY_EFF",
+    "WINDOWS_ENV_EFF",
+    "HOT_WATER_ENERGY_EFF",
+    "HOT_WATER_ENV_EFF",
+    "FLOOR_ENERGY_EFF",
+    "FLOOR_ENV_EFF",
+    "ROOF_ENERGY_EFF",
+    "ROOF_ENV_EFF",
+    "MAINHEAT_ENERGY_EFF",
+    "MAINHEAT_ENV_EFF",
+    "MAINHEATC_ENERGY_EFF",
+    "MAINHEATC_ENV_EFF",
+    "SHEATING_ENERGY_EFF",
+    "SHEATING_ENV_EFF",
+]
 
 metrics = [
     "energy-rating",
@@ -104,8 +125,8 @@ def generate_normalised_data(dataframe, currents, normalise):
 
 def convert_to_rating(dataframe, house_rating_metrics):
     for house_rating in house_rating_metrics:
-        fixed_metric = house_rating.upper().replace("-", "_") #DELETE THIS FOR NON BIGQUERY
-        dataframe[fixed_metric].replace(rating_number, inplace=True)
+        #fixed_metric = house_rating.upper().replace("-", "_") #DELETE THIS FOR NON BIGQUERY
+        dataframe[house_rating].replace(rating_number, inplace=True)
 
 
 def verify_number(data):
@@ -114,25 +135,39 @@ def verify_number(data):
 
     return None
 
-def timeseries_data(dataframe):
-    convert_to_rating(dataframe, house_rating_metrics)
+def timeseries_data(dataframe, features = timeseries_metrics):
     dataframe.sort_values("ADDRESS")
-    differences = []
+    feature_averages = {}
+    counts = {}
+    for feature in features:
+        feature_averages[feature] = 0
+        counts[feature] = 0
+
     for i, house in dataframe.iterrows():
         address = house["ADDRESS"]
         if i + 1 < len(dataframe):
             other_house_address = dataframe.iloc[i+1, dataframe.columns.get_loc("ADDRESS")]
             if other_house_address == address:
-                year_diff_neg = int(pd.to_datetime(house["INSPECTION_DATE"]).year) - int(pd.to_datetime(dataframe.iloc[i+1, dataframe.columns.get_loc("INSPECTION_DATE")]).year)
-                difference = 0
-                if year_diff_neg < 0:
-                    difference = dataframe.iloc[i+1, dataframe.columns.get_loc("WALLS_ENERGY_EFF")] - house["WALLS_ENERGY_EFF"]
-                else:
-                    difference = house["WALLS_ENERGY_EFF"] - dataframe.iloc[i+1, dataframe.columns.get_loc("WALLS_ENERGY_EFF")]
-                year_diff = abs(year_diff_neg)
-                if year_diff > 0 and difference > 0: #EPC sometimes gives negative over time
-                    if difference / year_diff > 0 or difference / year_diff < 0:
-                        differences.append(difference / year_diff)
-    print(differences)
-    print(sum(differences))
-    return sum(differences)/len(differences) #Return average
+                year_diff_neg = int(pd.to_datetime(house["INSPECTION_DATE"]).year) \
+                    - int(pd.to_datetime(dataframe.iloc[i+1, dataframe.columns.get_loc("INSPECTION_DATE")]).year)
+                for feature_name in features:
+                    difference = 0
+                    if year_diff_neg < 0:
+                        difference = dataframe.iloc[i+1, dataframe.columns.get_loc(feature_name)] - house[feature_name]
+                        year_diff = abs(year_diff_neg)
+                        if year_diff > 0 and difference > 0: #EPC sometimes gives negative over time
+                            if difference / year_diff > 0 or difference / year_diff < 0:
+                                feature_averages[feature_name] += difference / year_diff
+                                counts[feature_name] += 1
+                    else:
+                        difference = house[feature_name] - dataframe.iloc[i+1, dataframe.columns.get_loc(feature_name)]
+                        year_diff = abs(year_diff_neg)
+                        if year_diff > 0 and difference > 0: #EPC sometimes gives negative over time
+                            if difference / year_diff > 0 or difference / year_diff < 0:
+                                feature_averages[feature_name] += difference / year_diff
+                                counts[feature_name] += 1
+                                
+    average_values = {}
+    for k, v in feature_averages.items():
+        average_values[k] = v / counts[k] if counts[k] != 0 else 0
+    return average_values 
