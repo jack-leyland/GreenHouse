@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { useSpring, a } from "@react-spring/web";
-import { MdOutlineFlipCameraAndroid } from "react-icons/md";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { useSpring, a } from '@react-spring/web';
+import { MdOutlineFlipCameraAndroid } from 'react-icons/md';
 
 interface props {
   front: React.ReactChild | React.ReactChildren | never[];
@@ -17,20 +17,20 @@ interface props {
 export default function FlippableCard({
   front,
   back,
-  frontTitle = "",
-  backTitle = "",
-  style = "",
+  frontTitle = '',
+  backTitle = '',
+  style = '',
   onHover,
   disableHoverAnimation = false,
   showShadow = true,
 }: props) {
-  const hover = " hover:scale-105 hover:cursor-pointer ";
-  const shadow = " shadow-lg ";
+  const hover = ' hover:scale-105 hover:cursor-pointer ';
+  const shadow = ' shadow-lg ';
   const cardStyle =
-    "animate-fade rounded-lg w-full h-full relative " +
+    'animate-fade rounded-lg w-full h-full relative min-w-[467px] min-h-[240px]' +
     style +
-    (disableHoverAnimation ? "" : hover) +
-    (showShadow ? shadow : "");
+    (disableHoverAnimation ? '' : hover) +
+    (showShadow ? shadow : '');
 
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
@@ -53,7 +53,7 @@ export default function FlippableCard({
           <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
             {frontTitle}
             <span className="flex text-md gap-2 items-center font-thin">
-              <span className="text-sm">Flip Card</span>{" "}
+              <span className="text-sm">Flip Card</span>{' '}
               <MdOutlineFlipCameraAndroid
                 className="hover:cursor-pointer hover:text-black"
                 onClick={() => set((state) => !state)}
@@ -67,20 +67,20 @@ export default function FlippableCard({
 
       <a.div
         className={
-          "border rounded-lg content p-3 text-xs h-full w-full" +
-          (flipped ? "" : " hidden")
+          'border rounded-lg content p-3 text-xs h-full w-full' +
+          (flipped ? '' : ' hidden')
         }
         style={{
           opacity,
           transform,
-          rotateX: "180deg",
+          rotateX: '180deg',
         }}
       >
         <div className="h-full child">
           <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
             {backTitle}
             <span className="flex text-md gap-2 items-center font-thin">
-              <span className="text-sm">Flip Card</span>{" "}
+              <span className="text-sm">Flip Card</span>{' '}
               <MdOutlineFlipCameraAndroid
                 className="hover:cursor-pointer hover:text-black"
                 onClick={() => set((state) => !state)}

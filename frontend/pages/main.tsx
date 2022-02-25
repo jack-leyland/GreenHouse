@@ -68,11 +68,11 @@ const Main = () => {
 
   return (
     <>
-      <div className="absolute right-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-center tracking-tight">
+      <div className="absolute min-w-[1150px] min-h-[755px] w-full pr-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-right tracking-tight">
         GreenHouse
       </div>
       {dashboardData ? (
-        <div className="w-full flex flex-col bg-slate-50 text-gray-500">
+        <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
             title={'Dashboard'}
             subtitle={fullAddressString}
@@ -105,14 +105,7 @@ const Main = () => {
                   />
                 }
                 front={
-                  <CarbonSummary
-                    potentialEmissions={
-                      dashboardData.House.environmental.co2EmissionsPotential
-                    }
-                    currentEmissions={
-                      dashboardData.House.environmental.co2EmissionsCurrent
-                    }
-                  />
+                  <CarbonSummary data={dashboardData.House.environmental} />
                 }
               />
             </div>
@@ -123,8 +116,9 @@ const Main = () => {
               }
               disableHoverAnimation={true}
               showShadow={false}
+              minDims={{ w: '440px', h: '566px' }}
             >
-              <div className="flex justify-center h-full w-full">
+              <div className="flex justify-center h-full min-w-full">
                 <House data={dashboardData.House} />
               </div>
             </Card>

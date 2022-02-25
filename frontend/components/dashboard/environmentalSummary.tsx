@@ -58,10 +58,10 @@ export default function EnvironmentalSummary({ data }: props) {
   ];
 
   return (
-    <div className="py-2 px-1 h-full">
+    <div className="py-2 px-1 min-h-full">
       <div className="flex h-3/4">
-        <div className="w-7/12">
-          <div className="h-full flex flex-col pt-1 px-1">
+        <div className="min-w-7/12">
+          <div className="min-h-full flex flex-col pt-1 px-1">
             <div className="pb-2">
               Energy Consumption Current: {data.energyConsumptionCurrent}{' '}
               kWh/year

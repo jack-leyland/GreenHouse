@@ -97,8 +97,10 @@ export default function EpcChart({ data }: props) {
         </div>
       </div>
 
-      <div className="w-2/6 h-full h-full border border-r-0 border-y-0">
-        <div className="pb-1 underline text-sm px-4">How you compare:</div>
+      <div className="w-2/6 h-full border border-r-0 border-y-0">
+        <div className="pb-1 text-sm px-4">
+          <strong>How you compare:</strong>
+        </div>
         <div className="py-2 px-4">
           The average energy rating for houses in your area is ? with a score of
           ?
