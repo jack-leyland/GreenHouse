@@ -1,11 +1,34 @@
-import React from "react";
+import React, { MouseEventHandler, useEffect, useRef } from 'react';
 
 interface props {
   children?: React.ReactChild | React.ReactChildren | never[];
   hideModal: React.MouseEventHandler;
 }
 
+function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: React.MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        handler();
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside as any);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside as any);
+    };
+  }, [ref]);
+}
+
 export default function Modal({ children, hideModal }: props) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(wrapperRef, hideModal);
+
   return (
     <div
       className="fixed z-10 inset-0 overflow-y-auto"
@@ -24,7 +47,10 @@ export default function Modal({ children, hideModal }: props) {
         >
           &#8203;
         </span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div
+          className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          ref={wrapperRef}
+        >
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             {children}
           </div>
