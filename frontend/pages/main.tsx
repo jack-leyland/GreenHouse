@@ -1,34 +1,24 @@
-import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
-import Layout from "../components/layout";
-import Sidebar from "../components/sidebar";
-import Card from "../components/card";
-import House from "../components/house";
-import PageTitle from "../components/pageTitle";
-import Lottie from "react-lottie-player";
-import { useAppContext } from "../context/state";
-import loadingJson from "../public/assets/animation/loading.json";
-import errorJson from "../public/assets/animation/error.json";
-import { GET_CERTIFICATES } from "./api/queries";
-import { useQuery } from "@apollo/client";
-import type { epcCertificateObject, epcCertificateResponse } from "../types";
-import EpcChart from "../components/epcChart";
-import Modal from "../components/modal";
-import ExtraHouseInfo from "../components/extraHouseInfo";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
-import ChartContainer from "../components/chartContainer";
-import { RiMoneyPoundCircleFill } from "react-icons/ri";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { BsFillTreeFill } from "react-icons/bs";
-import { MdOutlineFlipCameraAndroid } from "react-icons/md";
+import type { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
+import Layout from '../components/generic/layout';
+import Sidebar from '../components/sidebar';
+import Card from '../components/generic/card';
+import House from '../components/dashboard/house';
+import PageTitle from '../components/generic/pageTitle';
+import Lottie from 'react-lottie-player';
+import { useAppContext } from '../context/state';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
+import { GET_CERTIFICATES } from './api/queries';
+import { useQuery } from '@apollo/client';
+import type { epcCertificateObject, epcCertificateResponse} from '../types';
+import EpcChart from '../components/dashboard/epcChart';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import CostSummary from '../components/dashboard/costSummary';
+import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
+import CarbonSummary from '../components/dashboard/carbonSummary';
+import FlipableCard from '../components/generic/flipableCard';
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
@@ -152,8 +142,7 @@ const Main = () => {
     skip: !queryParam,
     variables: { queryParam },
   });
-  const [environmentalSummaryActive, setEnvironmentalSummaryActive] =
-    useState<boolean>(false);
+
 
   // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
   useEffect(() => {
@@ -174,12 +163,12 @@ const Main = () => {
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error);
     }
   }, [error]);
 
-  let fullAddressString = "";
-  if (dashboardData) {
+  let fullAddressString = '';
+
+  if(dashboardData) {
     let addressElements = [
       dashboardData.ExtraInfo.address,
       dashboardData.ExtraInfo.localAuthorityName,
@@ -188,16 +177,6 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
-
-  const data1 = [
-    {
-      name: "C02 Production",
-      Current: 3000,
-      Potential: 1398,
-    },
-  ];
-
-  console.log(data);
 
   return (
     <>
@@ -209,88 +188,59 @@ const Main = () => {
             onClick={() => setShowModal(true)}
           />
 
-          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
+          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">          
             <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
-              <Card
-                style={"border"}
-                disableHoverAnimation={true}
-                showShadow={false}
-              >
-                <div className="h-full">
-                  <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
-                    Overview <MdOutlineFlipCameraAndroid size={25} />{" "}
-                  </h3>
-                  <div className="py-2 px-1 h-full">
-                    <EpcChart
-                      currentEfficiency={
-                        dashboardData.Main.currentEnergyEfficiency
-                      }
-                      potentialEfficiency={
-                        dashboardData.Main.potentialEnergyEfficiency
-                      }
+          
+              <FlipableCard
+                  disableHoverAnimation={true}
+                  showShadow={false}
+                  frontTitle="Overview"
+                  backTitle="Costs"
+                  front= {
+                     <div className="py-2 px-1 h-full">
+                          <EpcChart
+                              currentEfficiency={dashboardData.Main.currentEnergyEfficiency}
+                              potentialEfficiency={dashboardData.Main.potentialEnergyEfficiency}
+                          />
+                      </div>
+                  }
+                  back = {
+                    <CostSummary        
+                        heatingCurrent = {dashboardData.House.heating.general.heatingCostCurrent}
+                        heatingPotential = {dashboardData.House.heating.general.heatingCostPotential}
+                        waterCurrent = {dashboardData.House.water.hotWaterCostCurren}
+                        waterPotential={dashboardData.House.water.hotWaterCostPotential}
+                        lightingCurrent = {dashboardData.House.lighting.lightingCostCurrent}
+                        lightingPotential = {dashboardData.House.lighting.lightingCostPotential}            
                     />
-                  </div>
-                </div>
-              </Card>
+                  }
+              />
 
-              <Card
-                style={"border"}
-                disableHoverAnimation={true}
-                showShadow={false}
-              >
-                <div className="h-full">
-                  <h3 className="text-xl font-bold px-2 pt-1 pb-1 border border-t-0 border-x-0">
-                    Environmental
-                  </h3>
-                  <div className="py-2 px-1 h-full">
-                    <div className="flex h-3/4">
-                      <div className="w-5/12">
-                        <div className="flex items-center mx-1">
-                          <span className="mr-2">Carbon Production</span>
-                          <AiFillQuestionCircle size={10} />
-                        </div>
-                        <div className="h-full flex justify-center items-center pt-4">
-                          <BarChart
-                            layout="horizontal"
-                            width={150}
-                            height={175}
-                            data={data1}
-                          >
-                            {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                            <XAxis type="category" dataKey="name" />
-                            <Tooltip />
-                            <Bar dataKey="Current" fill="#e9153b" />
-                            <Bar dataKey="Potential" fill="#19b45a" />
-                          </BarChart>
-                        </div>
-                      </div>
+              <FlipableCard
+                  disableHoverAnimation={true}
+                  showShadow={false}
+                  frontTitle="Energy Consumption"
+                  backTitle="Emissions"
+                  back= {
+                      <EnvironmentalSummary 
+                        energyConsumptionCurrent = {dashboardData.House.environmental.energyConsumptionCurrent}
+                        energyConsumptionPotential = {dashboardData.House.environmental.energyConsumptionPotential}
+                        floorEnvEff = {dashboardData?.House.floor.floorEnvEff}
+                        wallsEnvEff = {dashboardData?.House.walls.wallsEnvEff}
+                        roofEnvEff = {dashboardData?.House.roof.roofEnvEff}
+                        lightingEnvEff = {dashboardData?.House.lighting.lightingEnvEff}
+                        heatingEnvEff = {dashboardData?.House.heating.mainHeatingControls.mainHeatControlEnvEff}
+                        windowsEnvEff = {dashboardData?.House.windows.windowsEnvEff}
+                        waterEnvEff = {dashboardData?.House.water.hotWaterEnvEff}
+                      />
+                  } front = {
+                      <CarbonSummary 
+                        potentialEmissions = {dashboardData.House.environmental.co2EmissionsPotential}
+                        currentEmissions = {dashboardData.House.environmental.co2EmissionsCurrent}
+                      />
+                  }
+              />
 
-                      <div className="w-7/12 border border-r-0 border-y-0">
-                        <div className="pb-1 underline text-sm px-4">
-                          How you compare:
-                        </div>
-                        <div>
-                          <div className="px-4 py-1">
-                            <div className="py-1">
-                              You are in the bottom/top % of emitters in your
-                              area, and emit ... less/more than the average U.K.
-                              household
-                            </div>
-                            <div className="py-2 font-bold">
-                              Your current emsssions are equilvalent to:
-                            </div>
-                            <div className="flex">
-                              <span>
-                                <BsFillTreeFill />
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
             </div>
 
             <Card
@@ -301,7 +251,9 @@ const Main = () => {
               showShadow={false}
             >
               <div className="flex justify-center h-full w-full">
-                <House data={dashboardData} />
+                <House 
+                    data={dashboardData}
+                    />
               </div>
             </Card>
           </div>
@@ -314,6 +266,7 @@ const Main = () => {
         </div>
       ) : (
         <>
+        {/*Loading Display*/}
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
               <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
@@ -326,6 +279,7 @@ const Main = () => {
             </div>
           ) : (
             <>
+            {/*Error Display*/}
               {isQueryError && !data ? (
                 <div className="w-full flex flex-col justify-center items-center bg-slate-50">
                   <h1 className="animate-fade text-3xl font-bold pb-2">

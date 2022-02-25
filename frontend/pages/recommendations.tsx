@@ -1,8 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { ReactElement, useEffect, useState } from "react";
-import Card from "../components/card";
-import Layout from "../components/layout";
-import PageTitle from "../components/pageTitle";
+import Card from "../components/generic/card";
+import Layout from "../components/generic/layout";
+import PageTitle from "../components/generic/pageTitle";
 import Sidebar from "../components/sidebar";
 import Recommendation from "../components/recommendationCard";
 import { useAppContext } from "../context/state";
