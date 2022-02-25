@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from '../generic/card';
 import Lottie from "react-lottie-player";
-const StarRatings = require("react-star-ratings").default;
 import json from "../../assets/animations/animation/up-arrow.json";
+import StarRating from '../generic/starRating';
 import {
     epcCertificateObject
   } from '../../types';
@@ -26,27 +26,16 @@ export default function FeatureCard({data, type}: props) {
                     <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                     <div className='p-2 text-sm'>
                       <div className='pt-2 pb-3'><b>Description:</b> {data?.House.walls.wallsDescription ? data.House.walls.wallsDescription : 'N/A'}</div>
-                      <div className='py-2 flex'>
-                        <b className="pr-2" >Energy Efficiency:</b>
-                        <StarRatings
-                          rating={data?.House.walls.wallsEnergyEff ? data.House.walls.wallsEnergyEff : 0}
-                          starRatedColor= {parseInt(data?.House.walls.wallsEnergyEff) > 2 ? "green" : "red"}
-                          numberOfStars={5}
-                          name='rating'
-                          starDimension="15px"
-                        />  
-                      </div>
-                      
-                      <div className='py-2 flex items-center'>
-                        <b className="pr-2">Environmental Efficiency:</b>
-                        <StarRatings
-                          rating={data?.House.walls.wallsEnvEff ? data.House.walls.wallsEnvEff : 0}
-                          starRatedColor= {parseInt(data?.House.walls.wallsEnvEff) > 2 ? "green" : "red"}
-                          numberOfStars={5}
-                          name='rating'
-                          starDimension="15px"
-                        />  
-                      </div>
+                      <StarRating
+                        title={'Energy Efficiency'}
+                        rating={data?.House.walls.wallsEnergyEff ? parseInt(data.House.walls.wallsEnergyEff) : 0}
+                        areaAverage={0}
+                      />
+                      <StarRating
+                        title={'Environmental Efficiency'}
+                        rating={data.House.walls.wallsEnvEff ? parseInt(data.House.walls.wallsEnvEff) : 0}
+                        areaAverage={0}
+                      />
                     </div>
                 </div>
             </Card>
@@ -63,27 +52,16 @@ export default function FeatureCard({data, type}: props) {
                   <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                   <div className='p-2 text-sm'>
                   <div className='py-2'><b>Description:</b> {data?.House.roof.roofDescription ? data.House.roof.roofDescription: 'N/A'}</div>
-                    <div className='py-2 flex'>
-                      <b className="pr-2" >Energy Efficiency:</b>
-                      <StarRatings
-                        rating={data?.House.roof.roofEnergyEff ? data?.House.roof.roofEnergyEff : 0}
-                        starRatedColor={parseInt(data?.House.roof.roofEnergyEff) > 2 ? "green" : "red"}
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension="15px"
-                      />  
-                    </div>
-                    
-                    <div className='py-2 flex items-center'>
-                      <b className="pr-2">Environmental Efficiency:</b>
-                      <StarRatings
-                        rating={data?.House.roof.roofEnvEff ? data?.House.roof.roofEnvEff : 0}
-                        starRatedColor= {parseInt(data?.House.roof.roofEnvEff) > 2 ? "green" : "red"}
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension="15px"
-                      />  
-                    </div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.roof.roofEnergyEff? parseInt(data?.House.roof.roofEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.roof.roofEnvEff ? parseInt(data?.House.roof.roofEnvEff) : 0}
+                      areaAverage={0}
+                    />
                   </div>
               </div>
           </Card>
@@ -100,27 +78,16 @@ export default function FeatureCard({data, type}: props) {
                 <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
                 <div className='p-2 text-sm'>
                 <div className='py-2'><b>Description:</b> {data?.House.floor.floorDescription ? data.House.floor.floorDescription: 'N/A'}</div>
-                  <div className='py-2 flex'>
-                    <b className="pr-2" >Energy Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.floor.floorEnergyEff ? data?.House.floor.floorEnergyEff: 0}
-                      starRatedColor={parseInt(data?.House.floor.floorEnergyEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
-                  
-                  <div className='py-2 flex items-center'>
-                    <b className="pr-2">Environmental Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.floor.floorEnvEff ? data?.House.floor.floorEnvEff : 0}
-                      starRatedColor={parseInt(data?.House.floor.floorEnvEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.floor.floorEnergyEff ? parseInt(data?.House.floor.floorEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.floor.floorEnvEff ? parseInt(data?.House.floor.floorEnvEff) : 0}
+                      areaAverage={0}
+                    />
                 </div>
             </div>
         </Card>
@@ -140,28 +107,16 @@ export default function FeatureCard({data, type}: props) {
                   <div className='py-2'><b>Lighting Cost Current:</b> {data?.House.lighting.lightingCostCurrent ? data?.House.lighting.lightingCostCurrent : 'N/A'}</div>
                   <div className='py-2'><b>Lighting Cost Potential:</b> {data?.House.lighting.lightingCostPotential ? data?.House.lighting.lightingCostPotential : 'N/A'}</div>
                   <div className='py-2'><b>Low Energy Lighting:</b> {data?.House.lighting.lowEnergyLighting ? data?.House.lighting.lowEnergyLighting : 'N/A'}</div>
-                  
-                  <div className='py-2 flex'>
-                    <b className="pr-2" >Energy Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.lighting.lightingEnergyEff ? data?.House.lighting.lightingEnergyEff : 0}
-                      starRatedColor={parseInt(data?.House.lighting.lightingEnergyEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
-                  
-                  <div className='py-2 flex items-center'>
-                    <b className="pr-2">Environmental Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.lighting.lightingEnvEff ? data?.House.lighting.lightingEnvEff : 0}
-                      starRatedColor={parseInt(data?.House.lighting.lightingEnvEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.lighting.lightingEnergyEff ? parseInt(data?.House.lighting.lightingEnergyEff ) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.lighting.lightingEnvEff ? parseInt(data?.House.lighting.lightingEnvEff) : 0}
+                      areaAverage={0}
+                    />
                 </div>
             </div>
           </Card>
@@ -220,27 +175,16 @@ export default function FeatureCard({data, type}: props) {
                 <div className='py-2'><b>Hot Water Cost Current:</b> {data?.House.water.hotWaterCostCurrent ? data?.House.water.hotWaterCostCurrent : 'N/A'}</div>
                 <div className='py-2'><b>Hot Water Cost Potential:</b> {data?.House.water.hotWaterCostPotential ? data?.House.water.hotWaterCostPotential : 'N/A'}</div>
 
-                  <div className='py-2 flex'>
-                    <b className="pr-2" >Energy Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.water.hotWaterEnergyEff ? data?.House.water.hotWaterEnergyEff : 0}
-                      starRatedColor={parseInt(data?.House.water.hotWaterEnergyEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
-                  
-                  <div className='py-2 flex items-center'>
-                    <b className="pr-2">Environmental Efficiency:</b>
-                    <StarRatings
-                      rating={data?.House.water.hotWaterEnvEff ? data?.House.water.hotWaterEnvEff : 0}
-                      starRatedColor={parseInt(data?.House.water.hotWaterEnvEff) > 2 ? "green" : "red"}
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="15px"
-                    />  
-                  </div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.water.hotWaterEnergyEff ? parseInt(data?.House.water.hotWaterEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.water.hotWaterEnvEff ? parseInt(data?.House.water.hotWaterEnvEff) : 0}
+                      areaAverage={0}
+                    />
                 </div>
             </div>
           </Card>
@@ -262,28 +206,16 @@ export default function FeatureCard({data, type}: props) {
                   <div className='py-2'><b>Glazed Type: </b> {data?.House.windows.glazedType ? data?.House.windows.glazedType  : 'N/A'}</div>
                   <div className='py-2'><b>Multi Glaze Proportion: </b> {data?.House.windows.multiGlazeProportion ? data?.House.windows.multiGlazeProportion : 'N/A'}</div>
    
-
-                    <div className='py-2 flex'>
-                      <b className="pr-2" >Energy Efficiency:</b>
-                      <StarRatings
-                        rating={data?.House.windows.windowsEnergyEff ? data?.House.windows.windowsEnergyEff : 0}
-                        starRatedColor={parseInt(data?.House.windows.windowsEnergyEff) > 2 ? "green" : "red"}
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension="15px"
-                      />  
-                    </div>
-                    
-                    <div className='py-2 flex items-center'>
-                      <b className="pr-2">Environmental Efficiency:</b>
-                      <StarRatings
-                        rating={data?.House.windows.windowsEnvEff ? data?.House.windows.windowsEnvEff : 0}
-                        starRatedColor={parseInt(data?.House.windows.windowsEnvEff) > 2 ? "green" : "red"}
-                        numberOfStars={5}
-                        name='rating'
-                        starDimension="15px"
-                      />  
-                    </div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.windows.windowsEnergyEff ? parseInt(data?.House.windows.windowsEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.windows.windowsEnvEff ? parseInt(data?.House.windows.windowsEnvEff) : 0}
+                      areaAverage={0}
+                    />
                   </div>
               </div>
           </Card>
