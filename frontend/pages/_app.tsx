@@ -14,7 +14,10 @@ const ENV: any = process.env["ENV"];
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
-     uri: ENV == 'DEV' ? "http://localhost:8000/graphql" : "https://epc-site-backend.herokuapp.com/graphql"
+    uri:
+      ENV == "DEV"
+        ? "http://localhost:8000/graphql"
+        : "https://epc-site-backend.herokuapp.com/graphql",
   }),
   cache: new InMemoryCache(),
 });
