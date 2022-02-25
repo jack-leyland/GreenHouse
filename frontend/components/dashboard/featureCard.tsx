@@ -33,8 +33,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.walls.wallsEnergyEff
-                    ? parseInt(data.House.walls.wallsEnergyEff)
+                  data?.walls.wallsEnergyEff
+                    ? parseInt(data?.walls.wallsEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -42,8 +42,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data.House.walls.wallsEnvEff
-                    ? parseInt(data.House.walls.wallsEnvEff)
+                  data?.consumptionEnvEff.wallsEnvEff
+                    ? parseInt(data?.consumptionEnvEff.wallsEnvEff)
                     : 0
                 }
                 areaAverage={0}
@@ -72,8 +72,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.roof.roofEnergyEff
-                    ? parseInt(data?.House.roof.roofEnergyEff)
+                  data?.roof.roofEnergyEff
+                    ? parseInt(data?.roof.roofEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -81,8 +81,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data?.House.roof.roofEnvEff
-                    ? parseInt(data?.House.roof.roofEnvEff)
+                  data?.consumptionEnvEff.roofEnvEff
+                    ? parseInt(data?.consumptionEnvEff.roofEnvEff)
                     : 0
                 }
                 areaAverage={0}
@@ -113,8 +113,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.floor.floorEnergyEff
-                    ? parseInt(data?.House.floor.floorEnergyEff)
+                  data?.floor.floorEnergyEff
+                    ? parseInt(data?.floor.floorEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -122,8 +122,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data?.House.floor.floorEnvEff
-                    ? parseInt(data?.House.floor.floorEnvEff)
+                  data?.consumptionEnvEff.floorEnvEff
+                    ? parseInt(data?.consumptionEnvEff.floorEnvEff)
                     : 0
                 }
                 areaAverage={0}
@@ -166,8 +166,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.lighting.lightingEnergyEff
-                    ? parseInt(data?.House.lighting.lightingEnergyEff)
+                  data?.lighting.lightingEnergyEff
+                    ? parseInt(data?.lighting.lightingEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -175,8 +175,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data?.House.lighting.lightingEnvEff
-                    ? parseInt(data?.House.lighting.lightingEnvEff)
+                  data?.consumptionEnvEff.lightingEnvEff
+                    ? parseInt(data?.consumptionEnvEff.lightingEnvEff)
                     : 0
                 }
                 areaAverage={0}
@@ -333,8 +333,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.water.hotWaterEnergyEff
-                    ? parseInt(data?.House.water.hotWaterEnergyEff)
+                  data?.water.hotWaterEnergyEff
+                    ? parseInt(data?.water.hotWaterEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -342,8 +342,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data?.House.water.hotWaterEnvEff
-                    ? parseInt(data?.House.water.hotWaterEnvEff)
+                  data?.consumptionEnvEff.hotWaterEnvEff
+                    ? parseInt(data?.consumptionEnvEff.hotWaterEnvEff)
                     : 0
                 }
                 areaAverage={0}
@@ -390,8 +390,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
-                  data?.House.windows.windowsEnergyEff
-                    ? parseInt(data?.House.windows.windowsEnergyEff)
+                  data?.windows.windowsEnergyEff
+                    ? parseInt(data?.windows.windowsEnergyEff)
                     : 0
                 }
                 areaAverage={0}
@@ -399,8 +399,8 @@ export default function FeatureCard({ data, type }: props) {
               <StarRating
                 title={"Environmental Efficiency"}
                 rating={
-                  data?.House.windows.windowsEnvEff
-                    ? parseInt(data?.House.windows.windowsEnvEff)
+                  data?.consumptionEnvEff.windowsEnvEff
+                    ? parseInt(data?.consumptionEnvEff.windowsEnvEff)
                     : 0
                 }
                 areaAverage={0}
