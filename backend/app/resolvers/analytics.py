@@ -96,5 +96,8 @@ def create_analytics(local_df):
     analytics.mean_second_heating_environmental_eff = local_df[
         "sheating-env-eff"
     ].mean()
+    analytics.mean_windows_energy_eff = local_df["windows-energy-eff"].mean()
+    analytics.mean_windows_environmental_eff = local_df["windows-env-eff"].mean()
+
 
     return analytics

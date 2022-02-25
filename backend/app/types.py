@@ -152,7 +152,8 @@ class Analytics(ObjectType):
     mean_main_heating_controls_environmental_eff = Float()
     mean_second_heating_energy_eff = Float()
     mean_second_heating_environmental_eff = Float()
-
+    mean_windows_energy_eff = Float()
+    mean_windows_environmental_eff = Float()
 
 class Address(ObjectType):
     lmk_key = String(required=True)
@@ -169,10 +170,25 @@ class Recommendation(ObjectType):
     improvement_id_text = String()
 
 
-# test
-class Big_Query(ObjectType):
-    co2_average = Float()
-
+class Timeseries(ObjectType):
+    average_annual_change_lighting_energy_eff = Float()
+    average_annual_change_lighting_environmental_eff = Float()
+    average_annual_change_walls_energy_eff = Float()
+    average_annual_change_walls_environmental_eff = Float()
+    average_annual_change_water_energy_eff = Float()
+    average_annual_change_water_environmental_eff = Float()
+    average_annual_change_floor_energy_eff = Float()
+    average_annual_change_floor_environmental_eff = Float()
+    average_annual_change_roof_energy_eff = Float()
+    average_annual_change_roof_environmental_eff = Float()
+    average_annual_change_main_heating_energy_eff = Float()
+    average_annual_change_main_heating_environmental_eff = Float()
+    average_annual_change_main_heating_controls_energy_eff = Float()
+    average_annual_change_main_heating_controls_environmental_eff = Float()
+    average_annual_change_second_heating_energy_eff = Float()
+    average_annual_change_second_heating_environmental_eff = Float()
+    average_annual_change_windows_energy_eff = Float()
+    average_annual_change_windows_environmental_eff = Float()
 
 class Improvement(ObjectType):
     lmk_key = String(required=True)
