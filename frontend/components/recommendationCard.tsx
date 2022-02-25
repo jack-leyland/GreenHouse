@@ -3,8 +3,8 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import { epcRecommendationObject } from "../types";
 import { gql, useMutation } from "@apollo/client";
 import { useAppContext } from "../context/state";
-import categories from "../categories.json";
 import { MdColorLens } from "react-icons/md";
+import {HeatingCategories} from "../types"
 
 interface Values {
   cost: number;
@@ -55,8 +55,8 @@ export default function Recommendation(props: props) {
       setLmk(localStorage.activeLmk);
     }
   }, [GlobalContext.activeLmk]);
-
-  const category = categories[0][props.recs.improvementId]; // This works, idk what to do with the error
+  
+  const category: string = HeatingCategories[props.recs.improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
     case "Heating":

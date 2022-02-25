@@ -234,9 +234,54 @@ export interface epcRecommendationObject {
   improvementIdText: string;
 }
 
-interface EPCDictionary<Value> {
+export interface EPCDictionary<Value> {
   [id: string]: Value;
 }
+
+export const HeatingCategories: EPCDictionary<string> = {
+    1: "Water",
+    2: "Water",
+    3: "Water",
+    4: "Water",
+    5: "Heating",
+    6: "Heating",
+    7: "Heating",
+    8: "Heating",
+    9: "Heating",
+    10: "Heating",
+    13: "Heating",
+    14: "Heating",
+    16: "Heating",
+    19: "Water",
+    20: "Water",
+    23: "Heating",
+    24: "Heating",
+    25: "Heating",
+    26: "Heating",
+    27: "Heating",
+    28: "Heating",
+    31: "Heating",
+    34: "Other",
+    35: "Lighting",
+    36: "Heating",
+    37: "Heating",
+    40: "Heating",
+    44: "Other",
+    45: "Heating",
+    46: "Heating",
+    47: "Heating",
+    48: "Other",
+    49: "Water",
+    50: "Heating",
+    56: "Heating",
+    57: "Heating",
+    58: "Heating",
+    59: "Heating",
+    62: "Heating",
+    63: "Heating",
+  }
+  
+
 
 export const epcColorDictionary: EPCDictionary<string> = {
   A: "epcA",
