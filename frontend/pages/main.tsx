@@ -65,7 +65,6 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(', ');
   }
-
   return (
     <>
       <div className="absolute min-w-[1150px] min-h-[755px] hidden logoRender:block w-full pr-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-right">
