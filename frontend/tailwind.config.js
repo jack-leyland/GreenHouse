@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        logoRender: '1150px',
+        logoRender: "1150px",
       },
       fontSize: {
         landingSearch: "1.1rem",

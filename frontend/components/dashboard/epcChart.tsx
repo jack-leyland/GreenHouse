@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 //Might move these out of types (below)
 import {
   epcCertificateObject,
   epcColorDictionary,
   epcIndexDictionary,
-} from '../../types';
-import { AiFillQuestionCircle } from 'react-icons/ai';
-import ReactTooltip from 'react-tooltip';
+} from "../../types";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import ReactTooltip from "react-tooltip";
 
 interface props {
-  data: epcCertificateObject['Main'];
+  data: epcCertificateObject["Main"];
 }
 
 export default function EpcChart({ data }: props) {
@@ -106,9 +106,9 @@ export default function EpcChart({ data }: props) {
           ?
         </div>
         <div className="py-2 px-4">
-          The average energy rating across England and Wales is{' '}
-          <b className={`text-${epcIndexDictionary['D']}`}>D</b> with a score of{' '}
-          <b className={`text-${epcIndexDictionary['D']}`}>60</b>
+          The average energy rating across England and Wales is{" "}
+          <b className={`text-${epcIndexDictionary["D"]}`}>D</b> with a score of{" "}
+          <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
         </div>
       </div>
     </div>

@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactTooltip from 'react-tooltip';
-import { AiFillQuestionCircle } from 'react-icons/ai';
-import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
-import { epcCertificateObject } from '../../types';
+import React from "react";
+import ReactTooltip from "react-tooltip";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { BarChart, Bar, XAxis, Tooltip } from "recharts";
+import { epcCertificateObject } from "../../types";
 
 interface props {
-  data: epcCertificateObject['House']['environmental'];
+  data: epcCertificateObject["House"]["environmental"];
 }
 
 export default function CarbonSummary({ data }: props) {
   const carbonData = [
     {
-      name: 'C02 Production',
+      name: "C02 Production",
       Current: data.co2EmissionsCurrent,
       Potential: data.co2EmissionsPotential,
     },
@@ -58,7 +58,7 @@ export default function CarbonSummary({ data }: props) {
               </div>
               <div className="py-1">
                 After implementing improvements you could reduce your emssions
-                to {data.co2EmissionsPotential}{' '}
+                to {data.co2EmissionsPotential}{" "}
               </div>
               <div className="py-1">
                 This C0<sub>2</sub> reduction is equivalent to ...
