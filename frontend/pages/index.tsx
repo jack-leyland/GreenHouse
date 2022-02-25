@@ -1,11 +1,11 @@
-import { ReactElement, useEffect, useState } from "react";
-import Router from "next/router";
-import Layout from "../components/layout";
-import { gql, useQuery } from "@apollo/client";
-import Circle from "../assets/circle.svg";
-import SearchBar from "../components/search-bar";
-import AddressModal from "../components/addressModal";
-import { useAppContext } from "../context/state";
+import { ReactElement, useEffect, useState } from 'react';
+import Router from 'next/router';
+import Layout from '../components/generic/layout';
+import { gql, useQuery } from '@apollo/client';
+import Circle from '../assets/circle.svg';
+import SearchBar from '../components/landing/search-bar';
+import AddressModal from '../components/landing/addressModal';
+import { useAppContext } from '../context/state';
 
 const GET_ADDRESSES = gql`
   query address($queryParam: String!) {

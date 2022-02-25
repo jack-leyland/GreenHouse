@@ -18,7 +18,7 @@ import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
 import CostSummary from "../components/dashboard/costSummary";
 import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
 import CarbonSummary from "../components/dashboard/carbonSummary";
-import FlipableCard from "../components/generic/flipableCard";
+import FlippableCard from "../components/generic/flippableCard";
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
@@ -189,7 +189,7 @@ const Main = () => {
 
           <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
             <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
-              <FlipableCard
+              <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
                 frontTitle="Overview"
@@ -228,7 +228,7 @@ const Main = () => {
                 }
               />
 
-              <FlipableCard
+              <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
                 frontTitle="Energy Consumption"

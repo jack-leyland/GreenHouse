@@ -14,7 +14,7 @@ interface props {
   showShadow?: boolean;
 }
 
-export default function FlipableCard({
+export default function FlippableCard({
   front,
   back,
   frontTitle = "",
