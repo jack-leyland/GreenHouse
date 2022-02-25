@@ -110,7 +110,12 @@ export default function Recommendation(props: props) {
       {/* Form goes here */}
       {showForm && (
         <div className="w-full">
-          <div className="h-full p-6 rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden">
+          <div
+            className={
+              "h-full p-6 rounded-lg border-2 text-white flex flex-col relative overflow-hidden " +
+              color
+            }
+          >
             <div>
               <h1 className="text-lg mb-1 font-bold title-font">
                 Tell us more!
