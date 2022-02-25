@@ -146,8 +146,24 @@ def convert_from_SAP(sap_rating):
 def verify_number(data):
     if data:
         return data
-
     return None
+
+def convert_from_SAP(sap_rating):
+    sap_rating = int(sap_rating)
+    if sap_rating in range(21):
+        return 'G'
+    elif sap_rating in range(21,39):
+        return 'F'
+    elif sap_rating in range(39,55):
+        return 'E'
+    elif sap_rating in range(55,69):
+        return 'D'
+    elif sap_rating in range(69,81):
+        return 'C'
+    elif sap_rating in range(81,92):
+        return 'B'
+    else:
+        return 'A'
 
 def timeseries_data(dataframe, features = timeseries_metrics):
     dataframe.sort_values("ADDRESS")

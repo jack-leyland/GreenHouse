@@ -25,13 +25,14 @@ def create_analytics(local_df):
     analytics.mean_current_energy_efficiency = round(
         local_df["current-energy-efficiency"].mean(), 2
     )
+    analytics.mean_current_energy_rating = convert_from_SAP(analytics.mean_current_energy_efficiency)
     analytics.mean_current_environment_impact = round(
         local_df["environment-impact-current"].mean(), 2
     )
     analytics.mean_current_energy_consumption = round(
         local_df["energy-consumption-current"].mean(), 2
     )
-    analytics.mean_current_co2_emissions = round(
+    analytics.mean_current_co2_consumption = round(
         local_df["co2-emissions-current"].mean(), 2
     )
     analytics.mean_current_lighting_cost = round(
@@ -46,6 +47,7 @@ def create_analytics(local_df):
     analytics.mean_potential_energy_efficiency = round(
         local_df["potential-energy-efficiency"].mean(), 2
     )
+    analytics.mean_potential_energy_rating = convert_from_SAP(analytics.mean_potential_energy_efficiency)
     analytics.mean_potential_environment_impact = round(
         local_df["environment-impact-potential"].mean(), 2
     )

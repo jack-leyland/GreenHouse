@@ -87,7 +87,6 @@ class Query(ObjectType):
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
         postcode = data["postcode"]
-        print(postcode)
         if len(postcode) == 7:
             postcode = postcode[:5]
         else:
