@@ -18,7 +18,6 @@ from django.urls import path
 from graphene_django.views import GraphQLView
 from .views import ping
 
-# from ..app.schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
