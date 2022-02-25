@@ -1,71 +1,68 @@
 import React from 'react';
 import Card from '../generic/card';
 import Lottie from "react-lottie-player";
-const StarRatings = require("react-star-ratings").default;
 import json from "../../assets/animations/animation/up-arrow.json";
-import { epcCertificateObject } from "../../types";
+import StarRating from '../generic/starRating';
+import {
+    epcCertificateObject
+  } from '../../types';
+  
 
 interface props {
     type: string;
     data: epcCertificateObject;
   }
 
-export default function FeatureCard({ data, type }: props) {
-  switch (type) {
-    case "Walls":
-      return (
-        <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
-          disableHoverAnimation={true}
-          showShadow={true}
-        >
-          <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
-              {type}
-            </div>
-            <div className="p-2 text-sm">
-              <div className="pt-2 pb-3">
-                <b>Description:</b>{" "}
-                {data?.House.walls.wallsDescription
-                  ? data.House.walls.wallsDescription
-                  : "N/A"}
-              </div>
-              <div className="py-2 flex">
-                <b className="pr-2">Energy Efficiency:</b>
-                <StarRatings
-                  rating={
-                    data?.House.walls.wallsEnergyEff
-                      ? data.House.walls.wallsEnergyEff
-                      : 0
-                  }
-                  starRatedColor={
-                    parseInt(data?.House.walls.wallsEnergyEff) > 2
-                      ? "green"
-                      : "red"
-                  }
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="15px"
-                />
-              </div>
+export default function FeatureCard({data, type}: props) {
+  switch(type) {
+    case 'Walls':
+        return (
+            <Card
+                style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
+                disableHoverAnimation={true}
+                showShadow={true}
+            >   
+                <div>
+                    <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                    <div className='p-2 text-sm'>
+                      <div className='pt-2 pb-3'><b>Description:</b> {data?.House.walls.wallsDescription ? data.House.walls.wallsDescription : 'N/A'}</div>
+                      <StarRating
+                        title={'Energy Efficiency'}
+                        rating={data?.House.walls.wallsEnergyEff ? parseInt(data.House.walls.wallsEnergyEff) : 0}
+                        areaAverage={0}
+                      />
+                      <StarRating
+                        title={'Environmental Efficiency'}
+                        rating={data.House.walls.wallsEnvEff ? parseInt(data.House.walls.wallsEnvEff) : 0}
+                        areaAverage={0}
+                      />
+                    </div>
+                </div>
+            </Card>
+        )
 
-              <div className="py-2 flex items-center">
-                <b className="pr-2">Environmental Efficiency:</b>
-                <StarRatings
-                  rating={
-                    data?.House.walls.wallsEnvEff
-                      ? data.House.walls.wallsEnvEff
-                      : 0
-                  }
-                  starRatedColor={
-                    parseInt(data?.House.walls.wallsEnvEff) > 2
-                      ? "green"
-                      : "red"
-                  }
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="15px"
-                />
+    case 'Roof':
+        return (
+          <Card
+              style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
+              disableHoverAnimation={true}
+              showShadow={true}
+          >   
+              <div>
+                  <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                  <div className='p-2 text-sm'>
+                  <div className='py-2'><b>Description:</b> {data?.House.roof.roofDescription ? data.House.roof.roofDescription: 'N/A'}</div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.roof.roofEnergyEff? parseInt(data?.House.roof.roofEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.roof.roofEnvEff ? parseInt(data?.House.roof.roofEnvEff) : 0}
+                      areaAverage={0}
+                    />
+                  </div>
               </div>
           </Card>
         )
@@ -76,10 +73,22 @@ export default function FeatureCard({ data, type }: props) {
           style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
-        >
-          <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
-              {type}
+        >   
+            <div>
+                <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                <div className='p-2 text-sm'>
+                <div className='py-2'><b>Description:</b> {data?.House.floor.floorDescription ? data.House.floor.floorDescription: 'N/A'}</div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.floor.floorEnergyEff ? parseInt(data?.House.floor.floorEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.floor.floorEnvEff ? parseInt(data?.House.floor.floorEnvEff) : 0}
+                      areaAverage={0}
+                    />
+                </div>
             </div>
         </Card>
       )
@@ -93,13 +102,21 @@ export default function FeatureCard({ data, type }: props) {
             showShadow={true}
           >
             <div>
-              <div className="text-xl font-bold p-2">{type}</div>
-              <div className="p-2">
-                <div className="py-2">
-                  <b>Heat Loss Corridor:</b>{" "}
-                  {data?.House.heating.general.heatLossCorridor
-                    ? data?.House.heating.general.heatLossCorridor
-                    : "N/A"}
+                <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                <div className='p-2 text-sm'>
+                  <div className='py-2'><b>Lighting Cost Current:</b> {data?.House.lighting.lightingCostCurrent ? data?.House.lighting.lightingCostCurrent : 'N/A'}</div>
+                  <div className='py-2'><b>Lighting Cost Potential:</b> {data?.House.lighting.lightingCostPotential ? data?.House.lighting.lightingCostPotential : 'N/A'}</div>
+                  <div className='py-2'><b>Low Energy Lighting:</b> {data?.House.lighting.lowEnergyLighting ? data?.House.lighting.lowEnergyLighting : 'N/A'}</div>
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.lighting.lightingEnergyEff ? parseInt(data?.House.lighting.lightingEnergyEff ) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.lighting.lightingEnvEff ? parseInt(data?.House.lighting.lightingEnvEff) : 0}
+                      areaAverage={0}
+                    />
                 </div>
             </div>
           </Card>
@@ -143,20 +160,89 @@ export default function FeatureCard({ data, type }: props) {
             </Card>
         )
 
-                <div>Main Heating</div>
-                <div className="py-2">
-                  <b>secondaryHeatingEnergyEff:</b>{" "}
-                  {data?.House.heating.secondaryHeating
-                    .secondaryHeatingEnergyEff
-                    ? data?.House.heating.secondaryHeating
-                        .secondaryHeatingEnergyEff
-                    : "N/A"}
+        
+    case 'Water':
+        return (
+            <Card
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
+            disableHoverAnimation={true}
+            showShadow={true}
+          >
+            <div>
+                <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                <div className='p-2 text-sm'>
+                <div className='py-2'><b>Description:</b> {data?.House.water.hotWaterDescription? data?.House.water.hotWaterDescription: 'N/A'}</div>
+                <div className='py-2'><b>Hot Water Cost Current:</b> {data?.House.water.hotWaterCostCurrent ? data?.House.water.hotWaterCostCurrent : 'N/A'}</div>
+                <div className='py-2'><b>Hot Water Cost Potential:</b> {data?.House.water.hotWaterCostPotential ? data?.House.water.hotWaterCostPotential : 'N/A'}</div>
+
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.water.hotWaterEnergyEff ? parseInt(data?.House.water.hotWaterEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.water.hotWaterEnvEff ? parseInt(data?.House.water.hotWaterEnvEff) : 0}
+                      areaAverage={0}
+                    />
                 </div>
             </div>
           </Card>
         )
 
-    case "Water":
+    case 'Windows':
+        return (
+          <Card
+            style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
+            disableHoverAnimation={true}
+            showShadow={true}
+          >
+            <div>
+                  <div className='text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0'>{type}</div>
+                  <div className='p-2 text-sm'>
+                  <div className='py-2'><b>Description:</b> {data?.House.windows.windowsDescription? data?.House.windows.windowsDescription : 'N/A'}</div>
+                    
+                  <div className='py-2'><b>Glazed Area: </b> {data?.House.windows.glazedArea ? data?.House.windows.glazedArea  : 'N/A'}</div>
+                  <div className='py-2'><b>Glazed Type: </b> {data?.House.windows.glazedType ? data?.House.windows.glazedType  : 'N/A'}</div>
+                  <div className='py-2'><b>Multi Glaze Proportion: </b> {data?.House.windows.multiGlazeProportion ? data?.House.windows.multiGlazeProportion : 'N/A'}</div>
+   
+                    <StarRating
+                      title={'Energy Efficiency'}
+                      rating={data?.House.windows.windowsEnergyEff ? parseInt(data?.House.windows.windowsEnergyEff) : 0}
+                      areaAverage={0}
+                    />
+                    <StarRating
+                      title={'Environmental Efficiency'}
+                      rating={data?.House.windows.windowsEnvEff ? parseInt(data?.House.windows.windowsEnvEff) : 0}
+                      areaAverage={0}
+                    />
+                  </div>
+              </div>
+
+              <div className="py-2 flex items-center">
+                <b className="pr-2">Environmental Efficiency:</b>
+                <StarRatings
+                  rating={
+                    data?.House.water.hotWaterEnvEff
+                      ? data?.House.water.hotWaterEnvEff
+                      : 0
+                  }
+                  starRatedColor={
+                    parseInt(data?.House.water.hotWaterEnvEff) > 2
+                      ? "green"
+                      : "red"
+                  }
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="15px"
+                />
+              </div>
+            </div>
+          </div>
+        </Card>
+      );
+
+    case "Windows":
       return (
         <Card
           style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
@@ -170,20 +256,27 @@ export default function FeatureCard({ data, type }: props) {
             <div className="p-2 text-sm">
               <div className="py-2">
                 <b>Description:</b>{" "}
-                {data?.House.water.hotWaterDescription
-                  ? data?.House.water.hotWaterDescription
+                {data?.House.windows.windowsDescription
+                  ? data?.House.windows.windowsDescription
+                  : "N/A"}
+              </div>
+
+              <div className="py-2">
+                <b>Glazed Area: </b>{" "}
+                {data?.House.windows.glazedArea
+                  ? data?.House.windows.glazedArea
                   : "N/A"}
               </div>
               <div className="py-2">
-                <b>Hot Water Cost Current:</b>{" "}
-                {data?.House.water.hotWaterCostCurrent
-                  ? data?.House.water.hotWaterCostCurrent
+                <b>Glazed Type: </b>{" "}
+                {data?.House.windows.glazedType
+                  ? data?.House.windows.glazedType
                   : "N/A"}
               </div>
               <div className="py-2">
-                <b>Hot Water Cost Potential:</b>{" "}
-                {data?.House.water.hotWaterCostPotential
-                  ? data?.House.water.hotWaterCostPotential
+                <b>Multi Glaze Proportion: </b>{" "}
+                {data?.House.windows.multiGlazeProportion
+                  ? data?.House.windows.multiGlazeProportion
                   : "N/A"}
               </div>
 
@@ -191,12 +284,12 @@ export default function FeatureCard({ data, type }: props) {
                 <b className="pr-2">Energy Efficiency:</b>
                 <StarRatings
                   rating={
-                    data?.House.water.hotWaterEnergyEff
-                      ? data?.House.water.hotWaterEnergyEff
+                    data?.House.windows.windowsEnergyEff
+                      ? data?.House.windows.windowsEnergyEff
                       : 0
                   }
                   starRatedColor={
-                    parseInt(data?.House.water.hotWaterEnergyEff) > 2
+                    parseInt(data?.House.windows.windowsEnergyEff) > 2
                       ? "green"
                       : "red"
                   }
@@ -205,30 +298,50 @@ export default function FeatureCard({ data, type }: props) {
                   starDimension="15px"
                 />
               </div>
-          </Card>
-        )
-      default:
-        return (
-            <Card
-              style={'col-start-7 col-end-10 row-start-1 row-end-7'}
-              disableHoverAnimation={true}
-              showShadow={true}
-            >
-              <>
-                <div>
-                  <div className='text-xl text-center p-2 flex flex-col items-center justify-center'>
-                    <Lottie
-                      loop
-                      animationData={json}
-                      play
-                      style={{height: '70px', width: '70px'}}
-                    />
-                    <p>Click On Your House To Find Out More!</p>
-                  </div>
-                </div>
-              </>
-            </Card>
-          )
 
+              <div className="py-2 flex items-center">
+                <b className="pr-2">Environmental Efficiency:</b>
+                <StarRatings
+                  rating={
+                    data?.House.windows.windowsEnvEff
+                      ? data?.House.windows.windowsEnvEff
+                      : 0
+                  }
+                  starRatedColor={
+                    parseInt(data?.House.windows.windowsEnvEff) > 2
+                      ? "green"
+                      : "red"
+                  }
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="15px"
+                />
+              </div>
+            </div>
+          </div>
+        </Card>
+      );
+    default:
+      return (
+        <Card
+          style={"col-start-7 col-end-10 row-start-1 row-end-7"}
+          disableHoverAnimation={true}
+          showShadow={true}
+        >
+          <>
+            <div>
+              <div className="text-xl text-center p-2 flex flex-col items-center justify-center">
+                <Lottie
+                  loop
+                  animationData={json}
+                  play
+                  style={{ height: "70px", width: "70px" }}
+                />
+                <p>Click On Your House To Find Out More!</p>
+              </div>
+            </div>
+          </>
+        </Card>
+      );
   }
 }
