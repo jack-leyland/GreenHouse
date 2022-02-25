@@ -4,7 +4,7 @@ import { epcRecommendationObject } from "../types";
 import { gql, useMutation } from "@apollo/client";
 import { useAppContext } from "../context/state";
 import { MdColorLens } from "react-icons/md";
-import {HeatingCategories} from "../types"
+import { HeatingCategories } from "../types";
 
 interface Values {
   cost: number;
@@ -55,7 +55,7 @@ export default function Recommendation(props: props) {
       setLmk(localStorage.activeLmk);
     }
   }, [GlobalContext.activeLmk]);
-  
+
   const category: string = HeatingCategories[props.recs.improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
