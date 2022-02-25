@@ -52,49 +52,49 @@ export default function Recommendation(props: props) {
     } else {
       setLmk(localStorage.activeLmk);
     }
-  }, []);
+  }, [GlobalContext.activeLmk]);
 
-  if (loading) return <p>"Submitting..."</p>;
-  if (error) return <p>`Submission error! ${error.message}`</p>;
+  if (loading) return <p>Submitting...</p>;
+  if (error) return <p>Submission error! ${error.message}</p>;
 
   return (
     <div className="flex flex-row p-4 mx-10">
-      <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-        <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
-          Improvement {props.recs.improvementItem}
-        </h2>
-        <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">
-          {props.recs.improvementIdText}
-        </h1>
-        <p className="flex items-center text-gray-600 mb-2">
-          <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0"></span>
-          {props.recs.indicativeCost}
-        </p>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded"
-        >
-          I've done this!
-          {/* <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            className="w-4 h-4 ml-auto"
-            viewBox="0 0 24 24"
+      <div className="h-full rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden w-72">
+        <div className="p-6">
+          <h2 className="text-sm tracking-widest title-font mb-1 font-medium justify-right">
+            Improvement {props.recs.improvementItem}
+          </h2>
+          <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
+            {"Category"}
+          </h2>
+          <h1 className="text-3xl pb-4 mb-4 border-b leading-none">
+            {props.recs.improvementIdText}
+          </h1>
+        </div>
+        <div className="w-full bg-green-600 flex items-center mb-2">
+          <p className="p-6">{props.recs.indicativeCost} estimated cost</p>
+        </div>
+        <div className="w-full bg-green-600 flex items-center mb-2">
+          <p className="p-6">{"£££"} potential savings</p>
+        </div>
+        <div className="p-6 pb-2 absolute bottom-0 w-full">
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className={
+              "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+              (showForm ? "bg-red-200" : "bg-white")
+            }
           >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg> */}
-        </button>
-        <p className="text-xs text-gray-500 mt-3"></p>
+            {showForm ? "Cancel" : "I've done this!"}
+          </button>
+        </div>
       </div>
       {/* Form goes here */}
       {showForm && (
         <div className="w-full">
-          <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+          <div className="h-full p-6 rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden">
             <div>
-              <h1 className="text-gray-900 text-lg mb-1 font-medium title-font">
+              <h1 className="text-lg mb-1 font-bold title-font">
                 Tell us more!
               </h1>
               <Formik
@@ -123,7 +123,7 @@ export default function Recommendation(props: props) {
               >
                 <Form>
                   <div className="relative mb-4">
-                    <label htmlFor="cost">Cost</label>
+                    <label htmlFor="cost">How much did it cost you (£)?</label>
                     <Field
                       id="cost"
                       name="cost"

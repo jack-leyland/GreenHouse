@@ -51,11 +51,9 @@ const Recommendations = () => {
   return (
     <section className="text-gray-600 body-font overflow-hidden h-screen">
       <div className="container px-5 mx-auto py-24 flex flex-row overflow-x-scroll flex-nowrap h-full">
-        {/* <div className="flex -m-4 flex-row overflow-x-scroll w-full"> */}
         {queryData.map((item: epcRecommendationObject, key: number) => {
           return <Recommendation recs={item} key={key} />;
         })}
-        {/* </div> */}
       </div>
     </section>
   );
