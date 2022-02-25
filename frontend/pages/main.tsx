@@ -176,8 +176,7 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
-  console.log(data)
-
+  console.log(data);
 
   return (
     <>
