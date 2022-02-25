@@ -257,3 +257,16 @@ export const epcIndexDictionary: EPCDictionary<number> = {
   F: 7,
   G: 8,
 };
+
+export interface epcCertificateRecs {
+  address: string;
+  localAuthorityName: string;
+  posttown: string;
+  postcode: string;
+  heatingCostPotential: number;
+  heatingCostCurrent: number;
+  lightingCostPotential: number;
+  lightingCostCurrent: number;
+  hotWaterCostPotential: number;
+  hotWaterCostCurrent: number;
+}
