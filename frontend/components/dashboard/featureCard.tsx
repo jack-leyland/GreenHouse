@@ -7,15 +7,15 @@ import { epcCertificateObject } from "../../types";
 
 interface props {
   type: string;
-  data: epcCertificateObject;
+  data: epcCertificateObject['House'];
 }
 
 export default function FeatureCard({ data, type }: props) {
   switch (type) {
-    case "Walls":
+    case 'Walls':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -25,10 +25,10 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="pt-2 pb-3">
-                <b>Description:</b>{" "}
-                {data?.House.walls.wallsDescription
-                  ? data.House.walls.wallsDescription
-                  : "N/A"}
+                <b>Description:</b>{' '}
+                {data?.walls.wallsDescription
+                  ? data.walls.wallsDescription
+                  : 'N/A'}
               </div>
               <StarRating
                 title={"Energy Efficiency"}
@@ -53,10 +53,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Roof":
+    case 'Roof':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -66,10 +66,8 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
-                <b>Description:</b>{" "}
-                {data?.House.roof.roofDescription
-                  ? data.House.roof.roofDescription
-                  : "N/A"}
+                <b>Description:</b>{' '}
+                {data?.roof.roofDescription ? data.roof.roofDescription : 'N/A'}
               </div>
               <StarRating
                 title={"Energy Efficiency"}
@@ -94,10 +92,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Floor":
+    case 'Floor':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -107,10 +105,10 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
-                <b>Description:</b>{" "}
-                {data?.House.floor.floorDescription
-                  ? data.House.floor.floorDescription
-                  : "N/A"}
+                <b>Description:</b>{' '}
+                {data?.floor.floorDescription
+                  ? data.floor.floorDescription
+                  : 'N/A'}
               </div>
               <StarRating
                 title={"Energy Efficiency"}
@@ -135,10 +133,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Lighting":
+    case 'Lighting':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -148,22 +146,22 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
-                <b>Lighting Cost Current:</b>{" "}
-                {data?.House.lighting.lightingCostCurrent
-                  ? data?.House.lighting.lightingCostCurrent
-                  : "N/A"}
+                <b>Lighting Cost Current:</b>{' '}
+                {data?.costs.lightingCostCurrent
+                  ? data?.costs.lightingCostCurrent
+                  : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Lighting Cost Potential:</b>{" "}
-                {data?.House.lighting.lightingCostPotential
-                  ? data?.House.lighting.lightingCostPotential
-                  : "N/A"}
+                <b>Lighting Cost Potential:</b>{' '}
+                {data?.costs.lightingCostPotential
+                  ? data?.costs.lightingCostPotential
+                  : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Low Energy Lighting:</b>{" "}
-                {data?.House.lighting.lowEnergyLighting
-                  ? data?.House.lighting.lowEnergyLighting
-                  : "N/A"}
+                <b>Low Energy Lighting:</b>{' '}
+                {data?.lighting.lowEnergyLighting
+                  ? data?.lighting.lowEnergyLighting
+                  : 'N/A'}
               </div>
               <StarRating
                 title={"Energy Efficiency"}
@@ -188,10 +186,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Heating":
+    case 'Heating':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -200,106 +198,100 @@ export default function FeatureCard({ data, type }: props) {
               <div className="text-xl font-bold p-2">{type}</div>
               <div className="p-2">
                 <div className="py-2">
-                  <b>Heat Loss Corridor:</b>{" "}
-                  {data?.House.heating.general.heatLossCorridor
-                    ? data?.House.heating.general.heatLossCorridor
-                    : "N/A"}
+                  <b>Heat Loss Corridor:</b>{' '}
+                  {data?.heating.general.heatLossCorridor
+                    ? data?.heating.general.heatLossCorridor
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Heating Cost Current:</b>{" "}
-                  {data?.House.heating.general.heatingCostCurrent
-                    ? data?.House.heating.general.heatingCostCurrent
-                    : "N/A"}
+                  <b>Heating Cost Current:</b>{' '}
+                  {data?.costs.heatingCostCurrent
+                    ? data?.costs.heatingCostCurrent
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Heating Cost Potential:</b>{" "}
-                  {data?.House.lighting.lightingEnergyEff
-                    ? data?.House.lighting.lightingEnergyEff
-                    : "N/A"}
+                  <b>Heating Cost Potential:</b>{' '}
+                  {data?.lighting.lightingEnergyEff
+                    ? data?.lighting.lightingEnergyEff
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Main Gas Flag:</b>{" "}
-                  {data?.House.heating.general.mainsGasFlag
-                    ? data?.House.heating.general.mainsGasFlag
-                    : "N/A"}
+                  <b>Main Gas Flag:</b>{' '}
+                  {data?.heating.general.mainsGasFlag
+                    ? data?.heating.general.mainsGasFlag
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Number of Heated Rooms:</b>{" "}
-                  {data?.House.heating.general.numberHeatedRooms
-                    ? data?.House.heating.general.numberHeatedRooms
-                    : "N/A"}
+                  <b>Number of Heated Rooms:</b>{' '}
+                  {data?.heating.general.numberHeatedRooms
+                    ? data?.heating.general.numberHeatedRooms
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Unheated Corridor Length:</b>{" "}
-                  {data?.House.heating.general.unheatedCorridorLength
-                    ? data?.House.heating.general.unheatedCorridorLength
-                    : "N/A"}
+                  <b>Unheated Corridor Length:</b>{' '}
+                  {data?.heating.general.unheatedCorridorLength
+                    ? data?.heating.general.unheatedCorridorLength
+                    : 'N/A'}
                 </div>
                 <div>Main Heating</div>
                 <div className="py-2">
-                  <b>Main Fuel:</b>{" "}
-                  {data?.House.heating.mainHeating.mainFuel
-                    ? data?.House.heating.mainHeating.mainFuel
-                    : "N/A"}
+                  <b>Main Fuel:</b>{' '}
+                  {data?.heating.mainHeating.mainFuel
+                    ? data?.heating.mainHeating.mainFuel
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Main Heat Description:</b>{" "}
-                  {data?.House.heating.mainHeating.mainHeatDescription
-                    ? data?.House.heating.mainHeating.mainHeatDescription
-                    : "N/A"}
+                  <b>Main Heat Description:</b>{' '}
+                  {data?.heating.mainHeating.mainHeatDescription
+                    ? data?.heating.mainHeating.mainHeatDescription
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Main Heat Energy Efficiency:</b>{" "}
-                  {data?.House.heating.mainHeating.mainHeatEnergyEff
-                    ? data?.House.heating.mainHeating.mainHeatEnergyEff
-                    : "N/A"}
+                  <b>Main Heat Energy Efficiency:</b>{' '}
+                  {data?.heating.mainHeating.mainHeatEnergyEff
+                    ? data?.heating.mainHeating.mainHeatEnergyEff
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>Main Heat Environmental Efficiency:</b>{" "}
-                  {data?.House.heating.mainHeating.mainHeatEnvEff
-                    ? data?.House.heating.mainHeating.mainHeatEnvEff
-                    : "N/A"}
+                  <b>Main Heat Environmental Efficiency:</b>{' '}
+                  {data?.consumptionEnvEff.mainHeatEnvEff
+                    ? data?.consumptionEnvEff.mainHeatEnvEff
+                    : 'N/A'}
                 </div>
 
                 <div>Main Heating</div>
                 <div className="py-2">
-                  <b>Main :</b>{" "}
-                  {data?.House.heating.mainHeatingControls
-                    .mainHeatControlDescription
-                    ? data?.House.heating.mainHeatingControls
+                  <b>Main :</b>{' '}
+                  {data?.heating.mainHeatingControls.mainHeatControlDescription
+                    ? data?.heating.mainHeatingControls
                         .mainHeatControlDescription
-                    : "N/A"}
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>mainHeatControlEnergyEff:</b>{" "}
-                  {data?.House.heating.mainHeatingControls
-                    .mainHeatControlEnergyEff
-                    ? data?.House.heating.mainHeatingControls
-                        .mainHeatControlEnergyEff
-                    : "N/A"}
+                  <b>mainHeatControlEnergyEff:</b>{' '}
+                  {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>mainHeatControlEnvEff:</b>{" "}
-                  {data?.House.heating.mainHeatingControls.mainHeatControlEnvEff
-                    ? data?.House.heating.mainHeatingControls
-                        .mainHeatControlEnvEff
-                    : "N/A"}
+                  <b>mainHeatControlEnvEff:</b>{' '}
+                  {data?.consumptionEnvEff.mainHeatControlEnvEff
+                    ? data?.consumptionEnvEff.mainHeatControlEnvEff
+                    : 'N/A'}
                 </div>
 
                 <div>Main Heating</div>
                 <div className="py-2">
-                  <b>secondaryHeatingEnergyEff:</b>{" "}
-                  {data?.House.heating.secondaryHeating
-                    .secondaryHeatingEnergyEff
-                    ? data?.House.heating.secondaryHeating
-                        .secondaryHeatingEnergyEff
-                    : "N/A"}
+                  <b>secondaryHeatingEnergyEff:</b>{' '}
+                  {data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                    ? data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                    : 'N/A'}
                 </div>
                 <div className="py-2">
-                  <b>secondheatDescription:</b>{" "}
-                  {data?.House.heating.secondaryHeating.secondheatDescription
-                    ? data?.House.heating.secondaryHeating.secondheatDescription
-                    : "N/A"}
+                  <b>secondheatDescription:</b>{' '}
+                  {data?.heating.secondaryHeating.secondheatDescription
+                    ? data?.heating.secondaryHeating.secondheatDescription
+                    : 'N/A'}
                 </div>
               </div>
             </div>
@@ -307,10 +299,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Water":
+    case 'Water':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -320,22 +312,22 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
-                <b>Description:</b>{" "}
-                {data?.House.water.hotWaterDescription
-                  ? data?.House.water.hotWaterDescription
-                  : "N/A"}
+                <b>Description:</b>{' '}
+                {data?.water.hotWaterDescription
+                  ? data?.water.hotWaterDescription
+                  : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Hot Water Cost Current:</b>{" "}
-                {data?.House.water.hotWaterCostCurrent
-                  ? data?.House.water.hotWaterCostCurrent
-                  : "N/A"}
+                <b>Hot Water Cost Current:</b>{' '}
+                {data?.costs.hotWaterCostCurrent
+                  ? data?.costs.hotWaterCostCurrent
+                  : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Hot Water Cost Potential:</b>{" "}
-                {data?.House.water.hotWaterCostPotential
-                  ? data?.House.water.hotWaterCostPotential
-                  : "N/A"}
+                <b>Hot Water Cost Potential:</b>{' '}
+                {data?.costs.hotWaterCostPotential
+                  ? data?.costs.hotWaterCostPotential
+                  : 'N/A'}
               </div>
 
               <StarRating
@@ -361,10 +353,10 @@ export default function FeatureCard({ data, type }: props) {
         </Card>
       );
 
-    case "Windows":
+    case 'Windows':
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -374,29 +366,25 @@ export default function FeatureCard({ data, type }: props) {
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
-                <b>Description:</b>{" "}
-                {data?.House.windows.windowsDescription
-                  ? data?.House.windows.windowsDescription
-                  : "N/A"}
+                <b>Description:</b>{' '}
+                {data?.windows.windowsDescription
+                  ? data?.windows.windowsDescription
+                  : 'N/A'}
               </div>
 
               <div className="py-2">
-                <b>Glazed Area: </b>{" "}
-                {data?.House.windows.glazedArea
-                  ? data?.House.windows.glazedArea
-                  : "N/A"}
+                <b>Glazed Area: </b>{' '}
+                {data?.windows.glazedArea ? data?.windows.glazedArea : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Glazed Type: </b>{" "}
-                {data?.House.windows.glazedType
-                  ? data?.House.windows.glazedType
-                  : "N/A"}
+                <b>Glazed Type: </b>{' '}
+                {data?.windows.glazedType ? data?.windows.glazedType : 'N/A'}
               </div>
               <div className="py-2">
-                <b>Multi Glaze Proportion: </b>{" "}
-                {data?.House.windows.multiGlazeProportion
-                  ? data?.House.windows.multiGlazeProportion
-                  : "N/A"}
+                <b>Multi Glaze Proportion: </b>{' '}
+                {data?.windows.multiGlazeProportion
+                  ? data?.windows.multiGlazeProportion
+                  : 'N/A'}
               </div>
 
               <StarRating
@@ -424,7 +412,7 @@ export default function FeatureCard({ data, type }: props) {
     default:
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7"}
+          style={'col-start-7 col-end-10 row-start-1 row-end-7'}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -435,7 +423,7 @@ export default function FeatureCard({ data, type }: props) {
                   loop
                   animationData={json}
                   play
-                  style={{ height: "70px", width: "70px" }}
+                  style={{ height: '70px', width: '70px' }}
                 />
                 <p>Click On Your House To Find Out More!</p>
               </div>

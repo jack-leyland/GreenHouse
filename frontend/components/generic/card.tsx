@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface props {
   children?: React.ReactChild | React.ReactChildren | never[];
@@ -7,23 +7,32 @@ interface props {
   onHover?: Dispatch<SetStateAction<boolean>>;
   onClick?: Dispatch<SetStateAction<boolean>>;
   showShadow?: boolean;
+  minDims?: {
+    w: string;
+    h: string;
+  };
 }
 
 export default function Card({
   children,
-  style = "",
+  style = '',
   onHover,
   onClick,
   disableHoverAnimation = false,
   showShadow = true,
+  minDims,
 }: props) {
-  const hover = " hover:scale-105 hover:cursor-pointer";
-  const shadow = " shadow-lg";
+  const hover = ' hover:scale-105 hover:cursor-pointer';
+  const shadow = ' shadow-lg';
   const cardStyle =
-    "animate-fade rounded-lg w-full h-full " +
+    'animate-fade rounded-lg w-full h-full ' +
     style +
-    (disableHoverAnimation ? "" : hover) +
-    (showShadow ? shadow : "");
+    (disableHoverAnimation ? '' : hover) +
+    (showShadow ? shadow : '') +
+    ' ' +
+    (minDims?.w ? 'min-w-[' + minDims.w + ']' : '') +
+    ' ' +
+    (minDims?.h ? 'min-h-[' + minDims.h + ']' : '');
 
   return (
     <div
@@ -32,7 +41,7 @@ export default function Card({
       onMouseLeave={() => (onHover ? onHover(false) : null)}
       onClick={() => (onClick ? onClick(true) : null)}
     >
-      <div className="p-3 text-xs h-full w-full">{children}</div>
+      <div className="p-3 text-xs h-full min-w-full">{children}</div>
     </div>
   );
 }

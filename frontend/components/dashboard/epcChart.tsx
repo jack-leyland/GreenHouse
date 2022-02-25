@@ -1,44 +1,24 @@
-import React from "react";
+import React from 'react';
 //Might move these out of types (below)
-import { epcColorDictionary, epcIndexDictionary } from "../../types";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import ReactTooltip from "react-tooltip";
+import {
+  epcCertificateObject,
+  epcColorDictionary,
+  epcIndexDictionary,
+} from '../../types';
+import { AiFillQuestionCircle } from 'react-icons/ai';
+import ReactTooltip from 'react-tooltip';
 
 interface props {
-  currentEfficiency: number;
-  potentialEfficiency: number;
+  data: epcCertificateObject['Main'];
 }
 
-function scoreToRating(score: number) {
-  switch (true) {
-    case score <= 20:
-      return "G";
-    case score <= 38:
-      return "F";
-    case score <= 54:
-      return "E";
-    case score <= 68:
-      return "D";
-    case score <= 80:
-      return "C";
-    case score <= 91:
-      return "B";
-    case score <= 100:
-      return "A";
-    default:
-      return "G";
-  }
-}
-
-export default function EpcChart({
-  currentEfficiency,
-  potentialEfficiency,
-}: props) {
-  const currentRating = scoreToRating(currentEfficiency);
-  const potentialRating = scoreToRating(potentialEfficiency);
-
-  const currentRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 text-center col-start-1 px-1 my-1 h-full row-start-${epcIndexDictionary[currentRating]} bg-${epcColorDictionary[currentRating]}`;
-  const potentialRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 text-center col-start-2 px-1 my-1 h-full row-start-${epcIndexDictionary[potentialRating]} bg-${epcColorDictionary[potentialRating]}`;
+export default function EpcChart({ data }: props) {
+  const currentRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 text-center col-start-1 px-1 my-1 h-full row-start-${
+    epcIndexDictionary[data.currentEnergyRating]
+  } bg-${epcColorDictionary[data.currentEnergyRating]}`;
+  const potentialRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 text-center col-start-2 px-1 my-1 h-full row-start-${
+    epcIndexDictionary[data.potentialEnergyRating]
+  } bg-${epcColorDictionary[data.potentialEnergyRating]}`;
 
   return (
     <div className="flex h-5/6">
@@ -110,23 +90,25 @@ export default function EpcChart({
           </a>
         </div>
         <div className={currentRatingIndexStyle}>
-          {currentEfficiency} | {currentRating}
+          {data.currentEnergyEfficiency} | {data.currentEnergyRating}
         </div>
         <div className={potentialRatingIndexStyle}>
-          {potentialEfficiency} | {potentialRating}
+          {data.potentialEnergyEfficiency} | {data.potentialEnergyRating}
         </div>
       </div>
 
-      <div className="w-2/6 h-full h-full border border-r-0 border-y-0">
-        <div className="pb-1 underline text-sm px-4">How you compare:</div>
+      <div className="w-2/6 h-full border border-r-0 border-y-0">
+        <div className="pb-1 text-sm px-4">
+          <strong>How you compare:</strong>
+        </div>
         <div className="py-2 px-4">
           The average energy rating for houses in your area is ? with a score of
           ?
         </div>
         <div className="py-2 px-4">
-          The average energy rating across England and Wales is{" "}
-          <b className={`text-${epcIndexDictionary["D"]}`}>D</b> with a score of{" "}
-          <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
+          The average energy rating across England and Wales is{' '}
+          <b className={`text-${epcIndexDictionary['D']}`}>D</b> with a score of{' '}
+          <b className={`text-${epcIndexDictionary['D']}`}>60</b>
         </div>
       </div>
     </div>

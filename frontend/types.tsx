@@ -121,22 +121,38 @@ export interface epcCertificateObject extends Object {
     currentEnergyRating: string;
   };
   House: {
+    costs: {
+      heatingCostPotential: number;
+      heatingCostCurrent: number;
+      hotWaterCostPotential: number;
+      hotWaterCostCurrent: number;
+      lightingCostPotential: number;
+      lightingCostCurrent: number;
+    };
+    consumptionEnvEff: {
+      energyConsumptionPotential: number;
+      energyConsumptionCurrent: number;
+      windowsEnvEff: string;
+      roofEnvEff: string;
+      mainHeatEnvEff: string;
+      mainHeatControlEnvEff: string;
+      lightingEnvEff: string;
+      wallsEnvEff: string;
+      floorEnvEff: string;
+      hotWaterEnvEff: string;
+    };
     environmental: {
       environmentImpactPotential: number;
       environmentImpactCurrent: number;
-      energyConsumptionPotential: number;
-      energyConsumptionCurrent: number;
       co2EmissionsCurrent: number;
       co2EmissionsPotential: number;
     };
     roof: {
       roofDescription: string;
       roofEnergyEff: string;
-      roofEnvEff: string;
     };
     windows: {
       windowsDescription: string;
-      windowsEnvEff: string;
       windowsEnergyEff: string;
       glazedType: string;
       glazedArea: string;
@@ -148,19 +164,15 @@ export interface epcCertificateObject extends Object {
         numberHeatedRooms: number;
         heatLossCorridor: string;
         unheatedCorridorLength: number;
-        heatingCostPotential: number;
-        heatingCostCurrent: number;
       };
       mainHeating: {
         mainHeatDescription: string;
-        mainHeatEnvEff: string;
         mainHeatEnergyEff: string;
         mainFuel: string;
       };
       mainHeatingControls: {
         mainHeatControlDescription: string;
         mainHeatControlEnergyEff: string;
-        mainHeatControlEnvEff: string;
       };
       secondaryHeating: {
         secondheatDescription: number;
@@ -171,26 +183,18 @@ export interface epcCertificateObject extends Object {
     lighting: {
       lowEnergyLighting: number;
       lightingEnergyEff: string;
-      lightingEnvEff: string;
-      lightingCostPotential: number;
-      lightingCostCurrent: number;
     };
     walls: {
       wallsDescription: string;
       wallsEnergyEff: string;
-      wallsEnvEff: string;
     };
     water: {
       hotWaterDescription: string;
-      hotWaterEnvEff: string;
       hotWaterEnergyEff: string;
-      hotWaterCostPotential: number;
-      hotWaterCostCurrent: number;
     };
     floor: {
       floorDescription: string;
       floorEnergyEff: string;
-      floorEnvEff: string;
     };
     other: {
       photoSupply: string;
@@ -282,13 +286,13 @@ export const HeatingCategories: EPCDictionary<string> = {
 };
 
 export const epcColorDictionary: EPCDictionary<string> = {
-  A: "epcA",
-  B: "epcB",
-  C: "epcC",
-  D: "epcD",
-  E: "epcE",
-  F: "epcF",
-  G: "epcG",
+  A: 'epcA',
+  B: 'epcB',
+  C: 'epcC',
+  D: 'epcD',
+  E: 'epcE',
+  F: 'epcF',
+  G: 'epcG',
 };
 
 export const epcIndexDictionary: EPCDictionary<number> = {
