@@ -13,6 +13,7 @@ import environ
 import os
 import pandas as pd
 import json
+
 from google.cloud import bigquery
 
 from app.types import (
@@ -38,19 +39,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 EPC_API_KEY = os.environ.get("EPC_API_KEY")
+
 ENV = os.environ.get("ENV")
+
 if ENV == "DEV":
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
-
-json_str = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-# json_data = json.loads(json_str)
-print(json_str)
-
-# json_data["private_key"] = json_data["private_key"].replace("\\n", "\n")
-
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_data
-
-print("GOOGLE_APPLICATION_CREDENTIALS")
 
 headers = {
     "Accept": "application/json",
