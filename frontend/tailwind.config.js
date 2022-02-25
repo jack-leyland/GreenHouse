@@ -37,11 +37,29 @@ module.exports = {
       animation: {
         fade: "fadeInGrow 2s ease-in-out",
         shake: "shake .5s linear",
+        widthGrow: "widthGrow 3s ease-in-out forwards",
+        flyUp: "flyUp 4s ease-in-out forwards",
+      },
+      transitionProperty: {
+        width: "width",
       },
       keyframes: (theme) => ({
         fadeInGrow: {
           "0%": { opacity: 0, transform: "scale(0.1)" },
           "100%": { opacity: 1, transform: "scale(1)" },
+        },
+        widthGrow: {
+          "0%": { width: 0 },
+          "70%": { width: 0 },
+          "100%": { width: "100%" },
+        },
+        flyUp: {
+          "0%": { top: "100px", opacity: 0, transform: "scale(1,1)" },
+          "70%": { top: "100px", opacity: 0, transform: "scale(1.1,0.9)" },
+          "85%": { top: "5px", opacity: 0.75, transform: "scale(1.1,0.9)" },
+          "90%": { top: "0px", opacity: 0.8, transform: "scale(1.05,.95)" },
+          "95%": { top: "5px", opacity: 0.9, transform: "scale(1.05,.95)" },
+          "100%": { top: "0px", opacity: 1, transform: "scale(1,1)" },
         },
         shake: {
           "8%": {

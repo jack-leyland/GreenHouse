@@ -1,13 +1,11 @@
 import { ReactElement, useEffect, useState } from "react";
 import Router from "next/router";
-import Layout from "../components/layout";
+import Layout from "../components/generic/layout";
 import { gql, useQuery } from "@apollo/client";
 import Circle from "../assets/circle.svg";
-import House from "../assets/house.svg";
-import SearchBar from "../components/search-bar";
-import AddressModal from "../components/addressModal";
+import SearchBar from "../components/landing/search-bar";
+import AddressModal from "../components/landing/addressModal";
 import { useAppContext } from "../context/state";
-import { ifError } from "assert";
 
 const GET_ADDRESSES = gql`
   query address($queryParam: String!) {
@@ -20,7 +18,7 @@ const GET_ADDRESSES = gql`
 
 type AddressObject = {
   address: string;
-  lmk: string;
+  lmkKey: string;
 };
 
 const formatPostcode = (postcode: string): string => {
@@ -117,7 +115,7 @@ const Landing = () => {
           (activeAddressModal ? "mt-[2vh]" : "mt-[calc(50vh-199px-7.5vh)]")
         }
       >
-        <div className="text-black font-logoFont font-black text-[6rem] text-center tracking-tight">
+        <div className="text-zinc-900 font-logoFont font-black text-[6rem] text-center tracking-tight">
           GreenHouse
         </div>
         <div className="flex justify-center">

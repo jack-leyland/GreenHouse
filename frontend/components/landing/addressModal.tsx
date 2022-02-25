@@ -1,9 +1,9 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import BackButton from "../assets/arrow-left.svg";
+import BackButton from "../../assets/arrow-left.svg";
 
 type AddressObject = {
   address: string;
-  lmk: string;
+  lmkKey: string;
 };
 
 type Props = {
@@ -58,10 +58,10 @@ export default function AddressList({
           ? addressData.map((item: AddressObject) => {
               return (
                 <div
-                  key={item.lmk}
+                  key={item.lmkKey}
                   className="h-[45px] w-[100%] pl-[10px] font- logoFont flex items-center rounded-default cursor-pointer hover:bg-lightGreen/25"
                   onClick={(e: React.MouseEvent<HTMLDivElement>): void => {
-                    selectionHandler(item.lmk);
+                    selectionHandler(item.lmkKey);
                   }}
                 >
                   {item.address}

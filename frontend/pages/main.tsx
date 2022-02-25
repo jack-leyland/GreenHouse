@@ -1,40 +1,143 @@
 import type { ReactElement } from "react";
 import { useState, useEffect } from "react";
-import Layout from "../components/layout";
+import Layout from "../components/generic/layout";
 import Sidebar from "../components/sidebar";
-import Card from "../components/card";
-import PageTitle from "../components/pageTitle";
+import Card from "../components/generic/card";
+import House from "../components/dashboard/house";
+import PageTitle from "../components/generic/pageTitle";
 import Lottie from "react-lottie-player";
 import { useAppContext } from "../context/state";
-import loadingJson from "../public/assets/animation/loading.json";
-import errorJson from "../public/assets/animation/error.json";
-import {
-  BarChart,
-  XAxis,
-  Tooltip,
-  Bar,
-  Pie,
-  PieChart,
-  RadarChart,
-  Radar,
-  PolarAngleAxis,
-  PolarGrid,
-  Legend,
-  PolarRadiusAxis,
-} from "recharts";
-import ChartContainer from "../components/chartContainer";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import type { epcCertificateObject, epcCertificateResponse } from "../types";
+import EpcChart from "../components/dashboard/epcChart";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import CostSummary from "../components/dashboard/costSummary";
+import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
+import CarbonSummary from "../components/dashboard/carbonSummary";
+import FlippableCard from "../components/generic/flippableCard";
 
-import { gql, useQuery } from "@apollo/client";
+function packageDashboardDataByComponent(
+  data: epcCertificateResponse
+): epcCertificateObject {
+  let componentPackagedData = {
+    ExtraInfo: {
+      address: data.address,
+      address2: data.address2,
+      address3: data.address3,
+      postcode: data.postcode,
+      posttown: data.posttown,
+      county: data.county,
+      localAuthorityName: data.localAuthorityLabel,
+      propertyType: data.propertyType,
+      builtForm: data.builtForm,
+      constructionAgeBand: data.constructionAgeBand,
+      totalFloorArea: data.totalFloorArea,
+      energyTariff: data.energyTariff,
+      floorLevel: data.floorLevel,
+      flatStoreyCount: data.flatStoreyCount,
+      flatTopStorey: data.flatTopStorey,
+      inspectionDate: data.inspectionDate,
+    },
+    Main: {
+      potentialEnergyRating: data.potentialEnergyRating,
+      currentEnergyRating: data.currentEnergyRating,
+      currentEnergyEfficiency: data.currentEnergyEfficiency,
+      potentialEnergyEfficiency: data.potentialEnergyEfficiency,
+    },
+    House: {
+      environmental: {
+        environmentImpactPotential: data.environmentImpactPotential,
+        environmentImpactCurrent: data.environmentImpactCurrent,
+        energyConsumptionPotential: data.energyConsumptionPotential,
+        energyConsumptionCurrent: data.energyConsumptionCurrent,
+        co2EmissionsCurrent: data.co2EmissionsCurrent,
+        co2EmissionsPotential: data.co2EmissionsPotential,
+      },
+      roof: {
+        roofDescription: data.roofDescription,
+        roofEnergyEff: data.roofEnergyEff,
+        roofEnvEff: data.roofEnvEff,
+      },
+      windows: {
+        windowsDescription: data.windowsDescription,
+        windowsEnvEff: data.windowsEnvEff,
+        windowsEnergyEff: data.windowsEnergyEff,
+        glazedType: data.glazedType,
+        glazedArea: data.glazedArea,
+        multiGlazeProportion: data.multiGlazeProportion,
+      },
+      heating: {
+        general: {
+          mainsGasFlag: data.mainsGasFlag,
+          numberHeatedRooms: data.numberHeatedRooms,
+          heatLossCorridor: data.heatLossCorridor,
+          unheatedCorridorLength: data.unheatedCorridorLength,
+          heatingCostPotential: data.heatingCostPotential,
+          heatingCostCurrent: data.heatingCostCurrent,
+        },
+        mainHeating: {
+          mainHeatDescription: data.mainheatDescription,
+          mainHeatEnvEff: data.mainheatEnvEff,
+          mainHeatEnergyEff: data.mainheatEnergyEff,
+          mainFuel: data.mainFuel,
+        },
+        mainHeatingControls: {
+          mainHeatControlDescription: data.mainheatcontDescription,
+          mainHeatControlEnergyEff: data.mainheatcEnergyEff,
+          mainHeatControlEnvEff: data.mainheatcEnvEff,
+        },
+        secondaryHeating: {
+          secondheatDescription: data.secondheatDescription,
+          secondaryHeatingEnergyEff: data.sheatingEnergyEff,
+          //secondary heating environ efficiency is missing
+        },
+      },
+      lighting: {
+        lowEnergyLighting: data.lowEnergyLighting,
+        lightingEnergyEff: data.lightingEnergyEff,
+        lightingEnvEff: data.lightingEnvEff,
+        lightingCostPotential: data.lightingCostPotential,
+        lightingCostCurrent: data.lightingCostCurrent,
+      },
+      walls: {
+        wallsDescription: data.wallsDescription,
+        wallsEnergyEff: data.wallsEnergyEff,
+        wallsEnvEff: data.wallsEnvEff,
+      },
+      water: {
+        hotWaterDescription: data.hotwaterDescription,
+        hotWaterEnvEff: data.hotWaterEnvEff,
+        hotWaterEnergyEff: data.hotWaterEnergyEff,
+        hotWaterCostCurrent: data.hotWaterCostCurrent,
+        hotWaterCostPotential: data.hotWaterCostPotential,
+      },
+      floor: {
+        floorDescription: data.floorDescription,
+        floorEnergyEff: data.floorEnergyEff,
+        floorEnvEff: data.floorEnvEff,
+      },
+      other: {
+        photoSupply: data.photoSupply,
+        solarWaterHeatingFlag: data.solarWaterHeatingFlag,
+        mechanicalVentilation: data.mechanicalVentilation,
+      },
+    },
+  };
 
-const GET_CERTIFICATES = gql`
-  query Certificate($queryParam: String!) {
-    certificate(name: $queryParam)
-  }
-`;
+  return componentPackagedData;
+}
 
 const Main = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
+  //type checking happens when this object is pacakged in above function, so any is fine here
+  const [dashboardData, setDashboardData] = useState<any>();
+  const [isQueryError, setIsQueryError] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -49,233 +152,145 @@ const Main = () => {
     }
   }, []);
 
-  //TODO: wrap in useEffect?
-  let epcData;
-  if (data) {
-    epcData = JSON.parse(data.certificate);
+  useEffect(() => {
+    if (data) {
+      let packagedData = packageDashboardDataByComponent(data.certificate);
+      setDashboardData(packagedData);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      setIsQueryError(true);
+    }
+  }, [error]);
+
+  let fullAddressString = "";
+
+  if (dashboardData) {
+    let addressElements = [
+      dashboardData.ExtraInfo.address,
+      dashboardData.ExtraInfo.localAuthorityName,
+      dashboardData.ExtraInfo.posttown,
+      dashboardData.ExtraInfo.postcode,
+    ];
+    fullAddressString = addressElements.join(", ");
   }
-
-  interface ColorDictionary<Value> {
-    [id: string]: Value;
-  }
-  const epcColorDictionary: ColorDictionary<string> = {
-    A: "bg-epcA",
-    B: "bg-epcB",
-    C: "bg-epcC",
-    D: "bg-epcD",
-    E: "bg-epcE",
-    F: "bg-epcF",
-    G: "bg-epcG",
-  };
-
-  //For testing charts
-  const barData = [
-    {
-      Walls: 200,
-      Floors: 100,
-    },
-  ];
-  const barData2 = [
-    {
-      Walls: 200,
-      Floors: 100,
-      Windows: 250,
-    },
-  ];
-  const pieData = [
-    {
-      name: "Group A",
-      value: 400,
-    },
-    {
-      name: "Group B",
-      value: 300,
-    },
-    {
-      name: "Group C",
-      value: 300,
-    },
-    {
-      name: "Group D",
-      value: 200,
-    },
-    {
-      name: "Group E",
-      value: 278,
-    },
-    {
-      name: "Group F",
-      value: 189,
-    },
-  ];
-
-  const radarData = [
-    {
-      Feature: "Floor",
-      house: 80,
-      fullMark: 100,
-    },
-    {
-      Feature: "Walls",
-      house: 60,
-      fullMark: 100,
-    },
-    {
-      Feature: "Roof",
-      house: 40,
-      fullMark: 100,
-    },
-    {
-      Feature: "Windows",
-      house: 80,
-      fullMark: 100,
-    },
-    {
-      Feature: "Heating",
-      house: 40,
-      fullMark: 100,
-    },
-    {
-      Feature: "Water",
-      house: 60,
-      fullMark: 100,
-    },
-  ];
 
   return (
     <>
-      {data ? (
+      {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle title={"Overview"} subtitle={epcData["address"]} />
-          <div className="grid grid-cols-10 grid-rows-5 w-full h-full p-6 gap-6 pr-12">
+          <PageTitle
+            title={"Dashboard"}
+            subtitle={fullAddressString}
+            onClick={() => setShowModal(true)}
+          />
+
+          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
+            <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
+              <FlippableCard
+                disableHoverAnimation={true}
+                showShadow={false}
+                frontTitle="Overview"
+                backTitle="Costs"
+                front={
+                  <div className="py-2 px-1 h-full">
+                    <EpcChart
+                      currentEfficiency={
+                        dashboardData.Main.currentEnergyEfficiency
+                      }
+                      potentialEfficiency={
+                        dashboardData.Main.potentialEnergyEfficiency
+                      }
+                    />
+                  </div>
+                }
+                back={
+                  <CostSummary
+                    heatingCurrent={
+                      dashboardData.House.heating.general.heatingCostCurrent
+                    }
+                    heatingPotential={
+                      dashboardData.House.heating.general.heatingCostPotential
+                    }
+                    waterCurrent={dashboardData.House.water.hotWaterCostCurren}
+                    waterPotential={
+                      dashboardData.House.water.hotWaterCostPotential
+                    }
+                    lightingCurrent={
+                      dashboardData.House.lighting.lightingCostCurrent
+                    }
+                    lightingPotential={
+                      dashboardData.House.lighting.lightingCostPotential
+                    }
+                  />
+                }
+              />
+
+              <FlippableCard
+                disableHoverAnimation={true}
+                showShadow={false}
+                frontTitle="Energy Consumption"
+                backTitle="Emissions"
+                back={
+                  <EnvironmentalSummary
+                    energyConsumptionCurrent={
+                      dashboardData.House.environmental.energyConsumptionCurrent
+                    }
+                    energyConsumptionPotential={
+                      dashboardData.House.environmental
+                        .energyConsumptionPotential
+                    }
+                    floorEnvEff={dashboardData?.House.floor.floorEnvEff}
+                    wallsEnvEff={dashboardData?.House.walls.wallsEnvEff}
+                    roofEnvEff={dashboardData?.House.roof.roofEnvEff}
+                    lightingEnvEff={
+                      dashboardData?.House.lighting.lightingEnvEff
+                    }
+                    heatingEnvEff={
+                      dashboardData?.House.heating.mainHeatingControls
+                        .mainHeatControlEnvEff
+                    }
+                    windowsEnvEff={dashboardData?.House.windows.windowsEnvEff}
+                    waterEnvEff={dashboardData?.House.water.hotWaterEnvEff}
+                  />
+                }
+                front={
+                  <CarbonSummary
+                    potentialEmissions={
+                      dashboardData.House.environmental.co2EmissionsPotential
+                    }
+                    currentEmissions={
+                      dashboardData.House.environmental.co2EmissionsCurrent
+                    }
+                  />
+                }
+              />
+            </div>
+
             <Card
               style={
-                "col-start-1 col-end-3 text-white " +
-                epcColorDictionary[epcData["current-energy-rating"]]
+                "relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"
               }
+              disableHoverAnimation={true}
+              showShadow={false}
             >
-              <div>
-                <h3>Current Energy Rating</h3>
-                <div className="p-2 font-bold text-3xl">
-                  {epcData["current-energy-rating"]}
-                </div>
+              <div className="flex justify-center h-full w-full">
+                <House data={dashboardData} />
               </div>
-            </Card>
-
-            <Card
-              style={
-                "col-start-3 col-end-5 text-white " +
-                epcColorDictionary[epcData["potential-energy-rating"]]
-              }
-            >
-              <div>
-                <h3>Potential Energy Rating</h3>
-                <div className="p-2 font-bold text-3xl">
-                  {epcData["potential-energy-rating"]}
-                </div>
-              </div>
-            </Card>
-            <Card style={"col-start-5 col-end-7"}>
-              <div>
-                <h3>Current C02 Emissions</h3>
-                <div className="p-2 font-bold text-3xl">
-                  {epcData["co2-emissions-current"]}
-                </div>
-              </div>
-            </Card>
-            <Card style={"col-start-7 col-end-9"}>
-              <div>
-                <h3>C02 Reduction Potential</h3>
-                <div className="p-2 font-bold text-3xl">
-                  {epcData["co2-emissions-potential"]}
-                </div>
-              </div>
-            </Card>
-
-            <Card style={"col-start-1 col-end-6 row-start-2 row-end-4"}>
-              <>
-                <h3>Your House</h3>
-                <ChartContainer>
-                  <RadarChart
-                    outerRadius={90}
-                    width={730}
-                    height={250}
-                    data={radarData}
-                  >
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="Feature" />
-                    <PolarRadiusAxis angle={30} domain={[0, 100]} />
-                    <Radar
-                      name="House"
-                      dataKey="house"
-                      stroke="#8884d8"
-                      fill="#8884d8"
-                      fillOpacity={0.6}
-                    />
-                    <Legend />
-                  </RadarChart>
-                </ChartContainer>
-              </>
-            </Card>
-
-            <Card style={"col-start-6 col-end-11 row-start-2 row-end-4"}>
-              <div>
-                <h3>Map</h3>
-              </div>
-            </Card>
-
-            <Card style={"col-start-1 col-end-4 row-start-4 row-end-6"}>
-              <>
-                <h3>Spending</h3>
-                <ChartContainer>
-                  <BarChart width={350} height={350} data={barData}>
-                    <XAxis dataKey="name" />
-                    <Tooltip />
-                    <Bar dataKey="Walls" fill="#8884d8" />
-                    <Bar dataKey="Floors" fill="#82ca9d" />
-                  </BarChart>
-                </ChartContainer>
-              </>
-            </Card>
-
-            <Card style={"col-start-4 col-end-7 row-start-4 row-end-6"}>
-              <>
-                <h3>C02 Production</h3>
-                <ChartContainer>
-                  <PieChart width={730} height={250}>
-                    <Pie
-                      data={pieData}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={50}
-                      fill="#8884d8"
-                      label
-                    />
-                  </PieChart>
-                </ChartContainer>
-              </>
-            </Card>
-
-            <Card style={"col-start-7 col-end-10 row-start-4 row-end-6"}>
-              <>
-                <h3>Potential Savings</h3>
-                <ChartContainer>
-                  <BarChart width={350} height={350} data={barData2}>
-                    <XAxis dataKey="name" />
-                    <Tooltip />
-                    <Bar dataKey="Walls" fill="#8884d8" />
-                    <Bar dataKey="Floors" fill="#82ca9d" />
-                    <Bar dataKey="Windows" fill="#85cb6d" />
-                  </BarChart>
-                </ChartContainer>
-              </>
             </Card>
           </div>
+
+          {showModal ? (
+            <Modal hideModal={() => setShowModal(false)}>
+              <ExtraHouseInfo data={dashboardData.ExtraInfo} />
+            </Modal>
+          ) : null}
         </div>
       ) : (
         <>
+          {/*Loading Display*/}
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
               <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
@@ -288,7 +303,8 @@ const Main = () => {
             </div>
           ) : (
             <>
-              {error && !data ? (
+              {/*Error Display*/}
+              {isQueryError && !data ? (
                 <div className="w-full flex flex-col justify-center items-center bg-slate-50">
                   <h1 className="animate-fade text-3xl font-bold pb-2">
                     Opps, there was an error, try again later...

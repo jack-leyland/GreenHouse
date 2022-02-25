@@ -1,5 +1,5 @@
 import Lottie from "react-lottie-player";
-import json from "../public/assets/animation/404.json";
+import json from "../assets/animations/animation/404.json";
 
 export default function Custom404() {
   return (

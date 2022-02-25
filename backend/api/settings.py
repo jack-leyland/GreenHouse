@@ -54,6 +54,7 @@ CORS_ORIGIN_WHITELIST = [
 # Application definition
 
 INSTALLED_APPS = [
+    "app.apps.AppConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -157,4 +158,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Graphene setup
-GRAPHENE = {"SCHEMA": "api.schema.schema"}
+GRAPHENE = {"SCHEMA": "app.schema.schema"}
