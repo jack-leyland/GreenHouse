@@ -1,24 +1,24 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/generic/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/generic/card';
-import House from '../components/dashboard/house';
-import PageTitle from '../components/generic/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../assets/animations/animation/loading.json';
-import errorJson from '../assets/animations/animation/error.json';
-import { GET_CERTIFICATES } from './api/queries';
-import { useQuery } from '@apollo/client';
-import type { epcCertificateObject, epcCertificateResponse} from '../types';
-import EpcChart from '../components/dashboard/epcChart';
-import Modal from '../components/generic/modal';
-import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
-import CostSummary from '../components/dashboard/costSummary';
-import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
-import CarbonSummary from '../components/dashboard/carbonSummary';
-import FlipableCard from '../components/generic/flipableCard';
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/generic/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/generic/card";
+import House from "../components/dashboard/house";
+import PageTitle from "../components/generic/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import type { epcCertificateObject, epcCertificateResponse } from "../types";
+import EpcChart from "../components/dashboard/epcChart";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import CostSummary from "../components/dashboard/costSummary";
+import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
+import CarbonSummary from "../components/dashboard/carbonSummary";
+import FlipableCard from "../components/generic/flipableCard";
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
@@ -143,7 +143,6 @@ const Main = () => {
     variables: { queryParam },
   });
 
-
   // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -166,9 +165,9 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
+  let fullAddressString = "";
 
-  if(dashboardData) {
+  if (dashboardData) {
     let addressElements = [
       dashboardData.ExtraInfo.address,
       dashboardData.ExtraInfo.localAuthorityName,
@@ -188,59 +187,86 @@ const Main = () => {
             onClick={() => setShowModal(true)}
           />
 
-          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">          
+          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
             <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
-          
               <FlipableCard
-                  disableHoverAnimation={true}
-                  showShadow={false}
-                  frontTitle="Overview"
-                  backTitle="Costs"
-                  front= {
-                     <div className="py-2 px-1 h-full">
-                          <EpcChart
-                              currentEfficiency={dashboardData.Main.currentEnergyEfficiency}
-                              potentialEfficiency={dashboardData.Main.potentialEnergyEfficiency}
-                          />
-                      </div>
-                  }
-                  back = {
-                    <CostSummary        
-                        heatingCurrent = {dashboardData.House.heating.general.heatingCostCurrent}
-                        heatingPotential = {dashboardData.House.heating.general.heatingCostPotential}
-                        waterCurrent = {dashboardData.House.water.hotWaterCostCurren}
-                        waterPotential={dashboardData.House.water.hotWaterCostPotential}
-                        lightingCurrent = {dashboardData.House.lighting.lightingCostCurrent}
-                        lightingPotential = {dashboardData.House.lighting.lightingCostPotential}            
+                disableHoverAnimation={true}
+                showShadow={false}
+                frontTitle="Overview"
+                backTitle="Costs"
+                front={
+                  <div className="py-2 px-1 h-full">
+                    <EpcChart
+                      currentEfficiency={
+                        dashboardData.Main.currentEnergyEfficiency
+                      }
+                      potentialEfficiency={
+                        dashboardData.Main.potentialEnergyEfficiency
+                      }
                     />
-                  }
+                  </div>
+                }
+                back={
+                  <CostSummary
+                    heatingCurrent={
+                      dashboardData.House.heating.general.heatingCostCurrent
+                    }
+                    heatingPotential={
+                      dashboardData.House.heating.general.heatingCostPotential
+                    }
+                    waterCurrent={dashboardData.House.water.hotWaterCostCurren}
+                    waterPotential={
+                      dashboardData.House.water.hotWaterCostPotential
+                    }
+                    lightingCurrent={
+                      dashboardData.House.lighting.lightingCostCurrent
+                    }
+                    lightingPotential={
+                      dashboardData.House.lighting.lightingCostPotential
+                    }
+                  />
+                }
               />
 
               <FlipableCard
-                  disableHoverAnimation={true}
-                  showShadow={false}
-                  frontTitle="Energy Consumption"
-                  backTitle="Emissions"
-                  back= {
-                      <EnvironmentalSummary 
-                        energyConsumptionCurrent = {dashboardData.House.environmental.energyConsumptionCurrent}
-                        energyConsumptionPotential = {dashboardData.House.environmental.energyConsumptionPotential}
-                        floorEnvEff = {dashboardData?.House.floor.floorEnvEff}
-                        wallsEnvEff = {dashboardData?.House.walls.wallsEnvEff}
-                        roofEnvEff = {dashboardData?.House.roof.roofEnvEff}
-                        lightingEnvEff = {dashboardData?.House.lighting.lightingEnvEff}
-                        heatingEnvEff = {dashboardData?.House.heating.mainHeatingControls.mainHeatControlEnvEff}
-                        windowsEnvEff = {dashboardData?.House.windows.windowsEnvEff}
-                        waterEnvEff = {dashboardData?.House.water.hotWaterEnvEff}
-                      />
-                  } front = {
-                      <CarbonSummary 
-                        potentialEmissions = {dashboardData.House.environmental.co2EmissionsPotential}
-                        currentEmissions = {dashboardData.House.environmental.co2EmissionsCurrent}
-                      />
-                  }
+                disableHoverAnimation={true}
+                showShadow={false}
+                frontTitle="Energy Consumption"
+                backTitle="Emissions"
+                back={
+                  <EnvironmentalSummary
+                    energyConsumptionCurrent={
+                      dashboardData.House.environmental.energyConsumptionCurrent
+                    }
+                    energyConsumptionPotential={
+                      dashboardData.House.environmental
+                        .energyConsumptionPotential
+                    }
+                    floorEnvEff={dashboardData?.House.floor.floorEnvEff}
+                    wallsEnvEff={dashboardData?.House.walls.wallsEnvEff}
+                    roofEnvEff={dashboardData?.House.roof.roofEnvEff}
+                    lightingEnvEff={
+                      dashboardData?.House.lighting.lightingEnvEff
+                    }
+                    heatingEnvEff={
+                      dashboardData?.House.heating.mainHeatingControls
+                        .mainHeatControlEnvEff
+                    }
+                    windowsEnvEff={dashboardData?.House.windows.windowsEnvEff}
+                    waterEnvEff={dashboardData?.House.water.hotWaterEnvEff}
+                  />
+                }
+                front={
+                  <CarbonSummary
+                    potentialEmissions={
+                      dashboardData.House.environmental.co2EmissionsPotential
+                    }
+                    currentEmissions={
+                      dashboardData.House.environmental.co2EmissionsCurrent
+                    }
+                  />
+                }
               />
-
             </div>
 
             <Card
@@ -251,9 +277,7 @@ const Main = () => {
               showShadow={false}
             >
               <div className="flex justify-center h-full w-full">
-                <House 
-                    data={dashboardData}
-                    />
+                <House data={dashboardData} />
               </div>
             </Card>
           </div>
@@ -266,7 +290,7 @@ const Main = () => {
         </div>
       ) : (
         <>
-        {/*Loading Display*/}
+          {/*Loading Display*/}
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
               <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
@@ -279,7 +303,7 @@ const Main = () => {
             </div>
           ) : (
             <>
-            {/*Error Display*/}
+              {/*Error Display*/}
               {isQueryError && !data ? (
                 <div className="w-full flex flex-col justify-center items-center bg-slate-50">
                   <h1 className="animate-fade text-3xl font-bold pb-2">

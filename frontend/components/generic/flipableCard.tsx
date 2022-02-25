@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useSpring, a } from '@react-spring/web'
-import {MdOutlineFlipCameraAndroid} from 'react-icons/md';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { useSpring, a } from "@react-spring/web";
+import { MdOutlineFlipCameraAndroid } from "react-icons/md";
 
 interface props {
   front: React.ReactChild | React.ReactChildren | never[];
@@ -17,26 +17,27 @@ interface props {
 export default function FlipableCard({
   front,
   back,
-  frontTitle = '',
-  backTitle = '',
-  style = '',
+  frontTitle = "",
+  backTitle = "",
+  style = "",
   onHover,
   disableHoverAnimation = false,
   showShadow = true,
 }: props) {
-  const hover = ' hover:scale-105 hover:cursor-pointer ';
-  const shadow = ' shadow-lg ';
-  const cardStyle = 'animate-fade rounded-lg w-full h-full relative ' + style +
-    (disableHoverAnimation ? '' : hover) +
-    (showShadow ? shadow : '');
+  const hover = " hover:scale-105 hover:cursor-pointer ";
+  const shadow = " shadow-lg ";
+  const cardStyle =
+    "animate-fade rounded-lg w-full h-full relative " +
+    style +
+    (disableHoverAnimation ? "" : hover) +
+    (showShadow ? shadow : "");
 
-
-  const [flipped, set] = useState(false)
+  const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
-  })
+  });
 
   return (
     <div
@@ -44,23 +45,49 @@ export default function FlipableCard({
       onMouseEnter={() => (onHover ? onHover(true) : null)}
       onMouseLeave={() => (onHover ? onHover(false) : null)}
     >
-      <a.div className="border rounded-lg content p-3 text-xs h-full w-full" style={{ opacity: opacity.to(o => 1 - o), transform }}>
+      <a.div
+        className="border rounded-lg content p-3 text-xs h-full w-full"
+        style={{ opacity: opacity.to((o) => 1 - o), transform }}
+      >
         <div className="h-full child">
-          <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">{frontTitle}<span className="flex text-md gap-2 items-center font-thin"><span className="text-sm">Flip Card</span> <MdOutlineFlipCameraAndroid className="hover:cursor-pointer hover:text-black" onClick={() => set(state => !state)} size={25}/></span></h3>
+          <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
+            {frontTitle}
+            <span className="flex text-md gap-2 items-center font-thin">
+              <span className="text-sm">Flip Card</span>{" "}
+              <MdOutlineFlipCameraAndroid
+                className="hover:cursor-pointer hover:text-black"
+                onClick={() => set((state) => !state)}
+                size={25}
+              />
+            </span>
+          </h3>
           {front}
         </div>
       </a.div>
 
       <a.div
-        className={"border rounded-lg content p-3 text-xs h-full w-full" + (flipped ? "" : " hidden")}
+        className={
+          "border rounded-lg content p-3 text-xs h-full w-full" +
+          (flipped ? "" : " hidden")
+        }
         style={{
           opacity,
           transform,
-          rotateX: '180deg',
+          rotateX: "180deg",
         }}
       >
         <div className="h-full child">
-          <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">{backTitle}<span className="flex text-md gap-2 items-center font-thin"><span className="text-sm">Flip Card</span> <MdOutlineFlipCameraAndroid className="hover:cursor-pointer hover:text-black" onClick={() => set(state => !state)} size={25}/></span></h3>
+          <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
+            {backTitle}
+            <span className="flex text-md gap-2 items-center font-thin">
+              <span className="text-sm">Flip Card</span>{" "}
+              <MdOutlineFlipCameraAndroid
+                className="hover:cursor-pointer hover:text-black"
+                onClick={() => set((state) => !state)}
+                size={25}
+              />
+            </span>
+          </h3>
           {back}
         </div>
       </a.div>
