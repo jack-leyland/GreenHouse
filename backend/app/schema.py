@@ -43,12 +43,12 @@ if ENV == "DEV":
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
 
 json_str = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-json_data = json.loads(json_str)
+# json_data = json.loads(json_str)
 print(json_str)
 
-json_data["private_key"] = json_data["private_key"].replace("\\n", "\n")
+# json_data["private_key"] = json_data["private_key"].replace("\\n", "\n")
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_data
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_data
 
 print("GOOGLE_APPLICATION_CREDENTIALS")
 
