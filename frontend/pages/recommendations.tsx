@@ -94,8 +94,8 @@ const Recommendations = () => {
               <div className="col-start-3 col-end-3 row-start-1 row-end-1 text-sm tracking-widest title-font mb-1 font-bold">
                 <p>
                   £
-                  {certificateData.lightingCostCurrent -
-                    certificateData.lightingCostPotential}{" "}
+                  {certificateData?.lightingCostCurrent -
+                    certificateData?.lightingCostPotential}{" "}
                   per year
                 </p>
               </div>
@@ -107,8 +107,8 @@ const Recommendations = () => {
               <div className="col-start-3 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font mb-1 font-bold">
                 <p>
                   £
-                  {certificateData.heatingCostCurrent -
-                    certificateData.heatingCostPotential}{" "}
+                  {certificateData?.heatingCostCurrent -
+                    certificateData?.heatingCostPotential}{" "}
                   per year
                 </p>
               </div>
@@ -120,8 +120,8 @@ const Recommendations = () => {
               <div className="col-start-3 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font mb-1 font-bold">
                 <p>
                   £
-                  {certificateData.hotWaterCostCurrent -
-                    certificateData.hotWaterCostPotential}{" "}
+                  {certificateData?.hotWaterCostCurrent -
+                    certificateData?.hotWaterCostPotential}{" "}
                   per year
                 </p>
               </div>
