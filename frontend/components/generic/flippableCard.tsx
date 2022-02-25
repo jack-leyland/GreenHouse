@@ -52,11 +52,9 @@ export default function FlippableCard({
         <div className="h-full child">
           <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
             {frontTitle}
-            <span className="flex text-md gap-2 items-center font-thin">
-              <span className="text-sm">Flip Card</span>{' '}
+            <span className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg" onClick={() => set((state) => !state)}>
+              <span className="text-sm">Flip Card</span>
               <MdOutlineFlipCameraAndroid
-                className="hover:cursor-pointer hover:text-black"
-                onClick={() => set((state) => !state)}
                 size={25}
               />
             </span>
@@ -79,11 +77,10 @@ export default function FlippableCard({
         <div className="h-full child">
           <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
             {backTitle}
-            <span className="flex text-md gap-2 items-center font-thin">
-              <span className="text-sm">Flip Card</span>{' '}
+            <span className="flex text-md gap-2 items-center font-thin font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg" onClick={() => set((state) => !state)}>
+              <span className="text-sm">Flip Card</span>
               <MdOutlineFlipCameraAndroid
-                className="hover:cursor-pointer hover:text-black"
-                onClick={() => set((state) => !state)}
+                
                 size={25}
               />
             </span>
