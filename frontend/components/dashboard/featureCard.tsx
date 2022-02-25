@@ -218,130 +218,30 @@ export default function FeatureCard({data, type}: props) {
                     />
                   </div>
               </div>
+          </Card>
+        )
+      default:
+        return (
+            <Card
+              style={'col-start-7 col-end-10 row-start-1 row-end-7'}
+              disableHoverAnimation={true}
+              showShadow={true}
+            >
+              <>
+                <div>
+                  <div className='text-xl text-center p-2 flex flex-col items-center justify-center'>
+                    <Lottie
+                      loop
+                      animationData={json}
+                      play
+                      style={{height: '70px', width: '70px'}}
+                    />
+                    <p>Click On Your House To Find Out More!</p>
+                  </div>
+                </div>
+              </>
+            </Card>
+          )
 
-              <div className="py-2 flex items-center">
-                <b className="pr-2">Environmental Efficiency:</b>
-                <StarRatings
-                  rating={
-                    data?.House.water.hotWaterEnvEff
-                      ? data?.House.water.hotWaterEnvEff
-                      : 0
-                  }
-                  starRatedColor={
-                    parseInt(data?.House.water.hotWaterEnvEff) > 2
-                      ? "green"
-                      : "red"
-                  }
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="15px"
-                />
-              </div>
-            </div>
-          </div>
-        </Card>
-      );
-
-    case "Windows":
-      return (
-        <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
-          disableHoverAnimation={true}
-          showShadow={true}
-        >
-          <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
-              {type}
-            </div>
-            <div className="p-2 text-sm">
-              <div className="py-2">
-                <b>Description:</b>{" "}
-                {data?.House.windows.windowsDescription
-                  ? data?.House.windows.windowsDescription
-                  : "N/A"}
-              </div>
-
-              <div className="py-2">
-                <b>Glazed Area: </b>{" "}
-                {data?.House.windows.glazedArea
-                  ? data?.House.windows.glazedArea
-                  : "N/A"}
-              </div>
-              <div className="py-2">
-                <b>Glazed Type: </b>{" "}
-                {data?.House.windows.glazedType
-                  ? data?.House.windows.glazedType
-                  : "N/A"}
-              </div>
-              <div className="py-2">
-                <b>Multi Glaze Proportion: </b>{" "}
-                {data?.House.windows.multiGlazeProportion
-                  ? data?.House.windows.multiGlazeProportion
-                  : "N/A"}
-              </div>
-
-              <div className="py-2 flex">
-                <b className="pr-2">Energy Efficiency:</b>
-                <StarRatings
-                  rating={
-                    data?.House.windows.windowsEnergyEff
-                      ? data?.House.windows.windowsEnergyEff
-                      : 0
-                  }
-                  starRatedColor={
-                    parseInt(data?.House.windows.windowsEnergyEff) > 2
-                      ? "green"
-                      : "red"
-                  }
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="15px"
-                />
-              </div>
-
-              <div className="py-2 flex items-center">
-                <b className="pr-2">Environmental Efficiency:</b>
-                <StarRatings
-                  rating={
-                    data?.House.windows.windowsEnvEff
-                      ? data?.House.windows.windowsEnvEff
-                      : 0
-                  }
-                  starRatedColor={
-                    parseInt(data?.House.windows.windowsEnvEff) > 2
-                      ? "green"
-                      : "red"
-                  }
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="15px"
-                />
-              </div>
-            </div>
-          </div>
-        </Card>
-      );
-    default:
-      return (
-        <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7"}
-          disableHoverAnimation={true}
-          showShadow={true}
-        >
-          <>
-            <div>
-              <div className="text-xl text-center p-2 flex flex-col items-center justify-center">
-                <Lottie
-                  loop
-                  animationData={json}
-                  play
-                  style={{ height: "70px", width: "70px" }}
-                />
-                <p>Click On Your House To Find Out More!</p>
-              </div>
-            </div>
-          </>
-        </Card>
-      );
   }
 }
