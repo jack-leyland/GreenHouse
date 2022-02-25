@@ -19,9 +19,11 @@ class Certificate(ObjectType):
     unheated_corridor_length = Float()
     hot_water_cost_potential = Float()
     hot_water_cost_adjusted_potential = Float()
-    total_current_cost = Float() #computed from hot water + lighting + heating
-    total_potential_cost = Float() #computed from adjusted versions of the above
-    total_adjusted_potential_cost = Float() #computed from adjusted versions of the above
+    total_current_cost = Float()  # computed from hot water + lighting + heating
+    total_potential_cost = Float()  # computed from adjusted versions of the above
+    total_adjusted_potential_cost = (
+        Float()
+    )  # computed from adjusted versions of the above
     construction_age_band = String()
     potential_energy_rating = String()
     mainheat_energy_eff = Float()
@@ -155,6 +157,7 @@ class Analytics(ObjectType):
     mean_windows_energy_eff = Float()
     mean_windows_environmental_eff = Float()
 
+
 class Address(ObjectType):
     lmk_key = String(required=True)
     address = String()
@@ -189,6 +192,7 @@ class Timeseries(ObjectType):
     average_annual_change_second_heating_environmental_eff = Float()
     average_annual_change_windows_energy_eff = Float()
     average_annual_change_windows_environmental_eff = Float()
+
 
 class Improvement(ObjectType):
     lmk_key = String(required=True)

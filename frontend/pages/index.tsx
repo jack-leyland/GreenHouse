@@ -107,6 +107,7 @@ const Landing = () => {
       setQueryData(data.address);
     }
   }, [data]);
+
   return (
     <div className={"overflow-hidden h-screen w-screen"}>
       <div

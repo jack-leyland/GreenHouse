@@ -176,6 +176,8 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
+  console.log(data)
+
 
   return (
     <>
@@ -307,7 +309,7 @@ const Main = () => {
               {isQueryError && !data ? (
                 <div className="w-full flex flex-col justify-center items-center bg-slate-50">
                   <h1 className="animate-fade text-3xl font-bold pb-2">
-                    Opps, there was an error, try again later...
+                    Oops, there was an error, try again later...
                   </h1>
                   <Lottie
                     loop

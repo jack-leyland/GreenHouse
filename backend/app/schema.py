@@ -13,7 +13,7 @@ import environ
 import os
 import pandas as pd
 
-from google.cloud import bigquery
+# from google.cloud import bigquery
 
 from app.types import (
     Certificate,
@@ -79,30 +79,28 @@ class Mutation(ObjectType):
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
-    analytics = Field(Analytics, postcode=String(default_value="N/A"))
+    analytics = Field(Analytics, lmk=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
     big_query = Field(Timeseries)
 
-    def resolve_analytics(root, info, postcode):
+    def resolve_analytics(root, info, lmk):
+        url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
+        response = requests.request("GET", url, headers=headers, data=payload)
+        data = response.json()["rows"][0]
+        postcode = data["postcode"]
+        print(postcode)
         if len(postcode) == 7:
-            postcode = postcode[:4]
+            postcode = postcode[:5]
         else:
-            postcode = postcode[:3]
+            postcode = postcode[:4]
 
-        page_size = 5000
+        page_size = 1000
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()
 
-        local_df1 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
+        result = pd.DataFrame(data=data["rows"], columns=data["column-names"])
 
-        url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}&from={page_size}"
-        response = requests.request("GET", url, headers=headers, data=payload)
-        data = response.json()
-
-        local_df2 = pd.DataFrame(data=data["rows"], columns=data["column-names"])
-
-        result = pd.concat([local_df1, local_df2])
         return create_analytics(result)
 
     def resolve_address(root, info, postcode):
