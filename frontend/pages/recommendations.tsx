@@ -6,10 +6,10 @@ import PageTitle from "../components/generic/pageTitle";
 import Sidebar from "../components/sidebar";
 import Recommendation from "../components/recommendationCard";
 import { useAppContext } from "../context/state";
-import { epcCertificateResponse, epcRecommendationObject } from "../types";
+import { epcCertificateRecs, epcRecommendationObject } from "../types";
 
-const GET_RECOMMENDATIONS = gql`
-  query recommendations($queryParam: String!) {
+const GET_DATA = gql`
+  query get_data($queryParam: String!) {
     recommendations(lmk: $queryParam) {
       lmkKey
       indicativeCost
@@ -17,14 +17,8 @@ const GET_RECOMMENDATIONS = gql`
       improvementItem
       improvementId
     }
-  }
-`;
-
-const GET_ADDRESS_DATA = gql`
-  query certificate($queryParam: String!) {
     certificate(lmk: $queryParam) {
       address
-      localAuthorityName
       posttown
       postcode
       heatingCostPotential
@@ -42,10 +36,14 @@ const Recommendations = () => {
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [addressData, setAddressData] = useState<Array<epcCertificateResponse>>(
-    []
-  );
   const [recData, setRecData] = useState<Array<epcRecommendationObject>>([]);
+  const [certificateData, setCertificateData] = useState<any>(null);
+  const [address, setAddress] = useState<string>("");
+
+  const { loading, error, data } = useQuery(GET_DATA, {
+    skip: !queryParam || isQueryError,
+    variables: { queryParam },
+  });
 
   // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
   useEffect(() => {
@@ -56,45 +54,30 @@ const Recommendations = () => {
     }
   }, [GlobalContext.activeLmk]);
 
-  const {
-    loading: recLoading,
-    error: recError,
-    data: recQueryData,
-  } = useQuery(GET_RECOMMENDATIONS, {
-    skip: !queryParam || isQueryError,
-    variables: { queryParam },
-  });
-
-  const {
-    loading: addressLoading,
-    error: addressError,
-    data: addressQueryData,
-  } = useQuery(GET_ADDRESS_DATA, {
-    skip: !queryParam || isQueryError,
-    variables: { queryParam },
-  });
+  useEffect(() => {
+    if (data) {
+      setRecData(data.recommendations);
+      setCertificateData(data.certificate);
+    }
+  }, [data]);
 
   useEffect(() => {
-    if (recQueryData) {
-      setRecData(recQueryData.recommendations);
+    if (certificateData) {
+      let addressElements = [
+        certificateData.address,
+        certificateData.posttown,
+        certificateData.postcode,
+      ];
+      setAddress(addressElements.join(", "));
     }
-  }, [recQueryData]);
-
-  useEffect(() => {
-    if (addressQueryData) {
-      console.log("query");
-      console.log(addressQueryData);
-      setAddressData(addressQueryData);
-    }
-    console.log(addressData);
-  }, [addressQueryData]);
+  }, [certificateData]);
 
   return (
     <>
       <div className="w-full flex flex-col bg-slate-50 text-gray-500">
         <PageTitle
           title={"Recommendations"}
-          subtitle={"Full Address Here"}
+          subtitle={address}
           onClick={() => setShowModal(true)}
         />
         <div className="p-6">
@@ -109,7 +92,12 @@ const Recommendations = () => {
                 Total Savings from Lighting Improvements
               </div>
               <div className="col-start-3 col-end-3 row-start-1 row-end-1 text-sm tracking-widest title-font mb-1 font-bold">
-                Cost
+                <p>
+                  £
+                  {certificateData.lightingCostCurrent -
+                    certificateData.lightingCostPotential}{" "}
+                  per year
+                </p>
               </div>
 
               <div className="col-start-1 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font mb-1 font-bold">
@@ -117,7 +105,12 @@ const Recommendations = () => {
                 Total Savings from Heating Improvements
               </div>
               <div className="col-start-3 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font mb-1 font-bold">
-                Cost
+                <p>
+                  £
+                  {certificateData.heatingCostCurrent -
+                    certificateData.heatingCostPotential}{" "}
+                  per year
+                </p>
               </div>
 
               <div className="col-start-1 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font mb-1 font-bold">
@@ -125,15 +118,17 @@ const Recommendations = () => {
                 Total Savings from Water Improvements
               </div>
               <div className="col-start-3 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font mb-1 font-bold">
-                Cost
+                <p>
+                  £
+                  {certificateData.hotWaterCostCurrent -
+                    certificateData.hotWaterCostPotential}{" "}
+                  per year
+                </p>
               </div>
 
               <div className="col-start-1 col-end-3 row-start-4 row-end-4 text-sm tracking-widest title-font mb-1 font-bold">
                 <span className="bg-slate-500 pr-5 mr-5"></span>
                 Other Improvements
-              </div>
-              <div className="col-start-3 col-end-3 row-start-4 row-end-4 text-sm tracking-widest title-font mb-1 font-bold">
-                Cost
               </div>
             </div>
           </Card>
