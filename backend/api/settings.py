@@ -43,6 +43,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://epc-site-frontend.vercel.app",
+    "https://epc-site-backend.herokuapp.com",
 ]
 
 CORS_ORIGIN_WHITELIST = [
