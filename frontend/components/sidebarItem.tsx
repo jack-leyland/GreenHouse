@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import Link from "next/link";
-=======
->>>>>>> main
 
 interface props {
   icon: React.ReactChild | React.ReactChildren;

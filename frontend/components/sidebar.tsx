@@ -14,7 +14,6 @@ export default function Sidebar() {
             </div>
             <SidebarItem
               label={"Overview"}
-<<<<<<< HEAD
               link={"/main"}
               icon={<BsFillHouseFill size={30} />}
             />
@@ -23,11 +22,6 @@ export default function Sidebar() {
               link={"/recommendations"}
               icon={<BsWrench size={30} />}
             />
-=======
-              icon={<BsFillHouseFill size={30} />}
-            />
-            <SidebarItem label={"Improvements"} icon={<BsWrench size={30} />} />
->>>>>>> main
           </nav>
         </div>
       </div>
