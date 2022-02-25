@@ -137,4 +137,44 @@ def create_certificate(data):
     certificate.low_energy_lighting = verify_number(data["low-energy-lighting"])
     certificate.walls_description = data["walls-description"]
     certificate.hotwater_description = data["hotwater-description"]
+
+    # Adjusted kicks in if potential cost > current cost (i.e. issue w the data)
+    # In this case, based on BigQuery, it seems that no relevant recommendation exists
+    # so potential should = current
+    certificate.hot_water_cost_adjusted_potential = (
+        certificate.hot_water_cost_potential
+        if certificate.hot_water_cost_potential < certificate.hot_water_cost_current
+        else certificate.hot_water_cost_current
+    )
+
+    certificate.heating_cost_adjusted_potential = (
+        certificate.heating_cost_potential
+        if certificate.heating_cost_potential < certificate.heating_cost_current
+        else certificate.heating_cost_current
+    )
+
+    certificate.lighting_cost_adjusted_potential = (
+        certificate.lighting_cost_potential
+        if certificate.lighting_cost_potential < certificate.lighting_cost_current
+        else certificate.lighting_cost_current
+    )
+
+    certificate.total_current_cost = (
+        float(certificate.heating_cost_current)
+        + float(certificate.lighting_cost_current)
+        + float(certificate.hot_water_cost_current)
+    )
+
+    certificate.total_adjusted_potential_cost = (
+        float(certificate.heating_cost_adjusted_potential)
+        + float(certificate.lighting_cost_adjusted_potential)
+        + float(certificate.hot_water_cost_adjusted_potential)
+    )
+
+    certificate.total_potential_cost = (
+        float(certificate.heating_cost_potential)
+        + float(certificate.lighting_cost_potential)
+        + float(certificate.hot_water_cost_potential)
+    )
+
     return certificate

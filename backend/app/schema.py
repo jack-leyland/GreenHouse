@@ -118,7 +118,7 @@ class Query(ObjectType):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
-        print(data)
+
         if not data:
             return {"Error": "Invalid LMK key"}
 
@@ -135,30 +135,25 @@ class Query(ObjectType):
 
         return create_recommendations(data)
 
-    # def resolve_big_query(root, info):
-    #     client = bigquery.Client()
+    def resolve_big_query(root, info):
+        client = bigquery.Client()
 
-    #     query = """
-    #         SELECT CONSTRUCTION_AGE_BAND, CO2_EMISSIONS_CURRENT, CO2_EMISSIONS_POTENTIAL
-    #         FROM `arcane-sentinel-340313.test_epc.cambridge`
-    #         WHERE CONSTRUCTION_AGE_BAND IS NOT NULL
-    #         AND NOT (CONSTRUCTION_AGE_BAND = 'INVALID!')
-    #         AND NOT (CONSTRUCTION_AGE_BAND = 'NO DATA!')
-    #         AND ENVIRONMENT_IMPACT_CURRENT IS NOT NULL
-    #     """
+        query = """
+            SELECT * 
+            FROM `arcane-sentinel-340313.test_epc.cambridge`
+        """
 
-    #     local_df = (
-    #         client.query(query)
-    #         .result()
-    #         .to_dataframe(
-    #             # Optionally, explicitly request to use the BigQuery Storage API. As of
-    #             # google-cloud-bigquery version 1.26.0 and above, the BigQuery Storage
-    #             # API is used by default.
-    #             create_bqstorage_client=True,
-    #         )
-    #     )
-
-    #     return create_bquery(local_df)
+        local_df = (
+            client.query(query)
+            .result()
+            .to_dataframe(
+                # Optionally, explicitly request to use the BigQuery Storage API. As of
+                # google-cloud-bigquery version 1.26.0 and above, the BigQuery Storage
+                # API is used by default.
+                create_bqstorage_client=True,
+            )
+        )
+        return create_bquery(local_df)
 
 
 schema = Schema(query=Query, mutation=Mutation)

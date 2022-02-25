@@ -16,10 +16,20 @@ interface props {
 }
 
 const ADD_IMPROVEMENT = gql`
-  mutation addImprovement($lmkKey: String!, $date: String!, $cost: Float!, $improvementId: String!) {
-    addImprovement(lmkKey: $lmkKey, date: $date, cost: $cost, improvementId: $improvementId) {
+  mutation addImprovement(
+    $lmkKey: String!
+    $date: String!
+    $cost: Float!
+    $improvementId: String!
+  ) {
+    addImprovement(
+      lmkKey: $lmkKey
+      date: $date
+      cost: $cost
+      improvementId: $improvementId
+    ) {
       ok
-      improvement{
+      improvement {
         lmkKey
         date
         cost
@@ -42,7 +52,7 @@ export default function Recommendation(props: props) {
     } else {
       setLmk(localStorage.activeLmk);
     }
-  }, []);
+  }, [GlobalContext.activeLmk]);
 
   if (loading) return <p>"Submitting..."</p>;
   if (error) return <p>`Submission error! ${error.message}`</p>;
@@ -64,27 +74,15 @@ export default function Recommendation(props: props) {
           onClick={() => setShowForm(!showForm)}
           className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded"
         >
-          I've done this!
-          {/* <svg
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            className="w-4 h-4 ml-auto"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg> */}
+          Already done!
         </button>
         <p className="text-xs text-gray-500 mt-3"></p>
       </div>
-      {/* Form goes here */}
       {showForm && (
         <div className="w-full">
-          <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+          <div className="h-full p-6 rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden">
             <div>
-              <h1 className="text-gray-900 text-lg mb-1 font-medium title-font">
+              <h1 className="text-lg mb-1 font-bold title-font">
                 Tell us more!
               </h1>
               <Formik
@@ -113,7 +111,7 @@ export default function Recommendation(props: props) {
               >
                 <Form>
                   <div className="relative mb-4">
-                    <label htmlFor="cost">Cost</label>
+                    <label htmlFor="cost">How much did it cost you (£)?</label>
                     <Field
                       id="cost"
                       name="cost"

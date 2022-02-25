@@ -1,9 +1,6 @@
 import React from "react";
-import House from '../assets/house.svg';
-import {
-  BsWrench,
-  BsFillHouseFill,
-} from "react-icons/bs";
+import House from "../assets/house.svg";
+import { BsWrench, BsFillHouseFill } from "react-icons/bs";
 import SidebarItem from "./sidebarItem";
 
 export default function Sidebar() {
@@ -13,10 +10,13 @@ export default function Sidebar() {
         <div className="flex-shrink-0 py-4 flex flex-row items-center justify-between">
           <nav className="flex-grow md:block pb-4 md:pb-0 md:overflow-y-auto">
             <span className="block pt-2 pb-6 px-6 mt-2">
-            <House/>
+              <House />
             </span>
-            <SidebarItem label={"Overview"} icon={<BsFillHouseFill size={30}/>} />
-            <SidebarItem label={"Improvements"} icon={<BsWrench size={30}/>} />
+            <SidebarItem
+              label={"Overview"}
+              icon={<BsFillHouseFill size={30} />}
+            />
+            <SidebarItem label={"Improvements"} icon={<BsWrench size={30} />} />
           </nav>
         </div>
       </div>
