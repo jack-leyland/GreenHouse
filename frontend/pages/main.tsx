@@ -68,9 +68,6 @@ const Main = () => {
   console.log(data);
   return (
     <>
-      <div className="absolute min-w-[1150px] min-h-[755px] hidden logoRender:block w-full pr-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-right">
-        GreenHouse
-      </div>
       {dashboardData ? (
         <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
