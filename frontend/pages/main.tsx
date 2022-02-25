@@ -19,12 +19,14 @@ import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
 import CarbonSummary from '../components/dashboard/carbonSummary';
 import FlippableCard from '../components/generic/flippableCard';
 import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
+import packageAnaylytics from '../utils/packageAnalytics';
 
 const Main = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
   //type checking happens when this object is pacakged in above function, so any is fine here
   const [dashboardData, setDashboardData] = useState<any>();
+  const [analyticsData, setAnalyticsData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
@@ -49,6 +51,15 @@ const Main = () => {
   }, [data]);
 
   useEffect(() => {
+    if (data) {
+      if(data.analytics) {
+        let analyticsData = packageAnaylytics(data.analytics);
+        setAnalyticsData(analyticsData);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
     if (error) {
       setIsQueryError(true);
     }
@@ -65,7 +76,6 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(', ');
   }
-  console.log(data);
   return (
     <>
       <div className="absolute min-w-[1150px] min-h-[755px] hidden logoRender:block w-full pr-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-right">
@@ -91,7 +101,7 @@ const Main = () => {
                     <EpcChart data={dashboardData.Main} />
                   </div>
                 }
-                back={<CostSummary data={dashboardData.House.costs} />}
+                back={<CostSummary data={dashboardData.House.costs} analytics={analyticsData.cost} />}
               />
 
               <FlippableCard
