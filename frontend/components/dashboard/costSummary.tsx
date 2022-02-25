@@ -1,10 +1,10 @@
-import React from 'react';
-import { GiWaterDrop, GiFireplace } from 'react-icons/gi';
-import { BsLightbulb } from 'react-icons/bs';
-import { epcCertificateObject } from '../../types';
+import React from "react";
+import { GiWaterDrop, GiFireplace } from "react-icons/gi";
+import { BsLightbulb } from "react-icons/bs";
+import { epcCertificateObject } from "../../types";
 
 interface props {
-  data: epcCertificateObject['House']['costs'];
+  data: epcCertificateObject["House"]["costs"];
 }
 
 export default function CostSummary({ data }: props) {
@@ -13,7 +13,7 @@ export default function CostSummary({ data }: props) {
       <div className="flex h-3/4">
         <div className="w-1/3 h-full px-1 flex flex-col gap-2">
           <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Heating <GiFireplace color="#eb6434" />{' '}
+            Heating <GiFireplace color="#eb6434" />{" "}
           </div>
           <div>
             <b>Current Cost:</b> {data.heatingCostCurrent} £/year
@@ -27,7 +27,7 @@ export default function CostSummary({ data }: props) {
         </div>
         <div className="w-1/3 border border-y-0 h-full px-2 flex flex-col gap-2">
           <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Hot Water <GiWaterDrop color="#34bdeb" />{' '}
+            Hot Water <GiWaterDrop color="#34bdeb" />{" "}
           </div>
           <div>
             <b>Current Cost:</b> {data.hotWaterCostCurrent} £/year
@@ -41,7 +41,7 @@ export default function CostSummary({ data }: props) {
         </div>
         <div className="w-1/3 h-full px-2 flex flex-col gap-2">
           <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Lighting <BsLightbulb color="#d4c328" />{' '}
+            Lighting <BsLightbulb color="#d4c328" />{" "}
           </div>
           <div>
             <b>Current Cost:</b> {data.lightingCostCurrent} £/year

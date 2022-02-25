@@ -1,24 +1,24 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/generic/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/generic/card';
-import House from '../components/dashboard/house';
-import PageTitle from '../components/generic/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../assets/animations/animation/loading.json';
-import errorJson from '../assets/animations/animation/error.json';
-import { GET_CERTIFICATES } from './api/queries';
-import { useQuery } from '@apollo/client';
-import EpcChart from '../components/dashboard/epcChart';
-import Modal from '../components/generic/modal';
-import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
-import CostSummary from '../components/dashboard/costSummary';
-import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
-import CarbonSummary from '../components/dashboard/carbonSummary';
-import FlippableCard from '../components/generic/flippableCard';
-import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/generic/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/generic/card";
+import House from "../components/dashboard/house";
+import PageTitle from "../components/generic/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import EpcChart from "../components/dashboard/epcChart";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import CostSummary from "../components/dashboard/costSummary";
+import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
+import CarbonSummary from "../components/dashboard/carbonSummary";
+import FlippableCard from "../components/generic/flippableCard";
+import packageDashboardDataByComponent from "../utils/packageDashboardDataByComponent";
 
 const Main = () => {
   const GlobalContext = useAppContext();
@@ -54,7 +54,7 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
+  let fullAddressString = "";
 
   if (dashboardData) {
     let addressElements = [
@@ -63,7 +63,7 @@ const Main = () => {
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(', ');
+    fullAddressString = addressElements.join(", ");
   }
   console.log(data);
   return (
@@ -71,7 +71,7 @@ const Main = () => {
       {dashboardData ? (
         <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
-            title={'Dashboard'}
+            title={"Dashboard"}
             subtitle={fullAddressString}
             onClick={() => setShowModal(true)}
           />
@@ -109,11 +109,11 @@ const Main = () => {
 
             <Card
               style={
-                'relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border'
+                "relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"
               }
               disableHoverAnimation={true}
               showShadow={false}
-              minDims={{ w: '440px', h: '566px' }}
+              minDims={{ w: "440px", h: "566px" }}
             >
               <div className="flex justify-center h-full min-w-full">
                 <House data={dashboardData.House} />
