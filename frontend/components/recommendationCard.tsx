@@ -3,6 +3,8 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import { epcRecommendationObject } from "../types";
 import { gql, useMutation } from "@apollo/client";
 import { useAppContext } from "../context/state";
+import categories from "../categories.json";
+import { MdColorLens } from "react-icons/md";
 
 interface Values {
   cost: number;
@@ -54,28 +56,44 @@ export default function Recommendation(props: props) {
     }
   }, [GlobalContext.activeLmk]);
 
+  const category = categories[0][props.recs.improvementId]; // This works, idk what to do with the error
+  let color;
+  switch (category) {
+    case "Heating":
+      color = "bg-red-500";
+      break;
+    case "Water":
+      color = "bg-blue-500";
+      break;
+    case "Lighting":
+      color = "bg-yellow-500";
+      break;
+    case "Other":
+      color = "bg-slate-500";
+      break;
+  }
+
   if (loading) return <p>Submitting...</p>;
   if (error) return <p>Submission error! ${error.message}</p>;
 
   return (
     <div className="flex flex-row p-4 mx-10">
-      <div className="h-full rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden w-72">
+      <div
+        className={
+          "h-full rounded-lg border-2 text-white flex flex-col relative overflow-hidden w-72 " +
+          color
+        }
+      >
         <div className="p-6">
-          <h2 className="text-sm tracking-widest title-font mb-1 font-medium justify-right">
-            Improvement {props.recs.improvementItem}
-          </h2>
           <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
-            {"Category"}
+            {category}
           </h2>
           <h1 className="text-3xl pb-4 mb-4 border-b leading-none">
             {props.recs.improvementIdText}
           </h1>
         </div>
-        <div className="w-full bg-green-600 flex items-center mb-2">
+        <div className="w-full flex items-center mb-2">
           <p className="p-6">{props.recs.indicativeCost} estimated cost</p>
-        </div>
-        <div className="w-full bg-green-600 flex items-center mb-2">
-          <p className="p-6">{"£££"} potential savings</p>
         </div>
         <div className="p-6 pb-2 absolute bottom-0 w-full">
           <button
