@@ -54,8 +54,8 @@ export default function Recommendation(props: props) {
     }
   }, []);
 
-  if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
+  if (loading) return (<p>Submitting...</p>)
+  if (error) return (<p>Submission error! ${error.message}</p>)
 
   return (
     <div className="flex flex-row p-4 mx-10">
