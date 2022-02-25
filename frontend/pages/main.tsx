@@ -1,24 +1,24 @@
-import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
-import Layout from "../components/generic/layout";
-import Sidebar from "../components/sidebar";
-import Card from "../components/generic/card";
-import House from "../components/dashboard/house";
-import PageTitle from "../components/generic/pageTitle";
-import Lottie from "react-lottie-player";
-import { useAppContext } from "../context/state";
-import loadingJson from "../assets/animations/animation/loading.json";
-import errorJson from "../assets/animations/animation/error.json";
-import { GET_CERTIFICATES } from "./api/queries";
-import { useQuery } from "@apollo/client";
-import type { epcCertificateObject, epcCertificateResponse } from "../types";
-import EpcChart from "../components/dashboard/epcChart";
-import Modal from "../components/generic/modal";
-import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
-import CostSummary from "../components/dashboard/costSummary";
-import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
-import CarbonSummary from "../components/dashboard/carbonSummary";
-import FlippableCard from "../components/generic/flippableCard";
+import type { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
+import Layout from '../components/generic/layout';
+import Sidebar from '../components/sidebar';
+import Card from '../components/generic/card';
+import House from '../components/dashboard/house';
+import PageTitle from '../components/generic/pageTitle';
+import Lottie from 'react-lottie-player';
+import { useAppContext } from '../context/state';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
+import { GET_CERTIFICATES } from './api/queries';
+import { useQuery } from '@apollo/client';
+import type { epcCertificateObject, epcCertificateResponse } from '../types';
+import EpcChart from '../components/dashboard/epcChart';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import CostSummary from '../components/dashboard/costSummary';
+import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
+import CarbonSummary from '../components/dashboard/carbonSummary';
+import FlippableCard from '../components/generic/flippableCard';
 
 function packageDashboardDataByComponent(
   data: epcCertificateResponse
@@ -49,22 +49,38 @@ function packageDashboardDataByComponent(
       potentialEnergyEfficiency: data.potentialEnergyEfficiency,
     },
     House: {
+      costs: {
+        heatingCostPotential: data.heatingCostPotential,
+        heatingCostCurrent: data.heatingCostCurrent,
+        lightingCostPotential: data.lightingCostPotential,
+        lightingCostCurrent: data.lightingCostCurrent,
+        hotWaterCostCurrent: data.hotWaterCostCurrent,
+        hotWaterCostPotential: data.hotWaterCostPotential,
+      },
+      consumptionEnvEff: {
+        energyConsumptionPotential: data.energyConsumptionPotential,
+        energyConsumptionCurrent: data.energyConsumptionCurrent,
+        roofEnvEff: data.roofEnvEff,
+        lightingEnvEff: data.lightingEnvEff,
+        wallsEnvEff: data.wallsEnvEff,
+        floorEnvEff: data.floorEnvEff,
+        mainHeatEnvEff: data.mainheatEnvEff,
+        windowsEnvEff: data.windowsEnvEff,
+        mainHeatControlEnvEff: data.mainheatcEnvEff,
+        hotWaterEnvEff: data.hotWaterEnvEff,
+      },
       environmental: {
         environmentImpactPotential: data.environmentImpactPotential,
         environmentImpactCurrent: data.environmentImpactCurrent,
-        energyConsumptionPotential: data.energyConsumptionPotential,
-        energyConsumptionCurrent: data.energyConsumptionCurrent,
         co2EmissionsCurrent: data.co2EmissionsCurrent,
         co2EmissionsPotential: data.co2EmissionsPotential,
       },
       roof: {
         roofDescription: data.roofDescription,
         roofEnergyEff: data.roofEnergyEff,
-        roofEnvEff: data.roofEnvEff,
       },
       windows: {
         windowsDescription: data.windowsDescription,
-        windowsEnvEff: data.windowsEnvEff,
         windowsEnergyEff: data.windowsEnergyEff,
         glazedType: data.glazedType,
         glazedArea: data.glazedArea,
@@ -76,19 +92,15 @@ function packageDashboardDataByComponent(
           numberHeatedRooms: data.numberHeatedRooms,
           heatLossCorridor: data.heatLossCorridor,
           unheatedCorridorLength: data.unheatedCorridorLength,
-          heatingCostPotential: data.heatingCostPotential,
-          heatingCostCurrent: data.heatingCostCurrent,
         },
         mainHeating: {
           mainHeatDescription: data.mainheatDescription,
-          mainHeatEnvEff: data.mainheatEnvEff,
           mainHeatEnergyEff: data.mainheatEnergyEff,
           mainFuel: data.mainFuel,
         },
         mainHeatingControls: {
           mainHeatControlDescription: data.mainheatcontDescription,
           mainHeatControlEnergyEff: data.mainheatcEnergyEff,
-          mainHeatControlEnvEff: data.mainheatcEnvEff,
         },
         secondaryHeating: {
           secondheatDescription: data.secondheatDescription,
@@ -99,26 +111,18 @@ function packageDashboardDataByComponent(
       lighting: {
         lowEnergyLighting: data.lowEnergyLighting,
         lightingEnergyEff: data.lightingEnergyEff,
-        lightingEnvEff: data.lightingEnvEff,
-        lightingCostPotential: data.lightingCostPotential,
-        lightingCostCurrent: data.lightingCostCurrent,
       },
       walls: {
         wallsDescription: data.wallsDescription,
         wallsEnergyEff: data.wallsEnergyEff,
-        wallsEnvEff: data.wallsEnvEff,
       },
       water: {
         hotWaterDescription: data.hotwaterDescription,
-        hotWaterEnvEff: data.hotWaterEnvEff,
         hotWaterEnergyEff: data.hotWaterEnergyEff,
-        hotWaterCostCurrent: data.hotWaterCostCurrent,
-        hotWaterCostPotential: data.hotWaterCostPotential,
       },
       floor: {
         floorDescription: data.floorDescription,
         floorEnergyEff: data.floorEnergyEff,
-        floorEnvEff: data.floorEnvEff,
       },
       other: {
         photoSupply: data.photoSupply,
@@ -165,7 +169,7 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = "";
+  let fullAddressString = '';
 
   if (dashboardData) {
     let addressElements = [
@@ -174,7 +178,7 @@ const Main = () => {
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(", ");
+    fullAddressString = addressElements.join(', ');
   }
 
   return (
@@ -182,7 +186,7 @@ const Main = () => {
       {dashboardData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
-            title={"Dashboard"}
+            title={'Dashboard'}
             subtitle={fullAddressString}
             onClick={() => setShowModal(true)}
           />
@@ -196,36 +200,10 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart
-                      currentEfficiency={
-                        dashboardData.Main.currentEnergyEfficiency
-                      }
-                      potentialEfficiency={
-                        dashboardData.Main.potentialEnergyEfficiency
-                      }
-                    />
+                    <EpcChart data={dashboardData.Main} />
                   </div>
                 }
-                back={
-                  <CostSummary
-                    heatingCurrent={
-                      dashboardData.House.heating.general.heatingCostCurrent
-                    }
-                    heatingPotential={
-                      dashboardData.House.heating.general.heatingCostPotential
-                    }
-                    waterCurrent={dashboardData.House.water.hotWaterCostCurren}
-                    waterPotential={
-                      dashboardData.House.water.hotWaterCostPotential
-                    }
-                    lightingCurrent={
-                      dashboardData.House.lighting.lightingCostCurrent
-                    }
-                    lightingPotential={
-                      dashboardData.House.lighting.lightingCostPotential
-                    }
-                  />
-                }
+                back={<CostSummary data={dashboardData.House.costs} />}
               />
 
               <FlippableCard
@@ -235,25 +213,7 @@ const Main = () => {
                 backTitle="Emissions"
                 back={
                   <EnvironmentalSummary
-                    energyConsumptionCurrent={
-                      dashboardData.House.environmental.energyConsumptionCurrent
-                    }
-                    energyConsumptionPotential={
-                      dashboardData.House.environmental
-                        .energyConsumptionPotential
-                    }
-                    floorEnvEff={dashboardData?.House.floor.floorEnvEff}
-                    wallsEnvEff={dashboardData?.House.walls.wallsEnvEff}
-                    roofEnvEff={dashboardData?.House.roof.roofEnvEff}
-                    lightingEnvEff={
-                      dashboardData?.House.lighting.lightingEnvEff
-                    }
-                    heatingEnvEff={
-                      dashboardData?.House.heating.mainHeatingControls
-                        .mainHeatControlEnvEff
-                    }
-                    windowsEnvEff={dashboardData?.House.windows.windowsEnvEff}
-                    waterEnvEff={dashboardData?.House.water.hotWaterEnvEff}
+                    data={dashboardData.House.consumptionEnvEff}
                   />
                 }
                 front={
@@ -271,7 +231,7 @@ const Main = () => {
 
             <Card
               style={
-                "relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"
+                'relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border'
               }
               disableHoverAnimation={true}
               showShadow={false}
