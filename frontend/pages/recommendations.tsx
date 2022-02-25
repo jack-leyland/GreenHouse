@@ -40,7 +40,7 @@ const Recommendations = () => {
     } else {
       setQueryParam(localStorage.activeLmk);
     }
-  }, []);
+  }, [GlobalContext.activeLmk]);
 
   useEffect(() => {
     if (data) {

@@ -52,7 +52,7 @@ export default function Recommendation(props: props) {
     } else {
       setLmk(localStorage.activeLmk);
     }
-  }, []);
+  }, [GlobalContext.activeLmk]);
 
   if (loading) return <p>Submitting...</p>;
   if (error) return <p>Submission error! ${error.message}</p>;
@@ -80,9 +80,9 @@ export default function Recommendation(props: props) {
       </div>
       {showForm && (
         <div className="w-full">
-          <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+          <div className="h-full p-6 rounded-lg border-2 bg-green-400 text-white flex flex-col relative overflow-hidden">
             <div>
-              <h1 className="text-gray-900 text-lg mb-1 font-medium title-font">
+              <h1 className="text-lg mb-1 font-bold title-font">
                 Tell us more!
               </h1>
               <Formik
@@ -111,7 +111,7 @@ export default function Recommendation(props: props) {
               >
                 <Form>
                   <div className="relative mb-4">
-                    <label htmlFor="cost">Cost</label>
+                    <label htmlFor="cost">How much did it cost you (£)?</label>
                     <Field
                       id="cost"
                       name="cost"
