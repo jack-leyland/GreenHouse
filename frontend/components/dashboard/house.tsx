@@ -4,13 +4,14 @@ import Card from '../generic/card';
 import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
 import { BsLightbulb } from 'react-icons/bs';
 import FeatureCard from './featureCard';
-import type { epcCertificateObject } from '../../types';
+import type { epcCertificateObject, packagedAnalyticsObject } from '../../types';
 
 interface props {
   data: epcCertificateObject['House'];
+  analytics: packagedAnalyticsObject['house'];
 }
 
-export default function House({ data }: props) {
+export default function House({ data, analytics }: props) {
   const [sidePanelType, setSidePanelType] = useState<string>('');
 
   return (
@@ -117,7 +118,7 @@ export default function House({ data }: props) {
 
       <div className="w-full h-full relative">
         <div className="w-full h-full absolute">
-          <FeatureCard data={data} type={sidePanelType} />
+          <FeatureCard data={data} type={sidePanelType} analytics={analytics}/>
         </div>
       </div>
     </div>

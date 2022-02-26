@@ -89,8 +89,8 @@ const Main = () => {
             onClick={() => setShowModal(true)}
           />
 
-          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
-            <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
+          <div className="h-full flex p-8 w-full gap-4">
+            <div className="flex flex-col w-1/2 gap-4">
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
@@ -115,21 +115,21 @@ const Main = () => {
                   />
                 }
                 front={
-                  <CarbonSummary data={dashboardData.House.environmental} />
+                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
                 }
               />
             </div>
 
             <Card
               style={
-                'relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border'
+                'relative pt-2 w-1/2 border'
               }
               disableHoverAnimation={true}
               showShadow={false}
               minDims={{ w: '440px', h: '566px' }}
             >
               <div className="flex justify-center h-full min-w-full">
-                <House data={dashboardData.House} />
+                <House data={dashboardData.House} analytics={analyticsData.house}/>
               </div>
             </Card>
           </div>
@@ -162,7 +162,6 @@ const Main = () => {
                     Oops, there was an error, try again later...
                   </h1>
                   <Lottie
-                    loop
                     animationData={errorJson}
                     play
                     style={{ width: 150, height: 150 }}

@@ -3,14 +3,15 @@ import Card from "../generic/card";
 import Lottie from "react-lottie-player";
 import json from "../../assets/animations/animation/up-arrow.json";
 import StarRating from "../generic/starRating";
-import { epcCertificateObject } from "../../types";
+import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
 
 interface props {
   type: string;
   data: epcCertificateObject['House'];
+  analytics: packagedAnalyticsObject['house'];
 }
 
-export default function FeatureCard({ data, type }: props) {
+export default function FeatureCard({ data, type, analytics }: props) {
   switch (type) {
     case 'Walls':
       return (
@@ -37,7 +38,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.walls.wallsEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.walls?.meanWallsEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -46,7 +47,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.wallsEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.walls?.meanWallsEnvironmentalEff}
               />
             </div>
           </div>
@@ -76,7 +77,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.roof.roofEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.roof?.meanRoofEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -85,7 +86,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.roofEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.roof?.meanRoofEnvironmentalEff}
               />
             </div>
           </div>
@@ -117,7 +118,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.floor.floorEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.floor?.meanFloorEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -126,7 +127,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.floorEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.floor?.meanFloorEnvironmentalEff}
               />
             </div>
           </div>
@@ -170,7 +171,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.lighting.lightingEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.lighting.meanLightingEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -179,7 +180,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.lightingEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.lighting.meanLightingEnvironmentalEff}
               />
             </div>
           </div>
@@ -193,11 +194,13 @@ export default function FeatureCard({ data, type }: props) {
           disableHoverAnimation={true}
           showShadow={true}
         >
-          <>
-            <div>
-              <div className="text-xl font-bold p-2">{type}</div>
-              <div className="p-2">
-                <div className="py-2">
+                    <div>
+            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+              {type}
+            </div>
+            <div className="p-2 text-sm">
+
+            <div className="py-2">
                   <b>Heat Loss Corridor:</b>{' '}
                   {data?.heating.general.heatLossCorridor
                     ? data?.heating.general.heatLossCorridor
@@ -293,9 +296,9 @@ export default function FeatureCard({ data, type }: props) {
                     ? data?.heating.secondaryHeating.secondheatDescription
                     : 'N/A'}
                 </div>
-              </div>
+
             </div>
-          </>
+          </div>
         </Card>
       );
 
@@ -337,7 +340,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.water.hotWaterEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -346,7 +349,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.hotWaterEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
               />
             </div>
           </div>
@@ -394,7 +397,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.windows.windowsEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -403,7 +406,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.windowsEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
               />
             </div>
           </div>

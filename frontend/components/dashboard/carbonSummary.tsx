@@ -2,10 +2,11 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
-import { epcCertificateObject } from '../../types';
+import { epcCertificateObject,packagedAnalyticsObject } from '../../types';
 
 interface props {
   data: epcCertificateObject['House']['environmental'];
+  analytics: packagedAnalyticsObject['environmental'];
 }
 
 export default function CarbonSummary({ data }: props) {
@@ -30,7 +31,7 @@ export default function CarbonSummary({ data }: props) {
               <AiFillQuestionCircle size={10} />
             </a>
           </div>
-          <div className="h-full flex justify-center items-center pt-8">
+          <div className="h-full flex justify-center items-center pt-2">
             <BarChart
               layout="horizontal"
               width={150}
