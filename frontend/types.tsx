@@ -243,40 +243,43 @@ export interface epcAnalyticsObject {
 }
 
 export interface packagedAnalyticsObject {
-  meanCurrentEnergyConsumption: number;
+  environmental: { 
+    meanCurrentEnergyConsumption: number;
+  },
   cost: {
       meanCurrentHeatingCost: number;
       meanCurrentHotWaterCost: number;
       meanCurrentLightingCost: number;
   },
-  floor: {
+  house: {
+    floor: {
       meanFloorEnergyEff: number;
       meanFloorEnvironmentalEff: number;
-  },
-  lighting: {
-      meanLightingEnergyEff: number;
-      meanLightingEnvironmentalEff: number;
-
-  },
-  heating: {
-      meanMainHeatingEnergyEff: number;
-      meanMainHeatingEnvironmentalEff: number;
-  },
-  water: {
-      meanWaterEnergyEff: number;
-      meanWaterEnvironmentalEff: number;
-  },
-  roof: {
-      meanRoofEnergyEff: number;
-      meanRoofEnvironmentalEff: number;
-  },
-  walls: {
-      meanWallsEnvironmentalEff: number;
-      meanWaterEnergyEff: number;
-  },
-  windows: {
-      meanWindowsEnergyEff: number;
-      meanWindowsEnvironmentalEff: number;
+    },
+    lighting: {
+        meanLightingEnergyEff: number;
+        meanLightingEnvironmentalEff: number;
+    },
+    heating: {
+        meanMainHeatingEnergyEff: number;
+        meanMainHeatingEnvironmentalEff: number;
+    },
+    water: {
+        meanWaterEnergyEff: number;
+        meanWaterEnvironmentalEff: number;
+    },
+    roof: {
+        meanRoofEnergyEff: number;
+        meanRoofEnvironmentalEff: number;
+    },
+    walls: {
+        meanWallsEnvironmentalEff: number;
+        meanWallsEnergyEff: number;
+    },
+    windows: {
+        meanWindowsEnergyEff: number;
+        meanWindowsEnvironmentalEff: number;
+    }
   }
 }
 
