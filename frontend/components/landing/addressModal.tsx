@@ -1,5 +1,7 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BackButton from "../../assets/arrow-left.svg";
+import Lottie from 'react-lottie-player';
+import loadingJson from '../../assets/animations/animation/loading.json';
 
 type AddressObject = {
   address: string;
@@ -50,8 +52,14 @@ export default function AddressList({
       </div>
       <div className=" h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounde">
         {loading ? (
-          <div className="w-[100%] h-[100%] flex items-center justify-center">
+          <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
             Loading Addresses...
+            <Lottie
+                loop
+                animationData={loadingJson}
+                play
+                style={{ width: 150, height: 150 }}
+            />
           </div>
         ) : null}
         {addressData && !isLoading
