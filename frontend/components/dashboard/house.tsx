@@ -22,17 +22,17 @@ export default function House({ data, analytics }: props) {
           <div
             className="house-card-roof col-start-1 col-end-7 row-start-0 row-end-0 roof animate-fade hover:scale-105 hover:cursor-pointer rounded-lg"
             onClick={() => {
-              setSidePanelType('Roof');
+              setSidePanelType("Roof");
             }}
           ></div>
 
           {/*Walls*/}
           <Card
             style={
-              'col-start-1 col-end-2 row-start-2 row-end-7 bg-stone-200 wall'
+              "col-start-1 col-end-2 row-start-2 row-end-7 bg-stone-200 wall"
             }
             onClick={() => {
-              setSidePanelType('Walls');
+              setSidePanelType("Walls");
             }}
             disableHoverAnimation={false}
             showShadow={true}
@@ -40,34 +40,34 @@ export default function House({ data, analytics }: props) {
 
           <Card
             style={
-              'col-start-6 col-end-7 row-start-2 row-end-7 bg-stone-200 wall'
+              "col-start-6 col-end-7 row-start-2 row-end-7 bg-stone-200 wall"
             }
             onClick={() => {
-              setSidePanelType('Walls');
+              setSidePanelType("Walls");
             }}
             disableHoverAnimation={false}
             showShadow={true}
           ></Card>
 
           {/*Floor*/}
-          <div className={'col-start-2 col-end-6 row-start-6 flex items-end'}>
+          <div className={"col-start-2 col-end-6 row-start-6 flex items-end"}>
             <Card
-              style={'bg-[#c3a590] rounded-none floor'}
+              style={"bg-[#c3a590] rounded-none floor"}
               disableHoverAnimation={false}
               showShadow={true}
               onClick={() => {
-                setSidePanelType('Floor');
+                setSidePanelType("Floor");
               }}
             ></Card>
           </div>
 
           {/*Inner Cards*/}
           <Card
-            style={'col-start-2 col-end-4 row-start-2 row-end-4'}
+            style={"col-start-2 col-end-4 row-start-2 row-end-4"}
             disableHoverAnimation={false}
             showShadow={true}
             onClick={() => {
-              setSidePanelType('Windows');
+              setSidePanelType("Windows");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -76,11 +76,11 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={'col-start-4 col-end-6 row-start-2 row-end-4'}
+            style={"col-start-4 col-end-6 row-start-2 row-end-4"}
             disableHoverAnimation={false}
             showShadow={true}
             onClick={() => {
-              setSidePanelType('Water');
+              setSidePanelType("Water");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -89,11 +89,11 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={'col-start-2 col-end-4 row-start-4 row-end-6'}
+            style={"col-start-2 col-end-4 row-start-4 row-end-6"}
             disableHoverAnimation={false}
             showShadow={true}
             onClick={() => {
-              setSidePanelType('Heating');
+              setSidePanelType("Heating");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -102,11 +102,11 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={'col-start-4 col-end-6 row-start-4 row-end-6'}
+            style={"col-start-4 col-end-6 row-start-4 row-end-6"}
             disableHoverAnimation={false}
             showShadow={true}
             onClick={() => {
-              setSidePanelType('Lighting');
+              setSidePanelType("Lighting");
             }}
           >
             <div className="flex justify-center h-full items-center">

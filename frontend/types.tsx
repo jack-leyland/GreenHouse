@@ -341,13 +341,13 @@ export const HeatingCategories: EPCDictionary<string> = {
 };
 
 export const epcColorDictionary: EPCDictionary<string> = {
-  A: 'epcA',
-  B: 'epcB',
-  C: 'epcC',
-  D: 'epcD',
-  E: 'epcE',
-  F: 'epcF',
-  G: 'epcG',
+  A: "epcA",
+  B: "epcB",
+  C: "epcC",
+  D: "epcD",
+  E: "epcE",
+  F: "epcF",
+  G: "epcG",
 };
 
 export const epcIndexDictionary: EPCDictionary<number> = {

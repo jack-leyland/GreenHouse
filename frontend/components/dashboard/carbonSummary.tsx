@@ -12,7 +12,7 @@ interface props {
 export default function CarbonSummary({ data }: props) {
   const carbonData = [
     {
-      name: 'C02 Production',
+      name: "C02 Production",
       Current: data.co2EmissionsCurrent,
       Potential: data.co2EmissionsPotential,
     },
@@ -59,7 +59,7 @@ export default function CarbonSummary({ data }: props) {
               </div>
               <div className="py-1">
                 After implementing improvements you could reduce your emssions
-                to {data.co2EmissionsPotential}{' '}
+                to {data.co2EmissionsPotential}{" "}
               </div>
               <div className="py-1">
                 This C0<sub>2</sub> reduction is equivalent to ...

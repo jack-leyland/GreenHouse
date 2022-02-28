@@ -65,7 +65,7 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
+  let fullAddressString = "";
 
   if (dashboardData) {
     let addressElements = [
@@ -74,17 +74,14 @@ const Main = () => {
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(', ');
+    fullAddressString = addressElements.join(", ");
   }
   return (
     <>
-      <div className="absolute min-w-[1150px] min-h-[755px] hidden logoRender:block w-full pr-[30px] mt-4 text-logoGreen font-logoFont font-black text-[40px] text-right">
-        GreenHouse
-      </div>
       {dashboardData ? (
         <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
-            title={'Dashboard'}
+            title={"Dashboard"}
             subtitle={fullAddressString}
             onClick={() => setShowModal(true)}
           />
@@ -126,7 +123,7 @@ const Main = () => {
               }
               disableHoverAnimation={true}
               showShadow={false}
-              minDims={{ w: '440px', h: '566px' }}
+              minDims={{ w: "440px", h: "566px" }}
             >
               <div className="flex justify-center h-full min-w-full">
                 <House data={dashboardData.House} analytics={analyticsData.house}/>

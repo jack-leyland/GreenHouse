@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface props {
   title: string;
@@ -19,6 +19,9 @@ export default function PageTitle({ title, subtitle, onClick }: props) {
           >
             More Info
           </button>
+          <div className="absolute top-2 hidden logoRender:block text-[40px] right-[30px] text-logoGreen font-logoFont font-black text-right justify-right">
+            GreenHouse
+          </div>
         </div>
       </div>
     </>
