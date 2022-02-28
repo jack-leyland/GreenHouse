@@ -1,25 +1,25 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/generic/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/generic/card';
-import House from '../components/dashboard/house';
-import PageTitle from '../components/generic/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../assets/animations/animation/loading.json';
-import errorJson from '../assets/animations/animation/error.json';
-import { GET_CERTIFICATES } from './api/queries';
-import { useQuery } from '@apollo/client';
-import EpcChart from '../components/dashboard/epcChart';
-import Modal from '../components/generic/modal';
-import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
-import CostSummary from '../components/dashboard/costSummary';
-import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
-import CarbonSummary from '../components/dashboard/carbonSummary';
-import FlippableCard from '../components/generic/flippableCard';
-import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
-import packageAnaylytics from '../utils/packageAnalytics';
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/generic/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/generic/card";
+import House from "../components/dashboard/house";
+import PageTitle from "../components/generic/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import EpcChart from "../components/dashboard/epcChart";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import CostSummary from "../components/dashboard/costSummary";
+import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
+import CarbonSummary from "../components/dashboard/carbonSummary";
+import FlippableCard from "../components/generic/flippableCard";
+import packageDashboardDataByComponent from "../utils/packageDashboardDataByComponent";
+import packageAnaylytics from "../utils/packageAnalytics";
 
 const Main = () => {
   const GlobalContext = useAppContext();
@@ -52,7 +52,7 @@ const Main = () => {
 
   useEffect(() => {
     if (data) {
-      if(data.analytics) {
+      if (data.analytics) {
         let analyticsData = packageAnaylytics(data.analytics);
         setAnalyticsData(analyticsData);
       }
@@ -76,7 +76,7 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
-  console.log(data)
+  console.log(data);
   return (
     <>
       {dashboardData ? (
@@ -96,10 +96,18 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart data={dashboardData.Main} analytics={analyticsData.main}/>
+                    <EpcChart
+                      data={dashboardData.Main}
+                      analytics={analyticsData.main}
+                    />
                   </div>
                 }
-                back={<CostSummary data={dashboardData.House.costs} analytics={analyticsData.cost} />}
+                back={
+                  <CostSummary
+                    data={dashboardData.House.costs}
+                    analytics={analyticsData.cost}
+                  />
+                }
               />
 
               <FlippableCard
@@ -108,7 +116,10 @@ const Main = () => {
                 frontTitle="Emissions"
                 backTitle="Energy Consumption"
                 front={
-                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
+                  <CarbonSummary
+                    data={dashboardData.House.environmental}
+                    analytics={analyticsData.environmental}
+                  />
                 }
                 back={
                   <EnvironmentalSummary
@@ -119,15 +130,16 @@ const Main = () => {
             </div>
 
             <Card
-              style={
-                'relative pt-2 w-1/2 border'
-              }
+              style={"relative pt-2 w-1/2 border"}
               disableHoverAnimation={true}
               showShadow={false}
               minDims={{ w: "440px", h: "566px" }}
             >
               <div className="flex justify-center h-full min-w-full">
-                <House data={dashboardData.House} analytics={analyticsData.house}/>
+                <House
+                  data={dashboardData.House}
+                  analytics={analyticsData.house}
+                />
               </div>
             </Card>
           </div>

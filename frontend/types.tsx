@@ -247,47 +247,47 @@ export interface packagedAnalyticsObject {
   main: {
     meanCurrentEnergyEfficiency: number;
     meanCurrentEnergyRating: string;
-  },
-  environmental: { 
-      meanCurrentEnergyConsumption: number;
-      meanCurrentEnvironmentImpact: number;
-      meanCurrentCo2Consumption: number;
-    },
+  };
+  environmental: {
+    meanCurrentEnergyConsumption: number;
+    meanCurrentEnvironmentImpact: number;
+    meanCurrentCo2Consumption: number;
+  };
   cost: {
-      meanCurrentHeatingCost: number;
-      meanCurrentHotWaterCost: number;
-      meanCurrentLightingCost: number;
-  },
+    meanCurrentHeatingCost: number;
+    meanCurrentHotWaterCost: number;
+    meanCurrentLightingCost: number;
+  };
   house: {
     floor: {
       meanFloorEnergyEff: number;
       meanFloorEnvironmentalEff: number;
-    },
+    };
     lighting: {
-        meanLightingEnergyEff: number;
-        meanLightingEnvironmentalEff: number;
-    },
+      meanLightingEnergyEff: number;
+      meanLightingEnvironmentalEff: number;
+    };
     heating: {
-        meanMainHeatingEnergyEff: number;
-        meanMainHeatingEnvironmentalEff: number;
-    },
+      meanMainHeatingEnergyEff: number;
+      meanMainHeatingEnvironmentalEff: number;
+    };
     water: {
-        meanWaterEnergyEff: number;
-        meanWaterEnvironmentalEff: number;
-    },
+      meanWaterEnergyEff: number;
+      meanWaterEnvironmentalEff: number;
+    };
     roof: {
-        meanRoofEnergyEff: number;
-        meanRoofEnvironmentalEff: number;
-    },
+      meanRoofEnergyEff: number;
+      meanRoofEnvironmentalEff: number;
+    };
     walls: {
-        meanWallsEnvironmentalEff: number;
-        meanWallsEnergyEff: number;
-    },
+      meanWallsEnvironmentalEff: number;
+      meanWallsEnergyEff: number;
+    };
     windows: {
-        meanWindowsEnergyEff: number;
-        meanWindowsEnvironmentalEff: number;
-    }
-  }
+      meanWindowsEnergyEff: number;
+      meanWindowsEnvironmentalEff: number;
+    };
+  };
 }
 
 export interface epcRecommendationObject {

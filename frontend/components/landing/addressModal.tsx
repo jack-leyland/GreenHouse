@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import BackButton from '../../assets/arrow-left.svg';
-import Lottie from 'react-lottie-player';
-import loadingJson from '../../assets/animations/animation/loading.json';
+import React, { useState, useEffect } from "react";
+import BackButton from "../../assets/arrow-left.svg";
+import Lottie from "react-lottie-player";
+import loadingJson from "../../assets/animations/animation/loading.json";
 
 type AddressObject = {
   address: string;
