@@ -4,14 +4,14 @@ export default function packageAnaylytics(
     data: epcAnalyticsObject
   ): packagedAnalyticsObject {
     let packagedAnalytics = {
-        main: {
-          meanCurrentEnergyEfficiency: data.meanCurrentEnergyEfficiency,
-          meanCurrentEnergyRating: data.meanCurrentEnergyRating,
-        },
-        environmental: { 
-            meanCurrentEnergyConsumption: data.meanCurrentEnergyConsumption,
-            meanCurrentEnvironmentImpact: data.meanCurrentEnvironmentImpact,
-            meanCurrentCo2Consumption: data.meanCurrentCo2Consumption,
+          main: {
+            meanCurrentEnergyEfficiency: data.meanCurrentEnergyEfficiency,
+            meanCurrentEnergyRating: data.meanCurrentEnergyRating,
+          },
+          environmental: { 
+              meanCurrentEnergyConsumption: data.meanCurrentEnergyConsumption,
+              meanCurrentEnvironmentImpact: data.meanCurrentEnvironmentImpact,
+              meanCurrentCo2Consumption: data.meanCurrentCo2Consumption,
           },
           cost: {
             meanCurrentHeatingCost: data.meanCurrentHeatingCost,

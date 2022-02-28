@@ -76,7 +76,7 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
-  console.log(analyticsData)
+  console.log(data)
   return (
     <>
       {dashboardData ? (
@@ -105,15 +105,15 @@ const Main = () => {
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
-                frontTitle="Energy Consumption"
-                backTitle="Emissions"
+                frontTitle="Emissions"
+                backTitle="Energy Consumption"
+                front={
+                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
+                }
                 back={
                   <EnvironmentalSummary
                     data={dashboardData.House.consumptionEnvEff}
                   />
-                }
-                front={
-                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
                 }
               />
             </div>

@@ -103,10 +103,13 @@ export default function EpcChart({ data, analytics }: props) {
         <div className="pb-1 text-sm px-4">
           <strong>How you compare:</strong>
         </div>
-        <div className="py-2 px-4">
+        <div className="py-1 px-4">
+          Your house has a current rating of <b>{data.currentEnergyRating}</b> with a score of <b>{data.currentEnergyEfficiency}</b>.
+        </div>
+        <div className="py-1 px-4">
           The average energy rating for houses in your area is <b>{analytics.meanCurrentEnergyRating}</b> with a score of <b>{analytics.meanCurrentEnergyEfficiency}</b>.
         </div>
-        <div className="py-2 px-4">
+        <div className="py-1 px-4">
           The average energy rating across England and Wales is{" "}
           <b className={`text-${epcIndexDictionary["D"]}`}>D</b> with a score of{" "}
           <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
