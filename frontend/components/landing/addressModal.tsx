@@ -1,5 +1,7 @@
-import React, { ReactElement, useState, useEffect } from "react";
-import BackButton from "../../assets/arrow-left.svg";
+import React, { useState, useEffect } from 'react';
+import BackButton from '../../assets/arrow-left.svg';
+import Lottie from 'react-lottie-player';
+import loadingJson from '../../assets/animations/animation/loading.json';
 
 type AddressObject = {
   address: string;
@@ -40,7 +42,7 @@ export default function AddressList({
   }, [data]);
 
   return (
-    <div className="h-[50vh] w-[35vw] max-w-[450px] rounded-default border-lightGrey bg-lightGrey drop-shadow-md">
+    <div className="h-[50vh] w-[35vw] max-w-[450px] min-w-[250px] rounded-default border-lightGrey bg-lightGrey drop-shadow-md">
       <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-default font-bold font-logoFont">
         <BackButton
           className="h-[35px] w-[35px] fill-black absolute left-[10px] transistion-all duration-100 hover:h-[45px] hover:w-[45px]"
@@ -50,8 +52,14 @@ export default function AddressList({
       </div>
       <div className=" h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounde">
         {loading ? (
-          <div className="w-[100%] h-[100%] flex items-center justify-center">
+          <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
             Loading Addresses...
+            <Lottie
+              loop
+              animationData={loadingJson}
+              play
+              style={{ width: 150, height: 150 }}
+            />
           </div>
         ) : null}
         {addressData && !isLoading

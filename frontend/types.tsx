@@ -205,6 +205,7 @@ export interface epcCertificateObject extends Object {
 }
 
 export interface epcAnalyticsObject {
+  meanCurrentEnergyRating: string;
   meanCurrentEnergyEfficiency: number;
   meanCurrentEnvironmentImpact: number;
   meanCurrentEnergyConsumption: number;
@@ -226,6 +227,67 @@ export interface epcAnalyticsObject {
   normalisedCurrentLightingCost: Array<number>;
   normalisedCurrentHeatingCost: Array<number>;
   normalisedCurrentHotWaterCost: Array<number>;
+  meanFloorEnergyEff: number;
+  meanFloorEnvironmentalEff: number;
+  meanLightingEnergyEff: number;
+  meanLightingEnvironmentalEff: number;
+  meanMainHeatingEnergyEff: number;
+  meanMainHeatingEnvironmentalEff: number;
+  meanRoofEnergyEff: number;
+  meanRoofEnvironmentalEff: number;
+  meanWallsEnergyEff: number;
+  meanWallsEnvironmentalEff: number;
+  meanWaterEnergyEff: number;
+  meanWaterEnvironmentalEff: number;
+  meanWindowsEnergyEff: number;
+  meanWindowsEnvironmentalEff: number;
+}
+
+export interface packagedAnalyticsObject {
+  main: {
+    meanCurrentEnergyEfficiency: number;
+    meanCurrentEnergyRating: string;
+  },
+  environmental: { 
+      meanCurrentEnergyConsumption: number;
+      meanCurrentEnvironmentImpact: number;
+      meanCurrentCo2Consumption: number;
+    },
+  cost: {
+      meanCurrentHeatingCost: number;
+      meanCurrentHotWaterCost: number;
+      meanCurrentLightingCost: number;
+  },
+  house: {
+    floor: {
+      meanFloorEnergyEff: number;
+      meanFloorEnvironmentalEff: number;
+    },
+    lighting: {
+        meanLightingEnergyEff: number;
+        meanLightingEnvironmentalEff: number;
+    },
+    heating: {
+        meanMainHeatingEnergyEff: number;
+        meanMainHeatingEnvironmentalEff: number;
+    },
+    water: {
+        meanWaterEnergyEff: number;
+        meanWaterEnvironmentalEff: number;
+    },
+    roof: {
+        meanRoofEnergyEff: number;
+        meanRoofEnvironmentalEff: number;
+    },
+    walls: {
+        meanWallsEnvironmentalEff: number;
+        meanWallsEnergyEff: number;
+    },
+    windows: {
+        meanWindowsEnergyEff: number;
+        meanWindowsEnvironmentalEff: number;
+    }
+  }
 }
 
 export interface epcRecommendationObject {

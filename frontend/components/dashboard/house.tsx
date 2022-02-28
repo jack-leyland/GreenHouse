@@ -1,17 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import Card from "../generic/card";
-import { GiWindow, GiWaterDrop, GiFireplace } from "react-icons/gi";
-import { BsLightbulb } from "react-icons/bs";
-import FeatureCard from "./featureCard";
-import type { epcCertificateObject } from "../../types";
+import React from 'react';
+import { useState } from 'react';
+import Card from '../generic/card';
+import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
+import { BsLightbulb } from 'react-icons/bs';
+import FeatureCard from './featureCard';
+import type { epcCertificateObject, packagedAnalyticsObject } from '../../types';
 
 interface props {
-  data: epcCertificateObject["House"];
+  data: epcCertificateObject['House'];
+  analytics: packagedAnalyticsObject['house'];
 }
 
-export default function House({ data }: props) {
-  const [sidePanelType, setSidePanelType] = useState<string>("");
+export default function House({ data, analytics }: props) {
+  const [sidePanelType, setSidePanelType] = useState<string>('');
 
   return (
     <div className="flex flex-col w-full h-full px-6 gap-6 pb-6 relative">
@@ -117,7 +118,7 @@ export default function House({ data }: props) {
 
       <div className="w-full h-full relative">
         <div className="w-full h-full absolute">
-          <FeatureCard data={data} type={sidePanelType} />
+          <FeatureCard data={data} type={sidePanelType} analytics={analytics}/>
         </div>
       </div>
     </div>

@@ -1,14 +1,15 @@
-import React from "react";
-import ReactTooltip from "react-tooltip";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { BarChart, Bar, XAxis, Tooltip } from "recharts";
-import { epcCertificateObject } from "../../types";
+import React from 'react';
+import ReactTooltip from 'react-tooltip';
+import { AiFillQuestionCircle } from 'react-icons/ai';
+import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
+import { epcCertificateObject,packagedAnalyticsObject } from '../../types';
 
 interface props {
-  data: epcCertificateObject["House"]["environmental"];
+  data: epcCertificateObject['House']['environmental'];
+  analytics: packagedAnalyticsObject['environmental'];
 }
 
-export default function CarbonSummary({ data }: props) {
+export default function CarbonSummary({ data, analytics }: props) {
   const carbonData = [
     {
       name: "C02 Production",
@@ -30,7 +31,7 @@ export default function CarbonSummary({ data }: props) {
               <AiFillQuestionCircle size={10} />
             </a>
           </div>
-          <div className="h-full flex justify-center items-center pt-8">
+          <div className="h-full flex justify-center items-center pt-2">
             <BarChart
               layout="horizontal"
               width={150}
@@ -46,21 +47,23 @@ export default function CarbonSummary({ data }: props) {
           </div>
         </div>
 
-        <div className="w-7/12 border border-r-0 border-y-0">
+        <div className="w-full border border-r-0 border-y-0">
           <div className="pb-1 text-sm px-4 ">
             <strong>How you compare:</strong>
           </div>
           <div>
             <div className="px-4 py-1">
               <div className="py-1">
-                You are in the bottom/top % of emitters in your area, and emit
-                ... less/more than the average U.K. household
+                Your current CO<sub>2</sub> production is {data.co2EmissionsCurrent} Kg per year. 
               </div>
               <div className="py-1">
+                The average for your area is {analytics.meanCurrentCo2Consumption} Kg per year.
+              </div>
+              <div className="pt-3">
                 After implementing improvements you could reduce your emssions
-                to {data.co2EmissionsPotential}{" "}
+                to {data.co2EmissionsPotential}{" "} Kg per year.
               </div>
-              <div className="py-1">
+              <div className="py-2">
                 This C0<sub>2</sub> reduction is equivalent to ...
               </div>
             </div>

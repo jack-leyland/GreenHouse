@@ -1,30 +1,32 @@
-import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
-import Layout from "../components/generic/layout";
-import Sidebar from "../components/sidebar";
-import Card from "../components/generic/card";
-import House from "../components/dashboard/house";
-import PageTitle from "../components/generic/pageTitle";
-import Lottie from "react-lottie-player";
-import { useAppContext } from "../context/state";
-import loadingJson from "../assets/animations/animation/loading.json";
-import errorJson from "../assets/animations/animation/error.json";
-import { GET_CERTIFICATES } from "./api/queries";
-import { useQuery } from "@apollo/client";
-import EpcChart from "../components/dashboard/epcChart";
-import Modal from "../components/generic/modal";
-import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
-import CostSummary from "../components/dashboard/costSummary";
-import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
-import CarbonSummary from "../components/dashboard/carbonSummary";
-import FlippableCard from "../components/generic/flippableCard";
-import packageDashboardDataByComponent from "../utils/packageDashboardDataByComponent";
+import type { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
+import Layout from '../components/generic/layout';
+import Sidebar from '../components/sidebar';
+import Card from '../components/generic/card';
+import House from '../components/dashboard/house';
+import PageTitle from '../components/generic/pageTitle';
+import Lottie from 'react-lottie-player';
+import { useAppContext } from '../context/state';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
+import { GET_CERTIFICATES } from './api/queries';
+import { useQuery } from '@apollo/client';
+import EpcChart from '../components/dashboard/epcChart';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import CostSummary from '../components/dashboard/costSummary';
+import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
+import CarbonSummary from '../components/dashboard/carbonSummary';
+import FlippableCard from '../components/generic/flippableCard';
+import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
+import packageAnaylytics from '../utils/packageAnalytics';
 
 const Main = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
   //type checking happens when this object is pacakged in above function, so any is fine here
   const [dashboardData, setDashboardData] = useState<any>();
+  const [analyticsData, setAnalyticsData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
@@ -49,6 +51,15 @@ const Main = () => {
   }, [data]);
 
   useEffect(() => {
+    if (data) {
+      if(data.analytics) {
+        let analyticsData = packageAnaylytics(data.analytics);
+        setAnalyticsData(analyticsData);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
     if (error) {
       setIsQueryError(true);
     }
@@ -65,7 +76,7 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
-  console.log(data);
+  console.log(data)
   return (
     <>
       {dashboardData ? (
@@ -76,8 +87,8 @@ const Main = () => {
             onClick={() => setShowModal(true)}
           />
 
-          <div className="h-full grid grid-cols-10 grid-rows-7 p-8 gap-4">
-            <div className="flex flex-col row-start-1 row-end-7 col-start-1 col-end-6 gap-4">
+          <div className="h-full flex p-8 w-full gap-4">
+            <div className="flex flex-col w-1/2 gap-4">
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
@@ -85,38 +96,38 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart data={dashboardData.Main} />
+                    <EpcChart data={dashboardData.Main} analytics={analyticsData.main}/>
                   </div>
                 }
-                back={<CostSummary data={dashboardData.House.costs} />}
+                back={<CostSummary data={dashboardData.House.costs} analytics={analyticsData.cost} />}
               />
 
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
-                frontTitle="Energy Consumption"
-                backTitle="Emissions"
+                frontTitle="Emissions"
+                backTitle="Energy Consumption"
+                front={
+                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
+                }
                 back={
                   <EnvironmentalSummary
                     data={dashboardData.House.consumptionEnvEff}
                   />
-                }
-                front={
-                  <CarbonSummary data={dashboardData.House.environmental} />
                 }
               />
             </div>
 
             <Card
               style={
-                "relative pt-2 col-start-6 col-end-11 row-start-1 row-end-7 border"
+                'relative pt-2 w-1/2 border'
               }
               disableHoverAnimation={true}
               showShadow={false}
               minDims={{ w: "440px", h: "566px" }}
             >
               <div className="flex justify-center h-full min-w-full">
-                <House data={dashboardData.House} />
+                <House data={dashboardData.House} analytics={analyticsData.house}/>
               </div>
             </Card>
           </div>
@@ -149,7 +160,6 @@ const Main = () => {
                     Oops, there was an error, try again later...
                   </h1>
                   <Lottie
-                    loop
                     animationData={errorJson}
                     play
                     style={{ width: 150, height: 150 }}

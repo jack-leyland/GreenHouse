@@ -3,14 +3,15 @@ import Card from "../generic/card";
 import Lottie from "react-lottie-player";
 import json from "../../assets/animations/animation/up-arrow.json";
 import StarRating from "../generic/starRating";
-import { epcCertificateObject } from "../../types";
+import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
 
 interface props {
   type: string;
-  data: epcCertificateObject["House"];
+  data: epcCertificateObject['House'];
+  analytics: packagedAnalyticsObject['house'];
 }
 
-export default function FeatureCard({ data, type }: props) {
+export default function FeatureCard({ data, type, analytics }: props) {
   switch (type) {
     case "Walls":
       return (
@@ -37,7 +38,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.walls.wallsEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.walls?.meanWallsEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -46,7 +47,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.wallsEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.walls?.meanWallsEnvironmentalEff}
               />
             </div>
           </div>
@@ -76,7 +77,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.roof.roofEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.roof?.meanRoofEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -85,7 +86,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.roofEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.roof?.meanRoofEnvironmentalEff}
               />
             </div>
           </div>
@@ -117,7 +118,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.floor.floorEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.floor?.meanFloorEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -126,7 +127,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.floorEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.floor?.meanFloorEnvironmentalEff}
               />
             </div>
           </div>
@@ -170,7 +171,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.lighting.lightingEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.lighting.meanLightingEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -179,7 +180,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.lightingEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.lighting.meanLightingEnvironmentalEff}
               />
             </div>
           </div>
@@ -193,14 +194,18 @@ export default function FeatureCard({ data, type }: props) {
           disableHoverAnimation={true}
           showShadow={true}
         >
-          <>
-            <div>
-              <div className="text-xl font-bold p-2">{type}</div>
-              <div className="p-2">
+        <div>
+            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+              {type}
+            </div>
+            <div className="p-2 text-sm">
+
+                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Main Heating</div>
+
                 <div className="py-2">
-                  <b>Heat Loss Corridor:</b>{" "}
-                  {data?.heating.general.heatLossCorridor
-                    ? data?.heating.general.heatLossCorridor
+                  <b>Main Heat Description:</b>{" "}
+                  {data?.heating.mainHeating.mainHeatDescription
+                    ? data?.heating.mainHeating.mainHeatDescription
                     : "N/A"}
                 </div>
                 <div className="py-2">
@@ -211,8 +216,58 @@ export default function FeatureCard({ data, type }: props) {
                 </div>
                 <div className="py-2">
                   <b>Heating Cost Potential:</b>{" "}
-                  {data?.lighting.lightingEnergyEff
-                    ? data?.lighting.lightingEnergyEff
+                  {data?.costs.heatingCostPotential
+                    ? data?.costs.heatingCostPotential
+                    : "N/A"}
+                </div>
+
+              <StarRating
+                title={"Energy Efficiency"}
+                rating={
+                  data?.heating.mainHeating.mainHeatEnergyEff
+                    ? parseInt(data?.heating.mainHeating.mainHeatEnergyEff)
+                    : 0
+                }
+                areaAverage={analytics?.heating.meanMainHeatingEnergyEff}
+              />
+              <StarRating
+                title={"Environmental Efficiency"}
+                rating={
+                  data?.consumptionEnvEff.mainHeatEnvEff
+                    ? parseInt(data?.consumptionEnvEff.mainHeatEnvEff)
+                    : 0
+                }
+                areaAverage={analytics?.heating.meanMainHeatingEnvironmentalEff}
+              />
+
+                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Heating Control</div>
+
+                <div className="py-2">
+                  <b>Main Heating Control Description:</b>{" "}
+                  {data?.heating.mainHeatingControls.mainHeatControlDescription
+                    ? data?.heating.mainHeatingControls
+                        .mainHeatControlDescription
+                    : "N/A"}
+                </div>
+                <div className="py-2">
+                  <b>Heating Control Energy Efficiency:</b>{" "}
+                  {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    : "N/A"}
+                </div>
+                <div className="py-2">
+                  <b>Heating Control Environmental Efficiency:</b>{" "}
+                  {data?.consumptionEnvEff.mainHeatControlEnvEff
+                    ? data?.consumptionEnvEff.mainHeatControlEnvEff
+                    : "N/A"}
+                </div>
+
+                
+                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Fuel</div>
+                <div className="py-2">
+                  <b>Main Fuel:</b>{" "}
+                  {data?.heating.mainHeating.mainFuel
+                    ? data?.heating.mainHeating.mainFuel
                     : "N/A"}
                 </div>
                 <div className="py-2">
@@ -221,10 +276,18 @@ export default function FeatureCard({ data, type }: props) {
                     ? data?.heating.general.mainsGasFlag
                     : "N/A"}
                 </div>
+
+                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Thermodynamics</div>
                 <div className="py-2">
                   <b>Number of Heated Rooms:</b>{" "}
                   {data?.heating.general.numberHeatedRooms
                     ? data?.heating.general.numberHeatedRooms
+                    : "N/A"}
+                </div>
+                <div className="py-2">
+                  <b>Heat Loss Corridor:</b>{' '}
+                  {data?.heating.general.heatLossCorridor
+                    ? data?.heating.general.heatLossCorridor
                     : "N/A"}
                 </div>
                 <div className="py-2">
@@ -233,69 +296,25 @@ export default function FeatureCard({ data, type }: props) {
                     ? data?.heating.general.unheatedCorridorLength
                     : "N/A"}
                 </div>
-                <div>Main Heating</div>
-                <div className="py-2">
-                  <b>Main Fuel:</b>{" "}
-                  {data?.heating.mainHeating.mainFuel
-                    ? data?.heating.mainHeating.mainFuel
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Main Heat Description:</b>{" "}
-                  {data?.heating.mainHeating.mainHeatDescription
-                    ? data?.heating.mainHeating.mainHeatDescription
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Main Heat Energy Efficiency:</b>{" "}
-                  {data?.heating.mainHeating.mainHeatEnergyEff
-                    ? data?.heating.mainHeating.mainHeatEnergyEff
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Main Heat Environmental Efficiency:</b>{" "}
-                  {data?.consumptionEnvEff.mainHeatEnvEff
-                    ? data?.consumptionEnvEff.mainHeatEnvEff
-                    : "N/A"}
-                </div>
 
-                <div>Main Heating</div>
-                <div className="py-2">
-                  <b>Main :</b>{" "}
-                  {data?.heating.mainHeatingControls.mainHeatControlDescription
-                    ? data?.heating.mainHeatingControls
-                        .mainHeatControlDescription
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>mainHeatControlEnergyEff:</b>{" "}
-                  {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>mainHeatControlEnvEff:</b>{" "}
-                  {data?.consumptionEnvEff.mainHeatControlEnvEff
-                    ? data?.consumptionEnvEff.mainHeatControlEnvEff
-                    : "N/A"}
-                </div>
 
-                <div>Main Heating</div>
+
+                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Secondary Heating</div>
                 <div className="py-2">
-                  <b>secondaryHeatingEnergyEff:</b>{" "}
-                  {data?.heating.secondaryHeating.secondaryHeatingEnergyEff
-                    ? data?.heating.secondaryHeating.secondaryHeatingEnergyEff
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>secondheatDescription:</b>{" "}
+                  <b>Secondary Heating Description:</b>{" "}
                   {data?.heating.secondaryHeating.secondheatDescription
                     ? data?.heating.secondaryHeating.secondheatDescription
                     : "N/A"}
                 </div>
-              </div>
+                <div className="py-2">
+                  <b>Secondary Heating Energy Efficiency:</b>{" "}
+                  {data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                    ? data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                    : "N/A"}
+                </div>
+
             </div>
-          </>
+          </div>
         </Card>
       );
 
@@ -337,7 +356,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.water.hotWaterEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -346,7 +365,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.hotWaterEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
               />
             </div>
           </div>
@@ -394,7 +413,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.windows.windowsEnergyEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnergyEff}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -403,7 +422,7 @@ export default function FeatureCard({ data, type }: props) {
                     ? parseInt(data?.consumptionEnvEff.windowsEnvEff)
                     : 0
                 }
-                areaAverage={0}
+                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
               />
             </div>
           </div>
