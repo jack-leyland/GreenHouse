@@ -45,7 +45,7 @@ export default function AddressList({
     <div className="h-[50vh] w-[35vw] max-w-[450px] min-w-[250px] rounded-default border-lightGrey bg-lightGrey drop-shadow-md">
       <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-default font-bold font-logoFont">
         <BackButton
-          className="h-[35px] w-[35px] fill-black absolute left-[10px] transistion-all duration-100 hover:h-[45px] hover:w-[45px]"
+          className="h-[35px] w-[35px] fill-red-600 absolute left-[10px] transistion-all duration-100 hover:h-[45px] hover:w-[45px]"
           onClick={backHandler}
         />
         Select your address

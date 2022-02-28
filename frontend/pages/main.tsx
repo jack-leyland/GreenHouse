@@ -47,12 +47,18 @@ const Main = () => {
     if (data) {
       let packagedData = packageDashboardDataByComponent(data.certificate);
       setDashboardData(packagedData);
+
+      //Update/set extra house info cache for use on other pages,
+      //may be better way to deal with this, but this'll do for now
+      GlobalContext.setExtraHouseInfo(packagedData.ExtraInfo);
     }
   }, [data]);
 
+  console.log(localStorage);
+
   useEffect(() => {
     if (data) {
-      if(data.analytics) {
+      if (data.analytics) {
         let analyticsData = packageAnaylytics(data.analytics);
         setAnalyticsData(analyticsData);
       }
@@ -65,7 +71,7 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = "";
+  let fullAddressString = '';
 
   if (dashboardData) {
     let addressElements = [
@@ -74,15 +80,15 @@ const Main = () => {
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(", ");
+    fullAddressString = addressElements.join(', ');
   }
-  console.log(data)
+
   return (
     <>
       {dashboardData ? (
         <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
-            title={"Dashboard"}
+            title={'Dashboard'}
             subtitle={fullAddressString}
             onClick={() => setShowModal(true)}
           />
@@ -96,10 +102,18 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart data={dashboardData.Main} analytics={analyticsData.main}/>
+                    <EpcChart
+                      data={dashboardData.Main}
+                      analytics={analyticsData.main}
+                    />
                   </div>
                 }
-                back={<CostSummary data={dashboardData.House.costs} analytics={analyticsData.cost} />}
+                back={
+                  <CostSummary
+                    data={dashboardData.House.costs}
+                    analytics={analyticsData.cost}
+                  />
+                }
               />
 
               <FlippableCard
@@ -108,7 +122,10 @@ const Main = () => {
                 frontTitle="Emissions"
                 backTitle="Energy Consumption"
                 front={
-                  <CarbonSummary data={dashboardData.House.environmental} analytics={analyticsData.environmental}/>
+                  <CarbonSummary
+                    data={dashboardData.House.environmental}
+                    analytics={analyticsData.environmental}
+                  />
                 }
                 back={
                   <EnvironmentalSummary
@@ -119,15 +136,16 @@ const Main = () => {
             </div>
 
             <Card
-              style={
-                'relative pt-2 w-1/2 border'
-              }
+              style={'relative pt-2 w-1/2 border'}
               disableHoverAnimation={true}
               showShadow={false}
-              minDims={{ w: "440px", h: "566px" }}
+              minDims={{ w: '440px', h: '566px' }}
             >
               <div className="flex justify-center h-full min-w-full">
-                <House data={dashboardData.House} analytics={analyticsData.house}/>
+                <House
+                  data={dashboardData.House}
+                  analytics={analyticsData.house}
+                />
               </div>
             </Card>
           </div>
