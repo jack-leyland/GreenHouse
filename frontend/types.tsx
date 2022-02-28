@@ -205,6 +205,7 @@ export interface epcCertificateObject extends Object {
 }
 
 export interface epcAnalyticsObject {
+  meanCurrentEnergyRating: string;
   meanCurrentEnergyEfficiency: number;
   meanCurrentEnvironmentImpact: number;
   meanCurrentEnergyConsumption: number;
@@ -243,9 +244,15 @@ export interface epcAnalyticsObject {
 }
 
 export interface packagedAnalyticsObject {
-  environmental: { 
-    meanCurrentEnergyConsumption: number;
+  main: {
+    meanCurrentEnergyEfficiency: number;
+    meanCurrentEnergyRating: string;
   },
+  environmental: { 
+      meanCurrentEnergyConsumption: number;
+      meanCurrentEnvironmentImpact: number;
+      meanCurrentCo2Consumption: number;
+    },
   cost: {
       meanCurrentHeatingCost: number;
       meanCurrentHotWaterCost: number;

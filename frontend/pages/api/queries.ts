@@ -85,6 +85,10 @@ export const GET_CERTIFICATES = gql`
       potentialEnergyEfficiency
     }
     analytics(lmk: $queryParam) {
+      meanCurrentEnergyEfficiency
+      meanCurrentEnergyRating
+      meanCurrentEnvironmentImpact
+      meanCurrentCo2Consumption
       meanCurrentEnergyConsumption
       meanCurrentHeatingCost
       meanCurrentHotWaterCost

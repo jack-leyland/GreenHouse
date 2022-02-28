@@ -76,6 +76,7 @@ const Main = () => {
     ];
     fullAddressString = addressElements.join(", ");
   }
+  console.log(analyticsData)
   return (
     <>
       {dashboardData ? (
@@ -95,7 +96,7 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart data={dashboardData.Main} />
+                    <EpcChart data={dashboardData.Main} analytics={analyticsData.main}/>
                   </div>
                 }
                 back={<CostSummary data={dashboardData.House.costs} analytics={analyticsData.cost} />}
