@@ -367,6 +367,14 @@ export const epcIndexDictionary: EPCDictionary<number> = {
   G: 8,
 };
 
+export const starColors: EPCDictionary<string> = {
+  1: "rgb(239 68 68)",
+  2: "rgb(249 115 22)",
+  3: "rgb(234 179 8)",
+  4: "rgb(132 204 22)",
+  5: "rgb(34 197 94)",
+};
+
 export interface epcCertificateRecs {
   address: string;
   localAuthorityName: string;
