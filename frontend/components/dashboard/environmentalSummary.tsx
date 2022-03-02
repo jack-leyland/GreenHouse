@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
 import { AiFillQuestionCircle } from "react-icons/ai";
-import { GiAirplaneDeparture } from "react-icons/gi";
+import { MdOutlineSmartphone } from "react-icons/md";
 import { GiOilPump } from "react-icons/gi";
 import { AiFillCar } from "react-icons/ai";
 import {
@@ -57,6 +57,11 @@ export default function EnvironmentalSummary({ data }: props) {
     },
   ];
 
+  const internationalNumberFormat = new Intl.NumberFormat('en-US')
+  const barrelsOfOil = Math.round(data.energyConsumptionCurrent * 0.001645)
+  const carJourneys = Math.round(data.energyConsumptionCurrent * 1.78)
+  const phoneCharges = Math.round(data.energyConsumptionCurrent * 86.2)
+
   return (
     <div className="py-2 px-1 min-h-full">
       <div className="flex h-3/4">
@@ -75,18 +80,18 @@ export default function EnvironmentalSummary({ data }: props) {
               {data.energyConsumptionCurrent - data.energyConsumptionPotential}{" "}
               kWh/year. This is equivalent to:
             </div>
-            <div className="flex w-full justify-center gap-2 py-3">
+            <div className="flex w-full justify-center gap-2 py-5">
               <div className="flex flex-col justify-center items-center w-1/3">
-                <GiAirplaneDeparture color={"#78abc4"} size={35} />
-                <p>? plane journeys</p>
+                <MdOutlineSmartphone color={"#78abc4"} size={35} />
+                <p className="text-center">{internationalNumberFormat.format(phoneCharges)} smartphone {phoneCharges > 1 ? "charges" : "charge"} charges</p>
               </div>
               <div className="flex flex-col justify-center items-center w-1/3">
                 <AiFillCar color={"#963041"} size={35} />
-                <p>? car journeys</p>
+                <p className="text-center">{internationalNumberFormat.format(carJourneys)} car {carJourneys > 1 ? "journeys" : "journey"} journeys</p>
               </div>
               <div className="flex flex-col justify-center items-center w-1/3">
                 <GiOilPump color={"black"} size={35} />
-                <p>? barrels of oil</p>
+                <p className="text-center">{internationalNumberFormat.format(barrelsOfOil)} {barrelsOfOil > 1 ? "barrels" : "barrel"} of oil</p>
               </div>
             </div>
           </div>
