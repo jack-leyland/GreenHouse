@@ -25,7 +25,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
               {type}
             </div>
             <div className="p-2 text-sm">
-              <div className="pt-2 pb-3">
+              <div className="py-2">
                 <b>Description:</b>{" "}
                 {data?.walls.wallsDescription
                   ? data.walls.wallsDescription

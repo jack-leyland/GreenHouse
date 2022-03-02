@@ -99,20 +99,30 @@ export default function EpcChart({ data, analytics }: props) {
         </div>
       </div>
 
-      <div className="w-2/6 h-full border border-r-0 border-y-0">
-        <div className="pb-1 text-sm px-4">
+      <div className="w-2/6 h-full border border-r-0 border-y-0 px-4">
+        <div className="pb-1 text-sm">
           <strong>How you compare:</strong>
         </div>
-        <div className="py-1 px-4">
-          Your house has a current rating of <b>{data.currentEnergyRating}</b> with a score of <b>{data.currentEnergyEfficiency}</b>.
+        <div className="pt-3 pb-1 underline font-semibold">
+          Your House
         </div>
-        <div className="py-1 px-4">
-          The average energy rating for houses in your area is <b>{analytics.meanCurrentEnergyRating}</b> with a score of <b>{analytics.meanCurrentEnergyEfficiency}</b>.
+        <div className="text-sm">
+          Rating: <b>{data.currentEnergyRating}</b>{" "}
+          Score: <b>{data.currentEnergyEfficiency}</b>
         </div>
-        <div className="py-1 px-4">
-          The average energy rating across England and Wales is{" "}
-          <b className={`text-${epcIndexDictionary["D"]}`}>D</b> with a score of{" "}
-          <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
+        <div className="pt-3 pb-1 underline font-semibold">
+          Area Average
+        </div>
+        <div className="text-sm">
+          Rating: <b>{analytics.meanCurrentEnergyRating}</b>{" "}
+          Score: <b>{analytics.meanCurrentEnergyEfficiency}</b>
+        </div>
+        <div className="pt-3 pb-1 underline font-semibold">
+          U.K. Average
+        </div>
+        <div className="text-sm">
+          Rating: <b className={`text-${epcIndexDictionary["D"]}`}>D</b>{" "}
+          Score: <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
         </div>
       </div>
     </div>
