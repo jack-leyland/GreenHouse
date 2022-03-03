@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Field, Form, FormikHelpers } from "formik";
-import { epcRecommendationObject } from "../types";
-import { gql, useMutation } from "@apollo/client";
-import { useAppContext } from "../context/state";
-import { MdColorLens } from "react-icons/md";
-import { HeatingCategories } from "../types";
+import React, { useEffect, useState } from 'react';
+import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { epcRecommendationObject } from '../../types';
+import { gql, useMutation } from '@apollo/client';
+import { useAppContext } from '../../context/state';
+import { MdColorLens } from 'react-icons/md';
+import { HeatingCategories } from '../../types';
 
 interface Values {
   cost: number;
@@ -13,7 +13,7 @@ interface Values {
   lmkKey: string;
 }
 interface props {
-  key: number;
+  key: string;
   recs: epcRecommendationObject;
 }
 
@@ -43,7 +43,7 @@ const ADD_IMPROVEMENT = gql`
 
 export default function Recommendation(props: props) {
   const [showForm, setShowForm] = useState(false);
-  const [lmk, setLmk] = useState<string>("");
+  const [lmk, setLmk] = useState<string>('');
   const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
@@ -59,17 +59,17 @@ export default function Recommendation(props: props) {
   const category: string = HeatingCategories[props.recs.improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
-    case "Heating":
-      color = "bg-red-500";
+    case 'Heating':
+      color = 'bg-red-500';
       break;
-    case "Water":
-      color = "bg-blue-500";
+    case 'Water':
+      color = 'bg-blue-500';
       break;
-    case "Lighting":
-      color = "bg-yellow-500";
+    case 'Lighting':
+      color = 'bg-yellow-500';
       break;
-    case "Other":
-      color = "bg-slate-500";
+    case 'Other':
+      color = 'bg-slate-500';
       break;
   }
 
@@ -80,7 +80,7 @@ export default function Recommendation(props: props) {
     <div className="flex flex-row p-4 mx-10">
       <div
         className={
-          "h-full rounded-lg border-2 text-white flex flex-col relative overflow-hidden w-72 " +
+          'h-full rounded-lg border-2 text-white flex flex-col relative overflow-hidden w-72 ' +
           color
         }
       >
@@ -99,11 +99,11 @@ export default function Recommendation(props: props) {
           <button
             onClick={() => setShowForm(!showForm)}
             className={
-              "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
-              (showForm ? "bg-red-200" : "bg-white")
+              'flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold ' +
+              (showForm ? 'bg-red-200' : 'bg-white')
             }
           >
-            {showForm ? "Cancel" : "I've done this!"}
+            {showForm ? 'Cancel' : "I've done this!"}
           </button>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function Recommendation(props: props) {
         <div className="w-full">
           <div
             className={
-              "h-full p-6 rounded-lg border-2 text-white flex flex-col relative overflow-hidden " +
+              'h-full p-6 rounded-lg border-2 text-white flex flex-col relative overflow-hidden ' +
               color
             }
           >
@@ -123,7 +123,7 @@ export default function Recommendation(props: props) {
               <Formik
                 initialValues={{
                   cost: 0,
-                  date: "",
+                  date: '',
                   lmkKey: lmk,
                   improvementId: props.recs.improvementId,
                 }}
@@ -180,7 +180,7 @@ export default function Recommendation(props: props) {
                     disabled={data ? true : false}
                     className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
                   >
-                    {data ? "You've already told us!" : "Submit"}
+                    {data ? "You've already told us!" : 'Submit'}
                   </button>
                 </Form>
               </Formik>
