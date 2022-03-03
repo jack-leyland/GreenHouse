@@ -94,24 +94,24 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
         <div className="pb-1 text-sm">
           <strong>How you compare:</strong>
         </div>
-        <div className="pt-3 pb-1 font-semibold text-sm">
+        <div className="pt-4 italic text-sm">
           Your House
         </div>
-        <div className="border border-x-0 border-t-0 py-1">
+        <div className="border border-x-0 border-t-0">
           Rating: <b>{data.currentEnergyRating}</b>{" "}
           Score: <b>{data.currentEnergyEfficiency}</b>
         </div>
-        <div className="pt-1 pb-1 font-semibold text-sm">
+        <div className="pt-4 italic text-sm">
           Area Average
         </div>
-        <div className="border border-x-0 border-t-0 py-1">
+        <div className="border border-x-0 border-t-0">
           Rating: <b>{analytics.meanCurrentEnergyRating}</b>{" "}
           Score: <b>{analytics.meanCurrentEnergyEfficiency}</b>
         </div>
-        <div className="pt-1 pb-1 font-semibold text-sm">
+        <div className="pt-4 italic text-sm">
           U.K. Average:
         </div>
-        <div className="py-1">
+        <div className="">
           Rating: <b className={`text-${epcIndexDictionary["D"]}`}>D</b>{" "}
           Score: <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
         </div>
