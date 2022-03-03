@@ -1,5 +1,4 @@
-import React from "react";
-import ReactTooltip from "react-tooltip";
+import React, {Dispatch, SetStateAction} from "react";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { MdOutlineSmartphone } from "react-icons/md";
 import { GiOilPump } from "react-icons/gi";
@@ -16,9 +15,10 @@ import { epcCertificateObject } from "../../types";
 
 interface props {
   data: epcCertificateObject["House"]["consumptionEnvEff"];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function EnvironmentalSummary({ data }: props) {
+export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   const featureData = [
     {
       feature: "Floor",
@@ -102,10 +102,7 @@ export default function EnvironmentalSummary({ data }: props) {
         <div className="w-5/12 border border-r-0 border-y-0">
           <div className="flex items-center mx-2">
             <span className="mr-2">Feature Environmental Efficiency</span>
-            <ReactTooltip effect="solid" />
-            <a data-tip="Each component of your house is given an environmental efficiency rating out of 5">
-              <AiFillQuestionCircle size={10} />
-            </a>
+              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("featureEfficiency")} size={10} />
           </div>
           <div className="flex justify-center align-center">
             <RadarChart

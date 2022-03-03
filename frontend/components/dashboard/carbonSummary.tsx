@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactTooltip from 'react-tooltip';
+import React, {Dispatch, SetStateAction} from 'react';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 import { epcCertificateObject,packagedAnalyticsObject } from '../../types';
@@ -8,9 +7,10 @@ import {AiOutlineArrowRight} from 'react-icons/ai';
 interface props {
   data: epcCertificateObject['House']['environmental'];
   analytics: packagedAnalyticsObject['environmental'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function CarbonSummary({ data, analytics }: props) {
+export default function CarbonSummary({ data, analytics, setModalHandler }: props) {
   const carbonData = [
     {
       name: "C02 Production",
@@ -27,10 +27,7 @@ export default function CarbonSummary({ data, analytics }: props) {
             <span className="mr-2">
               CO<sub>2</sub> Production
             </span>
-            <ReactTooltip effect="solid" />
-            <a data-tip="The amount of carbon dioxide produced by your house in kg/year">
-              <AiFillQuestionCircle size={10} />
-            </a>
+              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("carbonProduction")} size={10} />
           </div>
           <div className="h-full flex justify-center items-center pt-2">
             <BarChart

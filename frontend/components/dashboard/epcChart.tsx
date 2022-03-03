@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 //Might move these out of types (below)
 import {
   epcCertificateObject,
@@ -7,14 +7,14 @@ import {
   packagedAnalyticsObject,
 } from "../../types";
 import { AiFillQuestionCircle } from "react-icons/ai";
-import ReactTooltip from "react-tooltip";
 
 interface props {
   data: epcCertificateObject["Main"];
   analytics: packagedAnalyticsObject['main'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function EpcChart({ data, analytics }: props) {
+export default function EpcChart({ data, analytics, setModalHandler }: props) {
   const currentRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 text-center col-start-1 px-1 my-1 h-full row-start-${
     epcIndexDictionary[data.currentEnergyRating]
   } bg-${epcColorDictionary[data.currentEnergyRating]}`;
@@ -25,12 +25,9 @@ export default function EpcChart({ data, analytics }: props) {
   return (
     <div className="flex h-5/6">
       <div className="grid rating-grid w-2/6 h-full">
-        <ReactTooltip effect="solid" />
         <div className="row-start-1 flex items-center">
           <span className="mr-2">EPC Rating Chart</span>
-          <a data-tip="Properties are given a rating from A (most efficient) to G (least efficient).">
-            <AiFillQuestionCircle size={10} />
-          </a>
+            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("epcChart")}/>
         </div>
 
         <div className="w-4/12 my-1 row-start-2">
@@ -79,17 +76,11 @@ export default function EpcChart({ data, analytics }: props) {
       <div className="w-2/6 h-full grid rating-grid grid-cols-2">
         <div className="row-start-1 text-xs col-start-1 flex items-center justify-center">
           <span className="pr-1">Current</span>
-          <ReactTooltip effect="solid" />
-          <a data-tip="The current performance rating of your house">
-            <AiFillQuestionCircle size={10} />
-          </a>
+            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("currentRating")}/>
         </div>
         <div className="row-start-1 text-xs col-start-2 flex items-center justify-center">
           <span className="pr-1">Potential</span>
-          <ReactTooltip effect="solid" />
-          <a data-tip="The rating you could achieve if all improvements are made">
-            <AiFillQuestionCircle size={10} />
-          </a>
+            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("potentialRating")}/>
         </div>
         <div className={currentRatingIndexStyle}>
           {data.currentEnergyEfficiency} | {data.currentEnergyRating}

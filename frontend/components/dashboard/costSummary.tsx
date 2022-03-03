@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import { GiWaterDrop, GiFireplace } from 'react-icons/gi';
 import { BsLightbulb } from 'react-icons/bs';
 import { epcCertificateObject, packagedAnalyticsObject } from '../../types';
@@ -7,9 +7,10 @@ import {AiOutlineArrowRight} from 'react-icons/ai';
 interface props {
   data: epcCertificateObject['House']['costs'];
   analytics: packagedAnalyticsObject['cost'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function CostSummary({ data, analytics }: props) {
+export default function CostSummary({ data, analytics, setModalHandler }: props) {
   return (
     <div className="py-2 h-full">
       <div className="flex h-3/4">
@@ -26,7 +27,7 @@ export default function CostSummary({ data, analytics }: props) {
               <div>
                 Potential Cost: <b>{data.heatingCostPotential}</b>  £/year
               </div>
-              <div className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
+              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
             </div>
             <div className="h-1/3">
               <div className="py-1 underline">In Your Area</div>
@@ -49,7 +50,7 @@ export default function CostSummary({ data, analytics }: props) {
               <div>
                 Potential Cost: <b>{data.hotWaterCostPotential}</b>  £/year
               </div>
-              <div className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
+              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
             </div>
             <div className="h-1/3">
               <div className="py-1 underline">In Your Area</div>
@@ -72,7 +73,7 @@ export default function CostSummary({ data, analytics }: props) {
               <div>
                 Potential Cost: <b>{data.lightingCostPotential}</b>  £/year
               </div>
-              <div className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
+              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
             </div>
             <div className="h-1/3">
               <div className="py-1 underline">In Your Area</div>
