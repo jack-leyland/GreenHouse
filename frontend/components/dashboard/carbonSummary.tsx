@@ -27,7 +27,7 @@ export default function CarbonSummary({ data, analytics, setModalHandler }: prop
             <span className="mr-2">
               CO<sub>2</sub> Production
             </span>
-              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("carbonProduction")} size={10} />
+              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("carbonProduction")} size={13} />
           </div>
           <div className="h-full flex justify-center items-center pt-2">
             <BarChart

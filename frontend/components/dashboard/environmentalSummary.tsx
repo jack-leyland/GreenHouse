@@ -102,7 +102,7 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
         <div className="w-5/12 border border-r-0 border-y-0">
           <div className="flex items-center mx-2">
             <span className="mr-2">Feature Environmental Efficiency</span>
-              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("featureEfficiency")} size={10} />
+              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("featureEfficiency")} size={13} />
           </div>
           <div className="flex justify-center align-center">
             <RadarChart

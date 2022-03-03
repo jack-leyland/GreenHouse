@@ -27,7 +27,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
       <div className="grid rating-grid w-2/6 h-full">
         <div className="row-start-1 flex items-center">
           <span className="mr-2">EPC Rating Chart</span>
-            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("epcChart")}/>
+            <AiFillQuestionCircle size={13} className="hover:cursor-pointer" onClick={()=>setModalHandler("epcChart")}/>
         </div>
 
         <div className="w-4/12 my-1 row-start-2">
@@ -76,11 +76,11 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
       <div className="w-2/6 h-full grid rating-grid grid-cols-2">
         <div className="row-start-1 text-xs col-start-1 flex items-center justify-center">
           <span className="pr-1">Current</span>
-            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("currentRating")}/>
+            <AiFillQuestionCircle size={13} className="hover:cursor-pointer" onClick={()=>setModalHandler("currentRating")}/>
         </div>
         <div className="row-start-1 text-xs col-start-2 flex items-center justify-center">
           <span className="pr-1">Potential</span>
-            <AiFillQuestionCircle size={10} className="hover:cursor-pointer" onClick={()=>setModalHandler("potentialRating")}/>
+            <AiFillQuestionCircle size={13} className="hover:cursor-pointer" onClick={()=>setModalHandler("potentialRating")}/>
         </div>
         <div className={currentRatingIndexStyle}>
           {data.currentEnergyEfficiency} | {data.currentEnergyRating}
