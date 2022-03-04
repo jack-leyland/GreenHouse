@@ -74,7 +74,7 @@ const Landing = () => {
     }
   };
 
-  const handleSearchInput = (inputValue: string) => {
+  const handleSearchInput = (inputValue: string): void => {
     setSearchBoxText(inputValue);
     if (!inputValue) {
       setIsInputError(false);

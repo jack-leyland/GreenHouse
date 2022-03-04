@@ -19,6 +19,7 @@ module.exports = {
       },
       colors: {
         logoGreen: "#09E85E",
+        logoGreenLight: "rgba(9, 232, 94, .4)",
         lightGreen: "#2AFC98",
         emerald: "#16C172",
         skyBlue: "#2DE1FC",
@@ -38,7 +39,7 @@ module.exports = {
         logoFont: ["Inter", "sans-serif"],
       },
       animation: {
-        fade: "fadeInGrow 2s ease-in-out",
+        fade: "fadeInGrow 0.5s ease-in-out",
         shake: "shake .5s linear",
         widthGrow: "widthGrow 3s ease-in-out forwards",
         flyUp: "flyUp 4s ease-in-out forwards",

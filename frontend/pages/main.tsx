@@ -54,8 +54,6 @@ const Main = () => {
     }
   }, [data]);
 
-  console.log(localStorage);
-
   useEffect(() => {
     if (data) {
       if (data.analytics) {

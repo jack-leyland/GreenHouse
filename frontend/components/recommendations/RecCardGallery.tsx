@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { epcRecommendationObject } from '../../types';
 import Recommendation from './recommendationCard';
 import { v4 as uuid } from 'uuid';
+import Arrow from '../../assets/arrow-left.svg';
 
 interface props {
   data: Array<Array<epcRecommendationObject>>;
 }
 
-// Make landing back button more prominent
-// More info button needs to be more prominent
+//BIG TODO: Each recommendation needs a completed flag from backend
+
 export default function RecCostSummary({ data }: props) {
   const [activePage, setActivePage] = useState<number>(0);
   const [activePageRecs, setActivePageRecs] = useState<
@@ -20,37 +21,86 @@ export default function RecCostSummary({ data }: props) {
 
   useEffect(() => {
     setActivePageRecs(recData[activePage]);
-  }, [recData]);
+  }, [recData, activePage]);
 
-  useEffect(() => {}, [activePage]);
+  function handlePageChange(newPgNum: number) {
+    if (newPgNum >= recData.length) return;
+    setActivePage(newPgNum);
+  }
+
+  //It's worth noting that this will not handle large amounts of pages
+  //I'm assuming here that there wont be more than like 12 recommendations or so
+  let pageButtons: JSX.Element[] = [];
+  for (var i = 0; i < data.length; i++) {
+    let isActive = i == activePage ? true : false;
+    pageButtons.push(
+      <PageButton
+        key={uuid()}
+        pgNum={i}
+        handler={handlePageChange}
+        isActive={isActive}
+      />
+    );
+  }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full relative flex-row justify-center">
       <div className="w-full h-[10%] max-h-[50px] flex justify-center">
-        <div className="w-[95%] p-3 flex rounded-default bg-gray-200">
-          <div className="w-[50%] flex ">
-            <span className="mr-2 border-b-2 border-gray-900">Outstanding</span>
-            <span>Completed</span>
+        <div className="w-[95%] flex items-center rounded-default bg-gray-200 pr-2 pl-2">
+          <div className="w-[50%] h-[100%] flex items-center">
+            <span className="h-[100%] mr-2 pl-2 pr-2 flex items-center rounded-default">
+              Outstanding
+            </span>
+            <span className="h-[100%] mr-2 pl-2 pr-2 flex items-center rounded-default">
+              Completed
+            </span>
           </div>
-          <div className="w-[50%] pr-9 flex justify-end">
+          <div className="max-w-[50%] w-[50%] h-[100%] pr-2 flex justify-end items-center">
             <span className="mr-2">Page: </span>
-            <span className="mr-2 border-b-2 border-gray-900">1</span>
-            <span>2</span>
+            {pageButtons.map((elem, index) => {
+              return pageButtons[index];
+            })}
+            <Arrow
+              className=" ml-2 h-[25px] w-[25px] rotate-180 fill-gray-700 rounded-default hover:bg-logoGreenLight cursor-pointer"
+              onClick={() => handlePageChange(activePage + 1)}
+            />
           </div>
         </div>
       </div>
-      <div className="flex h-[85%] justify-center mt-2">
-        {/* This is mildy hacky, might change later */}
-        {activePageRecs[0] ? (
-          <Recommendation recs={activePageRecs[0]} key={uuid()} />
-        ) : null}
-        {activePageRecs[1] ? (
-          <Recommendation recs={activePageRecs[1]} key={uuid()} />
-        ) : null}
-        {activePageRecs[2] ? (
-          <Recommendation recs={activePageRecs[2]} key={uuid()} />
-        ) : null}
+      <div className="w-full h-[85%] flex justify-center animate-fade  ">
+        <div className="flex w-[95%] justify-center mt-2">
+          {/* This is mildy hacky, might change later */}
+          {activePageRecs[0] ? (
+            <Recommendation recs={activePageRecs[0]} key={uuid()} />
+          ) : null}
+          {activePageRecs[1] ? (
+            <Recommendation recs={activePageRecs[1]} key={uuid()} />
+          ) : null}
+          {activePageRecs[2] ? (
+            <Recommendation recs={activePageRecs[2]} key={uuid()} />
+          ) : null}
+        </div>
       </div>
     </div>
+  );
+}
+
+interface pageButtonProps {
+  pgNum: number;
+  isActive: boolean;
+  handler: (pgNum: number) => void;
+}
+
+function PageButton({ pgNum, isActive, handler }: pageButtonProps) {
+  let style =
+    'mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] hover:bg-logoGreenLight cursor-pointer';
+  if (isActive) {
+    style =
+      'mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] bg-logoGreenLight font-bold cursor-pointer';
+  }
+  return (
+    <span className={style} onClick={(e) => handler(pgNum)}>
+      {pgNum + 1}
+    </span>
   );
 }

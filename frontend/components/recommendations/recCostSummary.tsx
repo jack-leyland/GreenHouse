@@ -16,7 +16,7 @@ interface props {
 
 export default function RecCostSummary({ data }: props) {
   return (
-    <div className="w-full ml-9 mt-6 mb-6">
+    <div className="w-full ml-9 mt-6 mb-6 animate-fade">
       <div className="grid grid-cols-4 grid-rows-4 gap-1">
         <div className="col-start-1 col-end-3 row-start-1 row-end-1 text-sm tracking-widest title-font mb-1 font-bold">
           <span className="bg-yellow-500 pr-5 mr-5"></span>
