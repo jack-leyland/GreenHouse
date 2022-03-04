@@ -199,3 +199,4 @@ class Improvement(ObjectType):
     cost = Float()
     date = String()
     improvement_id = String()
+    postcode = String()

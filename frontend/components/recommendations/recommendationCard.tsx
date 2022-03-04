@@ -3,7 +3,6 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import { epcRecommendationObject } from "../../types";
 import { gql, useMutation } from "@apollo/client";
 import { useAppContext } from "../../context/state";
-import { MdColorLens } from "react-icons/md";
 import { HeatingCategories } from "../../types";
 
 interface Values {
@@ -11,7 +10,7 @@ interface Values {
   date: string;
   improvementId: string;
   lmkKey: string;
-  // postcode: string;
+  postcode: string;
 }
 interface props {
   key: string;
@@ -88,7 +87,7 @@ export default function Recommendation(props: props) {
 
   if (loading) return <p>Submitting...</p>;
   if (error) return <p>Submission error! ${error.message}</p>;
-
+  console.log(postcode);
   return (
     <div className="flex flex-row p-4 mx-10">
       <div
@@ -139,25 +138,25 @@ export default function Recommendation(props: props) {
                   date: "",
                   lmkKey: lmk,
                   improvementId: props.recs.improvementId,
-                  // postcode: postcode,
+                  postcode: postcode,
                 }}
                 onSubmit={(
                   values: Values,
                   { setSubmitting }: FormikHelpers<Values>
                 ) => {
+                  console.log(values);
                   addImprovement({
                     variables: {
                       lmkKey: values.lmkKey,
                       date: JSON.stringify(values.date),
                       cost: values.cost,
                       improvementId: values.improvementId,
-                      // postcode: values.postcode,
+                      postcode: values.postcode,
                     },
                   });
-                  alert(JSON.stringify(values, null, 2));
                   setTimeout(() => {
                     setSubmitting(false);
-                  }, 500);
+                  }, 1000);
                 }}
               >
                 <Form>

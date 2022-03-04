@@ -9,4 +9,4 @@ class CompletedRecommendation(models.Model):
     improvement_id = models.CharField(max_length=200)
     date = models.CharField(max_length=200)
     cost = models.FloatField()
-    postcode = models.CharField(max_length=16, default="")
+    postcode = models.CharField(max_length=200, default="")
