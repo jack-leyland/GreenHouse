@@ -41,8 +41,8 @@ module.exports = {
         fade: "fadeIn 1.5s ease-in-out",
         fadeInGrow: "fadeInGrow 0.5s ease-in-out",
         shake: "shake .5s linear",
-        widthGrow: "widthGrow 3s ease-in-out forwards",
-        flyUp: "flyUp 4s ease-in-out forwards",
+        widthGrow: "widthGrow 1.5s ease-in-out forwards",
+        flyUp: "flyUp 2s ease-in-out forwards",
       },
       transitionProperty: {
         width: "width",
@@ -58,12 +58,12 @@ module.exports = {
         },
         widthGrow: {
           "0%": { width: 0 },
-          "70%": { width: 0 },
+          "10%": { width: 0 },
           "100%": { width: "100%" },
         },
         flyUp: {
           "0%": { top: "100px", opacity: 0, transform: "scale(1,1)" },
-          "70%": { top: "100px", opacity: 0, transform: "scale(1.1,0.9)" },
+          "50%": { top: "100px", opacity: 0, transform: "scale(1.1,0.9)" },
           "85%": { top: "5px", opacity: 0.75, transform: "scale(1.1,0.9)" },
           "90%": { top: "0px", opacity: 0.8, transform: "scale(1.05,.95)" },
           "95%": { top: "5px", opacity: 0.9, transform: "scale(1.05,.95)" },
