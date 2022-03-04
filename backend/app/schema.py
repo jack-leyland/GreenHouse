@@ -8,6 +8,7 @@ from graphene import (
     Float,
     Boolean,
 )
+from graphene_django import DjangoObjectType
 import requests
 import environ
 import os
@@ -78,12 +79,19 @@ class Mutation(ObjectType):
     add_improvement = AddImprovement.Field()
 
 
+class CompletedRecommendationType(DjangoObjectType):
+    class Meta:
+        model = CompletedRecommendation
+        fields = ("lmk_key", "improvement_id", "date", "cost")
+
+
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
     analytics = Field(Analytics, lmk=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
     big_query = Field(Timeseries)
+    completed_recommendations = Field(List(CompletedRecommendationType),lmk=String(default_value="N/A"))
 
     def resolve_analytics(root, info, lmk):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
@@ -154,5 +162,7 @@ class Query(ObjectType):
         )
         return create_timeseries(local_df)
 
+    def resolve_completed_recommendations(root, info, lmk):
+        return CompletedRecommendation.objects.filter(lmk_key=lmk)
 
 schema = Schema(query=Query, mutation=Mutation)

@@ -20,6 +20,7 @@ import CarbonSummary from '../components/dashboard/carbonSummary';
 import FlippableCard from '../components/generic/flippableCard';
 import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
 import packageAnaylytics from '../utils/packageAnalytics';
+import HelpModal from '../components/dashboard/helpModal';
 
 const Main = () => {
   const GlobalContext = useAppContext();
@@ -28,7 +29,7 @@ const Main = () => {
   const [dashboardData, setDashboardData] = useState<any>();
   const [analyticsData, setAnalyticsData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<string>('');
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -88,7 +89,7 @@ const Main = () => {
           <PageTitle
             title={'Dashboard'}
             subtitle={fullAddressString}
-            onClick={() => setShowModal(true)}
+            onClick={() => setModalContent("address")}
           />
 
           <div className="h-full flex p-8 w-full gap-4">
@@ -100,16 +101,18 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart
-                      data={dashboardData.Main}
-                      analytics={analyticsData.main}
+                    <EpcChart 
+                      data={dashboardData.Main} 
+                      analytics={analyticsData.main} 
+                      setModalHandler={setModalContent}
                     />
                   </div>
                 }
                 back={
-                  <CostSummary
-                    data={dashboardData.House.costs}
-                    analytics={analyticsData.cost}
+                  <CostSummary 
+                    data={dashboardData.House.costs} 
+                    analytics={analyticsData.cost} 
+                    setModalHandler={setModalContent}
                   />
                 }
               />
@@ -120,14 +123,16 @@ const Main = () => {
                 frontTitle="Emissions"
                 backTitle="Energy Consumption"
                 front={
-                  <CarbonSummary
-                    data={dashboardData.House.environmental}
-                    analytics={analyticsData.environmental}
+                  <CarbonSummary 
+                    data={dashboardData.House.environmental} 
+                    analytics={analyticsData.environmental} 
+                    setModalHandler={setModalContent}
                   />
                 }
                 back={
                   <EnvironmentalSummary
                     data={dashboardData.House.consumptionEnvEff}
+                    setModalHandler={setModalContent}
                   />
                 }
               />
@@ -148,9 +153,16 @@ const Main = () => {
             </Card>
           </div>
 
-          {showModal ? (
-            <Modal hideModal={() => setShowModal(false)}>
-              <ExtraHouseInfo data={dashboardData.ExtraInfo} />
+          {modalContent !== "" ? (
+            <Modal hideModal={() => setModalContent("")}>
+              <>
+                {
+                  modalContent === "address" ? <ExtraHouseInfo data={dashboardData.ExtraInfo} /> : null
+                }
+                {
+                  <HelpModal type={modalContent}/>
+                }
+              </>
             </Modal>
           ) : null}
         </div>

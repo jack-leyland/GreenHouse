@@ -39,7 +39,8 @@ module.exports = {
         logoFont: ["Inter", "sans-serif"],
       },
       animation: {
-        fade: "fadeInGrow 0.5s ease-in-out",
+        fade: "fadeIn 1.5s ease-in-out",
+        fadeInGrow: "fadeInGrow 0.5s ease-in-out",
         shake: "shake .5s linear",
         widthGrow: "widthGrow 3s ease-in-out forwards",
         flyUp: "flyUp 4s ease-in-out forwards",
@@ -48,9 +49,13 @@ module.exports = {
         width: "width",
       },
       keyframes: (theme) => ({
-        fadeInGrow: {
+        fadeIn: {
           "0%": { opacity: 0},
           "100%": { opacity: 1 },
+        },
+        fadeInGrow: {
+          "0%": { opacity: 0, transform: "scale(0.8)"},
+          "100%": { opacity: 1, transform: "scale(1)" },
         },
         widthGrow: {
           "0%": { width: 0 },

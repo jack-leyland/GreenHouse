@@ -63,9 +63,9 @@ export default function House({ data, analytics }: props) {
 
           {/*Inner Cards*/}
           <Card
-            style={"col-start-2 col-end-4 row-start-2 row-end-4"}
+            style={"col-start-2 col-end-4 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Windows");
             }}
@@ -76,9 +76,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-4 col-end-6 row-start-2 row-end-4"}
+            style={"col-start-4 col-end-6 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Water");
             }}
@@ -89,9 +89,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-2 col-end-4 row-start-4 row-end-6"}
+            style={"col-start-2 col-end-4 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Heating");
             }}
@@ -102,9 +102,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-4 col-end-6 row-start-4 row-end-6"}
+            style={"col-start-4 col-end-6 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Lighting");
             }}
