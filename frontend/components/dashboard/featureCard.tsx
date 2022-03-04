@@ -12,6 +12,9 @@ interface props {
 }
 
 export default function FeatureCard({ data, type, analytics }: props) {
+
+  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0"
+
   switch (type) {
     case "Walls":
       return (
@@ -21,7 +24,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -62,7 +65,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -101,7 +104,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -142,7 +145,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -195,7 +198,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
         <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -326,7 +329,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
@@ -442,7 +445,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
                   loop
                   animationData={json}
                   play
-                  style={{ height: "70px", width: "70px" }}
+                  style={{ color:"red" , height: "70px", width: "70px" }}
                 />
                 <p>Click On Your House To Find Out More!</p>
               </div>

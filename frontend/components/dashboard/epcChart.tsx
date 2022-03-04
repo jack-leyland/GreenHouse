@@ -22,6 +22,8 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
     epcIndexDictionary[data.potentialEnergyRating]
   } bg-${epcColorDictionary[data.potentialEnergyRating]}`;
 
+  const labelStyling = " pr-1 shadow-sm animate-widthGrow text-right font-bold text-white";
+
   return (
     <div className="flex h-5/6">
       <div className="grid rating-grid w-2/6 h-full">
@@ -31,43 +33,43 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
         </div>
 
         <div className="w-4/12 my-1 row-start-2">
-          <div className="bg-epcA pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcA" + labelStyling}>
             A
           </div>
         </div>
 
         <div className="w-5/12 my-1 row-start-3">
-          <div className="bg-epcB pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcB" + labelStyling}>
             B
           </div>
         </div>
 
         <div className="w-6/12 my-1 row-start-4">
-          <div className="bg-epcC pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcC" + labelStyling}>
             C
           </div>
         </div>
 
         <div className="w-7/12 my-1 row-start-5">
-          <div className="bg-epcD pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcD" + labelStyling}>
             D
           </div>
         </div>
 
         <div className="w-8/12 my-1 row-start-6">
-          <div className="bg-epcE pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcE" + labelStyling}>
             E
           </div>
         </div>
 
         <div className="w-9/12 my-1 row-start-7">
-          <div className="bg-epcF pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcF" + labelStyling}>
             F
           </div>
         </div>
 
         <div className="w-10/12 my-1 eighth-row">
-          <div className="bg-epcG pr-1 shadow-sm animate-widthGrow text-right font-bold text-white">
+          <div className={"bg-epcG" + labelStyling}>
             G
           </div>
         </div>
