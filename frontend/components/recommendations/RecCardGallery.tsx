@@ -23,6 +23,13 @@ export default function RecCostSummary({ data }: props) {
     setActivePageRecs(recData[activePage]);
   }, [recData, activePage]);
 
+  // Could case weird behavior if I'm wrong about how
+  // epc sends these back
+  function formatCostString(str: string): string {
+    let formatted = str.replace(/[?]/g, '£');
+    return formatted;
+  }
+
   function handlePageChange(newPgNum: number) {
     if (newPgNum >= recData.length) return;
     setActivePage(newPgNum);
@@ -71,13 +78,34 @@ export default function RecCostSummary({ data }: props) {
         <div className="flex w-[95%] justify-center mt-2">
           {/* This is mildy hacky, might change later */}
           {activePageRecs[0] ? (
-            <Recommendation recs={activePageRecs[0]} key={uuid()} />
+            <Recommendation
+              indicativeCost={formatCostString(
+                activePageRecs[0].indicativeCost
+              )}
+              improvementId={activePageRecs[0].improvementId}
+              improvementIdText={activePageRecs[0].improvementIdText}
+              key={uuid()}
+            />
           ) : null}
           {activePageRecs[1] ? (
-            <Recommendation recs={activePageRecs[1]} key={uuid()} />
+            <Recommendation
+              indicativeCost={formatCostString(
+                activePageRecs[1].indicativeCost
+              )}
+              improvementId={activePageRecs[1].improvementId}
+              improvementIdText={activePageRecs[1].improvementIdText}
+              key={uuid()}
+            />
           ) : null}
           {activePageRecs[2] ? (
-            <Recommendation recs={activePageRecs[2]} key={uuid()} />
+            <Recommendation
+              indicativeCost={formatCostString(
+                activePageRecs[2].indicativeCost
+              )}
+              improvementId={activePageRecs[2].improvementId}
+              improvementIdText={activePageRecs[2].improvementIdText}
+              key={uuid()}
+            />
           ) : null}
         </div>
       </div>
