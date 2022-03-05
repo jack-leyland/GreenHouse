@@ -52,7 +52,7 @@ export default function AddressList({
       </div>
       <div className=" h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounde">
         {loading ? (
-          <div className="w-[100%] h-[100%] flex flex-col items-center justify-center">
+          <div className="w-[100%] h-[100%] flex flex-col text-gray-800 items-center justify-center">
             Loading Addresses...
             <Lottie
               loop

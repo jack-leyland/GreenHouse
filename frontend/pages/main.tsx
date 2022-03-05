@@ -89,7 +89,7 @@ const Main = () => {
           <PageTitle
             title={'Dashboard'}
             subtitle={fullAddressString}
-            onClick={() => setModalContent("address")}
+            onClick={() => setModalContent('address')}
           />
 
           <div className="h-full flex p-8 w-full gap-4">
@@ -101,17 +101,17 @@ const Main = () => {
                 backTitle="Costs"
                 front={
                   <div className="py-2 px-1 h-full">
-                    <EpcChart 
-                      data={dashboardData.Main} 
-                      analytics={analyticsData.main} 
+                    <EpcChart
+                      data={dashboardData.Main}
+                      analytics={analyticsData.main}
                       setModalHandler={setModalContent}
                     />
                   </div>
                 }
                 back={
-                  <CostSummary 
-                    data={dashboardData.House.costs} 
-                    analytics={analyticsData.cost} 
+                  <CostSummary
+                    data={dashboardData.House.costs}
+                    analytics={analyticsData.cost}
                     setModalHandler={setModalContent}
                   />
                 }
@@ -123,9 +123,9 @@ const Main = () => {
                 frontTitle="Emissions"
                 backTitle="Energy Consumption"
                 front={
-                  <CarbonSummary 
-                    data={dashboardData.House.environmental} 
-                    analytics={analyticsData.environmental} 
+                  <CarbonSummary
+                    data={dashboardData.House.environmental}
+                    analytics={analyticsData.environmental}
                     setModalHandler={setModalContent}
                   />
                 }
@@ -153,15 +153,13 @@ const Main = () => {
             </Card>
           </div>
 
-          {modalContent !== "" ? (
-            <Modal hideModal={() => setModalContent("")}>
+          {modalContent !== '' ? (
+            <Modal hideModal={() => setModalContent('')}>
               <>
-                {
-                  modalContent === "address" ? <ExtraHouseInfo data={dashboardData.ExtraInfo} /> : null
-                }
-                {
-                  <HelpModal type={modalContent}/>
-                }
+                {modalContent === 'address' ? (
+                  <ExtraHouseInfo data={dashboardData.ExtraInfo} />
+                ) : null}
+                {<HelpModal type={modalContent} />}
               </>
             </Modal>
           ) : null}
@@ -171,7 +169,9 @@ const Main = () => {
           {/*Loading Display*/}
           {loading ? (
             <div className="w-full flex flex-col justify-center items-center bg-slate-50">
-              <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
+              <h1 className="animate-fade text-3xl text-gray-800 italic pb-2">
+                Loading...
+              </h1>
               <Lottie
                 loop
                 animationData={loadingJson}
