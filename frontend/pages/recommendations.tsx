@@ -4,7 +4,7 @@ import Layout from '../components/generic/layout';
 import PageTitle from '../components/generic/pageTitle';
 import Sidebar from '../components/sidebar';
 import RecCostSummary from '../components/recommendations/recCostSummary';
-import RecCardGallery from '../components/recommendations/RecCardGallery';
+import RecCardGallery from '../components/recommendations/recCardGallery';
 import Modal from '../components/generic/modal';
 import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
 import { useAppContext } from '../context/state';
@@ -93,7 +93,7 @@ const Recommendations = () => {
   return (
     <>
       {recData && certificateData ? (
-        <div className="w-full flex flex-col bg-slate-50 text-gray-500">
+        <div className="w-full flex flex-col bg-slate-50 text-gray-500 min-w-[1150px] min-h-[755px]">
           <PageTitle
             title={'Recommendations'}
             subtitle={address}
@@ -121,7 +121,8 @@ const Recommendations = () => {
               {isQueryError && !data ? (
                 <div className="w-full flex flex-col justify-center items-center bg-slate-50">
                   <h1 className="animate-fade text-3xl font-bold pb-2">
-                    Oops, there was an error, try again later...
+                    Oops, there was an error, try again later... [Dev Note:
+                    Query Error]
                   </h1>
                   <Lottie
                     animationData={errorJson}

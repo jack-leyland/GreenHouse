@@ -57,17 +57,18 @@ class AddImprovement(Mutation):
         date = String()
         lmk_key = String()
         improvement_id = String()
+        postcode = String()
 
     ok = Boolean()
     improvement = Field(lambda: Improvement)
 
-    def mutate(root, info, cost, date, lmk_key, improvement_id):
-        print(cost, date, lmk_key, improvement_id)
+    def mutate(root, info, cost, date, lmk_key, improvement_id, postcode):
+        print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id, postcode=postcode
         )
         db_improvement = CompletedRecommendation(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id, postcode=postcode
         )
         db_improvement.save()
         ok = True
@@ -82,7 +83,7 @@ class Mutation(ObjectType):
 class CompletedRecommendationType(DjangoObjectType):
     class Meta:
         model = CompletedRecommendation
-        fields = ("lmk_key", "improvement_id", "date", "cost")
+        fields = ("lmk_key", "improvement_id", "date", "cost", "postcode")
 
 
 class Query(ObjectType):

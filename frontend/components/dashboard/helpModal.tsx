@@ -1,7 +1,7 @@
-import React from "react";
-
+import React from 'react';
+import Link from 'next/link';
 interface props {
-  type: string; 
+  type: string;
 }
 
 export default function HelpModal({ type }: props) {
@@ -150,6 +150,6 @@ export default function HelpModal({ type }: props) {
     
     
     default:
-        return null
+      return null;
   }
 }

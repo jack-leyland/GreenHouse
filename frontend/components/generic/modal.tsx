@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef } from "react";
+import React, { MouseEventHandler, useEffect, useRef } from 'react';
 
 interface props {
   children?: React.ReactChild | React.ReactChildren | never[];
@@ -17,10 +17,11 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
     }
 
     // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside as any);
+
+    document.addEventListener('mousedown', handleClickOutside as any);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside as any);
+      document.removeEventListener('mousedown', handleClickOutside as any);
     };
   }, [ref]);
 }
