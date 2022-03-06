@@ -1,10 +1,8 @@
 import type { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
 import Layout from '../components/generic/layout';
-import Sidebar from '../components/sidebar';
 import Card from '../components/generic/card';
 import House from '../components/dashboard/house';
-import PageTitle from '../components/generic/pageTitle';
 import Lottie from 'react-lottie-player';
 import { useAppContext } from '../context/state';
 import loadingJson from '../assets/animations/animation/loading.json';
@@ -21,6 +19,8 @@ import FlippableCard from '../components/generic/flippableCard';
 import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
 import packageAnaylytics from '../utils/packageAnalytics';
 import HelpModal from '../components/dashboard/helpModal';
+
+import DashboardWrapper from '../components/sidebarNew';
 
 const Main = () => {
   const GlobalContext = useAppContext();
@@ -83,17 +83,11 @@ const Main = () => {
   }
 
   return (
-    <>
+    <DashboardWrapper pageTitle="Dashboard" subTitle={fullAddressString}>
       {dashboardData ? (
-        <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
-          <PageTitle
-            title={'Dashboard'}
-            subtitle={fullAddressString}
-            onClick={() => setModalContent('address')}
-          />
-
-          <div className="h-full flex p-8 w-full gap-4">
-            <div className="flex flex-col w-1/2 gap-4">
+        <div className="h-screen flex flex-col text-gray-600">
+          <div className="h-full flex lg:flex-row flex-col px-2 py-8 w-full gap-4">
+            <div className="flex flex-col lg:w-1/2 lg:h-2/3 gap-4 h-full">
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
@@ -139,10 +133,9 @@ const Main = () => {
             </div>
 
             <Card
-              style={'relative pt-2 w-1/2 border'}
+              style={'lg:w-1/2 w-full lg:h-2/3 border'}
               disableHoverAnimation={true}
               showShadow={false}
-              minDims={{ w: '440px', h: '566px' }}
             >
               <div className="flex justify-center h-full min-w-full">
                 <House
@@ -169,7 +162,7 @@ const Main = () => {
         <>
           {/*Loading Display*/}
           {loading ? (
-            <div className="w-full flex flex-col justify-center items-center bg-slate-50">
+            <div className="w-full flex flex-col justify-center items-center bg-white">
               <h1 className="animate-fade text-3xl text-gray-800 italic pb-2">
                 Loading...
               </h1>
@@ -184,7 +177,7 @@ const Main = () => {
             <>
               {/*Error Display*/}
               {isQueryError && !data ? (
-                <div className="w-full flex flex-col justify-center items-center bg-slate-50">
+                <div className="w-full flex flex-col justify-center items-center bg-white">
                   <h1 className="animate-fade text-3xl font-bold pb-2">
                     Oops, there was an error, try again later...
                   </h1>
@@ -199,18 +192,15 @@ const Main = () => {
           )}
         </>
       )}
-    </>
+    </DashboardWrapper>
   );
 };
 
 Main.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Address Dashboard" footerFixed={false}>
-      <div className="flex overflow-hidden shadow-xl">
-        <Sidebar />
+    <Layout title="Address Dashboard">
         {page}
-      </div>
-    </Layout>
+     </Layout>
   );
 };
 

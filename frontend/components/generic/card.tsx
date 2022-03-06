@@ -20,19 +20,15 @@ export default function Card({
   onClick,
   disableHoverAnimation = false,
   showShadow = true,
-  minDims,
+
 }: props) {
   const hover = " hover:scale-105 hover:cursor-pointer";
   const shadow = " shadow-lg";
   const cardStyle =
-    "animate-fade rounded-lg w-full h-full " +
+    "animate-fade rounded-lg w-full h-full bg-white " +
     style +
     (disableHoverAnimation ? "" : hover) +
-    (showShadow ? shadow : "") +
-    " " +
-    (minDims?.w ? "min-w-[" + minDims.w + "]" : "") +
-    " " +
-    (minDims?.h ? "min-h-[" + minDims.h + "]" : "");
+    (showShadow ? shadow : "")
 
   return (
     <div
@@ -41,7 +37,7 @@ export default function Card({
       onMouseLeave={() => (onHover ? onHover(false) : null)}
       onClick={() => (onClick ? onClick(true) : null)}
     >
-      <div className="p-3 text-xs h-full min-w-full">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function FlippableCard({
   const hover = " hover:scale-105 hover:cursor-pointer ";
   const shadow = " shadow-lg ";
   const cardStyle =
-    "animate-fade rounded-lg w-full h-full relative min-w-[467px] min-h-[240px]" +
+    "animate-fade rounded-lg w-full xl:h-1/2 h-full relative bg-white" +
     style +
     (disableHoverAnimation ? "" : hover) +
     (showShadow ? shadow : "");
@@ -50,13 +50,13 @@ export default function FlippableCard({
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
       >
         <div className="h-full child">
-          <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
+          <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
             {frontTitle}
             <span
-              className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg"
+              className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg text-gray-600"
               onClick={() => set((state) => !state)}
             >
-              <span className="text-sm">Flip Card</span>
+              <span className="text-md ">Show me more</span>
               <MdOutlineFlipCameraAndroid size={25} />
             </span>
           </h3>
@@ -66,7 +66,7 @@ export default function FlippableCard({
 
       <a.div
         className={
-          "border rounded-lg content p-3 text-xs h-full w-full" +
+          "border rounded-lg content p-3 text-sm h-full w-full " +
           (flipped ? "" : " hidden")
         }
         style={{
@@ -75,14 +75,14 @@ export default function FlippableCard({
           rotateX: "180deg",
         }}
       >
-        <div className="h-full child">
+        <div className="h-full child text-gray-600 ">
           <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
             {backTitle}
             <span
               className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg"
               onClick={() => set((state) => !state)}
             >
-              <span className="text-sm">Flip Card</span>
+              <span className="text-md">Show me more</span>
               <MdOutlineFlipCameraAndroid size={25} />
             </span>
           </h3>

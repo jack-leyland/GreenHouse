@@ -18,6 +18,10 @@ module.exports = {
         default: "6px",
       },
       colors: {
+        primary: "bg-green-500",
+        heading: "text-gray-900",
+        body: "text-gray-600",
+        background: "bg-gray-100",
         logoGreen: "#09E85E",
         logoGreenLight: "rgba(9, 232, 94, .4)",
         lightGreen: "#2AFC98",
@@ -50,11 +54,11 @@ module.exports = {
       },
       keyframes: (theme) => ({
         fadeIn: {
-          "0%": { opacity: 0},
+          "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
         fadeInGrow: {
-          "0%": { opacity: 0, transform: "scale(0.8)"},
+          "0%": { opacity: 0, transform: "scale(0.8)" },
           "100%": { opacity: 1, transform: "scale(1)" },
         },
         widthGrow: {
@@ -96,5 +100,9 @@ module.exports = {
       }),
     },
   },
-  plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/forms"),
+  ],
 };
