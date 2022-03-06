@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import { gql, useMutation } from '@apollo/client';
+import { useAppContext } from '../../context/state';
 
 const ADD_IMPROVEMENT = gql`
-  mutation addImprovement(
+  mutation AddImprovement(
     $lmkKey: String!
     $date: String!
     $cost: Float!
     $improvementId: String!
+    $postcode: String!
   ) {
     addImprovement(
       lmkKey: $lmkKey
       date: $date
       cost: $cost
       improvementId: $improvementId
+      postcode: $postcode
     ) {
       ok
       improvement {
@@ -21,6 +24,7 @@ const ADD_IMPROVEMENT = gql`
         date
         cost
         improvementId
+        postcode
       }
     }
   }
@@ -37,31 +41,40 @@ interface Values {
   date: string;
   improvementId: string;
   lmkKey: string;
+  postcode: string;
 }
 
 export default function RecForm({ color, lmk, improvementId }: props) {
+  const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
+  const [postcode, setPostcode] = useState<string>('');
 
   useEffect(() => {
     if (error) setIsSubmissionError(true);
   }, [error]);
 
-  //Needs work here
-  if (loading) return <p>Submitting...</p>;
+  useEffect(() => {
+    if (GlobalContext.extraHouseInfo) {
+      setPostcode(GlobalContext.extraHouseInfo.postcode);
+    } else {
+      setPostcode(localStorage.extraHouseInfo.postcode);
+    }
+  }, [GlobalContext.extraHouseInfo]);
 
   return (
     <div
       className={
-        'h-full max-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col relative overflow-hidden ' +
+        'h-full max-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
         color
       }
     >
       {isSubmissionError && (
         <span>Something went wrong with the submission</span>
       )}
-      {!isSubmissionError && (
+      {loading && <span>Submitting...</span>}
+      {!isSubmissionError && !loading && (
         <div className="flex-row space-between">
           <span className="text-lg mb-1 font-bold title-font">
             Tell us more!
@@ -72,17 +85,20 @@ export default function RecForm({ color, lmk, improvementId }: props) {
               date: '',
               lmkKey: lmk,
               improvementId: improvementId,
+              postcode: postcode,
             }}
             onSubmit={(
               values: Values,
               { setSubmitting }: FormikHelpers<Values>
             ) => {
+              console.log(values);
               addImprovement({
                 variables: {
                   lmkKey: values.lmkKey,
                   date: JSON.stringify(values.date),
                   cost: values.cost,
                   improvementId: values.improvementId,
+                  postcode: values.postcode,
                 },
               });
               setTimeout(() => {
