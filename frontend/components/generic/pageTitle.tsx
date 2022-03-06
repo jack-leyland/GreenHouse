@@ -19,7 +19,7 @@ export default function PageTitle({ title, subtitle, onClick }: props) {
           >
             More Info
           </button>
-          <div className="absolute top-2 hidden logoRender:block text-[40px] right-[30px] text-logoGreen font-logoFont font-black text-right justify-right">
+          <div className="absolute top-2 hidden logoRender:block text-[40px] right-[30px] text-emerald font-logoFont font-black text-right justify-right">
             GreenHouse
           </div>
         </div>

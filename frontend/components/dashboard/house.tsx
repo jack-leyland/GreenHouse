@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import { useState } from 'react';
 import Card from '../generic/card';
 import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
@@ -9,9 +9,10 @@ import type { epcCertificateObject, packagedAnalyticsObject } from '../../types'
 interface props {
   data: epcCertificateObject['House'];
   analytics: packagedAnalyticsObject['house'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function House({ data, analytics }: props) {
+export default function House({ data, analytics, setModalHandler}: props) {
   const [sidePanelType, setSidePanelType] = useState<string>('');
 
   return (
@@ -118,7 +119,7 @@ export default function House({ data, analytics }: props) {
 
       <div className="w-full h-full relative">
         <div className="w-full h-full absolute">
-          <FeatureCard data={data} type={sidePanelType} analytics={analytics}/>
+          <FeatureCard data={data} type={sidePanelType} analytics={analytics} setModalHandler={setModalHandler}/>
         </div>
       </div>
     </div>

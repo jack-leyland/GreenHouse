@@ -98,7 +98,6 @@ const Landing = () => {
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error);
     }
   }, [error]);
 

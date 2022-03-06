@@ -55,8 +55,6 @@ const Main = () => {
     }
   }, [data]);
 
-  console.log(localStorage);
-
   useEffect(() => {
     if (data) {
       if (data.analytics) {
@@ -150,6 +148,7 @@ const Main = () => {
                 <House
                   data={dashboardData.House}
                   analytics={analyticsData.house}
+                  setModalHandler={setModalContent}
                 />
               </div>
             </Card>

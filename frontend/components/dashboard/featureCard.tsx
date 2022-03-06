@@ -1,19 +1,21 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import Card from "../generic/card";
 import Lottie from "react-lottie-player";
 import json from "../../assets/animations/animation/up-arrow.json";
 import StarRating from "../generic/starRating";
 import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
+import { AiFillQuestionCircle } from "react-icons/ai";
 
 interface props {
   type: string;
   data: epcCertificateObject['House'];
   analytics: packagedAnalyticsObject['house'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function FeatureCard({ data, type, analytics }: props) {
+export default function FeatureCard({ data, type, analytics, setModalHandler }: props) {
 
-  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0"
+  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between";
 
   switch (type) {
     case "Walls":
@@ -26,6 +28,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           <div>
             <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -67,6 +70,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           <div>
             <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -106,6 +110,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           <div>
             <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -147,6 +152,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           <div>
             <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("lighting")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -164,7 +170,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
               <div className="py-2">
                 <b>Low Energy Lighting:</b>{" "}
                 {data?.lighting.lowEnergyLighting
-                  ? data?.lighting.lowEnergyLighting
+                  ? data?.lighting.lowEnergyLighting + "%"
                   : "N/A"}
               </div>
               <StarRating
@@ -331,6 +337,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
           <div>
             <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("water")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -383,8 +390,9 @@ export default function FeatureCard({ data, type, analytics }: props) {
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("windows")}/>
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -405,7 +413,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
               <div className="py-2">
                 <b>Multi Glaze Proportion: </b>{" "}
                 {data?.windows.multiGlazeProportion
-                  ? data?.windows.multiGlazeProportion
+                  ? data?.windows.multiGlazeProportion + "%"
                   : "N/A"}
               </div>
 
