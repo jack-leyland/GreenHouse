@@ -81,6 +81,73 @@ export default function HelpModal({ type }: props) {
                 </div>
             </div>
         )
+
+    case "genericFeature":
+        return (
+            <div className={positionStyling}>
+                <div className={titleStyling}>House Feature</div>
+                <div className="py-1">
+                    <b>Description:</b> Description of your house feature.
+                </div>
+                <div className="py-1">
+                    <b>Energy Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+                <div className="py-1">
+                    <b>Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+            </div>
+        )
+
+    case "windows":
+        return (
+            <div className={positionStyling}>
+                <div className={titleStyling}>Windows</div>
+                <div className="py-1">
+                    <b>Description:</b> Description of your windows.
+                </div>
+                <div className="py-1">
+                    <b>Glazed Area:</b> Ranged estimate of the total glazed area of the Habitable Area.
+                </div>
+                <div className="py-1">
+                    <b>Glazed Type:</b> Type of glazing, either single, double or triple.
+                </div>
+                <div className="py-1">
+                    <b>Multi Glaze Proportion:</b> Percentage of the windows in the house with more than single glazing.
+                </div>
+                <div className="py-1">
+                    <b>Energy Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+                <div className="py-1">
+                    <b>Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+            </div>
+        )
+
+    case "windows":
+        return (
+            <div className={positionStyling}>
+                <div className={titleStyling}>Lighting</div>
+                <div className="py-1">
+                    <b>Description:</b> Description of your lighting.
+                </div>
+                <div className="py-1">
+                    <b>Lighting Cost Current:</b> Current estimated lighting costs.
+                </div>
+                <div className="py-1">
+                    <b>Lighting Cost Potential:</b> Potential lighting cost after improvements are made.
+                </div>
+                <div className="py-1">
+                    <b>Low Energy Lighting:</b> The percentage of low energy lighting present in the property as a percentage of the total fixed lights.
+                </div>
+                <div className="py-1">
+                    <b>Energy Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+                <div className="py-1">
+                    <b>Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0 being worst).
+                </div>
+            </div>
+        )
+    
     
     default:
         return null
