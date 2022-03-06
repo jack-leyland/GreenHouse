@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import { gql, useMutation } from '@apollo/client';
 import { useAppContext } from '../../context/state';
 
@@ -42,14 +42,17 @@ interface Values {
   improvementId: string;
   lmkKey: string;
   postcode: string;
+  agree: boolean;
 }
 
 export default function RecForm({ color, lmk, improvementId }: props) {
   const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
+
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
   const [postcode, setPostcode] = useState<string>('');
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     if (error) setIsSubmissionError(true);
@@ -62,6 +65,19 @@ export default function RecForm({ color, lmk, improvementId }: props) {
       setPostcode(localStorage.extraHouseInfo.postcode);
     }
   }, [GlobalContext.extraHouseInfo]);
+
+  //Could any of these improvements be made for free?
+  function validateCost(value: number): string | undefined {
+    if (value == 0) return 'Improvement cost is required.';
+  }
+
+  function validateDate(value: string): string | undefined {
+    if (value == '') return 'Date is required';
+  }
+
+  function validateAgreement(value: boolean): string | undefined {
+    if (!value) return 'Required';
+  }
 
   return (
     <div
@@ -86,12 +102,12 @@ export default function RecForm({ color, lmk, improvementId }: props) {
               lmkKey: lmk,
               improvementId: improvementId,
               postcode: postcode,
+              agree: false,
             }}
             onSubmit={(
               values: Values,
               { setSubmitting }: FormikHelpers<Values>
             ) => {
-              console.log(values);
               addImprovement({
                 variables: {
                   lmkKey: values.lmkKey,
@@ -106,47 +122,72 @@ export default function RecForm({ color, lmk, improvementId }: props) {
               }, 500);
             }}
           >
-            <Form>
-              <div className="relative mb-4">
-                <label htmlFor="cost">How much did it cost you (£)?</label>
-                <Field
-                  id="cost"
-                  name="cost"
-                  type="number"
-                  disabled={data ? true : false}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                />
-              </div>
-              <div className="relative mb-4">
-                <label htmlFor="date">Date</label>
-                <Field
-                  id="date"
-                  name="date"
-                  type="date"
-                  disabled={data ? true : false}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                />
-              </div>
-              <div className="relative mb-4">
-                <label htmlFor="agree">Agree</label>
-                <Field
-                  id="agree"
-                  name="agree"
-                  type="checkbox"
-                  disabled={data ? true : false}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                />
-              </div>
-              <div className=" w-full flex justify-center">
-                <button
-                  type="submit"
-                  disabled={data ? true : false}
-                  className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
-                >
-                  {data ? "You've already told us!" : 'Submit'}
-                </button>
-              </div>
-            </Form>
+            {({ errors, touched }) => (
+              <Form>
+                <div className="relative mb-2">
+                  <label htmlFor="cost">How much did it cost you (£)?</label>
+                  <Field
+                    validate={validateCost}
+                    id="cost"
+                    name="cost"
+                    type="number"
+                    disabled={data ? true : false}
+                    className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  />
+                  {errors.cost && (
+                    <div className="w-full rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
+                      {errors.cost}
+                    </div>
+                  )}
+                </div>
+                <div className="relative mb-2">
+                  <label htmlFor="date">Date</label>
+                  <Field
+                    validate={validateDate}
+                    id="date"
+                    name="date"
+                    type="date"
+                    disabled={data ? true : false}
+                    className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  />
+                  {errors.date && (
+                    <div className="w-full rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
+                      {errors.date}
+                    </div>
+                  )}
+                </div>
+                <div className="relative mb-2">
+                  <label htmlFor="agree">
+                    Do you agree to share this data with us?
+                  </label>
+                  <div className="w-full flex justify-center items-center">
+                    <span className="mr-2 mb-1">I agree</span>{' '}
+                    <Field
+                      validate={validateAgreement}
+                      id="agree"
+                      name="agree"
+                      type="checkbox"
+                      disabled={data ? true : false}
+                      className="bg-white rounded border border-gray-300 focus:border-green-500 text-base outline-none "
+                    />
+                    {errors.agree && (
+                      <span className=" ml-2 rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
+                        {errors.agree}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className=" w-full flex justify-center">
+                  <button
+                    type="submit"
+                    disabled={data ? true : false}
+                    className="text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
+                  >
+                    {data ? "You've already told us!" : 'Submit'}
+                  </button>
+                </div>
+              </Form>
+            )}
           </Formik>
         </div>
       )}
