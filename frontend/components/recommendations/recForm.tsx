@@ -79,18 +79,27 @@ export default function RecForm({ color, lmk, improvementId }: props) {
     if (!value) return 'Required';
   }
 
+  // TODO: Instead of the "Thanks for Submission" thing
+  // it should just set the completed flag and change the filter and formatting
+  // by itself.
+
   return (
     <div
       className={
-        'h-full max-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
-        color
+        'h-full max-w-[58%] min-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
+        (!data ? color : 'bg-gray-400')
       }
     >
       {isSubmissionError && (
         <span>Something went wrong with the submission</span>
       )}
       {loading && <span>Submitting...</span>}
-      {!isSubmissionError && !loading && (
+      {data && (
+        <div className=" w-full h-full flex items-center text-center justify-center">
+          Thanks for your submission!
+        </div>
+      )}
+      {!isSubmissionError && !loading && !data && (
         <div className="flex-row space-between">
           <span className="text-lg mb-1 font-bold title-font">
             Tell us more!
@@ -183,7 +192,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
                     disabled={data ? true : false}
                     className="text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
                   >
-                    {data ? "You've already told us!" : 'Submit'}
+                    Submit
                   </button>
                 </div>
               </Form>
