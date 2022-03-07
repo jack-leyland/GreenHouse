@@ -18,7 +18,7 @@ export default function House({ data, analytics, setModalHandler}: props) {
   return (
     <div className="flex flex-col w-full h-full px-6 py-4 gap-6 pb-6 relative">
       <div className="flex justify-center w-full ">
-        <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3">
+        <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3 h-2/5">
           {/*Roof*/}
           <div
             className="house-card-roof col-start-1 col-end-7 row-start-0 row-end-0 roof animate-fade hover:scale-105 hover:cursor-pointer rounded-lg"
@@ -117,8 +117,8 @@ export default function House({ data, analytics, setModalHandler}: props) {
         </div>
       </div>
 
-      <div className="w-full h-full relative">
-        <div className="w-full h-full absolute">
+      <div className="w-full h-3/5">
+        <div className="w-full h-full">
           <FeatureCard data={data} type={sidePanelType} analytics={analytics} setModalHandler={setModalHandler}/>
         </div>
       </div>
