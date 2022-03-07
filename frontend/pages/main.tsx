@@ -85,7 +85,7 @@ const Main = () => {
   return (
     <DashboardWrapper pageTitle="Dashboard" subTitle={fullAddressString} setModalContent={setModalContent}>
       {dashboardData ? (
-        <div className="h-screen flex flex-col text-gray-600 py-6">
+        <div className="h-[120vh] xl:h-screen flex flex-col text-gray-600 py-6">
           <div className="h-full flex lg:flex-row flex-col w-full gap-4">
             <div className="flex flex-col lg:w-1/2 gap-4 h-full">
               <FlippableCard

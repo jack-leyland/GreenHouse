@@ -7,6 +7,12 @@ module.exports = {
     placeholderColor: {
       darkGrey: "#444444",
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1220px",
+      xl: "1280px",
+    },
     extend: {
       screens: {
         logoRender: "1150px",
@@ -18,7 +24,7 @@ module.exports = {
         default: "6px",
       },
       colors: {
-        primary: "bg-green-500",
+        primary: "#3fad79",
         heading: "text-gray-900",
         body: "text-gray-600",
         background: "bg-gray-100",
