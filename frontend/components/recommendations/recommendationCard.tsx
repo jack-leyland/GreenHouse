@@ -41,8 +41,7 @@ export default function Recommendation({
   const [showForm, setShowForm] = useState(false);
   const [lmk, setLmk] = useState<string>('');
   const GlobalContext = useAppContext();
-  const [color, setColor] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>('');
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -52,27 +51,34 @@ export default function Recommendation({
     }
   }, [GlobalContext.activeLmk]);
 
+  useEffect(() => {
+    if (GlobalContext.extraHouseInfo) {
+      setPostcode(GlobalContext.extraHouseInfo.postcode);
+    } else {
+      setPostcode(localStorage.extraHouseInfo.postcode);
+    }
+  }, [GlobalContext.extraHouseInfo]);
+
   useOutsideClick(wrapperRef, () => {
     setShowForm(false);
   });
 
-  useEffect(() => {
-    setCategory(HeatingCategories[improvementId]); // This works, idk what to do with the error
-    switch (category) {
-      case 'Heating':
-        setColor('bg-red-500');
-        break;
-      case 'Water':
-        setColor('bg-blue-500');
-        break;
-      case 'Lighting':
-        setColor('bg-yellow-500');
-        break;
-      case 'Other':
-        setColor('bg-slate-500');
-        break;
-    }
-  }, [category]);
+  let category = HeatingCategories[improvementId]; // This works, idk what to do with the error
+  let color;
+  switch (category) {
+    case 'Heating':
+      color = 'bg-red-500';
+      break;
+    case 'Water':
+      color = 'bg-blue-500';
+      break;
+    case 'Lighting':
+      color = 'bg-yellow-500';
+      break;
+    case 'Other':
+      color = 'bg-slate-500';
+      break;
+  }
 
   return (
     <div
@@ -110,7 +116,12 @@ export default function Recommendation({
       </div>
       {/* Form goes here */}
       {showForm && (
-        <RecForm color={color} improvementId={improvementId} lmk={lmk} />
+        <RecForm
+          color={color}
+          improvementId={improvementId}
+          lmk={lmk}
+          postcode={postcode}
+        />
       )}
     </div>
   );

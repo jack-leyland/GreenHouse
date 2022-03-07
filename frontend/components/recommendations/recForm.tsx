@@ -31,9 +31,10 @@ const ADD_IMPROVEMENT = gql`
 `;
 
 interface props {
-  color: string;
+  color: string | undefined;
   lmk: string;
   improvementId: string;
+  postcode: string;
 }
 
 interface Values {
@@ -45,26 +46,22 @@ interface Values {
   agree: boolean;
 }
 
-export default function RecForm({ color, lmk, improvementId }: props) {
+export default function RecForm({
+  color,
+  lmk,
+  postcode,
+  improvementId,
+}: props) {
   const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
 
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
-  const [postcode, setPostcode] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
     if (error) setIsSubmissionError(true);
   }, [error]);
-
-  useEffect(() => {
-    if (GlobalContext.extraHouseInfo) {
-      setPostcode(GlobalContext.extraHouseInfo.postcode);
-    } else {
-      setPostcode(localStorage.extraHouseInfo.postcode);
-    }
-  }, [GlobalContext.extraHouseInfo]);
 
   //Could any of these improvements be made for free?
   function validateCost(value: number): string | undefined {
@@ -117,6 +114,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
               values: Values,
               { setSubmitting }: FormikHelpers<Values>
             ) => {
+              console.log(values);
               addImprovement({
                 variables: {
                   lmkKey: values.lmkKey,

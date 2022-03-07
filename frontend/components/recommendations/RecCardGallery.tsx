@@ -18,8 +18,13 @@ export default function RecCostSummary({ data }: props) {
   const [activeView, setActiveView] = useState<string>('Outstanding');
   const [recData, setRecData] =
     useState<Array<Array<epcRecommendationObject>>>(data);
+  const [noRecs, setNoRecs] = useState<boolean>(false);
 
   useEffect(() => {
+    if (recData[0].length == 0) {
+      setNoRecs(true);
+      return;
+    }
     setActivePageRecs(recData[activePage]);
   }, [recData, activePage]);
 
@@ -49,7 +54,7 @@ export default function RecCostSummary({ data }: props) {
       />
     );
   }
-
+  console.log(noRecs);
   return (
     <div className="w-full h-full relative flex-row justify-center">
       <div className="w-full h-[10%] max-h-[50px] flex justify-center">
@@ -62,18 +67,25 @@ export default function RecCostSummary({ data }: props) {
               Completed
             </span>
           </div>
-          <div className="max-w-[50%] w-[50%] h-[100%] pr-2 flex justify-end items-center">
-            <span className="mr-2">Page: </span>
-            {pageButtons.map((elem, index) => {
-              return pageButtons[index];
-            })}
-            <Arrow
-              className=" ml-2 h-[25px] w-[25px] rotate-180 fill-gray-700 rounded-default hover:bg-logoGreenLight cursor-pointer"
-              onClick={() => handlePageChange(activePage + 1)}
-            />
-          </div>
+          {!noRecs && (
+            <div className="max-w-[50%] w-[50%] h-[100%] pr-2 flex justify-end items-center">
+              <span className="mr-2">Page: </span>
+              {pageButtons.map((elem, index) => {
+                return pageButtons[index];
+              })}
+              <Arrow
+                className=" ml-2 h-[25px] w-[25px] rotate-180 fill-gray-700 rounded-default hover:bg-logoGreenLight cursor-pointer"
+                onClick={() => handlePageChange(activePage + 1)}
+              />
+            </div>
+          )}
         </div>
       </div>
+      {noRecs && (
+        <div className="flex w-[95%] justify-center mt-2">
+          There are no available recommendations for this property!
+        </div>
+      )}
       <div className="w-full h-[85%] flex justify-center animate-fade  ">
         <div className="flex w-[95%] justify-center mt-2">
           {/* This is mildy hacky, might change later */}

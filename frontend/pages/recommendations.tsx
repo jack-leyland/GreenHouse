@@ -22,10 +22,14 @@ function paginateRecommendations(
 
   recs.forEach((elem) => {
     if (paginated[paginated.length - 1].length < recsPerPage) {
-      paginated[paginated.length - 1].push(elem);
+      if (elem.improvementId) {
+        paginated[paginated.length - 1].push(elem);
+      }
     } else {
-      paginated.push([]);
-      paginated[paginated.length - 1].push(elem);
+      if (elem.improvementId) {
+        paginated.push([]);
+        paginated[paginated.length - 1].push(elem);
+      }
     }
   });
   return paginated;
@@ -89,7 +93,6 @@ const Recommendations = () => {
     }
   }, [error]);
 
-  console.log(recData);
   return (
     <>
       {recData && certificateData ? (

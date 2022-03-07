@@ -247,47 +247,47 @@ export interface packagedAnalyticsObject {
   main: {
     meanCurrentEnergyEfficiency: number;
     meanCurrentEnergyRating: string;
-  },
-  environmental: { 
-      meanCurrentEnergyConsumption: number;
-      meanCurrentEnvironmentImpact: number;
-      meanCurrentCo2Consumption: number;
-    },
+  };
+  environmental: {
+    meanCurrentEnergyConsumption: number;
+    meanCurrentEnvironmentImpact: number;
+    meanCurrentCo2Consumption: number;
+  };
   cost: {
-      meanCurrentHeatingCost: number;
-      meanCurrentHotWaterCost: number;
-      meanCurrentLightingCost: number;
-  },
+    meanCurrentHeatingCost: number;
+    meanCurrentHotWaterCost: number;
+    meanCurrentLightingCost: number;
+  };
   house: {
     floor: {
       meanFloorEnergyEff: number;
       meanFloorEnvironmentalEff: number;
-    },
+    };
     lighting: {
-        meanLightingEnergyEff: number;
-        meanLightingEnvironmentalEff: number;
-    },
+      meanLightingEnergyEff: number;
+      meanLightingEnvironmentalEff: number;
+    };
     heating: {
-        meanMainHeatingEnergyEff: number;
-        meanMainHeatingEnvironmentalEff: number;
-    },
+      meanMainHeatingEnergyEff: number;
+      meanMainHeatingEnvironmentalEff: number;
+    };
     water: {
-        meanWaterEnergyEff: number;
-        meanWaterEnvironmentalEff: number;
-    },
+      meanWaterEnergyEff: number;
+      meanWaterEnvironmentalEff: number;
+    };
     roof: {
-        meanRoofEnergyEff: number;
-        meanRoofEnvironmentalEff: number;
-    },
+      meanRoofEnergyEff: number;
+      meanRoofEnvironmentalEff: number;
+    };
     walls: {
-        meanWallsEnvironmentalEff: number;
-        meanWallsEnergyEff: number;
-    },
+      meanWallsEnvironmentalEff: number;
+      meanWallsEnergyEff: number;
+    };
     windows: {
-        meanWindowsEnergyEff: number;
-        meanWindowsEnvironmentalEff: number;
-    }
-  }
+      meanWindowsEnergyEff: number;
+      meanWindowsEnvironmentalEff: number;
+    };
+  };
 }
 
 export interface epcRecommendationObject {
@@ -305,56 +305,56 @@ export interface EPCDictionary<Value> {
 }
 
 export const HeatingCategories: EPCDictionary<string> = {
-  1: "Water",
-  2: "Water",
-  3: "Water",
-  4: "Water",
-  5: "Heating",
-  6: "Heating",
-  7: "Heating",
-  8: "Heating",
-  9: "Heating",
-  10: "Heating",
-  13: "Heating",
-  14: "Heating",
-  16: "Heating",
-  19: "Water",
-  20: "Water",
-  23: "Heating",
-  24: "Heating",
-  25: "Heating",
-  26: "Heating",
-  27: "Heating",
-  28: "Heating",
-  31: "Heating",
-  34: "Other",
-  35: "Lighting",
-  36: "Heating",
-  37: "Heating",
-  40: "Heating",
-  44: "Other",
-  45: "Heating",
-  46: "Heating",
-  47: "Heating",
-  48: "Other",
-  49: "Water",
-  50: "Heating",
-  56: "Heating",
-  57: "Heating",
-  58: "Heating",
-  59: "Heating",
-  62: "Heating",
-  63: "Heating",
+  1: 'Water',
+  2: 'Water',
+  3: 'Water',
+  4: 'Water',
+  5: 'Heating',
+  6: 'Heating',
+  7: 'Heating',
+  8: 'Heating',
+  9: 'Heating',
+  10: 'Heating',
+  13: 'Heating',
+  14: 'Heating',
+  16: 'Heating',
+  19: 'Water',
+  20: 'Water',
+  23: 'Heating',
+  24: 'Heating',
+  25: 'Heating',
+  26: 'Heating',
+  27: 'Heating',
+  28: 'Heating',
+  31: 'Heating',
+  34: 'Other',
+  35: 'Lighting',
+  36: 'Heating',
+  37: 'Heating',
+  40: 'Heating',
+  44: 'Other',
+  45: 'Heating',
+  46: 'Heating',
+  47: 'Heating',
+  48: 'Other',
+  49: 'Water',
+  50: 'Heating',
+  56: 'Heating',
+  57: 'Heating',
+  58: 'Heating',
+  59: 'Heating',
+  62: 'Heating',
+  63: 'Heating',
 };
 
 export const epcColorDictionary: EPCDictionary<string> = {
-  A: "epcA",
-  B: "epcB",
-  C: "epcC",
-  D: "epcD",
-  E: "epcE",
-  F: "epcF",
-  G: "epcG",
+  A: 'epcA',
+  B: 'epcB',
+  C: 'epcC',
+  D: 'epcD',
+  E: 'epcE',
+  F: 'epcF',
+  G: 'epcG',
 };
 
 export const epcIndexDictionary: EPCDictionary<number> = {
@@ -368,11 +368,11 @@ export const epcIndexDictionary: EPCDictionary<number> = {
 };
 
 export const starColors: EPCDictionary<string> = {
-  1: "rgb(239 68 68)",
-  2: "rgb(249 115 22)",
-  3: "rgb(234 179 8)",
-  4: "rgb(132 204 22)",
-  5: "rgb(34 197 94)",
+  1: 'rgb(239 68 68)',
+  2: 'rgb(249 115 22)',
+  3: 'rgb(234 179 8)',
+  4: 'rgb(132 204 22)',
+  5: 'rgb(34 197 94)',
 };
 
 export interface epcCertificateRecs {
