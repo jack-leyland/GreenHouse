@@ -13,18 +13,16 @@ interface props {
 
 export default function StarRating({ title, rating, areaAverage }: props) {
   return (
-    <div className="py-2 flex items-center gap-6">
-      <div className="flex items-center">
+    <div className="py-2 flex items-center gap-1">
         <b className="pr-2">{title}:</b>
         <StarRatings
           rating={rating ? rating : 0}
           starRatedColor={rating ? starColors[rating] : "gray"}
           numberOfStars={5}
           name="rating"
-          starDimension="15px"
+          starDimension="12px"
         />
-      </div>
-      <div className="text-sm flex items-center justify-center italic">
+      <div className="text-xs flex items-center justify-center italic">
         (Area average: {areaAverage} <AiFillStar color={areaAverage? starColors[Math.floor(areaAverage)] : "gray"}/>)
       </div>
     </div>

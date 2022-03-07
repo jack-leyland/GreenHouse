@@ -30,13 +30,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
               {type}
               <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
             </div>
-            <div className="p-2 text-sm">
-              <div className="py-2">
+            <div className="p-2 text-sm flex flex-col md-justify-center md-items-center">
                 <b>Description:</b>{" "}
                 {data?.walls.wallsDescription
                   ? data.walls.wallsDescription
                   : "N/A"}
-              </div>
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
@@ -158,13 +156,13 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
               <div className="py-2">
                 <b>Lighting Cost Current:</b>{" "}
                 {data?.costs.lightingCostCurrent
-                  ? data?.costs.lightingCostCurrent
+                  ? "£" + data?.costs.lightingCostCurrent + " /year"
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Lighting Cost Potential:</b>{" "}
-                {data?.costs.lightingCostPotential
-                  ? data?.costs.lightingCostPotential
+                {data?.costs.lightingCostPotential + " /year"
+                  ? "£" + data?.costs.lightingCostPotential
                   : "N/A"}
               </div>
               <div className="py-2">
@@ -220,13 +218,13 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
                 <div className="py-2">
                   <b>Heating Cost Current:</b>{" "}
                   {data?.costs.heatingCostCurrent
-                    ? data?.costs.heatingCostCurrent
+                    ? "£" + data?.costs.heatingCostCurrent  + " /year"
                     : "N/A"}
                 </div>
                 <div className="py-2">
                   <b>Heating Cost Potential:</b>{" "}
                   {data?.costs.heatingCostPotential
-                    ? data?.costs.heatingCostPotential
+                    ? "£" + data?.costs.heatingCostPotential  + " /year"
                     : "N/A"}
                 </div>
 
@@ -258,19 +256,25 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
                         .mainHeatControlDescription
                     : "N/A"}
                 </div>
-                <div className="py-2">
-                  <b>Heating Control Energy Efficiency:</b>{" "}
-                  {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heating Control Environmental Efficiency:</b>{" "}
-                  {data?.consumptionEnvEff.mainHeatControlEnvEff
-                    ? data?.consumptionEnvEff.mainHeatControlEnvEff
-                    : "N/A"}
-                </div>
 
+                <StarRating
+                title={"Energy Efficiency"}
+                rating={
+                  data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    ? parseInt(data?.heating.mainHeatingControls.mainHeatControlEnergyEff)
+                    : 0
+                  }
+                  areaAverage={0}
+                />
+                <StarRating
+                  title={"Environmental Efficiency"}
+                  rating={
+                    data?.consumptionEnvEff.mainHeatControlEnvEff
+                      ? parseInt(data?.consumptionEnvEff.mainHeatControlEnvEff)
+                      : 0
+                  }
+                  areaAverage={0}
+                />
                 
                 <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Fuel</div>
                 <div className="py-2">
@@ -349,13 +353,13 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
               <div className="py-2">
                 <b>Hot Water Cost Current:</b>{" "}
                 {data?.costs.hotWaterCostCurrent
-                  ? data?.costs.hotWaterCostCurrent
+                  ? "£" + data?.costs.hotWaterCostCurrent + "/year"
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Hot Water Cost Potential:</b>{" "}
                 {data?.costs.hotWaterCostPotential
-                  ? data?.costs.hotWaterCostPotential
+                  ? "£" + data?.costs.hotWaterCostPotential + "/year"
                   : "N/A"}
               </div>
 
@@ -442,7 +446,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     default:
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 h-1/2"}
           disableHoverAnimation={true}
           showShadow={true}
         >

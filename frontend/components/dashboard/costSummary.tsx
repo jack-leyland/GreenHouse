@@ -20,18 +20,16 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
           </div>
 
           <div className="flex gap-2 flex-col h-full">
-            <div className="h-2/3 flex flex-col gap-2 w-full py-1 border border-x-0 border-t-0 text-center">
+            <div className="flex flex-col gap-2 w-full py-1 pb-3 border border-x-0 border-t-0 text-center">
               <div>
                 Current Cost: <b>£{data.heatingCostCurrent}</b>/year
               </div>
               <div>
                 Potential Cost: <b>£{data.heatingCostPotential}</b>/year
               </div>
-              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 text-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean?</div>
             </div>
-            <div className="h-1/3 text-center px-2">
-              <div className="py-1 underline">In Your Area</div>
-              The average household spends <i className="font-bold">£{analytics?.meanCurrentHeatingCost}/year</i> on heating.
+            <div className="text-center px-2">
+              Area Average: <i className="font-bold">£{analytics?.meanCurrentHeatingCost}/year</i>
             </div>
           </div>
 
@@ -43,18 +41,16 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
           </div>
 
           <div className="flex gap-2 flex-col h-full">
-            <div className="h-2/3 flex flex-col gap-2 w-full py-1 border border-x-0 border-t-0 text-center">
+            <div className="flex flex-col gap-2 w-full py-1 pb-3 border border-x-0 border-t-0 text-center">
               <div>
                 Current Cost: <b>£{data.hotWaterCostCurrent}</b>/year
               </div>
               <div>
                 Potential Cost: <b>£{data.hotWaterCostPotential}</b>/year
               </div>
-              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 text-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean?</div>
             </div>
-            <div className="h-1/3 text-center px-2">
-              <div className="py-1 underline text-center">In Your Area</div>
-              The average household spends <i className="font-bold">£{analytics?.meanCurrentHotWaterCost}/year</i> on hot water.
+            <div className="text-center px-2">
+              Area Average: <i className="font-bold">£{analytics?.meanCurrentHotWaterCost}/year</i>
             </div>
           </div>
 
@@ -66,18 +62,16 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
           </div>
 
           <div className="flex gap-2 flex-col h-full">
-            <div className="h-2/3 flex flex-col gap-2 w-full py-1 border border-x-0 border-t-0 text-center">
+            <div className="flex flex-col gap-2 w-full py-1 pb-3 border border-x-0 border-t-0 text-center">
               <div>
                 Current Cost: <b>£{data.lightingCostCurrent}</b>/year
               </div>
               <div>
                 Potential Cost: <b>£{data.lightingCostPotential}</b>/year
               </div>
-              <div onClick={()=>setModalHandler("costs")} className="pt-2 italic text-blue-500 text-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean?</div>
             </div>
-            <div className="h-1/3 text-center px-2">
-              <div className="py-1 underline">In Your Area</div>
-              The average household spends <i className="font-bold">£{analytics?.meanCurrentLightingCost}/year</i> on lighting.
+            <div className="text-center px-2">
+              Area Average:<i className="font-bold">£{analytics?.meanCurrentLightingCost}/year</i> 
             </div>
           </div>
         </div>

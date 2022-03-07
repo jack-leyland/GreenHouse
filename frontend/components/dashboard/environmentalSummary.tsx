@@ -21,8 +21,8 @@ interface props {
 export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   const featureData = [
     {
-      feature: "Floor",
-      rank: data.floorEnvEff,
+      feature: "Windows",
+      rank: data.windowsEnvEff,
       total: 5,
     },
     {
@@ -46,8 +46,8 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
       total: 5,
     },
     {
-      feature: "Windows",
-      rank: data.windowsEnvEff,
+      feature: "Floor",
+      rank: data.floorEnvEff,
       total: 5,
     },
     {
@@ -68,16 +68,16 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
         <div className="min-w-7/12">
           <div className="min-h-full flex flex-col pt-1 px-1">
             <div className="border border-x-0 border-t-0">
-              <div className="pb-2 text-sm">
+              <div className="pb-2 text-xs xl:text-sm">
                 Energy Consumption Current: <b>{data.energyConsumptionCurrent}</b>{" "}
                 kWh/year
               </div>
-              <div className="pb-2 text-sm">
+              <div className="pb-2 text-xs xl:text-sm">
                 Energy Consumption Potential: <b>{data.energyConsumptionPotential}</b>{" "}
                 kWh/year
               </div>
             </div>
-            <div className="pt-3">
+            <div className="pt-3 text-xs">
                 You can potentially reduce your energy consumption by{" "}
                 <b>{data.energyConsumptionCurrent - data.energyConsumptionPotential}{" "}</b>
                 kWh/year. This is equivalent to:
@@ -85,29 +85,29 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
             <div className="flex w-full justify-center gap-2 py-5">
               <div className="flex flex-col justify-center items-center w-1/3">
                 <MdOutlineSmartphone color={"#78abc4"} size={35} />
-                <p className="text-center italic">{internationalNumberFormat.format(phoneCharges)} smartphone {phoneCharges > 1 ? "charges" : "charge"} charges</p>
+                <p className="text-center text-xs italic">{internationalNumberFormat.format(phoneCharges)} smartphone {phoneCharges > 1 ? "charges" : "charge"}</p>
               </div>
               <div className="flex flex-col justify-center items-center w-1/3">
                 <AiFillCar color={"#963041"} size={35} />
-                <p className="text-center italic">{internationalNumberFormat.format(carJourneys)} car {carJourneys > 1 ? "journeys" : "journey"} journeys</p>
+                <p className="text-center text-xs italic">{internationalNumberFormat.format(carJourneys)} car {carJourneys > 1 ? "journeys" : "journey"}</p>
               </div>
               <div className="flex flex-col justify-center items-center w-1/3">
                 <GiOilPump color={"black"} size={35} />
-                <p className="text-center italic">{internationalNumberFormat.format(barrelsOfOil)} {barrelsOfOil > 1 ? "barrels" : "barrel"} of oil</p>
+                <p className="text-center text-xs italic">{internationalNumberFormat.format(barrelsOfOil)} {barrelsOfOil > 1 ? "barrels" : "barrel"} of oil</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="w-5/12 border border-r-0 border-y-0">
-          <div className="flex items-center mx-2">
+          <div className="flex justify-center items-center mx-2 md:text-xs">
             <span className="mr-2">Feature Environmental Efficiency</span>
               <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("featureEfficiency")} size={13} />
           </div>
           <div className="flex justify-center align-center">
             <RadarChart
-              outerRadius={40}
-              width={200}
+              outerRadius={30}
+              width={150}
               height={150}
               data={featureData}
             >
@@ -121,7 +121,6 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
                 fill="#8884d8"
                 fillOpacity={0.6}
               />
-              <Legend />
             </RadarChart>
           </div>
         </div>

@@ -55,7 +55,6 @@ export default function CarbonSummary({ data, analytics, setModalHandler }: prop
                 <div className="py-1 text-sm">
                   Your potential CO<sub>2</sub> production is <b>{data.co2EmissionsPotential}{" "}</b> tonnes per year.
                 </div>
-                <div onClick={()=>setModalHandler("carbonProduction")} className="pt-2 pb-3 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
               </div>
               <div className="pt-2 text-sm">
                 <strong>How you compare:</strong>

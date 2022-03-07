@@ -110,10 +110,10 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           Rating: <b>{analytics.meanCurrentEnergyRating}</b>{" "}
           Score: <b>{analytics.meanCurrentEnergyEfficiency}</b>
         </div>
-        <div className="pt-4 italic text-sm">
+        <div className="pt-4 italic text-sm ">
           U.K. Average:
         </div>
-        <div className="">
+        <div className="border border-x-0 border-t-0">
           Rating: <b className={`text-${epcIndexDictionary["D"]}`}>D</b>{" "}
           Score: <b className={`text-${epcIndexDictionary["D"]}`}>60</b>
         </div>
