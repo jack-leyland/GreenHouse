@@ -15,13 +15,13 @@ interface props {
 
 export default function FeatureCard({ data, type, analytics, setModalHandler }: props) {
 
-  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between";
+  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between text-gray-900";
 
   switch (type) {
     case "Walls":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll text-gray-600"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -63,7 +63,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Roof":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -103,7 +103,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Floor":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -145,7 +145,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Lighting":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -199,7 +199,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Heating":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -330,7 +330,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Water":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -385,7 +385,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
     case "Windows":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"}
           disableHoverAnimation={true}
           showShadow={true}
         >

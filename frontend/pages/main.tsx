@@ -83,11 +83,11 @@ const Main = () => {
   }
 
   return (
-    <DashboardWrapper pageTitle="Dashboard" subTitle={fullAddressString}>
+    <DashboardWrapper pageTitle="Dashboard" subTitle={fullAddressString} setModalContent={setModalContent}>
       {dashboardData ? (
-        <div className="h-screen flex flex-col text-gray-600">
-          <div className="h-full flex lg:flex-row flex-col px-2 py-8 w-full gap-4">
-            <div className="flex flex-col lg:w-1/2 lg:h-2/3 gap-4 h-full">
+        <div className="h-screen flex flex-col text-gray-600 py-6">
+          <div className="h-full flex lg:flex-row flex-col w-full gap-4">
+            <div className="flex flex-col lg:w-1/2 gap-4 h-full">
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
@@ -133,7 +133,7 @@ const Main = () => {
             </div>
 
             <Card
-              style={'lg:w-1/2 w-full lg:h-2/3 border'}
+              style={'lg:w-1/2 w-full border h-full'}
               disableHoverAnimation={true}
               showShadow={false}
             >

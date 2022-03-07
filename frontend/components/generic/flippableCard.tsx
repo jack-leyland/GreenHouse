@@ -27,7 +27,7 @@ export default function FlippableCard({
   const hover = " hover:scale-105 hover:cursor-pointer ";
   const shadow = " shadow-lg ";
   const cardStyle =
-    "animate-fade rounded-lg w-full xl:h-1/2 h-full relative bg-white" +
+    "animate-fade rounded-lg w-full xl:h-1/2 h-96 relative bg-white" +
     style +
     (disableHoverAnimation ? "" : hover) +
     (showShadow ? shadow : "");
@@ -76,7 +76,7 @@ export default function FlippableCard({
         }}
       >
         <div className="h-full child text-gray-600 ">
-          <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center">
+          <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
             {backTitle}
             <span
               className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg"
