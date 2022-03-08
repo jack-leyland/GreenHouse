@@ -57,7 +57,6 @@ export default function RecForm({
     useMutation(ADD_IMPROVEMENT);
 
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
-  const [postcode, setPostcode] = useState<string>("");
 
   useEffect(() => {
     if (error) setIsSubmissionError(true);
@@ -114,7 +113,6 @@ export default function RecForm({
               values: Values,
               { setSubmitting }: FormikHelpers<Values>
             ) => {
-              console.log(values);
               addImprovement({
                 variables: {
                   lmkKey: values.lmkKey,
