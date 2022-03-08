@@ -13,6 +13,7 @@ import { GET_REC_DATA } from "./api/queries";
 import loadingJson from "../assets/animations/animation/loading.json";
 import errorJson from "../assets/animations/animation/error.json";
 import Lottie from "react-lottie-player";
+import DashboardWrapper from "../components/sidebarNew";
 
 function paginateRecommendations(
   recs: Array<epcRecommendationObject>
@@ -95,67 +96,63 @@ const Recommendations = () => {
 
   return (
     <>
-      {recData && certificateData ? (
-        <div className="w-full flex flex-col bg-slate-50 text-gray-500 min-w-[1150px] min-h-[755px]">
-          <PageTitle
-            title={"Recommendations"}
-            subtitle={address}
-            onClick={() => setShowModal(true)}
-          />
-          <RecCostSummary data={certificateData} />
-          <RecCardGallery data={recData} />
-        </div>
-      ) : (
-        <>
-          {/*Loading Display*/}
-          {loading ? (
-            <div className="w-full flex flex-col justify-center items-center bg-slate-50">
-              <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
-              <Lottie
-                loop
-                animationData={loadingJson}
-                play
-                style={{ width: 250, height: 250 }}
-              />
-            </div>
-          ) : (
-            <>
-              {/*Error Display*/}
-              {isQueryError && !data ? (
-                <div className="w-full flex flex-col justify-center items-center bg-slate-50">
-                  <h1 className="animate-fade text-3xl font-bold pb-2">
-                    Oops, there was an error, try again later... [Dev Note:
-                    Query Error]
-                  </h1>
-                  <Lottie
-                    animationData={errorJson}
-                    play
-                    style={{ width: 150, height: 150 }}
-                  />
-                </div>
-              ) : null}
-            </>
-          )}
-        </>
-      )}
-      {showModal && extraHouseInfo ? (
-        <Modal hideModal={() => setShowModal(false)}>
-          <ExtraHouseInfo data={extraHouseInfo} />
-        </Modal>
-      ) : null}
+      <DashboardWrapper
+        pageTitle="Dashboard"
+        subTitle={address}
+        setModalContent={setShowModal}
+      >
+        {recData && certificateData ? (
+          <div className="flex flex-col bg-gray-100 text-gray-500">
+            <RecCostSummary data={certificateData} />
+            <RecCardGallery data={recData} />
+            {showModal && extraHouseInfo ? (
+              <Modal hideModal={() => setShowModal(false)}>
+                <ExtraHouseInfo data={extraHouseInfo} />
+              </Modal>
+            ) : null}
+          </div>
+        ) : (
+          <>
+            {/*Loading Display*/}
+            {loading ? (
+              <div className="w-full flex flex-col justify-center items-center bg-gray-100">
+                <h1 className="animate-fade text-3xl italic pb-2">
+                  Loading...
+                </h1>
+                <Lottie
+                  loop
+                  animationData={loadingJson}
+                  play
+                  style={{ width: 250, height: 250 }}
+                />
+              </div>
+            ) : (
+              <>
+                {/*Error Display*/}
+                {isQueryError && !data ? (
+                  <div className="w-full flex flex-col justify-center items-center bg-gray-100">
+                    <h1 className="animate-fade text-3xl font-bold pb-2">
+                      Oops, there was an error, try again later... [Dev Note:
+                      Query Error]
+                    </h1>
+                    <Lottie
+                      animationData={errorJson}
+                      play
+                      style={{ width: 150, height: 150 }}
+                    />
+                  </div>
+                ) : null}
+              </>
+            )}
+          </>
+        )}
+      </DashboardWrapper>
     </>
   );
 };
 
 Recommendations.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout title="Address Dashboard">
-      <div className="flex overflow-hidden shadow-xl">
-        <Sidebar />
-        {page}
-      </div>
-    </Layout>
-  );
+  return <Layout title="Address Dashboard">{page}</Layout>;
 };
 
 export default Recommendations;

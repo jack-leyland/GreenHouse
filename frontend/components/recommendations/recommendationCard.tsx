@@ -84,32 +84,24 @@ export default function Recommendation({
   }, [category]);
 
   return (
-    <div
-      className="flex flex-row justify-center p-4 mx-5 w-[40%]"
-      ref={wrapperRef}
-    >
-      <div
-        className={
-          "h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 " +
-          color
-        }
-      >
+    <div className="flex flex-row justify-center p-4 mx-5" ref={wrapperRef}>
+      <div className={"h-full rounded-lg text-white flex flex-col " + color}>
         <div className="p-6">
           <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
             {category}
           </h2>
-          <h1 className="text-[1.5rem] pb-4 mb-4 border-b leading-none">
+          <h1 className="text-base pb-4 mb-4 border-b leading-none">
             {improvementIdText}
           </h1>
         </div>
         <div className="w-full flex items-center justify-center p-6">
           <span className="text-center">{indicativeCost} estimated cost</span>
         </div>
-        <div className="p-6 pb-2 absolute bottom-0 w-full">
+        <div className="p-6 pb-2 bottom-0 w-full flex justify-center">
           <button
             onClick={() => setShowForm(!showForm)}
             className={
-              "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+              "flex justify-center mt-auto text-gray-900 border-0 py-2 px-4 focus:outline-none hover:bg-gray-100 rounded font-bold " +
               (showForm ? "bg-red-200" : "bg-white")
             }
           >

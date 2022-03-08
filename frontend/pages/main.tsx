@@ -166,7 +166,7 @@ const Main = () => {
         <>
           {/*Loading Display*/}
           {loading ? (
-            <div className="w-full flex flex-col justify-center items-center bg-white">
+            <div className="w-full flex flex-col justify-center items-center bg-gray-100">
               <h1 className="animate-fade text-3xl text-gray-800 italic pb-2">
                 Loading...
               </h1>
@@ -181,7 +181,7 @@ const Main = () => {
             <>
               {/*Error Display*/}
               {isQueryError && !data ? (
-                <div className="w-full flex flex-col justify-center items-center bg-white">
+                <div className="w-full flex flex-col justify-center items-center bg-gray-100">
                   <h1 className="animate-fade text-3xl font-bold pb-2">
                     Oops, there was an error, try again later...
                   </h1>

@@ -54,7 +54,7 @@ export default function RecCardGallery({ data }: props) {
   }
   console.log(noRecs);
   return (
-    <div className="w-full h-full relative flex-row justify-center">
+    <div className="w-full h-full flex-row justify-center">
       <div className="w-full h-[10%] max-h-[50px] flex justify-center">
         <div className="w-[95%] flex items-center rounded-default bg-gray-200 pr-2 pl-2">
           <div className="w-[50%] h-[100%] flex items-center">
@@ -84,8 +84,10 @@ export default function RecCardGallery({ data }: props) {
           There are no available recommendations for this property!
         </div>
       )}
-      <div className="w-full h-[85%] flex justify-center animate-fade  ">
-        <div className="flex w-[95%] justify-center mt-2">
+      <div className="w-full h-[85%] flex justify-center animate-fade  "></div>
+      <div>
+        {" "}
+        <div className="flex w-[95%] justify-center mt-2 md:flex-row flex-col">
           {/* This is mildy hacky, might change later */}
           {activePageRecs[0] ? (
             <Recommendation
