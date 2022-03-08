@@ -71,7 +71,6 @@ export default function CarbonSummary({
             </div>
           </div>
           <div className="border border-x-0 border-t-0"></div>
-
           <div className="py-1 md:text-lg text-sm font-semibold underline">
             How you compare
           </div>

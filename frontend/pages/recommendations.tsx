@@ -1,18 +1,18 @@
-import { useQuery } from '@apollo/client';
-import { ReactElement, useEffect, useState } from 'react';
-import Layout from '../components/generic/layout';
-import PageTitle from '../components/generic/pageTitle';
-import Sidebar from '../components/sidebar';
-import RecCostSummary from '../components/recommendations/recCostSummary';
-import RecCardGallery from '../components/recommendations/recCardGallery';
-import Modal from '../components/generic/modal';
-import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
-import { useAppContext } from '../context/state';
-import { epcCertificateObject, epcRecommendationObject } from '../types';
-import { GET_REC_DATA } from './api/queries';
-import loadingJson from '../assets/animations/animation/loading.json';
-import errorJson from '../assets/animations/animation/error.json';
-import Lottie from 'react-lottie-player';
+import { useQuery } from "@apollo/client";
+import { ReactElement, useEffect, useState } from "react";
+import Layout from "../components/generic/layout";
+import PageTitle from "../components/generic/pageTitle";
+import Sidebar from "../components/sidebar";
+import RecCostSummary from "../components/recommendations/recCostSummary";
+import RecCardGallery from "../components/recommendations/recCardGallery";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import { useAppContext } from "../context/state";
+import { epcCertificateObject, epcRecommendationObject } from "../types";
+import { GET_REC_DATA } from "./api/queries";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import Lottie from "react-lottie-player";
 
 function paginateRecommendations(
   recs: Array<epcRecommendationObject>
@@ -40,9 +40,9 @@ const Recommendations = () => {
     [[]]
   );
   const [certificateData, setCertificateData] = useState<any>(null);
-  const [address, setAddress] = useState<string>('');
+  const [address, setAddress] = useState<string>("");
   const [extraHouseInfo, setExtraHouseInfo] =
-    useState<epcCertificateObject['ExtraInfo']>();
+    useState<epcCertificateObject["ExtraInfo"]>();
 
   const { loading, error, data } = useQuery(GET_REC_DATA, {
     skip: !queryParam || isQueryError,
@@ -79,7 +79,7 @@ const Recommendations = () => {
         certificateData.posttown,
         certificateData.postcode,
       ];
-      setAddress(addressElements.join(', '));
+      setAddress(addressElements.join(", "));
     }
   }, [certificateData]);
 
@@ -95,7 +95,7 @@ const Recommendations = () => {
       {recData && certificateData ? (
         <div className="w-full flex flex-col bg-slate-50 text-gray-500 min-w-[1150px] min-h-[755px]">
           <PageTitle
-            title={'Recommendations'}
+            title={"Recommendations"}
             subtitle={address}
             onClick={() => setShowModal(true)}
           />
@@ -146,7 +146,7 @@ const Recommendations = () => {
 
 Recommendations.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Address Dashboard" >
+    <Layout title="Address Dashboard">
       <div className="flex overflow-hidden shadow-xl">
         <Sidebar />
         {page}

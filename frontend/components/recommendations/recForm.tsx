@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import { gql, useMutation } from '@apollo/client';
-import { useAppContext } from '../../context/state';
+import React, { useEffect, useState, useRef } from "react";
+import { Formik, Field, Form, FormikHelpers } from "formik";
+import { gql, useMutation } from "@apollo/client";
+import { useAppContext } from "../../context/state";
 
 const ADD_IMPROVEMENT = gql`
   mutation AddImprovement(
@@ -49,7 +49,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
-  const [postcode, setPostcode] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>("");
 
   useEffect(() => {
     if (error) setIsSubmissionError(true);
@@ -66,7 +66,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
   return (
     <div
       className={
-        'h-full max-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
+        "h-full max-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden " +
         color
       }
     >
@@ -82,7 +82,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
           <Formik
             initialValues={{
               cost: 0,
-              date: '',
+              date: "",
               lmkKey: lmk,
               improvementId: improvementId,
               postcode: postcode,
@@ -143,7 +143,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
                   disabled={data ? true : false}
                   className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
                 >
-                  {data ? "You've already told us!" : 'Submit'}
+                  {data ? "You've already told us!" : "Submit"}
                 </button>
               </div>
             </Form>

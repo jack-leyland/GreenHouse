@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import SearchIcon from '../assets/search-icon.svg';
+import React, { useState, useEffect } from "react";
+import SearchIcon from "../assets/search-icon.svg";
 
 type Props = {
   searchTextValue: string;
@@ -16,7 +16,7 @@ export default function SearchBar({
   inputHandler,
   submitHandler,
 }: Props) {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [errorState, setErrorState] = useState(isError);
 
   useEffect(() => {
@@ -28,13 +28,13 @@ export default function SearchBar({
     inputHandler(event.target.value);
   };
 
-  const containerStyling = 'flex min-w-[250px]' + width;
+  const containerStyling = "flex min-w-[250px]" + width;
   const errorBorderStyling =
-    'border-2 border-l-red-500 border-t-red-500 border-b-red-500 text-red-500';
+    "border-2 border-l-red-500 border-t-red-500 border-b-red-500 text-red-500";
   const defaultBorderStyling =
-    'border-2 border-lightGrey focus:border-l-gray-900 focus:border-t-gray-900 focus:border-b-gray-900';
+    "border-2 border-lightGrey focus:border-l-gray-900 focus:border-t-gray-900 focus:border-b-gray-900";
   return (
-    <div className={containerStyling + (errorState ? ' animate-shake' : '')}>
+    <div className={containerStyling + (errorState ? " animate-shake" : "")}>
       <input
         type="text"
         maxLength={10}
@@ -44,12 +44,12 @@ export default function SearchBar({
           handleChange(e)
         }
         onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-          if (e.key == 'Enter') {
+          if (e.key == "Enter") {
             submitHandler();
           }
         }}
         className={
-          'z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] rounded-l-default pl-[15px] font-logoFont font-medium bg-white rounded border border-gray-300 focus:border-lightGreen focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out' +
+          "z-0 peer placeholder-darkGrey w-[75%] outline-0 h-[55px] rounded-l-default pl-[15px] font-logoFont font-medium bg-white rounded border border-gray-300 focus:border-lightGreen focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" +
           (errorState ? errorBorderStyling : defaultBorderStyling)
         }
       ></input>

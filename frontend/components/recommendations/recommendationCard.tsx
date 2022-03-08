@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { epcRecommendationObject } from '../../types';
-import { useAppContext } from '../../context/state';
-import { HeatingCategories } from '../../types';
-import RecForm from './recForm';
+import React, { useEffect, useState, useRef } from "react";
+import { epcRecommendationObject } from "../../types";
+import { useAppContext } from "../../context/state";
+import { HeatingCategories } from "../../types";
+import RecForm from "./recForm";
 
 interface props {
-  improvementId: epcRecommendationObject['improvementId'];
-  improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost: epcRecommendationObject['indicativeCost'];
+  improvementId: epcRecommendationObject["improvementId"];
+  improvementIdText: epcRecommendationObject["improvementIdText"];
+  indicativeCost: epcRecommendationObject["indicativeCost"];
 }
 
 function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
@@ -24,10 +24,10 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
     }
 
     // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside as any);
+    document.addEventListener("mousedown", handleClickOutside as any);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside as any);
+      document.removeEventListener("mousedown", handleClickOutside as any);
     };
   }, [ref]);
 }
@@ -39,10 +39,10 @@ export default function Recommendation({
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
-  const [lmk, setLmk] = useState<string>('');
+  const [lmk, setLmk] = useState<string>("");
   const GlobalContext = useAppContext();
-  const [color, setColor] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
+  const [color, setColor] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -59,17 +59,17 @@ export default function Recommendation({
   useEffect(() => {
     setCategory(HeatingCategories[improvementId]); // This works, idk what to do with the error
     switch (category) {
-      case 'Heating':
-        setColor('bg-red-500');
+      case "Heating":
+        setColor("bg-red-500");
         break;
-      case 'Water':
-        setColor('bg-blue-500');
+      case "Water":
+        setColor("bg-blue-500");
         break;
-      case 'Lighting':
-        setColor('bg-yellow-500');
+      case "Lighting":
+        setColor("bg-yellow-500");
         break;
-      case 'Other':
-        setColor('bg-slate-500');
+      case "Other":
+        setColor("bg-slate-500");
         break;
     }
   }, [category]);
@@ -81,7 +81,7 @@ export default function Recommendation({
     >
       <div
         className={
-          'h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 ' +
+          "h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 " +
           color
         }
       >
@@ -100,11 +100,11 @@ export default function Recommendation({
           <button
             onClick={() => setShowForm(!showForm)}
             className={
-              'flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold ' +
-              (showForm ? 'bg-red-200' : 'bg-white')
+              "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+              (showForm ? "bg-red-200" : "bg-white")
             }
           >
-            {showForm ? 'Cancel' : "I've done this!"}
+            {showForm ? "Cancel" : "I've done this!"}
           </button>
         </div>
       </div>

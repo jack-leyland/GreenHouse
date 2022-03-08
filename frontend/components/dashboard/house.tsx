@@ -19,8 +19,8 @@ export default function House({ data, analytics, setModalHandler }: props) {
   const [sidePanelType, setSidePanelType] = useState<string>("");
 
   return (
-    <div className="flex flex-col items-center w-full h-full px-6 py-4 gap-6 pb-6 relative">
-      <div className="flex justify-center w-full max-w-[600px]">
+    <div className="flex flex-col items-center w-full px-6 py-4 gap-6 pb-6 relative h-auto">
+      <div className="flex justify-center w-full">
         <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3 h-2/5">
           {/*Roof*/}
           <div
@@ -120,13 +120,15 @@ export default function House({ data, analytics, setModalHandler }: props) {
         </div>
       </div>
 
-      <div className="w-full h-full">
-        <FeatureCard
-          data={data}
-          type={sidePanelType}
-          analytics={analytics}
-          setModalHandler={setModalHandler}
-        />
+      <div className="w-full">
+        <div className="w-full h-full">
+          <FeatureCard
+            data={data}
+            type={sidePanelType}
+            analytics={analytics}
+            setModalHandler={setModalHandler}
+          />
+        </div>
       </div>
     </div>
   );

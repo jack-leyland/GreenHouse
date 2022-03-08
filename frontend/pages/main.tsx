@@ -89,9 +89,9 @@ const Main = () => {
       setModalContent={setModalContent}
     >
       {dashboardData ? (
-        <div className="h-full text-gray-600 py-6">
+        <div className="h-screen text-gray-600 py-6">
           <div className="flex lg:flex-row flex-col gap-4 h-auto">
-            <div className="flex flex-col w-full lg:w-1/2 gap-4">
+            <div className="flex flex-col w-full lg:w-1/2 gap-4 h-auto">
               <FlippableCard
                 disableHoverAnimation={true}
                 showShadow={false}
@@ -137,7 +137,7 @@ const Main = () => {
             </div>
 
             <Card
-              style={"lg:w-1/2 w-full border h-auto"}
+              style={"lg:w-1/2 w-full border h-full lg:h-auto"}
               disableHoverAnimation={true}
               showShadow={false}
             >

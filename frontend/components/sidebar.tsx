@@ -1,8 +1,8 @@
-import React from 'react';
-import House from '../assets/house.svg';
-import { BsWrench, BsFillHouseFill } from 'react-icons/bs';
-import SidebarItem from './sidebarItem';
-import Link from 'next/link';
+import React from "react";
+import House from "../assets/house.svg";
+import { BsWrench, BsFillHouseFill } from "react-icons/bs";
+import SidebarItem from "./sidebarItem";
+import Link from "next/link";
 
 export default function Sidebar() {
   return (
@@ -18,13 +18,13 @@ export default function Sidebar() {
               </Link>
             </div>
             <SidebarItem
-              label={'Overview'}
-              link={'/main'}
+              label={"Overview"}
+              link={"/main"}
               icon={<BsFillHouseFill size={30} />}
             />
             <SidebarItem
-              label={'Recommendations'}
-              link={'/recommendations'}
+              label={"Recommendations"}
+              link={"/recommendations"}
               icon={<BsWrench size={30} />}
             />
           </nav>

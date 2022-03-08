@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import BackButton from '../../assets/arrow-left.svg';
-import Lottie from 'react-lottie-player';
-import loadingJson from '../../assets/animations/animation/loading.json';
-import SearchIcon from '../../assets/search-icon.svg';
+import React, { useState, useEffect } from "react";
+import BackButton from "../../assets/arrow-left.svg";
+import Lottie from "react-lottie-player";
+import loadingJson from "../../assets/animations/animation/loading.json";
+import SearchIcon from "../../assets/search-icon.svg";
 
 type AddressObject = {
   address: string;
@@ -29,7 +29,7 @@ export default function AddressList({
   const [addressData, setAddressData] = useState<Array<AddressObject>>([]);
   const [filteredData, setFilteredData] = useState<Array<AddressObject>>([]);
   const [showSearchBar, setShowSearchBar] = useState<Boolean>(false);
-  const [searchBoxText, setSearchBoxText] = useState<string>('');
+  const [searchBoxText, setSearchBoxText] = useState<string>("");
 
   useEffect(() => {
     setLoading(isLoading);
@@ -53,13 +53,13 @@ export default function AddressList({
   };
 
   useEffect(() => {
-    if (searchBoxText == '') {
+    if (searchBoxText == "") {
       setFilteredData(addressData);
       return;
     }
     let filtered = addressData.filter((obj) => {
-      let stripped_address = obj.address.toLowerCase().replace(/ /g, '');
-      let stripped_search = searchBoxText.toLowerCase().replace(/ /g, '');
+      let stripped_address = obj.address.toLowerCase().replace(/ /g, "");
+      let stripped_search = searchBoxText.toLowerCase().replace(/ /g, "");
       return stripped_address.includes(stripped_search);
     });
     setFilteredData(filtered);
@@ -88,8 +88,8 @@ export default function AddressList({
       ) : null}
       <div
         className={
-          'h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounded ' +
-          (showSearchBar ? 'h-[calc(100%-90px)]' : 'h-[calc(100%-45px)]')
+          "h-[calc(100%-45px)] overflow-y-scroll scrollbar-track-lightGrey scrollbar-thumb-rounded " +
+          (showSearchBar ? "h-[calc(100%-90px)]" : "h-[calc(100%-45px)]")
         }
       >
         {loading ? (
@@ -113,7 +113,14 @@ export default function AddressList({
                     selectionHandler(item.lmkKey);
                   }}
                 >
-                  {item.address.split(" ").map((word:string) => word[0].toUpperCase() + word.slice(1).toLowerCase() + " ")}
+                  {item.address
+                    .split(" ")
+                    .map(
+                      (word: string) =>
+                        word[0].toUpperCase() +
+                        word.slice(1).toLowerCase() +
+                        " "
+                    )}
                 </div>
               );
             })

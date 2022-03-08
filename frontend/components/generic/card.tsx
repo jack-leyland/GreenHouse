@@ -41,7 +41,7 @@ export default function Card({
       onMouseLeave={() => (onHover ? onHover(false) : null)}
       onClick={() => (onClick ? onClick(true) : null)}
     >
-      <div className="p-3 text-xs h-full min-w-full">{children}</div>
+      <div className="p-3 text-xs h-auto max-h-96 min-w-full">{children}</div>
     </div>
   );
 }
