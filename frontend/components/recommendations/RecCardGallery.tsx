@@ -10,7 +10,7 @@ interface props {
 
 //BIG TODO: Each recommendation needs a completed flag from backend
 
-export default function RecCostSummary({ data }: props) {
+export default function RecCardGallery({ data }: props) {
   const [activePage, setActivePage] = useState<number>(0);
   const [activePageRecs, setActivePageRecs] = useState<
     Array<epcRecommendationObject>
