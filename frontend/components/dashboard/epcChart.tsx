@@ -15,10 +15,10 @@ interface props {
 }
 
 export default function EpcChart({ data, analytics, setModalHandler }: props) {
-  const currentRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 md:h-1/2 w-2/3 text-center col-start-1 my-1 h-full row-start-${
+  const currentRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-1/2 md:h-1/2 w-2/3 text-center col-start-1 my-1 h-full row-start-${
     epcIndexDictionary[data.currentEnergyRating]
   } bg-${epcColorDictionary[data.currentEnergyRating]}`;
-  const potentialRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-2/3 md:h-1/2 w-2/3 text-center col-start-2 px-1 my-1 h-full row-start-${
+  const potentialRatingIndexStyle = `relative animate-flyUp text-white mx-4 h-1/2 md:h-1/2 w-2/3 text-center col-start-2 px-1 my-1 h-full row-start-${
     epcIndexDictionary[data.potentialEnergyRating]
   } bg-${epcColorDictionary[data.potentialEnergyRating]}`;
 
@@ -36,7 +36,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
             EPC Rating
           </button>
           <AiFillQuestionCircle
-            size={14}
+            size={16}
             className="hover:cursor-pointer hidden md:flex"
             onClick={() => setModalHandler("epcChart")}
           />
@@ -80,7 +80,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
             Current
           </button>
           <AiFillQuestionCircle
-            size={14}
+            size={16}
             className="hover:cursor-pointer hidden md:flex"
             onClick={() => setModalHandler("currentRating")}
           />
@@ -93,7 +93,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
             Potential
           </button>
           <AiFillQuestionCircle
-            size={14}
+            size={16}
             className="hover:cursor-pointer hidden md:flex"
             onClick={() => setModalHandler("potentialRating")}
           />
@@ -105,8 +105,9 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           {data.potentialEnergyEfficiency}
         </div>
       </div>
+      <div className="border border-r-1 border-l-0 border-y-0 pl-2"></div>
 
-      <div className="w-2/6 h-full border border-r-0 border-y-0 px-2 flex flex-col justify-between text-center">
+      <div className="w-2/6 h-full px-2 flex flex-col justify-between text-center">
         <div>
           <div className="font-semibold md:text-base text-sm underline">
             Your House
@@ -134,7 +135,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
             </div>
           </div>
         </div>
-        <div className="border border-x-0 border-t-0"></div>
+        <div className="border border-x-0 border-t-0 "></div>
 
         <div>
           <div className="font-semibold md:text-base text-sm pt-2 underline">

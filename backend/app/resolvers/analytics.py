@@ -23,116 +23,108 @@ def create_analytics(local_df):
     analytics = Analytics()
     analytics.number_of_houses = len(local_df)
     analytics.mean_current_energy_efficiency = round(
-        local_df["current-energy-efficiency"].mean(), 0
+        local_df["current-energy-efficiency"].mean()
     )
     analytics.mean_current_energy_rating = convert_from_SAP(
         analytics.mean_current_energy_efficiency
     )
     analytics.mean_current_environment_impact = round(
-        local_df["environment-impact-current"].mean(), 0
+        local_df["environment-impact-current"].mean()
     )
     analytics.mean_current_energy_consumption = round(
-        local_df["energy-consumption-current"].mean(), 0
+        local_df["energy-consumption-current"].mean()
     )
     analytics.mean_current_co2_consumption = round(
-        local_df["co2-emissions-current"].mean(), 0
+        local_df["co2-emissions-current"].mean()
     )
     analytics.mean_current_lighting_cost = round(
-        local_df["lighting-cost-current"].mean(), 0
+        local_df["lighting-cost-current"].mean()
     )
-    analytics.mean_current_heating_cost = round(
-        local_df["heating-cost-current"].mean(), 0
-    )
+    analytics.mean_current_heating_cost = round(local_df["heating-cost-current"].mean())
     analytics.mean_current_hot_water_cost = round(
-        local_df["hot-water-cost-current"].mean(), 0
+        local_df["hot-water-cost-current"].mean()
     )
     analytics.mean_potential_energy_efficiency = round(
-        local_df["potential-energy-efficiency"].mean(), 0
+        local_df["potential-energy-efficiency"].mean()
     )
     analytics.mean_potential_energy_rating = convert_from_SAP(
         analytics.mean_potential_energy_efficiency
     )
     analytics.mean_potential_environment_impact = round(
-        local_df["environment-impact-potential"].mean(), 0
+        local_df["environment-impact-potential"].mean()
     )
     analytics.mean_potential_energy_consumption = round(
-        local_df["energy-consumption-potential"].mean(), 0
+        local_df["energy-consumption-potential"].mean()
     )
     analytics.mean_potential_co2_consumption = round(
-        local_df["co2-emissions-potential"].mean(), 0
+        local_df["co2-emissions-potential"].mean()
     )
     analytics.mean_potential_lighting_cost = round(
-        local_df["lighting-cost-potential"].mean(), 0
+        local_df["lighting-cost-potential"].mean()
     )
     analytics.mean_potential_heating_cost = round(
-        local_df["heating-cost-potential"].mean(), 0
+        local_df["heating-cost-potential"].mean()
     )
     analytics.mean_potential_hot_water_cost = round(
-        local_df["hot-water-cost-potential"].mean(), 0
+        local_df["hot-water-cost-potential"].mean()
     )
     analytics.normalised_current_energy_efficiency = round(
-        local_df["current-energy-efficiency-per-total-floor-area"], 0
+        local_df["current-energy-efficiency-per-total-floor-area"]
     )
     analytics.normalised_current_environment_impact = round(
-        local_df["environment-impact-current-per-total-floor-area"], 0
+        local_df["environment-impact-current-per-total-floor-area"]
     )
     analytics.normalised_current_energy_consumption = round(
-        local_df["energy-consumption-current-per-total-floor-area"], 0
+        local_df["energy-consumption-current-per-total-floor-area"]
     )
     analytics.normalised_current_co2_consumption = round(
-        local_df["current-energy-efficiency-per-total-floor-area"], 0
+        local_df["current-energy-efficiency-per-total-floor-area"]
     )
     analytics.normalised_current_lighting_cost = round(
-        local_df["lighting-cost-current-per-total-floor-area"], 0
+        local_df["lighting-cost-current-per-total-floor-area"]
     )
     analytics.normalised_current_heating_cost = round(
-        local_df["heating-cost-current-per-total-floor-area"], 0
+        local_df["heating-cost-current-per-total-floor-area"]
     )
     analytics.normalised_current_hot_water_cost = round(
-        local_df["hot-water-cost-current-per-total-floor-area"], 0
+        local_df["hot-water-cost-current-per-total-floor-area"]
     )
 
     # ratings means for housing tile comparison
-    analytics.mean_low_energy_lighting = round(
-        local_df["low-energy-lighting"].mean(), 0
-    )
-    analytics.mean_lighting_energy_eff = round(
-        local_df["lighting-energy-eff"].mean(), 0
-    )
+    analytics.mean_low_energy_lighting = round(local_df["low-energy-lighting"].mean())
+    analytics.mean_lighting_energy_eff = round(local_df["lighting-energy-eff"].mean())
     analytics.mean_lighting_environmental_eff = round(
-        local_df["lighting-env-eff"].mean(), 0
+        local_df["lighting-env-eff"].mean()
     )
-    analytics.mean_walls_energy_eff = round(local_df["walls-energy-eff"].mean(), 0)
-    analytics.mean_walls_environmental_eff = round(local_df["walls-env-eff"].mean(), 0)
-    analytics.mean_water_energy_eff = round(local_df["hot-water-energy-eff"].mean(), 0)
-    analytics.mean_water_environmental_eff = round(
-        local_df["hot-water-env-eff"].mean(), 0
-    )
-    analytics.mean_floor_energy_eff = round(local_df["floor-energy-eff"].mean(), 0)
-    analytics.mean_floor_environmental_eff = round(local_df["floor-env-eff"].mean(), 0)
-    analytics.mean_roof_energy_eff = round(local_df["roof-energy-eff"].mean(), 0)
-    analytics.mean_roof_environmental_eff = round(local_df["roof-env-eff"].mean(), 0)
+    analytics.mean_walls_energy_eff = round(local_df["walls-energy-eff"].mean())
+    analytics.mean_walls_environmental_eff = round(local_df["walls-env-eff"].mean())
+    analytics.mean_water_energy_eff = round(local_df["hot-water-energy-eff"].mean())
+    analytics.mean_water_environmental_eff = round(local_df["hot-water-env-eff"].mean())
+    analytics.mean_floor_energy_eff = round(local_df["floor-energy-eff"].mean())
+    analytics.mean_floor_environmental_eff = round(local_df["floor-env-eff"].mean())
+    analytics.mean_roof_energy_eff = round(local_df["roof-energy-eff"].mean())
+    analytics.mean_roof_environmental_eff = round(local_df["roof-env-eff"].mean())
     analytics.mean_main_heating_energy_eff = round(
-        local_df["mainheat-energy-eff"].mean(), 0
+        local_df["mainheat-energy-eff"].mean()
     )
     analytics.mean_main_heating_environmental_eff = round(
-        local_df["mainheat-env-eff"].mean(), 0
+        local_df["mainheat-env-eff"].mean()
     )
     analytics.mean_main_heating_controls_energy_eff = round(
-        local_df["mainheatc-energy-eff"].mean(), 0
+        local_df["mainheatc-energy-eff"].mean()
     )
     analytics.mean_main_heating_controls_environmental_eff = round(
-        local_df["mainheat-env-eff"].mean(), 0
+        local_df["mainheat-env-eff"].mean()
     )
     analytics.mean_second_heating_energy_eff = round(
-        local_df["sheating-energy-eff"].mean(), 0
+        local_df["sheating-energy-eff"].mean()
     )
     analytics.mean_second_heating_environmental_eff = round(
-        local_df["sheating-env-eff"].mean(), 0
+        local_df["sheating-env-eff"].mean()
     )
-    analytics.mean_windows_energy_eff = round(local_df["windows-energy-eff"].mean(), 0)
-    analytics.mean_windows_environmental_eff = round(
-        local_df["windows-env-eff"].mean(), 0
+    analytics.mean_windows_energy_eff = round(
+        local_df["windows-energy-eff"].mean(),
     )
+    analytics.mean_windows_environmental_eff = round(local_df["windows-env-eff"].mean())
 
     return analytics

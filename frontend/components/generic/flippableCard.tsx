@@ -27,7 +27,7 @@ export default function FlippableCard({
   const hover = " hover:scale-105 hover:cursor-pointer ";
   const shadow = " shadow-lg ";
   const cardStyle =
-    "animate-fade rounded-lg w-full xl:h-1/2 h-96 relative bg-white" +
+    "animate-fade rounded-lg w-full h-96 relative bg-white" +
     style +
     (disableHoverAnimation ? "" : hover) +
     (showShadow ? shadow : "");

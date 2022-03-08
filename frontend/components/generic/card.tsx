@@ -25,7 +25,7 @@ export default function Card({
   const hover = " hover:scale-105 hover:cursor-pointer";
   const shadow = " shadow-lg";
   const cardStyle =
-    "animate-fade rounded-lg w-full h-full b bg-white " +
+    "animate-fade rounded-lg w-full h-full bg-white " +
     style +
     (disableHoverAnimation ? "" : hover) +
     (showShadow ? shadow : "") +
