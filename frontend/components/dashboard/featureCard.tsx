@@ -1,36 +1,51 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Card from "../generic/card";
 import Lottie from "react-lottie-player";
 import json from "../../assets/animations/animation/up-arrow.json";
 import StarRating from "../generic/starRating";
 import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
+import { AiFillQuestionCircle } from "react-icons/ai";
 
 interface props {
   type: string;
   data: epcCertificateObject["House"];
   analytics: packagedAnalyticsObject["house"];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function FeatureCard({ data, type, analytics }: props) {
+export default function FeatureCard({
+  data,
+  type,
+  analytics,
+  setModalHandler,
+}: props) {
+  const titleStyling =
+    "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between text-gray-900";
+
   switch (type) {
     case "Walls":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll text-gray-600"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
-            <div className="p-2 text-sm">
-              <div className="pt-2 pb-3">
-                <b>Description:</b>{" "}
-                {data?.walls.wallsDescription
-                  ? data.walls.wallsDescription
-                  : "N/A"}
-              </div>
+            <div className="p-2 text-sm flex flex-col md-justify-center md-items-center">
+              <b>Description:</b>{" "}
+              {data?.walls.wallsDescription
+                ? data.walls.wallsDescription
+                : "N/A"}
               <StarRating
                 title={"Energy Efficiency"}
                 rating={
@@ -57,13 +72,20 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Roof":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -96,13 +118,20 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Floor":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -137,31 +166,38 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Lighting":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("lighting")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
                 <b>Lighting Cost Current:</b>{" "}
                 {data?.costs.lightingCostCurrent
-                  ? data?.costs.lightingCostCurrent
+                  ? "£" + data?.costs.lightingCostCurrent + " /year"
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Lighting Cost Potential:</b>{" "}
-                {data?.costs.lightingCostPotential
-                  ? data?.costs.lightingCostPotential
+                {data?.costs.lightingCostPotential + " /year"
+                  ? "£" + data?.costs.lightingCostPotential
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Low Energy Lighting:</b>{" "}
                 {data?.lighting.lowEnergyLighting
-                  ? data?.lighting.lowEnergyLighting
+                  ? data?.lighting.lowEnergyLighting + "%"
                   : "N/A"}
               </div>
               <StarRating
@@ -190,14 +226,14 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Heating":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
-              {type}
-            </div>
+            <div className={titleStyling}>{type}</div>
             <div className="p-2 text-sm">
               <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
                 Main Heating
@@ -212,13 +248,13 @@ export default function FeatureCard({ data, type, analytics }: props) {
               <div className="py-2">
                 <b>Heating Cost Current:</b>{" "}
                 {data?.costs.heatingCostCurrent
-                  ? data?.costs.heatingCostCurrent
+                  ? "£" + data?.costs.heatingCostCurrent + " /year"
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Heating Cost Potential:</b>{" "}
                 {data?.costs.heatingCostPotential
-                  ? data?.costs.heatingCostPotential
+                  ? "£" + data?.costs.heatingCostPotential + " /year"
                   : "N/A"}
               </div>
 
@@ -251,18 +287,28 @@ export default function FeatureCard({ data, type, analytics }: props) {
                   ? data?.heating.mainHeatingControls.mainHeatControlDescription
                   : "N/A"}
               </div>
-              <div className="py-2">
-                <b>Heating Control Energy Efficiency:</b>{" "}
-                {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                  ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                  : "N/A"}
-              </div>
-              <div className="py-2">
-                <b>Heating Control Environmental Efficiency:</b>{" "}
-                {data?.consumptionEnvEff.mainHeatControlEnvEff
-                  ? data?.consumptionEnvEff.mainHeatControlEnvEff
-                  : "N/A"}
-              </div>
+
+              <StarRating
+                title={"Energy Efficiency"}
+                rating={
+                  data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                    ? parseInt(
+                        data?.heating.mainHeatingControls
+                          .mainHeatControlEnergyEff
+                      )
+                    : 0
+                }
+                areaAverage={0}
+              />
+              <StarRating
+                title={"Environmental Efficiency"}
+                rating={
+                  data?.consumptionEnvEff.mainHeatControlEnvEff
+                    ? parseInt(data?.consumptionEnvEff.mainHeatControlEnvEff)
+                    : 0
+                }
+                areaAverage={0}
+              />
 
               <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
                 Fuel
@@ -325,13 +371,20 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Water":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("water")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -343,13 +396,13 @@ export default function FeatureCard({ data, type, analytics }: props) {
               <div className="py-2">
                 <b>Hot Water Cost Current:</b>{" "}
                 {data?.costs.hotWaterCostCurrent
-                  ? data?.costs.hotWaterCostCurrent
+                  ? "£" + data?.costs.hotWaterCostCurrent + "/year"
                   : "N/A"}
               </div>
               <div className="py-2">
                 <b>Hot Water Cost Potential:</b>{" "}
                 {data?.costs.hotWaterCostPotential
-                  ? data?.costs.hotWaterCostPotential
+                  ? "£" + data?.costs.hotWaterCostPotential + "/year"
                   : "N/A"}
               </div>
 
@@ -379,13 +432,20 @@ export default function FeatureCard({ data, type, analytics }: props) {
     case "Windows":
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7 overflow-scroll"}
+          style={
+            "col-start-7 col-end-10 row-start-1 row-end-7 overflow-y-scroll"
+          }
           disableHoverAnimation={true}
           showShadow={true}
         >
           <div>
-            <div className="text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0">
+            <div className={titleStyling}>
               {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("windows")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -406,7 +466,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
               <div className="py-2">
                 <b>Multi Glaze Proportion: </b>{" "}
                 {data?.windows.multiGlazeProportion
-                  ? data?.windows.multiGlazeProportion
+                  ? data?.windows.multiGlazeProportion + "%"
                   : "N/A"}
               </div>
 
@@ -435,7 +495,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
     default:
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7  max-h-96"}
           disableHoverAnimation={true}
           showShadow={true}
         >
@@ -446,7 +506,7 @@ export default function FeatureCard({ data, type, analytics }: props) {
                   loop
                   animationData={json}
                   play
-                  style={{ height: "70px", width: "70px" }}
+                  style={{ color: "red", height: "70px", width: "70px" }}
                 />
                 <p>Click On Your House To Find Out More!</p>
               </div>

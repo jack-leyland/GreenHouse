@@ -6,6 +6,7 @@ import Circle from "../assets/circle.svg";
 import SearchBar from "../components/landing/search-bar";
 import AddressModal from "../components/landing/addressModal";
 import { useAppContext } from "../context/state";
+import _ from "lodash";
 
 const GET_ADDRESSES = gql`
   query address($queryParam: String!) {
@@ -74,7 +75,7 @@ const Landing = () => {
     }
   };
 
-  const handleSearchInput = (inputValue: string) => {
+  const handleSearchInput = (inputValue: string): void => {
     setSearchBoxText(inputValue);
     if (!inputValue) {
       setIsInputError(false);
@@ -98,13 +99,19 @@ const Landing = () => {
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error);
     }
   }, [error]);
 
+  // Important note here: the backend will need to implement
+  // a way to make sure that the lmk key is the most recent one for
+  // a given address, as the duplicate removal will simply keep whichever
+  // came first in the array.
   useEffect(() => {
     if (data) {
-      setQueryData(data.address);
+      let temp = [...data.address];
+      let unique = _.uniqBy(temp, "address");
+      unique.sort((a: any, b: any) => (a.address < b.address ? 1 : -1));
+      setQueryData(unique);
     }
   }, [data]);
 
@@ -116,7 +123,7 @@ const Landing = () => {
           (activeAddressModal ? "mt-[2vh]" : "mt-[calc(50vh-199px-7.5vh)]")
         }
       >
-        <div className="text-zinc-900 font-logoFont font-black text-[3rem] md:text-[6rem] text-center tracking-tight">
+        <div className="text-gray-900 font-logoFont font-black text-[3rem] md:text-[6rem] text-center tracking-tight">
           GreenHouse
         </div>
         <div className="flex justify-center">
@@ -158,11 +165,7 @@ const Landing = () => {
 };
 
 Landing.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout title={"GreenHouse"} footerFixed={true}>
-      {page}
-    </Layout>
-  );
+  return <Layout title={"GreenHouse"}>{page}</Layout>;
 };
 
 export default Landing;
