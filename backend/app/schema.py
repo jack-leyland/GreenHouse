@@ -1,37 +1,26 @@
-from graphene import (
-    ObjectType,
-    String,
-    Schema,
-    Field,
-    List,
-    Mutation,
-    Float,
-    Boolean,
-)
-from graphene_django import DjangoObjectType
-import requests
-import environ
 import os
+
+import environ
 import pandas as pd
-import json
-
+import requests
 from google.cloud import bigquery
+from graphene import Boolean, Field, Float, List, Mutation, ObjectType, Schema, String
+from graphene_django import DjangoObjectType
 
-from app.types import (
-    Certificate,
-    Analytics,
-    Address,
-    Timeseries,
-    Improvement,
-    Recommendation,
-)
-
-from app.resolvers.analytics import create_analytics
+from app.models import CompletedRecommendation
 from app.resolvers.addresses import create_addresses
+from app.resolvers.analytics import create_analytics
 from app.resolvers.certificates import create_certificate
 from app.resolvers.recommendations import create_recommendations
 from app.resolvers.timeseries import create_timeseries
-from app.models import CompletedRecommendation
+from app.types import (
+    Address,
+    Analytics,
+    Certificate,
+    Improvement,
+    Recommendation,
+    Timeseries,
+)
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -68,10 +57,18 @@ class AddImprovement(Mutation):
     def mutate(root, info, cost, date, lmk_key, improvement_id, postcode):
         print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id, postcode=postcode
+            cost=cost,
+            date=date,
+            lmk_key=lmk_key,
+            improvement_id=improvement_id,
+            postcode=postcode,
         )
         db_improvement = CompletedRecommendation(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id, postcode=postcode
+            cost=cost,
+            date=date,
+            lmk_key=lmk_key,
+            improvement_id=improvement_id,
+            postcode=postcode,
         )
         db_improvement.save()
         ok = True
@@ -95,7 +92,9 @@ class Query(ObjectType):
     analytics = Field(Analytics, lmk=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
     big_query = Field(Timeseries)
-    completed_recommendations = Field(List(CompletedRecommendationType),lmk=String(default_value="N/A"))
+    completed_recommendations = Field(
+        List(CompletedRecommendationType), lmk=String(default_value="N/A")
+    )
 
     def resolve_analytics(root, info, lmk):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
@@ -168,5 +167,6 @@ class Query(ObjectType):
 
     def resolve_completed_recommendations(root, info, lmk):
         return CompletedRecommendation.objects.filter(lmk_key=lmk)
+
 
 schema = Schema(query=Query, mutation=Mutation)

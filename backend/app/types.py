@@ -8,6 +8,7 @@ from graphene import (
     DateTime,
 )
 
+
 class Certificate(ObjectType):
     low_energy_fixed_light_count = Float()
     address = String()
@@ -18,11 +19,12 @@ class Certificate(ObjectType):
     unheated_corridor_length = Float()
     hot_water_cost_potential = Float()
     hot_water_cost_adjusted_potential = Float()
-    total_current_cost = Float()  # computed from hot water + lighting + heating
-    total_potential_cost = Float()  # computed from adjusted versions of the above
-    total_adjusted_potential_cost = (
-        Float()
-    )  # computed from adjusted versions of the above
+    # computed from hot water + lighting + heating
+    total_current_cost = Float()
+    # computed from adjusted versions of the above
+    total_potential_cost = Float()
+    # computed from adjusted versions of the above
+    total_adjusted_potential_cost = Float()
     construction_age_band = String()
     potential_energy_rating = String()
     mainheat_energy_eff = Float()

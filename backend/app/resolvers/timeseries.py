@@ -1,4 +1,3 @@
-from numpy import average
 from app.types import Timeseries
 from scripts.analysis import timeseries_data, convert_to_rating, timeseries_metrics
 
