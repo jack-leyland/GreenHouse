@@ -1,15 +1,16 @@
-import React from "react";
-import ReactTooltip from "react-tooltip";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { BarChart, Bar, XAxis, Tooltip } from "recharts";
-import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
+import React, {Dispatch, SetStateAction} from 'react';
+import { AiFillQuestionCircle } from 'react-icons/ai';
+import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
+import { epcCertificateObject,packagedAnalyticsObject } from '../../types';
+import {AiOutlineArrowRight} from 'react-icons/ai';
 
 interface props {
-  data: epcCertificateObject["House"]["environmental"];
-  analytics: packagedAnalyticsObject["environmental"];
+  data: epcCertificateObject['House']['environmental'];
+  analytics: packagedAnalyticsObject['environmental'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function CarbonSummary({ data, analytics }: props) {
+export default function CarbonSummary({ data, analytics, setModalHandler }: props) {
   const carbonData = [
     {
       name: "C02 Production",
@@ -26,10 +27,7 @@ export default function CarbonSummary({ data, analytics }: props) {
             <span className="mr-2">
               CO<sub>2</sub> Production
             </span>
-            <ReactTooltip effect="solid" />
-            <a data-tip="The amount of carbon dioxide produced by your house in kg/year">
-              <AiFillQuestionCircle size={10} />
-            </a>
+              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("carbonProduction")} size={13} />
           </div>
           <div className="h-full flex justify-center items-center pt-2">
             <BarChart
@@ -48,25 +46,22 @@ export default function CarbonSummary({ data, analytics }: props) {
         </div>
 
         <div className="w-full border border-r-0 border-y-0">
-          <div className="pb-1 text-sm px-4 ">
-            <strong>How you compare:</strong>
-          </div>
           <div>
             <div className="px-4 py-1">
-              <div className="py-1">
-                Your current CO<sub>2</sub> production is{" "}
-                {data.co2EmissionsCurrent} Kg per year.
+              <div className="border border-x-0 border-t-0">
+                <div className="py-1 text-sm">
+                  Your current CO<sub>2</sub> production is <b>{data.co2EmissionsCurrent}</b> tonnes per year. 
+                </div>
+                <div className="py-1 text-sm">
+                  Your potential CO<sub>2</sub> production is <b>{data.co2EmissionsPotential}{" "}</b> tonnes per year.
+                </div>
+                <div onClick={()=>setModalHandler("carbonProduction")} className="pt-2 pb-3 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
               </div>
-              <div className="py-1">
-                The average for your area is{" "}
-                {analytics.meanCurrentCo2Consumption} Kg per year.
+              <div className="pt-2 text-sm">
+                <strong>How you compare:</strong>
               </div>
-              <div className="pt-3">
-                After implementing improvements you could reduce your emssions
-                to {data.co2EmissionsPotential} Kg per year.
-              </div>
-              <div className="py-2">
-                This C0<sub>2</sub> reduction is equivalent to ...
+              <div className="py-1 text-sm">
+                The average for CO<sub>2</sub> production for your area is <b>{analytics.meanCurrentCo2Consumption}</b> tonnes per year.
               </div>
             </div>
           </div>

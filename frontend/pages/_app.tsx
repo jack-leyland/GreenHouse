@@ -11,11 +11,12 @@ import {
 import { AppContextWrapper } from "../context/state";
 
 const ENV: any = process.env["ENV"];
+console.log("environment:", process.env.NODE_ENV);
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
     uri:
-      ENV == "DEV"
+      process.env.NODE_ENV == "development"
         ? "http://localhost:8000/graphql"
         : "https://epc-site-backend.herokuapp.com/graphql",
   }),

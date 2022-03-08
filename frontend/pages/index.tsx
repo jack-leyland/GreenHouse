@@ -1,11 +1,12 @@
-import { ReactElement, useEffect, useState } from "react";
-import Router from "next/router";
-import Layout from "../components/generic/layout";
-import { gql, useQuery } from "@apollo/client";
-import Circle from "../assets/circle.svg";
-import SearchBar from "../components/landing/search-bar";
-import AddressModal from "../components/landing/addressModal";
-import { useAppContext } from "../context/state";
+import { ReactElement, useEffect, useState } from 'react';
+import Router from 'next/router';
+import Layout from '../components/generic/layout';
+import { gql, useQuery } from '@apollo/client';
+import Circle from '../assets/circle.svg';
+import SearchBar from '../components/landing/search-bar';
+import AddressModal from '../components/landing/addressModal';
+import { useAppContext } from '../context/state';
+import _ from 'lodash';
 
 const GET_ADDRESSES = gql`
   query address($queryParam: String!) {
@@ -74,7 +75,7 @@ const Landing = () => {
     }
   };
 
-  const handleSearchInput = (inputValue: string) => {
+  const handleSearchInput = (inputValue: string): void => {
     setSearchBoxText(inputValue);
     if (!inputValue) {
       setIsInputError(false);
@@ -98,13 +99,19 @@ const Landing = () => {
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error);
     }
   }, [error]);
 
+  // Important note here: the backend will need to implement
+  // a way to make sure that the lmk key is the most recent one for
+  // a given address, as the duplicate removal will simply keep whichever
+  // came first in the array.
   useEffect(() => {
     if (data) {
-      setQueryData(data.address);
+      let temp = [...data.address];
+      let unique = _.uniqBy(temp, 'address');
+      unique.sort((a: any, b: any) => (a.address < b.address ? 1 : -1));
+      setQueryData(unique);
     }
   }, [data]);
 

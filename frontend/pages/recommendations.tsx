@@ -1,46 +1,54 @@
-import { gql, useQuery } from "@apollo/client";
-import { ReactElement, useEffect, useState } from "react";
-import Card from "../components/generic/card";
-import Layout from "../components/generic/layout";
-import PageTitle from "../components/generic/pageTitle";
-import Sidebar from "../components/sidebar";
-import Recommendation from "../components/recommendationCard";
-import { useAppContext } from "../context/state";
-import { epcCertificateRecs, epcRecommendationObject } from "../types";
+import { useQuery } from '@apollo/client';
+import { ReactElement, useEffect, useState } from 'react';
+import Layout from '../components/generic/layout';
+import PageTitle from '../components/generic/pageTitle';
+import Sidebar from '../components/sidebar';
+import RecCostSummary from '../components/recommendations/recCostSummary';
+import RecCardGallery from '../components/recommendations/recCardGallery';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import { useAppContext } from '../context/state';
+import { epcCertificateObject, epcRecommendationObject } from '../types';
+import { GET_REC_DATA } from './api/queries';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
+import Lottie from 'react-lottie-player';
 
-const GET_DATA = gql`
-  query get_data($queryParam: String!) {
-    recommendations(lmk: $queryParam) {
-      lmkKey
-      indicativeCost
-      improvementIdText
-      improvementItem
-      improvementId
+function paginateRecommendations(
+  recs: Array<epcRecommendationObject>
+): Array<Array<epcRecommendationObject>> {
+  let recsPerPage = 3;
+  let paginated: Array<Array<epcRecommendationObject>> = [[]];
+
+  recs.forEach((elem) => {
+    if (paginated[paginated.length - 1].length < recsPerPage) {
+      if (elem.improvementId) {
+        paginated[paginated.length - 1].push(elem);
+      }
+    } else {
+      if (elem.improvementId) {
+        paginated.push([]);
+        paginated[paginated.length - 1].push(elem);
+      }
     }
-    certificate(lmk: $queryParam) {
-      address
-      posttown
-      postcode
-      heatingCostPotential
-      heatingCostCurrent
-      lightingCostPotential
-      lightingCostCurrent
-      hotWaterCostPotential
-      hotWaterCostCurrent
-    }
-  }
-`;
+  });
+  return paginated;
+}
 
 const Recommendations = () => {
   const GlobalContext = useAppContext();
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [recData, setRecData] = useState<Array<epcRecommendationObject>>([]);
+  const [recData, setRecData] = useState<Array<Array<epcRecommendationObject>>>(
+    [[]]
+  );
   const [certificateData, setCertificateData] = useState<any>(null);
-  const [address, setAddress] = useState<string>("");
+  const [address, setAddress] = useState<string>('');
+  const [extraHouseInfo, setExtraHouseInfo] =
+    useState<epcCertificateObject['ExtraInfo']>();
 
-  const { loading, error, data } = useQuery(GET_DATA, {
+  const { loading, error, data } = useQuery(GET_REC_DATA, {
     skip: !queryParam || isQueryError,
     variables: { queryParam },
   });
@@ -52,15 +60,22 @@ const Recommendations = () => {
     } else {
       setQueryParam(localStorage.activeLmk);
     }
-  }, [GlobalContext.activeLmk]);
+
+    if (GlobalContext.extraHouseInfo) {
+      setExtraHouseInfo(GlobalContext.extraHouseInfo);
+    } else {
+      setExtraHouseInfo(JSON.parse(localStorage.extraHouseInfo));
+    }
+  }, [GlobalContext.activeLmk, GlobalContext.extraHouseInfo]);
 
   useEffect(() => {
     if (data) {
-      setRecData(data.recommendations);
+      setRecData(paginateRecommendations(data.recommendations));
       setCertificateData(data.certificate);
     }
   }, [data]);
 
+  // If we have time we should just cache this since it is used across pages
   useEffect(() => {
     if (certificateData) {
       let addressElements = [
@@ -68,79 +83,66 @@ const Recommendations = () => {
         certificateData.posttown,
         certificateData.postcode,
       ];
-      setAddress(addressElements.join(", "));
+      setAddress(addressElements.join(', '));
     }
   }, [certificateData]);
 
+  useEffect(() => {
+    if (error) {
+      setIsQueryError(true);
+    }
+  }, [error]);
+
   return (
     <>
-      <div className="w-full flex flex-col bg-slate-50 text-gray-500">
-        <PageTitle
-          title={"Recommendations"}
-          subtitle={address}
-          onClick={() => setShowModal(true)}
-        />
-        <div className="p-6">
-          <Card
-            style={"w-full flex flex-col"}
-            disableHoverAnimation={true}
-            showShadow={false}
-          >
-            <div className="grid grid-cols-4 grid-rows-4 gap-1">
-              <div className="col-start-1 col-end-3 row-start-1 row-end-1 text-sm tracking-widest title-font mb-1 font-bold">
-                <span className="bg-yellow-500 pr-5 mr-5"></span>
-                Total Savings from Lighting Improvements
-              </div>
-              <div className="col-start-3 col-end-3 row-start-1 row-end-1 text-sm tracking-widest title-font mb-1 font-bold">
-                <p>
-                  £
-                  {certificateData?.lightingCostCurrent -
-                    certificateData?.lightingCostPotential}{" "}
-                  per year
-                </p>
-              </div>
-
-              <div className="col-start-1 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font mb-1 font-bold">
-                <span className="bg-red-500 pr-5 mr-5"></span>
-                Total Savings from Heating Improvements
-              </div>
-              <div className="col-start-3 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font mb-1 font-bold">
-                <p>
-                  £
-                  {certificateData?.heatingCostCurrent -
-                    certificateData?.heatingCostPotential}{" "}
-                  per year
-                </p>
-              </div>
-
-              <div className="col-start-1 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font mb-1 font-bold">
-                <span className="bg-blue-500 pr-5 mr-5"></span>
-                Total Savings from Water Improvements
-              </div>
-              <div className="col-start-3 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font mb-1 font-bold">
-                <p>
-                  £
-                  {certificateData?.hotWaterCostCurrent -
-                    certificateData?.hotWaterCostPotential}{" "}
-                  per year
-                </p>
-              </div>
-
-              <div className="col-start-1 col-end-3 row-start-4 row-end-4 text-sm tracking-widest title-font mb-1 font-bold">
-                <span className="bg-slate-500 pr-5 mr-5"></span>
-                Other Improvements
-              </div>
-            </div>
-          </Card>
+      {recData && certificateData ? (
+        <div className="w-full flex flex-col bg-slate-50 text-gray-500 min-w-[1150px] min-h-[755px]">
+          <PageTitle
+            title={'Recommendations'}
+            subtitle={address}
+            onClick={() => setShowModal(true)}
+          />
+          <RecCostSummary data={certificateData} />
+          <RecCardGallery data={recData} />
         </div>
-        <section className="text-gray-600 body-font overflow-hidden h-1/2">
-          <div className="container px-5 mx-auto flex flex-row overflow-x-scroll flex-nowrap h-full">
-            {recData.map((item: epcRecommendationObject, key: number) => {
-              return <Recommendation recs={item} key={key} />;
-            })}
-          </div>
-        </section>
-      </div>
+      ) : (
+        <>
+          {/*Loading Display*/}
+          {loading ? (
+            <div className="w-full flex flex-col justify-center items-center bg-slate-50">
+              <h1 className="animate-fade text-3xl italic pb-2">Loading...</h1>
+              <Lottie
+                loop
+                animationData={loadingJson}
+                play
+                style={{ width: 250, height: 250 }}
+              />
+            </div>
+          ) : (
+            <>
+              {/*Error Display*/}
+              {isQueryError && !data ? (
+                <div className="w-full flex flex-col justify-center items-center bg-slate-50">
+                  <h1 className="animate-fade text-3xl font-bold pb-2">
+                    Oops, there was an error, try again later... [Dev Note:
+                    Query Error]
+                  </h1>
+                  <Lottie
+                    animationData={errorJson}
+                    play
+                    style={{ width: 150, height: 150 }}
+                  />
+                </div>
+              ) : null}
+            </>
+          )}
+        </>
+      )}
+      {showModal && extraHouseInfo ? (
+        <Modal hideModal={() => setShowModal(false)}>
+          <ExtraHouseInfo data={extraHouseInfo} />
+        </Modal>
+      ) : null}
     </>
   );
 };

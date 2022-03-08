@@ -1,21 +1,19 @@
-import React from "react";
-import { useState } from "react";
-import Card from "../generic/card";
-import { GiWindow, GiWaterDrop, GiFireplace } from "react-icons/gi";
-import { BsLightbulb } from "react-icons/bs";
-import FeatureCard from "./featureCard";
-import type {
-  epcCertificateObject,
-  packagedAnalyticsObject,
-} from "../../types";
+import React, {Dispatch, SetStateAction} from 'react';
+import { useState } from 'react';
+import Card from '../generic/card';
+import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
+import { BsLightbulb } from 'react-icons/bs';
+import FeatureCard from './featureCard';
+import type { epcCertificateObject, packagedAnalyticsObject } from '../../types';
 
 interface props {
-  data: epcCertificateObject["House"];
-  analytics: packagedAnalyticsObject["house"];
+  data: epcCertificateObject['House'];
+  analytics: packagedAnalyticsObject['house'];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function House({ data, analytics }: props) {
-  const [sidePanelType, setSidePanelType] = useState<string>("");
+export default function House({ data, analytics, setModalHandler}: props) {
+  const [sidePanelType, setSidePanelType] = useState<string>('');
 
   return (
     <div className="flex flex-col w-full h-full px-6 gap-6 pb-6 relative">
@@ -66,9 +64,9 @@ export default function House({ data, analytics }: props) {
 
           {/*Inner Cards*/}
           <Card
-            style={"col-start-2 col-end-4 row-start-2 row-end-4"}
+            style={"col-start-2 col-end-4 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Windows");
             }}
@@ -79,9 +77,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-4 col-end-6 row-start-2 row-end-4"}
+            style={"col-start-4 col-end-6 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Water");
             }}
@@ -92,9 +90,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-2 col-end-4 row-start-4 row-end-6"}
+            style={"col-start-2 col-end-4 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Heating");
             }}
@@ -105,9 +103,9 @@ export default function House({ data, analytics }: props) {
           </Card>
 
           <Card
-            style={"col-start-4 col-end-6 row-start-4 row-end-6"}
+            style={"col-start-4 col-end-6 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
               setSidePanelType("Lighting");
             }}
@@ -121,7 +119,7 @@ export default function House({ data, analytics }: props) {
 
       <div className="w-full h-full relative">
         <div className="w-full h-full absolute">
-          <FeatureCard data={data} type={sidePanelType} analytics={analytics} />
+          <FeatureCard data={data} type={sidePanelType} analytics={analytics} setModalHandler={setModalHandler}/>
         </div>
       </div>
     </div>
