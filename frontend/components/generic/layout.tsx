@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import Footer from "./footer";
 
 type Props = {
   children: ReactNode;
@@ -22,8 +21,6 @@ export default function Layout({ children, title }: Props) {
       </Head>
 
       <main className="h-full bg-gray-100">{children}</main>
-
-      {/* <Footer /> */}
     </>
   );
 }

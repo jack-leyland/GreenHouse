@@ -3,7 +3,8 @@ import os
 import environ
 import pandas as pd
 import requests
-from google.cloud import bigquery
+
+# from google.cloud import bigquery
 from graphene import Boolean, Field, Float, List, Mutation, ObjectType, Schema, String
 from graphene_django import DjangoObjectType
 
@@ -149,7 +150,7 @@ class Query(ObjectType):
         client = bigquery.Client()
 
         query = """
-            SELECT * 
+            SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`
         """
 
