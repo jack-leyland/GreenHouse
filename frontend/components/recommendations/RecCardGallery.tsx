@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { epcRecommendationObject } from '../../types';
-import Recommendation from './recommendationCard';
-import { v4 as uuid } from 'uuid';
-import Arrow from '../../assets/arrow-left.svg';
+import React, { useState, useEffect } from "react";
+import { epcRecommendationObject } from "../../types";
+import Recommendation from "./recommendationCard";
+import { v4 as uuid } from "uuid";
+import Arrow from "../../assets/arrow-left.svg";
 
 interface props {
   data: Array<Array<epcRecommendationObject>>;
@@ -15,7 +15,7 @@ export default function RecCostSummary({ data }: props) {
   const [activePageRecs, setActivePageRecs] = useState<
     Array<epcRecommendationObject>
   >([]);
-  const [activeView, setActiveView] = useState<string>('Outstanding');
+  const [activeView, setActiveView] = useState<string>("Outstanding");
   const [recData, setRecData] =
     useState<Array<Array<epcRecommendationObject>>>(data);
   const [noRecs, setNoRecs] = useState<boolean>(false);
@@ -31,7 +31,7 @@ export default function RecCostSummary({ data }: props) {
   // Could case weird behavior if I'm wrong about how
   // epc sends these back
   function formatCostString(str: string): string {
-    let formatted = str.replace(/[?]/g, '£');
+    let formatted = str.replace(/[?]/g, "£");
     return formatted;
   }
 
@@ -133,10 +133,10 @@ interface pageButtonProps {
 
 function PageButton({ pgNum, isActive, handler }: pageButtonProps) {
   let style =
-    'mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] hover:bg-logoGreenLight cursor-pointer';
+    "mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] hover:bg-logoGreenLight cursor-pointer";
   if (isActive) {
     style =
-      'mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] bg-logoGreenLight font-bold cursor-pointer';
+      "mr-2 h-[100%] pl-2 pr-2 flex items-center rounded-default text-center w-[25px] bg-logoGreenLight font-bold cursor-pointer";
   }
   return (
     <span className={style} onClick={(e) => handler(pgNum)}>

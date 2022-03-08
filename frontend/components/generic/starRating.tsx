@@ -1,15 +1,13 @@
 import React from "react";
 const StarRatings = require("react-star-ratings").default;
 import { AiFillStar } from "react-icons/ai";
-import {starColors} from "../../types";
+import { starColors } from "../../types";
 
 interface props {
   title: string;
   rating?: number;
   areaAverage?: number;
 }
-
-
 
 export default function StarRating({ title, rating, areaAverage }: props) {
   return (
@@ -25,7 +23,11 @@ export default function StarRating({ title, rating, areaAverage }: props) {
         />
       </div>
       <div className="text-sm flex items-center justify-center italic">
-        (Area average: {areaAverage} <AiFillStar color={areaAverage? starColors[Math.floor(areaAverage)] : "gray"}/>)
+        (Area average: {areaAverage}{" "}
+        <AiFillStar
+          color={areaAverage ? starColors[Math.floor(areaAverage)] : "gray"}
+        />
+        )
       </div>
     </div>
   );

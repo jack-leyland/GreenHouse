@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
-import { gql, useMutation } from '@apollo/client';
-import { useAppContext } from '../../context/state';
+import React, { useEffect, useState, useRef } from "react";
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
+import { gql, useMutation } from "@apollo/client";
+import { useAppContext } from "../../context/state";
 
 const ADD_IMPROVEMENT = gql`
   mutation AddImprovement(
@@ -65,15 +65,15 @@ export default function RecForm({
 
   //Could any of these improvements be made for free?
   function validateCost(value: number): string | undefined {
-    if (value == 0) return 'Improvement cost is required.';
+    if (value == 0) return "Improvement cost is required.";
   }
 
   function validateDate(value: string): string | undefined {
-    if (value == '') return 'Date is required';
+    if (value == "") return "Date is required";
   }
 
   function validateAgreement(value: boolean): string | undefined {
-    if (!value) return 'Required';
+    if (!value) return "Required";
   }
 
   // TODO: Instead of the "Thanks for Submission" thing
@@ -83,8 +83,8 @@ export default function RecForm({
   return (
     <div
       className={
-        'h-full max-w-[58%] min-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
-        (!data ? color : 'bg-gray-400')
+        "h-full max-w-[58%] min-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden " +
+        (!data ? color : "bg-gray-400")
       }
     >
       {isSubmissionError && (
@@ -104,7 +104,7 @@ export default function RecForm({
           <Formik
             initialValues={{
               cost: 0,
-              date: '',
+              date: "",
               lmkKey: lmk,
               improvementId: improvementId,
               postcode: postcode,
@@ -168,7 +168,7 @@ export default function RecForm({
                     Do you agree to share this data with us?
                   </label>
                   <div className="w-full flex justify-center items-center">
-                    <span className="mr-2 mb-1">I agree</span>{' '}
+                    <span className="mr-2 mb-1">I agree</span>{" "}
                     <Field
                       validate={validateAgreement}
                       id="agree"

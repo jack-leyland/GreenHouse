@@ -1,12 +1,12 @@
-import { ReactElement, useEffect, useState } from 'react';
-import Router from 'next/router';
-import Layout from '../components/generic/layout';
-import { gql, useQuery } from '@apollo/client';
-import Circle from '../assets/circle.svg';
-import SearchBar from '../components/landing/search-bar';
-import AddressModal from '../components/landing/addressModal';
-import { useAppContext } from '../context/state';
-import _ from 'lodash';
+import { ReactElement, useEffect, useState } from "react";
+import Router from "next/router";
+import Layout from "../components/generic/layout";
+import { gql, useQuery } from "@apollo/client";
+import Circle from "../assets/circle.svg";
+import SearchBar from "../components/landing/search-bar";
+import AddressModal from "../components/landing/addressModal";
+import { useAppContext } from "../context/state";
+import _ from "lodash";
 
 const GET_ADDRESSES = gql`
   query address($queryParam: String!) {
@@ -109,7 +109,7 @@ const Landing = () => {
   useEffect(() => {
     if (data) {
       let temp = [...data.address];
-      let unique = _.uniqBy(temp, 'address');
+      let unique = _.uniqBy(temp, "address");
       unique.sort((a: any, b: any) => (a.address < b.address ? 1 : -1));
       setQueryData(unique);
     }

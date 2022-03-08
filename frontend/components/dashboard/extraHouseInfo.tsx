@@ -51,8 +51,9 @@ export default function ExtraHouseInfo({ data }: props) {
   return (
     <div className="w-full flex flex-col p-2">
       <div className={divBaseStyle}>
-      <div className="font-bold text-lg pt-2 mb-2 w-full border border-x-0 border-t-0">Additional Information</div>
-        {" "}
+        <div className="font-bold text-lg pt-2 mb-2 w-full border border-x-0 border-t-0">
+          Additional Information
+        </div>{" "}
         <span className={spanDarkLabel}>Last Inspection Date: </span>
         {data.inspectionDate}
       </div>

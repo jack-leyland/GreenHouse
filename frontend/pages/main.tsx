@@ -1,26 +1,26 @@
-import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import Layout from '../components/generic/layout';
-import Sidebar from '../components/sidebar';
-import Card from '../components/generic/card';
-import House from '../components/dashboard/house';
-import PageTitle from '../components/generic/pageTitle';
-import Lottie from 'react-lottie-player';
-import { useAppContext } from '../context/state';
-import loadingJson from '../assets/animations/animation/loading.json';
-import errorJson from '../assets/animations/animation/error.json';
-import { GET_CERTIFICATES } from './api/queries';
-import { useQuery } from '@apollo/client';
-import EpcChart from '../components/dashboard/epcChart';
-import Modal from '../components/generic/modal';
-import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
-import CostSummary from '../components/dashboard/costSummary';
-import EnvironmentalSummary from '../components/dashboard/environmentalSummary';
-import CarbonSummary from '../components/dashboard/carbonSummary';
-import FlippableCard from '../components/generic/flippableCard';
-import packageDashboardDataByComponent from '../utils/packageDashboardDataByComponent';
-import packageAnaylytics from '../utils/packageAnalytics';
-import HelpModal from '../components/dashboard/helpModal';
+import type { ReactElement } from "react";
+import { useState, useEffect } from "react";
+import Layout from "../components/generic/layout";
+import Sidebar from "../components/sidebar";
+import Card from "../components/generic/card";
+import House from "../components/dashboard/house";
+import PageTitle from "../components/generic/pageTitle";
+import Lottie from "react-lottie-player";
+import { useAppContext } from "../context/state";
+import loadingJson from "../assets/animations/animation/loading.json";
+import errorJson from "../assets/animations/animation/error.json";
+import { GET_CERTIFICATES } from "./api/queries";
+import { useQuery } from "@apollo/client";
+import EpcChart from "../components/dashboard/epcChart";
+import Modal from "../components/generic/modal";
+import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
+import CostSummary from "../components/dashboard/costSummary";
+import EnvironmentalSummary from "../components/dashboard/environmentalSummary";
+import CarbonSummary from "../components/dashboard/carbonSummary";
+import FlippableCard from "../components/generic/flippableCard";
+import packageDashboardDataByComponent from "../utils/packageDashboardDataByComponent";
+import packageAnaylytics from "../utils/packageAnalytics";
+import HelpModal from "../components/dashboard/helpModal";
 
 const Main = () => {
   const GlobalContext = useAppContext();
@@ -29,7 +29,7 @@ const Main = () => {
   const [dashboardData, setDashboardData] = useState<any>();
   const [analyticsData, setAnalyticsData] = useState<any>();
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
-  const [modalContent, setModalContent] = useState<string>('');
+  const [modalContent, setModalContent] = useState<string>("");
   const { loading, error, data } = useQuery(GET_CERTIFICATES, {
     skip: !queryParam,
     variables: { queryParam },
@@ -70,7 +70,7 @@ const Main = () => {
     }
   }, [error]);
 
-  let fullAddressString = '';
+  let fullAddressString = "";
 
   if (dashboardData) {
     let addressElements = [
@@ -79,7 +79,7 @@ const Main = () => {
       dashboardData.ExtraInfo.posttown,
       dashboardData.ExtraInfo.postcode,
     ];
-    fullAddressString = addressElements.join(', ');
+    fullAddressString = addressElements.join(", ");
   }
 
   return (
@@ -87,9 +87,9 @@ const Main = () => {
       {dashboardData ? (
         <div className="w-full h-[100vh] min-w-[1150px] min-h-[755px] flex flex-col bg-slate-50 text-gray-500">
           <PageTitle
-            title={'Dashboard'}
+            title={"Dashboard"}
             subtitle={fullAddressString}
-            onClick={() => setModalContent('address')}
+            onClick={() => setModalContent("address")}
           />
 
           <div className="h-full flex p-8 w-full gap-4">
@@ -139,10 +139,10 @@ const Main = () => {
             </div>
 
             <Card
-              style={'relative pt-2 w-1/2 border'}
+              style={"relative pt-2 w-1/2 border"}
               disableHoverAnimation={true}
               showShadow={false}
-              minDims={{ w: '440px', h: '566px' }}
+              minDims={{ w: "440px", h: "566px" }}
             >
               <div className="flex justify-center h-full min-w-full">
                 <House
@@ -154,10 +154,10 @@ const Main = () => {
             </Card>
           </div>
 
-          {modalContent !== '' ? (
-            <Modal hideModal={() => setModalContent('')}>
+          {modalContent !== "" ? (
+            <Modal hideModal={() => setModalContent("")}>
               <>
-                {modalContent === 'address' ? (
+                {modalContent === "address" ? (
                   <ExtraHouseInfo data={dashboardData.ExtraInfo} />
                 ) : null}
                 {<HelpModal type={modalContent} />}

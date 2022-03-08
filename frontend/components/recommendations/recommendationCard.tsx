@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { epcRecommendationObject } from '../../types';
-import { useAppContext } from '../../context/state';
-import { HeatingCategories } from '../../types';
-import RecForm from './recForm';
+import React, { useEffect, useState, useRef } from "react";
+import { epcRecommendationObject } from "../../types";
+import { useAppContext } from "../../context/state";
+import { HeatingCategories } from "../../types";
+import RecForm from "./recForm";
 
 interface props {
-  improvementId: epcRecommendationObject['improvementId'];
-  improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost: epcRecommendationObject['indicativeCost'];
+  improvementId: epcRecommendationObject["improvementId"];
+  improvementIdText: epcRecommendationObject["improvementIdText"];
+  indicativeCost: epcRecommendationObject["indicativeCost"];
 }
 
 function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
@@ -24,10 +24,10 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
     }
 
     // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside as any);
+    document.addEventListener("mousedown", handleClickOutside as any);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside as any);
+      document.removeEventListener("mousedown", handleClickOutside as any);
     };
   }, [ref]);
 }
@@ -39,9 +39,9 @@ export default function Recommendation({
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
-  const [lmk, setLmk] = useState<string>('');
+  const [lmk, setLmk] = useState<string>("");
   const GlobalContext = useAppContext();
-  const [postcode, setPostcode] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>("");
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -66,17 +66,17 @@ export default function Recommendation({
   let category = HeatingCategories[improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
-    case 'Heating':
-      color = 'bg-red-500';
+    case "Heating":
+      color = "bg-red-500";
       break;
-    case 'Water':
-      color = 'bg-blue-500';
+    case "Water":
+      color = "bg-blue-500";
       break;
-    case 'Lighting':
-      color = 'bg-yellow-500';
+    case "Lighting":
+      color = "bg-yellow-500";
       break;
-    case 'Other':
-      color = 'bg-slate-500';
+    case "Other":
+      color = "bg-slate-500";
       break;
   }
 
@@ -87,7 +87,7 @@ export default function Recommendation({
     >
       <div
         className={
-          'h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 ' +
+          "h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 " +
           color
         }
       >
@@ -106,11 +106,11 @@ export default function Recommendation({
           <button
             onClick={() => setShowForm(!showForm)}
             className={
-              'flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold ' +
-              (showForm ? 'bg-red-200' : 'bg-white')
+              "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+              (showForm ? "bg-red-200" : "bg-white")
             }
           >
-            {showForm ? 'Cancel' : "I've done this!"}
+            {showForm ? "Cancel" : "I've done this!"}
           </button>
         </div>
       </div>

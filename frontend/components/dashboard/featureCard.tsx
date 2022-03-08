@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction} from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Card from "../generic/card";
 import Lottie from "react-lottie-player";
 import json from "../../assets/animations/animation/up-arrow.json";
@@ -8,14 +8,19 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 
 interface props {
   type: string;
-  data: epcCertificateObject['House'];
-  analytics: packagedAnalyticsObject['house'];
+  data: epcCertificateObject["House"];
+  analytics: packagedAnalyticsObject["house"];
   setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function FeatureCard({ data, type, analytics, setModalHandler }: props) {
-
-  const titleStyling = "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between";
+export default function FeatureCard({
+  data,
+  type,
+  analytics,
+  setModalHandler,
+}: props) {
+  const titleStyling =
+    "text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between";
 
   switch (type) {
     case "Walls":
@@ -28,7 +33,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -70,7 +79,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -110,7 +123,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("genericFeature")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("genericFeature")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -152,7 +169,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("lighting")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("lighting")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -203,11 +224,8 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           disableHoverAnimation={true}
           showShadow={true}
         >
-
-        <div>
-            <div className={titleStyling}>
-              {type}
-            </div>
+          <div>
+            <div className={titleStyling}>{type}</div>
             <div className="p-2 text-sm">
               <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
                 Main Heating
@@ -342,7 +360,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("water")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("water")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -397,7 +419,11 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           <div>
             <div className={titleStyling}>
               {type}
-              <AiFillQuestionCircle size={20} className="hover:cursor-pointer" onClick={()=>setModalHandler("windows")}/>
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("windows")}
+              />
             </div>
             <div className="p-2 text-sm">
               <div className="py-2">
@@ -458,7 +484,7 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
                   loop
                   animationData={json}
                   play
-                  style={{ color:"red" , height: "70px", width: "70px" }}
+                  style={{ color: "red", height: "70px", width: "70px" }}
                 />
                 <p>Click On Your House To Find Out More!</p>
               </div>

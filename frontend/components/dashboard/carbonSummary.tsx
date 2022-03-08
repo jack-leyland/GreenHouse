@@ -1,16 +1,20 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import { AiFillQuestionCircle } from 'react-icons/ai';
-import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
-import { epcCertificateObject,packagedAnalyticsObject } from '../../types';
-import {AiOutlineArrowRight} from 'react-icons/ai';
+import React, { Dispatch, SetStateAction } from "react";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { BarChart, Bar, XAxis, Tooltip } from "recharts";
+import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 interface props {
-  data: epcCertificateObject['House']['environmental'];
-  analytics: packagedAnalyticsObject['environmental'];
+  data: epcCertificateObject["House"]["environmental"];
+  analytics: packagedAnalyticsObject["environmental"];
   setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function CarbonSummary({ data, analytics, setModalHandler }: props) {
+export default function CarbonSummary({
+  data,
+  analytics,
+  setModalHandler,
+}: props) {
   const carbonData = [
     {
       name: "C02 Production",
@@ -27,7 +31,11 @@ export default function CarbonSummary({ data, analytics, setModalHandler }: prop
             <span className="mr-2">
               CO<sub>2</sub> Production
             </span>
-              <AiFillQuestionCircle className="hover:cursor-pointer" onClick={()=>setModalHandler("carbonProduction")} size={13} />
+            <AiFillQuestionCircle
+              className="hover:cursor-pointer"
+              onClick={() => setModalHandler("carbonProduction")}
+              size={13}
+            />
           </div>
           <div className="h-full flex justify-center items-center pt-2">
             <BarChart
@@ -50,18 +58,26 @@ export default function CarbonSummary({ data, analytics, setModalHandler }: prop
             <div className="px-4 py-1">
               <div className="border border-x-0 border-t-0">
                 <div className="py-1 text-sm">
-                  Your current CO<sub>2</sub> production is <b>{data.co2EmissionsCurrent}</b> tonnes per year. 
+                  Your current CO<sub>2</sub> production is{" "}
+                  <b>{data.co2EmissionsCurrent}</b> tonnes per year.
                 </div>
                 <div className="py-1 text-sm">
-                  Your potential CO<sub>2</sub> production is <b>{data.co2EmissionsPotential}{" "}</b> tonnes per year.
+                  Your potential CO<sub>2</sub> production is{" "}
+                  <b>{data.co2EmissionsPotential} </b> tonnes per year.
                 </div>
-                <div onClick={()=>setModalHandler("carbonProduction")} className="pt-2 pb-3 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer">What does this mean <AiOutlineArrowRight/> </div>
+                <div
+                  onClick={() => setModalHandler("carbonProduction")}
+                  className="pt-2 pb-3 italic text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:cursor-pointer"
+                >
+                  What does this mean <AiOutlineArrowRight />{" "}
+                </div>
               </div>
               <div className="pt-2 text-sm">
                 <strong>How you compare:</strong>
               </div>
               <div className="py-1 text-sm">
-                The average for CO<sub>2</sub> production for your area is <b>{analytics.meanCurrentCo2Consumption}</b> tonnes per year.
+                The average for CO<sub>2</sub> production for your area is{" "}
+                <b>{analytics.meanCurrentCo2Consumption}</b> tonnes per year.
               </div>
             </div>
           </div>
