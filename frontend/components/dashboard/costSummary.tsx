@@ -18,7 +18,6 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
           <div className="w-full justify-center text-sm font-bold text-lg pt-1 flex items-center gap-2">
             Heating <GiFireplace color="#eb6434" />{' '}
           </div>
-
           <div className="flex gap-2 flex-col h-full">
             <div className="h-2/3 flex flex-col gap-2 w-full py-1 border border-x-0 border-t-0">
               <div>
@@ -34,7 +33,6 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
               In your area, the average person pays <i>{analytics?.meanCurrentHeatingCost} £/year</i> on heating.
             </div>
           </div>
-
         </div>
 
         <div className="w-1/3 border border-y-0 h-full pl-2 flex flex-col gap-1">
@@ -59,7 +57,7 @@ export default function CostSummary({ data, analytics, setModalHandler }: props)
           </div>
 
         </div>
-        
+
         <div className="w-1/3 h-full pl-1 flex flex-col gap-1">
           <div className="w-full justify-center text-sm font-bold pt-1 flex text-lg items-center gap-2">
             Lighting <BsLightbulb color="#d4c328" />{' '}

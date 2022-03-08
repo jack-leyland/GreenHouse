@@ -203,32 +203,34 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
           disableHoverAnimation={true}
           showShadow={true}
         >
+
         <div>
             <div className={titleStyling}>
               {type}
             </div>
             <div className="p-2 text-sm">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+                Main Heating
+              </div>
 
-                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Main Heating</div>
-
-                <div className="py-2">
-                  <b>Main Heat Description:</b>{" "}
-                  {data?.heating.mainHeating.mainHeatDescription
-                    ? data?.heating.mainHeating.mainHeatDescription
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heating Cost Current:</b>{" "}
-                  {data?.costs.heatingCostCurrent
-                    ? data?.costs.heatingCostCurrent
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heating Cost Potential:</b>{" "}
-                  {data?.costs.heatingCostPotential
-                    ? data?.costs.heatingCostPotential
-                    : "N/A"}
-                </div>
+              <div className="py-2">
+                <b>Main Heat Description:</b>{" "}
+                {data?.heating.mainHeating.mainHeatDescription
+                  ? data?.heating.mainHeating.mainHeatDescription
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Heating Cost Current:</b>{" "}
+                {data?.costs.heatingCostCurrent
+                  ? data?.costs.heatingCostCurrent
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Heating Cost Potential:</b>{" "}
+                {data?.costs.heatingCostPotential
+                  ? data?.costs.heatingCostPotential
+                  : "N/A"}
+              </div>
 
               <StarRating
                 title={"Energy Efficiency"}
@@ -249,79 +251,82 @@ export default function FeatureCard({ data, type, analytics, setModalHandler }: 
                 areaAverage={analytics?.heating.meanMainHeatingEnvironmentalEff}
               />
 
-                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Heating Control</div>
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+                Heating Control
+              </div>
 
-                <div className="py-2">
-                  <b>Main Heating Control Description:</b>{" "}
-                  {data?.heating.mainHeatingControls.mainHeatControlDescription
-                    ? data?.heating.mainHeatingControls
-                        .mainHeatControlDescription
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heating Control Energy Efficiency:</b>{" "}
-                  {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heating Control Environmental Efficiency:</b>{" "}
-                  {data?.consumptionEnvEff.mainHeatControlEnvEff
-                    ? data?.consumptionEnvEff.mainHeatControlEnvEff
-                    : "N/A"}
-                </div>
+              <div className="py-2">
+                <b>Main Heating Control Description:</b>{" "}
+                {data?.heating.mainHeatingControls.mainHeatControlDescription
+                  ? data?.heating.mainHeatingControls.mainHeatControlDescription
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Heating Control Energy Efficiency:</b>{" "}
+                {data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                  ? data?.heating.mainHeatingControls.mainHeatControlEnergyEff
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Heating Control Environmental Efficiency:</b>{" "}
+                {data?.consumptionEnvEff.mainHeatControlEnvEff
+                  ? data?.consumptionEnvEff.mainHeatControlEnvEff
+                  : "N/A"}
+              </div>
 
-                
-                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Fuel</div>
-                <div className="py-2">
-                  <b>Main Fuel:</b>{" "}
-                  {data?.heating.mainHeating.mainFuel
-                    ? data?.heating.mainHeating.mainFuel
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Main Gas Flag:</b>{" "}
-                  {data?.heating.general.mainsGasFlag
-                    ? data?.heating.general.mainsGasFlag
-                    : "N/A"}
-                </div>
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+                Fuel
+              </div>
+              <div className="py-2">
+                <b>Main Fuel:</b>{" "}
+                {data?.heating.mainHeating.mainFuel
+                  ? data?.heating.mainHeating.mainFuel
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Main Gas Flag:</b>{" "}
+                {data?.heating.general.mainsGasFlag
+                  ? data?.heating.general.mainsGasFlag
+                  : "N/A"}
+              </div>
 
-                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Thermodynamics</div>
-                <div className="py-2">
-                  <b>Number of Heated Rooms:</b>{" "}
-                  {data?.heating.general.numberHeatedRooms
-                    ? data?.heating.general.numberHeatedRooms
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Heat Loss Corridor:</b>{' '}
-                  {data?.heating.general.heatLossCorridor
-                    ? data?.heating.general.heatLossCorridor
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Unheated Corridor Length:</b>{" "}
-                  {data?.heating.general.unheatedCorridorLength
-                    ? data?.heating.general.unheatedCorridorLength
-                    : "N/A"}
-                </div>
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+                Thermodynamics
+              </div>
+              <div className="py-2">
+                <b>Number of Heated Rooms:</b>{" "}
+                {data?.heating.general.numberHeatedRooms
+                  ? data?.heating.general.numberHeatedRooms
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Heat Loss Corridor:</b>{" "}
+                {data?.heating.general.heatLossCorridor
+                  ? data?.heating.general.heatLossCorridor
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Unheated Corridor Length:</b>{" "}
+                {data?.heating.general.unheatedCorridorLength
+                  ? data?.heating.general.unheatedCorridorLength
+                  : "N/A"}
+              </div>
 
-
-
-                <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">Secondary Heating</div>
-                <div className="py-2">
-                  <b>Secondary Heating Description:</b>{" "}
-                  {data?.heating.secondaryHeating.secondheatDescription
-                    ? data?.heating.secondaryHeating.secondheatDescription
-                    : "N/A"}
-                </div>
-                <div className="py-2">
-                  <b>Secondary Heating Energy Efficiency:</b>{" "}
-                  {data?.heating.secondaryHeating.secondaryHeatingEnergyEff
-                    ? data?.heating.secondaryHeating.secondaryHeatingEnergyEff
-                    : "N/A"}
-                </div>
-
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+                Secondary Heating
+              </div>
+              <div className="py-2">
+                <b>Secondary Heating Description:</b>{" "}
+                {data?.heating.secondaryHeating.secondheatDescription
+                  ? data?.heating.secondaryHeating.secondheatDescription
+                  : "N/A"}
+              </div>
+              <div className="py-2">
+                <b>Secondary Heating Energy Efficiency:</b>{" "}
+                {data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                  ? data?.heating.secondaryHeating.secondaryHeatingEnergyEff
+                  : "N/A"}
+              </div>
             </div>
           </div>
         </Card>
