@@ -31,9 +31,10 @@ const ADD_IMPROVEMENT = gql`
 `;
 
 interface props {
-  color: string;
+  color: string | undefined;
   lmk: string;
   improvementId: string;
+  postcode: string;
 }
 
 interface Values {
@@ -42,12 +43,19 @@ interface Values {
   improvementId: string;
   lmkKey: string;
   postcode: string;
+  agree: boolean;
 }
 
-export default function RecForm({ color, lmk, improvementId }: props) {
+export default function RecForm({
+  color,
+  lmk,
+  postcode,
+  improvementId,
+}: props) {
   const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
     useMutation(ADD_IMPROVEMENT);
+
   const [isSubmissionError, setIsSubmissionError] = useState<boolean>(false);
   const [postcode, setPostcode] = useState<string>("");
 
@@ -55,13 +63,22 @@ export default function RecForm({ color, lmk, improvementId }: props) {
     if (error) setIsSubmissionError(true);
   }, [error]);
 
-  useEffect(() => {
-    if (GlobalContext.extraHouseInfo) {
-      setPostcode(GlobalContext.extraHouseInfo.postcode);
-    } else {
-      setPostcode(localStorage.extraHouseInfo.postcode);
-    }
-  }, [GlobalContext.extraHouseInfo]);
+  //Could any of these improvements be made for free?
+  function validateCost(value: number): string | undefined {
+    if (value == 0) return 'Improvement cost is required.';
+  }
+
+  function validateDate(value: string): string | undefined {
+    if (value == '') return 'Date is required';
+  }
+
+  function validateAgreement(value: boolean): string | undefined {
+    if (!value) return 'Required';
+  }
+
+  // TODO: Instead of the "Thanks for Submission" thing
+  // it should just set the completed flag and change the filter and formatting
+  // by itself.
 
   return (
     <div
@@ -74,7 +91,12 @@ export default function RecForm({ color, lmk, improvementId }: props) {
         <span>Something went wrong with the submission</span>
       )}
       {loading && <span>Submitting...</span>}
-      {!isSubmissionError && !loading && (
+      {data && (
+        <div className=" w-full h-full flex items-center text-center justify-center">
+          Thanks for your submission!
+        </div>
+      )}
+      {!isSubmissionError && !loading && !data && (
         <div className="flex-row space-between">
           <span className="text-lg mb-1 font-bold title-font">
             Tell us more!
@@ -86,6 +108,7 @@ export default function RecForm({ color, lmk, improvementId }: props) {
               lmkKey: lmk,
               improvementId: improvementId,
               postcode: postcode,
+              agree: false,
             }}
             onSubmit={(
               values: Values,

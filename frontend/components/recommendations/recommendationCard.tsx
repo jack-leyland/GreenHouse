@@ -52,6 +52,14 @@ export default function Recommendation({
     }
   }, [GlobalContext.activeLmk]);
 
+  useEffect(() => {
+    if (GlobalContext.extraHouseInfo) {
+      setPostcode(GlobalContext.extraHouseInfo.postcode);
+    } else {
+      setPostcode(localStorage.extraHouseInfo.postcode);
+    }
+  }, [GlobalContext.extraHouseInfo]);
+
   useOutsideClick(wrapperRef, () => {
     setShowForm(false);
   });
@@ -110,7 +118,12 @@ export default function Recommendation({
       </div>
       {/* Form goes here */}
       {showForm && (
-        <RecForm color={color} improvementId={improvementId} lmk={lmk} />
+        <RecForm
+          color={color}
+          improvementId={improvementId}
+          lmk={lmk}
+          postcode={postcode}
+        />
       )}
     </div>
   );
