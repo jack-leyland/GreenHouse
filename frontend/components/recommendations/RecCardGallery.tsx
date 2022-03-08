@@ -8,8 +8,6 @@ interface props {
   data: Array<Array<epcRecommendationObject>>;
 }
 
-//BIG TODO: Each recommendation needs a completed flag from backend
-
 export default function RecCardGallery({ data }: props) {
   const [activePage, setActivePage] = useState<number>(0);
   const [activePageRecs, setActivePageRecs] = useState<

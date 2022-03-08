@@ -4,7 +4,7 @@ import environ
 import pandas as pd
 import requests
 
-# from google.cloud import bigquery
+from google.cloud import bigquery
 from graphene import Boolean, Field, Float, List, Mutation, ObjectType, Schema, String
 from graphene_django import DjangoObjectType
 
