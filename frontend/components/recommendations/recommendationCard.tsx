@@ -43,6 +43,7 @@ export default function Recommendation({
   const GlobalContext = useAppContext();
   const [color, setColor] = useState<string>("");
   const [category, setCategory] = useState<string>("");
+  const [postcode, setPostcode] = useState<string>("");
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {

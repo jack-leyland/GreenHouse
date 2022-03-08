@@ -65,15 +65,15 @@ export default function RecForm({
 
   //Could any of these improvements be made for free?
   function validateCost(value: number): string | undefined {
-    if (value == 0) return 'Improvement cost is required.';
+    if (value == 0) return "Improvement cost is required.";
   }
 
   function validateDate(value: string): string | undefined {
-    if (value == '') return 'Date is required';
+    if (value == "") return "Date is required";
   }
 
   function validateAgreement(value: boolean): string | undefined {
-    if (!value) return 'Required';
+    if (!value) return "Required";
   }
 
   // TODO: Instead of the "Thanks for Submission" thing
