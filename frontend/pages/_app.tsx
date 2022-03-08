@@ -1,23 +1,24 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import type { ReactNode, ReactElement } from 'react';
-import type { NextPage } from 'next';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import type { ReactNode, ReactElement } from "react";
+import type { NextPage } from "next";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { AppContextWrapper } from '../context/state';
+} from "@apollo/client";
+import { AppContextWrapper } from "../context/state";
 
-const ENV: any = process.env['ENV'];
+const ENV: any = process.env["ENV"];
+console.log("environment:", process.env.NODE_ENV);
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({
     uri:
-      ENV == 'DEV'
-        ? 'http://localhost:8000/graphql'
-        : 'https://epc-site-backend.herokuapp.com/graphql',
+      process.env.NODE_ENV == "development"
+        ? "http://localhost:8000/graphql"
+        : "https://epc-site-backend.herokuapp.com/graphql",
   }),
   cache: new InMemoryCache(),
 });
