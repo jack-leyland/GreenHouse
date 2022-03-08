@@ -146,7 +146,7 @@ const Recommendations = () => {
 
 Recommendations.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Address Dashboard" footerFixed={false}>
+    <Layout title="Address Dashboard" >
       <div className="flex overflow-hidden shadow-xl">
         <Sidebar />
         {page}

@@ -67,15 +67,15 @@ export default function AddressList({
 
   return (
     <div className="h-[50vh] w-[35vw] max-w-[450px] min-w-[250px] rounded-default border-lightGrey bg-gray-50 drop-shadow-md">
-      <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-default font-bold font-logoFont">
+      <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-default font-semibold font-logoFont">
         <BackButton
-          className="h-[35px] w-[35px] fill-gray-900 absolute left-[10px] transition-all duration-100 hover:h-[45px] hover:w-[45px]"
+          className="h-8 w-8 fill-gray-900 absolute left-[10px] transition-all duration-100 hover:h-[45px] hover:w-[45px]"
           onClick={backHandler}
         />
         Select your address
       </div>
       <SearchIcon
-        className="h-[35px] w-[35px] cursor-pointer stroke-2 stroke-gray-900 absolute right-[10px] top-[5px] transition-all duration-100 hover:h-[40px] hover:w-[40px]"
+        className="h-8 w-8 cursor-pointer stroke-2 stroke-gray-900 absolute right-[10px] top-[5px] transition-all duration-100 hover:h-[40px] hover:w-[40px]"
         onClick={() => setShowSearchBar(!showSearchBar)}
       />
       {showSearchBar ? (

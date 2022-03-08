@@ -4,7 +4,6 @@ import Footer from "./footer";
 
 type Props = {
   children: ReactNode;
-  footerFixed: boolean;
   title?: string;
 };
 

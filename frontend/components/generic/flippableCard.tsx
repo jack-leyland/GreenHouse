@@ -50,13 +50,13 @@ export default function FlippableCard({
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
       >
         <div className="h-full child">
-          <h3 className="child text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
+          <h3 className="child text-base md:text-lg font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
             {frontTitle}
             <span
               className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg text-gray-600"
               onClick={() => set((state) => !state)}
             >
-              <span className="text-md ">Show me more</span>
+              <span className="text-sm md:text-base">Show me more</span>
               <MdOutlineFlipCameraAndroid size={25} />
             </span>
           </h3>
@@ -76,13 +76,13 @@ export default function FlippableCard({
         }}
       >
         <div className="h-full child text-gray-600 ">
-          <h3 className="text-xl font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
+          <h3 className="text-base md:text-lg font-bold px-1 pb-1 border border-t-0 border-x-0 flex justify-between items-center text-gray-900">
             {backTitle}
             <span
               className="flex text-md gap-2 items-center font-light hover:cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg"
               onClick={() => set((state) => !state)}
             >
-              <span className="text-md">Show me more</span>
+              <span className="text-sm md:text-base">Show me more</span>
               <MdOutlineFlipCameraAndroid size={25} />
             </span>
           </h3>

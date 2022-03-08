@@ -19,7 +19,7 @@ interface props {
     children?: React.ReactChild | React.ReactChildren;
     pageTitle:string;
     subTitle: string;
-    modalContent: any
+    setModalContent: any
 }
 
 function classNames(...classes:any) {
