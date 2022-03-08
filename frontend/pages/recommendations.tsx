@@ -4,7 +4,7 @@ import Layout from "../components/generic/layout";
 import PageTitle from "../components/generic/pageTitle";
 import Sidebar from "../components/sidebar";
 import RecCostSummary from "../components/recommendations/recCostSummary";
-import RecCardGallery from "../components/recommendations/recCardGallery";
+import RecCardGallery from "../components/recommendations/recsCardGallery";
 import Modal from "../components/generic/modal";
 import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
 import { useAppContext } from "../context/state";
