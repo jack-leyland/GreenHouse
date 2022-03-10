@@ -235,7 +235,7 @@ export default function FeatureCard({
           <div>
             <div className={titleStyling}>{type}</div>
             <div className="p-2 text-sm">
-              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Main Heating
               </div>
 
@@ -277,7 +277,7 @@ export default function FeatureCard({
                 areaAverage={analytics?.heating.meanMainHeatingEnvironmentalEff}
               />
 
-              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Heating Control
               </div>
 
@@ -310,7 +310,7 @@ export default function FeatureCard({
                 areaAverage={0}
               />
 
-              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Fuel
               </div>
               <div className="py-2">
@@ -326,7 +326,7 @@ export default function FeatureCard({
                   : "N/A"}
               </div>
 
-              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Thermodynamics
               </div>
               <div className="py-2">
@@ -348,7 +348,7 @@ export default function FeatureCard({
                   : "N/A"}
               </div>
 
-              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0">
+              <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Secondary Heating
               </div>
               <div className="py-2">
@@ -495,7 +495,7 @@ export default function FeatureCard({
     default:
       return (
         <Card
-          style={"col-start-7 col-end-10 row-start-1 row-end-7  max-h-96"}
+          style={"col-start-7 col-end-10 row-start-1 row-end-7 max-h-96"}
           disableHoverAnimation={true}
           showShadow={true}
         >

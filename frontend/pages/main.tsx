@@ -140,8 +140,9 @@ const Main = () => {
               style={"lg:w-1/2 w-full border h-full lg:h-auto"}
               disableHoverAnimation={true}
               showShadow={false}
+              innerStyle="inline"
             >
-              <div className="flex justify-center h-96">
+              <div className="flex justify-center h-full">
                 <House
                   data={dashboardData.House}
                   analytics={analyticsData.house}

@@ -21,7 +21,8 @@ export default function House({ data, analytics, setModalHandler }: props) {
   return (
     <div className="flex flex-col items-center w-full px-6 py-4 gap-6 pb-6 relative h-auto">
       <div className="flex justify-center w-full">
-        <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3 h-2/5">
+        {/* This max px is set for the house to stop it growing too wide on larger screen, so don't change it, looking at you Jarryd */}
+        <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3 h-2/5 max-w-[400px]">
           {/*Roof*/}
           <div
             className="house-card-roof col-start-1 col-end-7 row-start-0 row-end-0 roof animate-fade hover:scale-105 hover:cursor-pointer rounded-lg"

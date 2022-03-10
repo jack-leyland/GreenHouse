@@ -25,6 +25,9 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
   const labelStyling =
     " pr-1 shadow-xs animate-widthGrow text-right font-bold text-white";
 
+  const tdStyle = "border w-1/3 ";
+  const titleStyle = tdStyle + "font-semibold";
+
   return (
     <div className="flex h-5/6">
       <div className="grid rating-grid w-2/6 h-full">
@@ -37,7 +40,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </button>
           <AiFillQuestionCircle
             size={16}
-            className="hover:cursor-pointer hidden md:flex"
+            className="hover:cursor-pointer hidden md:flex lg:hidden"
             onClick={() => setModalHandler("epcChart")}
           />
         </div>
@@ -81,7 +84,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </button>
           <AiFillQuestionCircle
             size={16}
-            className="hover:cursor-pointer hidden md:flex"
+            className="hover:cursor-pointer hidden md:flex lg:hidden"
             onClick={() => setModalHandler("currentRating")}
           />
         </div>
@@ -94,7 +97,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </button>
           <AiFillQuestionCircle
             size={16}
-            className="hover:cursor-pointer hidden md:flex"
+            className="hover:cursor-pointer hidden md:flex lg:hidden"
             onClick={() => setModalHandler("potentialRating")}
           />
         </div>
@@ -151,6 +154,6 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </div>
         </div>
       </div>
-    </div>
+  </div>
   );
 }
