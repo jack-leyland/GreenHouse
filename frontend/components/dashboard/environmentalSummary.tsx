@@ -22,37 +22,37 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   const featureData = [
     {
       feature: "Windows",
-      rank: data.windowsEnvEff,
+      rank: data.windowsEnvEff ? data.windowsEnvEff : 0,
       total: 5,
     },
     {
       feature: "Walls",
-      rank: data.wallsEnvEff,
+      rank: data.wallsEnvEff ? data.wallsEnvEff : 0,
       total: 5,
     },
     {
       feature: "Roof",
-      rank: data.roofEnvEff,
+      rank: data.roofEnvEff ? data.roofEnvEff : 0,
       total: 5,
     },
     {
       feature: "Lighting",
-      rank: data.lightingEnvEff,
+      rank: data.lightingEnvEff ? data.lightingEnvEff : 0,
       total: 5,
     },
     {
       feature: "Heating",
-      rank: data.mainHeatEnvEff,
+      rank: data.mainHeatEnvEff ? data.mainHeatEnvEff : 0,
       total: 5,
     },
     {
       feature: "Floor",
-      rank: data.floorEnvEff,
+      rank: data.floorEnvEff ? data.floorEnvEff : 0,
       total: 5,
     },
     {
       feature: "Water",
-      rank: data.hotWaterEnvEff,
+      rank: data.hotWaterEnvEff ? data.hotWaterEnvEff : 0,
       total: 5,
     },
   ];
@@ -61,6 +61,8 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   const kgsOfCoal = Math.round(((data.energyConsumptionCurrent- data.energyConsumptionPotential) / 1.278) /2.204);
   const carJourneys = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 1.78);
   const phoneCharges = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 86.2);
+
+  console.log(featureData)
 
   return (
     <div className="py-2 px-1 flex h-full">
