@@ -52,7 +52,6 @@ export default function RecCardGallery({ data }: props) {
       />
     );
   }
-  console.log(noRecs);
   return (
     <div className="w-full h-full flex-row justify-center">
       <div className="w-full h-[10%] max-h-[50px] flex justify-center">

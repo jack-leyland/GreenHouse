@@ -10,6 +10,7 @@ interface props {
   indicativeCost: epcRecommendationObject['indicativeCost'];
 }
 
+//Close form if click outside the form
 function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
   useEffect(() => {
     /**

@@ -298,6 +298,10 @@ export interface epcRecommendationObject {
   improvementDescrText: string;
   improvementId: string;
   improvementIdText: string;
+  date: string;
+  cost: number;
+  postcode: string;
+  completed: boolean;
 }
 
 export interface EPCDictionary<Value> {

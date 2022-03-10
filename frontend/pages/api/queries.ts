@@ -119,6 +119,11 @@ export const GET_REC_DATA = gql`
       improvementIdText
       improvementItem
       improvementId
+      improvementId
+      date
+      cost
+      postcode
+      completed
     }
     certificate(lmk: $queryParam) {
       address

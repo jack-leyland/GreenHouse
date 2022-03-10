@@ -1,14 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { ReactElement, useEffect, useState } from "react";
 import Layout from "../components/generic/layout";
-import PageTitle from "../components/generic/pageTitle";
-import Sidebar from "../components/sidebar";
 import RecCostSummary from "../components/recommendations/recCostSummary";
 import RecCardGallery from "../components/recommendations/recsCardGallery";
 import Modal from "../components/generic/modal";
 import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
 import { useAppContext } from "../context/state";
-import { epcCertificateObject, epcRecommendationObject } from "../types";
+import { epcCertificateObject, epcRecommendationObject} from "../types";
 import { GET_REC_DATA } from "./api/queries";
 import loadingJson from "../assets/animations/animation/loading.json";
 import errorJson from "../assets/animations/animation/error.json";
@@ -21,18 +19,23 @@ function paginateRecommendations(
   let recsPerPage = 3;
   let paginated: Array<Array<epcRecommendationObject>> = [[]];
 
+  let test:any = []
+
   recs.forEach((elem) => {
-    if (paginated[paginated.length - 1].length < recsPerPage) {
-      if (elem.improvementId) {
+    if (paginated[paginated.length - 1].length >= recsPerPage) {
+      paginated.push([]);
+    } 
+    if (elem.improvementId) {
+      //If improvementId is not present, then push to paginated, else do nothing
+      if(!elem.completed) {
         paginated[paginated.length - 1].push(elem);
-      }
-    } else {
-      if (elem.improvementId) {
-        paginated.push([]);
-        paginated[paginated.length - 1].push(elem);
+      }  else {
+        test.push(elem)
       }
     }
   });
+  console.log("test", test)
+  console.log("paginated", paginated)
   return paginated;
 }
 
@@ -44,6 +47,7 @@ const Recommendations = () => {
   const [recData, setRecData] = useState<Array<Array<epcRecommendationObject>>>(
     [[]]
   );
+
   const [certificateData, setCertificateData] = useState<any>(null);
   const [address, setAddress] = useState<string>("");
   const [extraHouseInfo, setExtraHouseInfo] =
