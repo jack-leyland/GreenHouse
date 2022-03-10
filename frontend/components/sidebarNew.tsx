@@ -6,18 +6,13 @@ import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: BsFillHouseFill, current: true },
+  { name: "Dashboard", href: "/main", icon: BsFillHouseFill, current: true },
   {
     name: "Recommendations",
     href: "/recommendations",
     icon: BsWrench,
     current: false,
   },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
 ];
 
 interface props {
