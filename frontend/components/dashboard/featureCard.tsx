@@ -233,7 +233,14 @@ export default function FeatureCard({
           showShadow={true}
         >
           <div>
-            <div className={titleStyling}>{type}</div>
+            <div className={titleStyling}>
+              {type}
+              <AiFillQuestionCircle
+                size={20}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("heating")}
+              />
+            </div>
             <div className="p-2 text-sm">
               <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
                 Main Heating
