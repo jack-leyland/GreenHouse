@@ -75,12 +75,12 @@ export default function HelpModal({ type }: props) {
         <div className={positionStyling}>
           <div className={titleStyling}>Current Costs</div>
           <div className="py-1">
-            Current costs are estimations based on the current efficiency of
+            <b>Current costs</b> are estimations based on the current efficiency of
             your house features and current energy prices (for more accurate
             cost estimations we advise using a smart meter!).
           </div>
           <div className="py-1">
-            Potential costs are projections of what your costs could be if you
+          <b>Potential costs</b> are projections of what your costs could be if you
             make all of the recommended improvements. To check out these
             improvements see our{" "}
             <a
@@ -92,7 +92,7 @@ export default function HelpModal({ type }: props) {
             page!
           </div>
           <div className="py-1">
-            Area costs are the current average costs paid by other households in your postcode.
+          <b>Area costs</b> are the current average costs paid by other households in your postcode.
           </div>
         </div>
       );

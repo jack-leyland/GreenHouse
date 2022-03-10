@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { MdOutlineSmartphone } from "react-icons/md";
-import { GiOilPump } from "react-icons/gi";
+import {GiCoalWagon} from "react-icons/gi";
 import { AiFillCar } from "react-icons/ai";
 import {
   Legend,
@@ -58,9 +58,9 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   ];
 
   const internationalNumberFormat = new Intl.NumberFormat("en-US");
-  const barrelsOfOil = Math.round(data.energyConsumptionCurrent * 0.001645);
-  const carJourneys = Math.round(data.energyConsumptionCurrent * 1.78);
-  const phoneCharges = Math.round(data.energyConsumptionCurrent * 86.2);
+  const kgsOfCoal = Math.round(((data.energyConsumptionCurrent- data.energyConsumptionPotential) / 1.278) /2.204);
+  const carJourneys = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 1.78);
+  const phoneCharges = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 86.2);
 
   return (
     <div className="py-2 px-1 flex h-full">
@@ -101,10 +101,10 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
             </p>
           </div>
           <div className="flex flex-col justify-center items-center w-1/3">
-            <GiOilPump color={"black"} size={35} />
+            <GiCoalWagon color={"black"} size={35} />
             <p className="text-center md:text-sm text-xs italic">
-              {internationalNumberFormat.format(barrelsOfOil)}{" "}
-              {barrelsOfOil > 1 ? "barrels" : "barrel"} of oil
+              {internationalNumberFormat.format(kgsOfCoal)}{" "}
+              {kgsOfCoal > 1 ? "kgs" : "kg"} of coal
             </p>
           </div>
         </div>
