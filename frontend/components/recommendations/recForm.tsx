@@ -111,22 +111,23 @@ export default function RecForm({
               agree: false,
             }}
             onSubmit={(
-              values: Values,
-              { setSubmitting }: FormikHelpers<Values>
+              values: Values
+              // { setSubmitting }: FormikHelpers<Values>
             ) => {
-              console.log(values);
               addImprovement({
                 variables: {
                   lmkKey: values.lmkKey,
                   date: JSON.stringify(values.date),
                   cost: values.cost,
                   improvementId: values.improvementId,
-                  postcode: values.postcode,
+                  postcode: postcode,
                 },
               });
-              setTimeout(() => {
-                setSubmitting(false);
-              }, 500);
+              //Causes react error, need some other way of verifying submit success
+
+              // setTimeout(() => {
+              //   setSubmitting(false);
+              // }, 500);
             }}
           >
             {({ errors, touched }) => (
