@@ -21,6 +21,7 @@ from app.types import (
     Improvement,
     Recommendation,
     Timeseries,
+    LocalImprovement,
 )
 
 # Set the project base directory
@@ -94,7 +95,7 @@ class Query(ObjectType):
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
     big_query = Field(Timeseries)
     local_recommendations = Field(
-        List(CompletedRecommendationType), postcode=String(default_value="N/A")
+        List(LocalImprovement), postcode=String(default_value="N/A")
     )
 
     def resolve_analytics(root, info, lmk):
@@ -174,7 +175,26 @@ class Query(ObjectType):
         if len(postcode) == 7:
             area = postcode[:4]
 
-        return CompletedRecommendation.objects.filter(postcode__startswith=area)
+        completed_recs = CompletedRecommendation.objects.filter(
+            postcode__startswith=area
+        )
+        costs = {}
+
+        for rec in completed_recs:
+            if rec.improvement_id in costs:
+                costs[rec.improvement_id].append(rec.cost)
+            else:
+                costs[rec.improvement_id] = [rec.cost]
+
+        results = []
+        for id in costs:
+            result = LocalImprovement()
+            result.improvement_id = id
+            result.frequency = len(costs[id])
+            result.average_cost = sum(costs[id]) / result.frequency
+            results.append(result)
+
+        return results
 
 
 schema = Schema(query=Query, mutation=Mutation)

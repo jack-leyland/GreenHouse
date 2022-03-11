@@ -198,3 +198,9 @@ class Improvement(ObjectType):
     date = String()
     improvement_id = String()
     postcode = String()
+
+
+class LocalImprovement(ObjectType):
+    improvement_id = String()
+    frequency = Float()
+    average_cost = Float()
