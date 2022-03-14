@@ -34,8 +34,6 @@ function paginateRecommendations(
       }
     }
   });
-  console.log("test", test)
-  console.log("paginated", paginated)
   return paginated;
 }
 
@@ -106,7 +104,7 @@ const Recommendations = () => {
         setModalContent={setShowModal}
       >
         {recData && certificateData ? (
-          <div className="flex flex-col bg-gray-100 text-gray-500">
+          <div className="h-[calc(100vh-90px)] flex flex-col bg-gray-100 text-gray-500 border-2 border-green-500">
             <RecCostSummary data={certificateData} />
             <RecCardGallery data={recData} />
             {showModal && extraHouseInfo ? (
@@ -119,7 +117,7 @@ const Recommendations = () => {
           <>
             {/*Loading Display*/}
             {loading ? (
-              <div className="w-full flex flex-col justify-center items-center bg-gray-100">
+              <div className="relative top-[30vh] w-full h-full flex flex-col justify-center items-center bg-gray-100">
                 <h1 className="animate-fade text-3xl italic pb-2">
                   Loading...
                 </h1>
@@ -136,8 +134,7 @@ const Recommendations = () => {
                 {isQueryError && !data ? (
                   <div className="w-full flex flex-col justify-center items-center bg-gray-100">
                     <h1 className="animate-fade text-3xl font-bold pb-2">
-                      Oops, there was an error, try again later... [Dev Note:
-                      Query Error]
+                      Oops, there was an error, try again later...
                     </h1>
                     <Lottie
                       animationData={errorJson}

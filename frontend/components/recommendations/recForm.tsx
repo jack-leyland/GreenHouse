@@ -35,6 +35,8 @@ interface props {
   lmk: string;
   improvementId: string;
   postcode: string;
+  heading: string;
+  cancelHandler: React.MouseEventHandler;
 }
 
 interface Values {
@@ -51,6 +53,8 @@ export default function RecForm({
   lmk,
   postcode,
   improvementId,
+  heading,
+  cancelHandler,
 }: props) {
   const GlobalContext = useAppContext();
   const [addImprovement, { data, loading, error }] =
@@ -83,7 +87,7 @@ export default function RecForm({
   return (
     <div
       className={
-        'h-full max-w-[58%] min-w-[58%] p-6 rounded-lg border-2 text-white flex flex-col justify-center relative overflow-hidden ' +
+        'h-full px-6 pt-6 rounded-lg text-white flex flex-col justify-center relative overflow-hidden ' +
         (!data ? color : 'bg-gray-400')
       }
     >
@@ -97,7 +101,12 @@ export default function RecForm({
         </div>
       )}
       {!isSubmissionError && !loading && !data && (
-        <div className="flex-row space-between">
+        
+        <div className='h-full w-full overflow-y-scroll scrollbar-hide'>
+          <span className="top-[5px] text-[1.5rem] pb-4 mb-4 leading-none">
+            {heading}
+          </span>
+        <div className="h-full flex-row space-between mt-4">
           <span className="text-lg mb-1 font-bold title-font">
             Tell us more!
           </span>
@@ -189,16 +198,22 @@ export default function RecForm({
                   <button
                     type="submit"
                     disabled={data ? true : false}
-                    className="text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
+                    className="mr-2 text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
                   >
                     Submit
+                  </button>
+                  <button
+                    onClick={cancelHandler}
+                    className="text-white bg-gray-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-400 rounded text-lg"
+                  >
+                    Cancel
                   </button>
                 </div>
               </Form>
             )}
           </Formik>
         </div>
-      )}
+        </div>)}
     </div>
   );
 }

@@ -54,7 +54,6 @@ export default function Recommendation({
 
   useEffect(() => {
     if (GlobalContext.extraHouseInfo) {
-      console.log('wrong');
       setPostcode(GlobalContext.extraHouseInfo.postcode);
     } else {
       let cachedInfo = JSON.parse(localStorage.extraHouseInfo);
@@ -62,7 +61,6 @@ export default function Recommendation({
     }
   }, [GlobalContext.extraHouseInfo]);
 
-  console.log(postcode);
 
   useOutsideClick(wrapperRef, () => {
     setShowForm(false);
@@ -85,22 +83,39 @@ export default function Recommendation({
       break;
   }
 
+
+  function handleFormCancel() {
+    setShowForm(false);
+  }
+
   return (
     <div
-      className="flex flex-row justify-center p-4 mx-5 w-[40%]"
+      className="flex flex-row justify-center h-[500px] w-[300px] mx-5 my-4"
       ref={wrapperRef}
     >
+
+      {/* Form goes here */}
+      {showForm ? (
+        <RecForm
+          color={color}
+          improvementId={improvementId}
+          lmk={lmk}
+          postcode={postcode}
+          heading={improvementIdText}
+          cancelHandler={handleFormCancel}
+        />
+      ) : (      
       <div
         className={
-          'h-full min-w-[42%] rounded-lg text-white flex flex-col relative overflow-hidden w-72 ' +
+          'rounded-lg w-full text-white flex flex-col relative overflow-hidden ' +
           color
         }
       >
-        <div className="p-6">
+        <div className="p-6 h-[40%]">
           <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
             {category}
           </h2>
-          <h1 className="text-[1.5rem] pb-4 mb-4 border-b leading-none">
+          <h1 className="text-[1.5rem] pb-4 mb-4 leading-none">
             {improvementIdText}
           </h1>
         </div>
@@ -119,14 +134,6 @@ export default function Recommendation({
           </button>
         </div>
       </div>
-      {/* Form goes here */}
-      {showForm && (
-        <RecForm
-          color={color}
-          improvementId={improvementId}
-          lmk={lmk}
-          postcode={postcode}
-        />
       )}
     </div>
   );
