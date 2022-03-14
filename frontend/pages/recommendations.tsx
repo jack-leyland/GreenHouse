@@ -13,39 +13,15 @@ import errorJson from "../assets/animations/animation/error.json";
 import Lottie from "react-lottie-player";
 import DashboardWrapper from "../components/sidebarNew";
 
-function paginateRecommendations(
-  recs: Array<epcRecommendationObject>
-): Array<Array<epcRecommendationObject>> {
-  let recsPerPage = 3;
-  let paginated: Array<Array<epcRecommendationObject>> = [[]];
-
-  let test:any = []
-
-  recs.forEach((elem) => {
-    if (paginated[paginated.length - 1].length >= recsPerPage) {
-      paginated.push([]);
-    } 
-    if (elem.improvementId) {
-      //If improvementId is not present, then push to paginated, else do nothing
-      if(!elem.completed) {
-        paginated[paginated.length - 1].push(elem);
-      }  else {
-        test.push(elem)
-      }
-    }
-  });
-  return paginated;
-}
-
 const Recommendations = () => {
   const GlobalContext = useAppContext();
+  const [screenWidth, setScreenWidth] = useState<number>(0);
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [recData, setRecData] = useState<Array<Array<epcRecommendationObject>>>(
-    [[]]
+  const [recData, setRecData] = useState<Array<epcRecommendationObject>>(
+    []
   );
-
   const [certificateData, setCertificateData] = useState<any>(null);
   const [address, setAddress] = useState<string>("");
   const [extraHouseInfo, setExtraHouseInfo] =
@@ -73,7 +49,7 @@ const Recommendations = () => {
 
   useEffect(() => {
     if (data) {
-      setRecData(paginateRecommendations(data.recommendations));
+      setRecData(data.recommendations);
       setCertificateData(data.certificate);
     }
   }, [data]);
@@ -96,6 +72,19 @@ const Recommendations = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    const handleWindowResize = () => setScreenWidth(window.innerWidth)
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, [])
+
+  // Set initial screen size on client size component mount
+  useEffect(() => {
+    setScreenWidth(window.innerWidth)
+  }, [])
+  console.log(screenWidth)
+  let mobileBreakpoint = 500;
+
   return (
     <>
       <DashboardWrapper
@@ -104,15 +93,15 @@ const Recommendations = () => {
         setModalContent={setShowModal}
       >
         {recData && certificateData ? (
-          <div className="h-[calc(100vh-90px)] flex flex-col bg-gray-100 text-gray-500 border-2 border-green-500">
-            <RecCostSummary data={certificateData} />
-            <RecCardGallery data={recData} />
-            {showModal && extraHouseInfo ? (
-              <Modal hideModal={() => setShowModal(false)}>
-                <ExtraHouseInfo data={extraHouseInfo} />
-              </Modal>
-            ) : null}
-          </div>
+          <>
+          <RecCostSummary data={certificateData} />
+          <RecCardGallery data={recData} isMobile={screenWidth <= mobileBreakpoint}/>   
+          {showModal && extraHouseInfo && (
+            <Modal hideModal={() => setShowModal(false)}>
+              <ExtraHouseInfo data={extraHouseInfo} />
+            </Modal>
+          )}
+          </>
         ) : (
           <>
             {/*Loading Display*/}

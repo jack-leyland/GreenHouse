@@ -8,6 +8,7 @@ interface props {
   improvementId: epcRecommendationObject['improvementId'];
   improvementIdText: epcRecommendationObject['improvementIdText'];
   indicativeCost: epcRecommendationObject['indicativeCost'];
+  isMobile: boolean;
 }
 
 //Close form if click outside the form
@@ -18,7 +19,6 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
      */
 
     function handleClickOutside(event: React.MouseEvent) {
-      console.log(ref.current);
       if (ref.current && !ref.current.contains(event.target as Node)) {
         handler();
       }
@@ -37,6 +37,7 @@ export default function Recommendation({
   improvementId,
   improvementIdText,
   indicativeCost,
+  isMobile
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
@@ -90,7 +91,7 @@ export default function Recommendation({
 
   return (
     <div
-      className="flex flex-row justify-center h-[500px] w-[300px] mx-5 my-4"
+      className={"flex flex-row justify-center h-[500px] w-[300px] " + (isMobile ? "mb-4" :"mx-5 my-4")}
       ref={wrapperRef}
     >
 
