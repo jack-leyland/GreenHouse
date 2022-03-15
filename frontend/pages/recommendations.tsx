@@ -1,17 +1,17 @@
-import { useQuery } from "@apollo/client";
-import { ReactElement, useEffect, useState } from "react";
-import Layout from "../components/generic/layout";
-import RecCostSummary from "../components/recommendations/recCostSummary";
-import RecCardGallery from "../components/recommendations/recsCardGallery";
-import Modal from "../components/generic/modal";
-import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
-import { useAppContext } from "../context/state";
-import { epcCertificateObject, epcRecommendationObject} from "../types";
-import { GET_REC_DATA } from "./api/queries";
-import loadingJson from "../assets/animations/animation/loading.json";
-import errorJson from "../assets/animations/animation/error.json";
-import Lottie from "react-lottie-player";
-import DashboardWrapper from "../components/sidebarNew";
+import { useQuery } from '@apollo/client';
+import { ReactElement, useEffect, useState } from 'react';
+import Layout from '../components/generic/layout';
+import RecCostSummary from '../components/recommendations/recCostSummary';
+import RecCardGallery from '../components/recommendations/recsCardGallery';
+import Modal from '../components/generic/modal';
+import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
+import { useAppContext } from '../context/state';
+import { epcCertificateObject, epcRecommendationObject } from '../types';
+import { GET_REC_DATA } from './api/queries';
+import loadingJson from '../assets/animations/animation/loading.json';
+import errorJson from '../assets/animations/animation/error.json';
+import Lottie from 'react-lottie-player';
+import DashboardWrapper from '../components/sidebarNew';
 
 const Recommendations = () => {
   const GlobalContext = useAppContext();
@@ -19,17 +19,17 @@ const Recommendations = () => {
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [recData, setRecData] = useState<Array<epcRecommendationObject>>(
-    []
-  );
+  const [recData, setRecData] = useState<Array<epcRecommendationObject>>([]);
   const [certificateData, setCertificateData] = useState<any>(null);
-  const [address, setAddress] = useState<string>("");
+  const [address, setAddress] = useState<string>('');
   const [extraHouseInfo, setExtraHouseInfo] =
-    useState<epcCertificateObject["ExtraInfo"]>();
+    useState<epcCertificateObject['ExtraInfo']>();
+  const [queryPostcode, setQueryPostcode] =
+    useState<epcCertificateObject['ExtraInfo']['postcode']>();
 
   const { loading, error, data } = useQuery(GET_REC_DATA, {
-    skip: !queryParam || isQueryError,
-    variables: { queryParam },
+    skip: !queryParam || !queryPostcode || isQueryError,
+    variables: { queryParam, queryPostcode },
   });
 
   // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
@@ -42,8 +42,11 @@ const Recommendations = () => {
 
     if (GlobalContext.extraHouseInfo) {
       setExtraHouseInfo(GlobalContext.extraHouseInfo);
+      setQueryPostcode(GlobalContext.extraHouseInfo.postcode);
     } else {
-      setExtraHouseInfo(JSON.parse(localStorage.extraHouseInfo));
+      let parsed = JSON.parse(localStorage.extraHouseInfo);
+      setExtraHouseInfo(parsed);
+      setQueryPostcode(parsed.postcode);
     }
   }, [GlobalContext.activeLmk, GlobalContext.extraHouseInfo]);
 
@@ -62,7 +65,7 @@ const Recommendations = () => {
         certificateData.posttown,
         certificateData.postcode,
       ];
-      setAddress(addressElements.join(", "));
+      setAddress(addressElements.join(', '));
     }
   }, [certificateData]);
 
@@ -73,17 +76,19 @@ const Recommendations = () => {
   }, [error]);
 
   useEffect(() => {
-    const handleWindowResize = () => setScreenWidth(window.innerWidth)
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, [])
+    const handleWindowResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
 
   // Set initial screen size on client size component mount
   useEffect(() => {
-    setScreenWidth(window.innerWidth)
-  }, [])
-  console.log(screenWidth)
+    setScreenWidth(window.innerWidth);
+  }, []);
   let mobileBreakpoint = 500;
+
+  console.log();
+  console.log(recData);
 
   return (
     <>
@@ -94,13 +99,16 @@ const Recommendations = () => {
       >
         {recData && certificateData ? (
           <>
-          <RecCostSummary data={certificateData} />
-          <RecCardGallery data={recData} isMobile={screenWidth <= mobileBreakpoint}/>   
-          {showModal && extraHouseInfo && (
-            <Modal hideModal={() => setShowModal(false)}>
-              <ExtraHouseInfo data={extraHouseInfo} />
-            </Modal>
-          )}
+            <RecCostSummary data={certificateData} />
+            <RecCardGallery
+              data={recData}
+              isMobile={screenWidth <= mobileBreakpoint}
+            />
+            {showModal && extraHouseInfo && (
+              <Modal hideModal={() => setShowModal(false)}>
+                <ExtraHouseInfo data={extraHouseInfo} />
+              </Modal>
+            )}
           </>
         ) : (
           <>
