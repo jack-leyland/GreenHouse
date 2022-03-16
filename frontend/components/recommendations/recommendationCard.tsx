@@ -7,11 +7,14 @@ import RecForm from './recForm';
 interface props {
   improvementId: epcRecommendationObject['improvementId'];
   improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost: epcRecommendationObject['indicativeCost'];
+  indicativeCost?: epcRecommendationObject['indicativeCost'];
   date?: epcRecommendationObject['date'];
   cost?: epcRecommendationObject['cost'];
   isMobile: boolean;
-  isCompleted: boolean;
+  isCompleted?: boolean;
+  isLocal?: boolean;
+  averageCost?: number;
+  frequency?: number;
 }
 
 //Close form if click outside the form
@@ -44,6 +47,8 @@ export default function Recommendation({
   isCompleted,
   date,
   cost,
+  averageCost,
+  frequency,
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
@@ -133,7 +138,7 @@ export default function Recommendation({
 interface incompleteViewProps {
   improvementId: epcRecommendationObject['improvementId'];
   improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost: epcRecommendationObject['indicativeCost'];
+  indicativeCost?: epcRecommendationObject['indicativeCost'];
   lmk: string;
   showForm: boolean;
   postcode: string;

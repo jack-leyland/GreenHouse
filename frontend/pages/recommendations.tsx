@@ -6,7 +6,11 @@ import RecCardGallery from '../components/recommendations/recsCardGallery';
 import Modal from '../components/generic/modal';
 import ExtraHouseInfo from '../components/dashboard/extraHouseInfo';
 import { useAppContext } from '../context/state';
-import { epcCertificateObject, epcRecommendationObject } from '../types';
+import {
+  epcCertificateObject,
+  epcRecommendationObject,
+  localRecommendationObject,
+} from '../types';
 import { GET_REC_DATA } from './api/queries';
 import loadingJson from '../assets/animations/animation/loading.json';
 import errorJson from '../assets/animations/animation/error.json';
@@ -19,6 +23,9 @@ const Recommendations = () => {
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [regionRecData, setRegionRecData] = useState<
+    Array<localRecommendationObject>
+  >([]);
   const [recData, setRecData] = useState<Array<epcRecommendationObject>>([]);
   const [certificateData, setCertificateData] = useState<any>(null);
   const [address, setAddress] = useState<string>('');
@@ -27,7 +34,7 @@ const Recommendations = () => {
   const [queryPostcode, setQueryPostcode] =
     useState<epcCertificateObject['ExtraInfo']['postcode']>();
 
-  const { loading, error, data } = useQuery(GET_REC_DATA, {
+  const { loading, error, data, refetch } = useQuery(GET_REC_DATA, {
     skip: !queryParam || !queryPostcode || isQueryError,
     variables: { queryParam, queryPostcode },
   });
@@ -52,6 +59,7 @@ const Recommendations = () => {
 
   useEffect(() => {
     if (data) {
+      setRegionRecData(data.localRecommendations);
       setRecData(data.recommendations);
       setCertificateData(data.certificate);
     }
@@ -86,10 +94,7 @@ const Recommendations = () => {
     setScreenWidth(window.innerWidth);
   }, []);
   let mobileBreakpoint = 500;
-
-  console.log();
-  console.log(recData);
-
+  console.log(data);
   return (
     <>
       <DashboardWrapper
@@ -102,6 +107,7 @@ const Recommendations = () => {
             <RecCostSummary data={certificateData} />
             <RecCardGallery
               data={recData}
+              regionData={regionRecData}
               isMobile={screenWidth <= mobileBreakpoint}
             />
             {showModal && extraHouseInfo && (
