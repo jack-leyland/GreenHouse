@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface props {
   data: {
@@ -46,11 +46,11 @@ export default function RecCostSummary({ data }: props) {
               <p>
                 <span
                   className={
-                    '' + (lightingSavings > 0 ? 'text-primary font-bold' : '')
+                    "" + (lightingSavings > 0 ? "text-primary font-bold" : "")
                   }
                 >
                   £{lightingSavings}
-                </span>{' '}
+                </span>{" "}
                 per year
               </p>
             </div>
@@ -63,11 +63,11 @@ export default function RecCostSummary({ data }: props) {
               <p>
                 <span
                   className={
-                    '' + (heatingSavings > 0 ? 'text-primary font-bold' : '')
+                    "" + (heatingSavings > 0 ? "text-primary font-bold" : "")
                   }
                 >
                   £{heatingSavings}
-                </span>{' '}
+                </span>{" "}
                 per year
               </p>
             </div>
@@ -80,11 +80,11 @@ export default function RecCostSummary({ data }: props) {
               <p>
                 <span
                   className={
-                    '' + (waterSavings > 0 ? 'text-primary font-bold' : '')
+                    "" + (waterSavings > 0 ? "text-primary font-bold" : "")
                   }
                 >
                   £{waterSavings}
-                </span>{' '}
+                </span>{" "}
                 per year
               </p>
             </div>

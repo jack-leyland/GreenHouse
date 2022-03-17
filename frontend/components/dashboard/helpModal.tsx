@@ -75,13 +75,13 @@ export default function HelpModal({ type }: props) {
         <div className={positionStyling}>
           <div className={titleStyling}>Current Costs</div>
           <div className="py-1">
-            <b>Current costs</b> are estimations based on the current efficiency of
-            your house features and current energy prices (for more accurate
+            <b>Current costs</b> are estimations based on the current efficiency
+            of your house features and current energy prices (for more accurate
             cost estimations we advise using a smart meter!).
           </div>
           <div className="py-1">
-          <b>Potential costs</b> are projections of what your costs could be if you
-            make all of the recommended improvements. To check out these
+            <b>Potential costs</b> are projections of what your costs could be
+            if you make all of the recommended improvements. To check out these
             improvements see our{" "}
             <a
               className="text-blue-500"
@@ -92,7 +92,8 @@ export default function HelpModal({ type }: props) {
             page!
           </div>
           <div className="py-1">
-          <b>Area costs</b> are the current average costs paid by other households in your postcode.
+            <b>Area costs</b> are the current average costs paid by other
+            households in your postcode.
           </div>
         </div>
       );
@@ -102,9 +103,9 @@ export default function HelpModal({ type }: props) {
           <div className={titleStyling}>Feature Efficiency</div>
           <div className="py-1">
             All features in your house are given an environmental efficiency
-            rating from 0-5 , by your assessor(5 being best, 0 being worst). Features which are
-            less environmentally friendly are given a lower rating. Click on the
-            house to see more about each feature!
+            rating from 0-5 , by your assessor(5 being best, 0 being worst).
+            Features which are less environmentally friendly are given a lower
+            rating. Click on the house to see more about each feature!
           </div>
         </div>
       );
@@ -129,12 +130,12 @@ export default function HelpModal({ type }: props) {
             <b>Description:</b> Description of your house feature.
           </div>
           <div className="py-1">
-            <b>Energy Efficiency:</b> Rating from 1-5, given by your assessor (5 being best, 0 being
-            worst).
+            <b>Energy Efficiency:</b> Rating from 1-5, given by your assessor (5
+            being best, 0 being worst).
           </div>
           <div className="py-1">
-            <b>Environmental Efficiency:</b> Rating from 1-5 given by your assessor (5 being best, 0
-            being worst).
+            <b>Environmental Efficiency:</b> Rating from 1-5 given by your
+            assessor (5 being best, 0 being worst).
           </div>
         </div>
       );
@@ -177,11 +178,12 @@ export default function HelpModal({ type }: props) {
             <b>Description:</b> Description of your lighting.
           </div>
           <div className="py-1">
-            <b>Lighting Cost Current:</b> Current estimated lighting cost per year.
+            <b>Lighting Cost Current:</b> Current estimated lighting cost per
+            year.
           </div>
           <div className="py-1">
-            <b>Lighting Cost Potential:</b> Potential estimated lighting cost per year after
-            improvements are made.
+            <b>Lighting Cost Potential:</b> Potential estimated lighting cost
+            per year after improvements are made.
           </div>
           <div className="py-1">
             <b>Low Energy Lighting:</b> The percentage of low energy lighting
@@ -198,122 +200,141 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-      case "water":
-        return (
-          <div className={positionStyling}>
-            <div className={titleStyling}>Water</div>
-            <div className="py-1">
-              <b>Description:</b> Description of your hot water system.
-            </div>
-            <div className="py-1">
-              <b>Hot Water Cost Current:</b> Current estimated hot water cost per year.
-            </div>
-            <div className="py-1">
-              <b>Hot Water Cost Potential:</b> Potential estimated hot water cost per year after
-            improvements are made.
-            </div>
-            <div className="py-1">
+    case "water":
+      return (
+        <div className={positionStyling}>
+          <div className={titleStyling}>Water</div>
+          <div className="py-1">
+            <b>Description:</b> Description of your hot water system.
+          </div>
+          <div className="py-1">
+            <b>Hot Water Cost Current:</b> Current estimated hot water cost per
+            year.
+          </div>
+          <div className="py-1">
+            <b>Hot Water Cost Potential:</b> Potential estimated hot water cost
+            per year after improvements are made.
+          </div>
+          <div className="py-1">
             <b>Energy Efficiency:</b> Rating from 1-5 (5 being best, 0 being
             worst).
-            </div>
-            <div className="py-1">
-              <b>Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst).
+          </div>
+          <div className="py-1">
+            <b>Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0
+            being worst).
+          </div>
+        </div>
+      );
+
+    case "heating":
+      return (
+        <div className={positionStyling}>
+          <div className={titleStyling}>Heating</div>
+          <div className="py-2">
+            <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">
+              Main Heat
             </div>
           </div>
-        );
-
-
-      case "heating":
-        return (
-          <div className={positionStyling}>
-            <div className={titleStyling}>Heating</div>
-            <div className="py-2">
-              <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">Main Heat</div>
-            </div>
-            <div className="py-1">
-              <b>Main Heat Description:</b> Description of {"property's"} main heating system.
-            </div>
-
-            <div className="py-1">
-              <b>Heating Costs Current:</b> Current estimated heating costs.
-            </div>
-
-            <div className="py-1">
-              <b>Heating Costs Potential:</b> Potential estimated heating costs once improvements are made.
-            </div>
-
-            <div className="py-1">
-              <b>Main Heat Energy Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst), for overall heating energy efficiency.
-            </div>
-
-            <div className="py-1">
-              <b>Main Heat Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst), for overall heating environmental efficiency.
-            </div>
-
-            <div className="py-2">
-              <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">Heating Control</div>
-            </div>
-
-            <div className="py-1">
-              <b>Main Heating Control Description:</b> Property's type of main heating control.
-            </div>
-
-            <div className="py-1">
-              <b>Heating Control Energy Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst), for heating control energy efficiency.
-            </div>
-
-            <div className="py-1">
-              <b>Heating Control Environmental Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst), for heating control environmental efficiency.
-            </div>
-
-            <div className="py-2">
-              <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">Fuel</div>
-            </div>
-
-            <div className="py-1">
-              <b>Main Fuel:</b> Type of fuel used to power central heating.
-            </div>
-
-            <div className="py-1">
-              <b>Main Gas Flag:</b> Whether mains gas is available. Y means that there is a gas meter or a gas-burning appliance in the dwelling.
-            </div>
-
-            <div className="py-2">
-              <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">Thermodynamics</div>
-            </div>
-
-            <div className="py-1">
-              <b>Number of Heated Rooms:</b> The number of heated rooms in the property.
-            </div>
-
-            <div className="py-1">
-              <b>Heat Loss Corridor:</b> Indicates that the flat contains a corridor through which heat is lost. Heat loss corridor, one of: no corridor, heated corridor or unheated corridor.
-            </div>
-
-            <div className="py-1">
-              <b>Unheated Corridor Length:</b> The total length of unheated corridor in the flat in m<sup>2</sup>.
-            </div>
-
-            <div className="py-2">
-              <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">Secondary Heating</div>
-            </div>
-
-            <div className="py-1">
-              <b>Secondary Heating Description:</b> Description of property's secondary heating system.
-            </div>
-
-            <div className="py-1">
-              <b>Secondary Heating Energy Efficiency:</b> Rating from 1-5 (5 being best, 0
-              being worst), for secondary heating energy efficiency.
-            </div>
-
+          <div className="py-1">
+            <b>Main Heat Description:</b> Description of {"property's"} main
+            heating system.
           </div>
-        );
+
+          <div className="py-1">
+            <b>Heating Costs Current:</b> Current estimated heating costs.
+          </div>
+
+          <div className="py-1">
+            <b>Heating Costs Potential:</b> Potential estimated heating costs
+            once improvements are made.
+          </div>
+
+          <div className="py-1">
+            <b>Main Heat Energy Efficiency:</b> Rating from 1-5 (5 being best, 0
+            being worst), for overall heating energy efficiency.
+          </div>
+
+          <div className="py-1">
+            <b>Main Heat Environmental Efficiency:</b> Rating from 1-5 (5 being
+            best, 0 being worst), for overall heating environmental efficiency.
+          </div>
+
+          <div className="py-2">
+            <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">
+              Heating Control
+            </div>
+          </div>
+
+          <div className="py-1">
+            <b>Main Heating Control Description:</b> Property's type of main
+            heating control.
+          </div>
+
+          <div className="py-1">
+            <b>Heating Control Energy Efficiency:</b> Rating from 1-5 (5 being
+            best, 0 being worst), for heating control energy efficiency.
+          </div>
+
+          <div className="py-1">
+            <b>Heating Control Environmental Efficiency:</b> Rating from 1-5 (5
+            being best, 0 being worst), for heating control environmental
+            efficiency.
+          </div>
+
+          <div className="py-2">
+            <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">
+              Fuel
+            </div>
+          </div>
+
+          <div className="py-1">
+            <b>Main Fuel:</b> Type of fuel used to power central heating.
+          </div>
+
+          <div className="py-1">
+            <b>Main Gas Flag:</b> Whether mains gas is available. Y means that
+            there is a gas meter or a gas-burning appliance in the dwelling.
+          </div>
+
+          <div className="py-2">
+            <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">
+              Thermodynamics
+            </div>
+          </div>
+
+          <div className="py-1">
+            <b>Number of Heated Rooms:</b> The number of heated rooms in the
+            property.
+          </div>
+
+          <div className="py-1">
+            <b>Heat Loss Corridor:</b> Indicates that the flat contains a
+            corridor through which heat is lost. Heat loss corridor, one of: no
+            corridor, heated corridor or unheated corridor.
+          </div>
+
+          <div className="py-1">
+            <b>Unheated Corridor Length:</b> The total length of unheated
+            corridor in the flat in m<sup>2</sup>.
+          </div>
+
+          <div className="py-2">
+            <div className="text-gray-800 border border-x-0 border-t-0 w-full font-bold">
+              Secondary Heating
+            </div>
+          </div>
+
+          <div className="py-1">
+            <b>Secondary Heating Description:</b> Description of property's
+            secondary heating system.
+          </div>
+
+          <div className="py-1">
+            <b>Secondary Heating Energy Efficiency:</b> Rating from 1-5 (5 being
+            best, 0 being worst), for secondary heating energy efficiency.
+          </div>
+        </div>
+      );
 
     default:
       return null;

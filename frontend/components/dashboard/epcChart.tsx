@@ -154,6 +154,6 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </div>
         </div>
       </div>
-  </div>
+    </div>
   );
 }

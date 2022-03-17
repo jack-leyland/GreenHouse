@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { MdOutlineSmartphone } from "react-icons/md";
-import {GiCoalWagon} from "react-icons/gi";
+import { GiCoalWagon } from "react-icons/gi";
 import { AiFillCar } from "react-icons/ai";
 import {
   Legend,
@@ -58,11 +58,19 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   ];
 
   const internationalNumberFormat = new Intl.NumberFormat("en-US");
-  const kgsOfCoal = Math.round(((data.energyConsumptionCurrent- data.energyConsumptionPotential) / 1.278) /2.204);
-  const carJourneys = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 1.78);
-  const phoneCharges = Math.round((data.energyConsumptionCurrent- data.energyConsumptionPotential) * 86.2);
+  const kgsOfCoal = Math.round(
+    (data.energyConsumptionCurrent - data.energyConsumptionPotential) /
+      1.278 /
+      2.204
+  );
+  const carJourneys = Math.round(
+    (data.energyConsumptionCurrent - data.energyConsumptionPotential) * 1.78
+  );
+  const phoneCharges = Math.round(
+    (data.energyConsumptionCurrent - data.energyConsumptionPotential) * 86.2
+  );
 
-  console.log(featureData)
+  console.log(featureData);
 
   return (
     <div className="py-2 px-1 flex h-full">
