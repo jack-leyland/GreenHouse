@@ -5,7 +5,7 @@ import {
 } from '../../types';
 import Recommendation from './recommendationCard';
 import { v4 as uuid } from 'uuid';
-import Arrow from '../../assets/arrow-left.svg';
+import idTexts from '../../idTexts.json';
 
 interface props {
   data: Array<epcRecommendationObject>;
@@ -105,7 +105,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
           )}
           {!noRecs && noCompleted && activeView == 'Completed' && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
-              {"You haven't reported any upgrades yet!"}
+              {"You haven't reported any improvements yet!"}
             </div>
           )}
           {noRecs && noCompleted && activeView == 'Completed' && (
@@ -155,17 +155,18 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             activeView == 'Neighborhood' &&
             regionRecData.map((elem) => {
               return (
-                <></>
-                // <Recommendation
-                //   averageCost={elem.averageCost}
-                //   frequency={elem.frequency}
-                //   improvementId={elem.improvementId}
-                //   // improvementIdText={elem.improvementIdText}
-                //   key={uuid()}
-                //   isMobile={isMobile}
-                //   isCompleted={false}
-                //   isLocal={true}
-                // />
+                <Recommendation
+                  averageCost={elem.averageCost}
+                  frequency={elem.frequency}
+                  improvementId={elem.improvementId}
+                  improvementIdText={
+                    (idTexts as any)[parseInt(elem.improvementId)]
+                  }
+                  key={uuid()}
+                  isMobile={isMobile}
+                  isLocal={true}
+                  setActiveView={setActiveView}
+                />
               );
             })}
         </div>

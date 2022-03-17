@@ -15,6 +15,7 @@ interface props {
   isLocal?: boolean;
   averageCost?: number;
   frequency?: number;
+  setActiveView?: any;
 }
 
 //Close form if click outside the form
@@ -47,8 +48,10 @@ export default function Recommendation({
   isCompleted,
   date,
   cost,
+  isLocal,
   averageCost,
   frequency,
+  setActiveView,
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
@@ -110,14 +113,15 @@ export default function Recommendation({
       }
       ref={wrapperRef}
     >
-      {isCompleted ? (
+      {isCompleted && !isLocal && (
         <CompletedView
           improvementIdText={improvementIdText}
           category={category}
           date={date}
           cost={cost}
         />
-      ) : (
+      )}
+      {!isCompleted && !isLocal && (
         <IncompleteView
           improvementId={improvementId}
           improvementIdText={improvementIdText}
@@ -129,6 +133,16 @@ export default function Recommendation({
           handleFormCancel={handleFormCancel}
           showForm={showForm}
           showFormHandler={showFormHandler}
+        />
+      )}
+      {isLocal && (
+        <NeighborhoodView
+          improvementIdText={improvementIdText}
+          averageCost={averageCost}
+          frequency={frequency}
+          category={category}
+          color={color}
+          setActiveView={setActiveView}
         />
       )}
     </div>
@@ -240,8 +254,8 @@ function CompletedView({
           {improvementIdText}
         </h1>
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
-          You completed this upgrade on <strong>{strippedDate}</strong>. Nice
-          work!
+          You completed this improvement on <strong>{strippedDate}</strong>.
+          Nice work!
         </h2>
         <br />
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
@@ -250,7 +264,61 @@ function CompletedView({
         <br />
         <h2 className="text-xs tracking-wide title-font mb-1 font-bold">
           This information will help us let others in your neighborhood know how
-          much they can expect their own upgrades to cost!
+          much they can expect their own improvements to cost!
+        </h2>
+      </div>
+    </div>
+  );
+}
+
+interface neighborhoodViewProps {
+  improvementIdText: any;
+  category: string;
+  averageCost?: number;
+  frequency?: number;
+  color: string | undefined;
+  setActiveView: any;
+}
+
+function NeighborhoodView({
+  improvementIdText,
+  averageCost,
+  frequency,
+  category,
+  color,
+  setActiveView,
+}: neighborhoodViewProps) {
+  return (
+    <div
+      className={
+        'rounded-lg w-full text-white flex flex-col relative overflow-hidden ' +
+        color
+      }
+    >
+      <div className="p-6 h-[40%]">
+        <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
+          {category}
+        </h2>
+        <h1 className="text-[1.5rem] pb-4 mb-4 leading-none">
+          {improvementIdText}
+        </h1>
+        <h2 className="text-sm tracking-wide title-font mb-1 font-medium">
+          <strong>{frequency}</strong> of your neighbors have reported
+          completing this upgrade.
+        </h2>
+        <br />
+        <h2 className="text-sm tracking-wide title-font mb-1 font-medium">
+          They have reported an average cost of <strong>£{averageCost}</strong>.
+        </h2>
+        <br />
+        <h2 className="text-xs tracking-wide title-font mb-1 font-medium">
+          If you have also completed this upgrade, make sure you{' '}
+          <span
+            className="text-blue-400 underline cursor-pointer"
+            onClick={() => setActiveView('Outstanding')}
+          >
+            let us know!
+          </span>
         </h2>
       </div>
     </div>

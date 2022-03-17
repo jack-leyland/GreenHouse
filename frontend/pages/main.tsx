@@ -44,6 +44,8 @@ const Main = () => {
     }
   }, []);
 
+  console.log(queryParam);
+
   useEffect(() => {
     if (data) {
       let packagedData = packageDashboardDataByComponent(data.certificate);
