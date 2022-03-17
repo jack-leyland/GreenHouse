@@ -6,21 +6,12 @@ import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
 import Link from "next/link";
 
-const navigation = [
-  { name: "Dashboard", href: "/main", icon: BsFillHouseFill, current: true },
-  {
-    name: "Recommendations",
-    href: "/recommendations",
-    icon: BsWrench,
-    current: false,
-  },
-];
-
 interface props {
   children?: React.ReactChild | React.ReactChildren;
   pageTitle: string;
   subTitle: string;
   setModalContent: any;
+  currentPage: string;
 }
 
 function classNames(...classes: any) {
@@ -32,19 +23,26 @@ export default function DashboardWrapper({
   pageTitle,
   subTitle,
   setModalContent,
+  currentPage,
 }: props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const navigation = [
+    {
+      name: "Dashboard",
+      href: "/main",
+      icon: BsFillHouseFill,
+      current: currentPage == "Dashboard",
+    },
+    {
+      name: "Recommendations",
+      href: "/recommendations",
+      icon: BsWrench,
+      current: currentPage == "Recommendations",
+    },
+  ];
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           {/* @ts-ignore */}
