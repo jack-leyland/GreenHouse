@@ -44,6 +44,8 @@ const Main = () => {
     }
   }, []);
 
+  console.log(queryParam);
+
   useEffect(() => {
     if (data) {
       let packagedData = packageDashboardDataByComponent(data.certificate);
@@ -87,6 +89,7 @@ const Main = () => {
       pageTitle="Dashboard"
       subTitle={fullAddressString}
       setModalContent={setModalContent}
+      currentPage="Dashboard"
     >
       {dashboardData ? (
         <div className="h-screen text-gray-600 py-6">
@@ -140,8 +143,9 @@ const Main = () => {
               style={"lg:w-1/2 w-full border h-full lg:h-auto"}
               disableHoverAnimation={true}
               showShadow={false}
+              innerStyle="inline"
             >
-              <div className="flex justify-center h-96">
+              <div className="flex justify-center h-full">
                 <House
                   data={dashboardData.House}
                   analytics={analyticsData.house}
@@ -166,8 +170,8 @@ const Main = () => {
         <>
           {/*Loading Display*/}
           {loading ? (
-            <div className="w-full flex flex-col justify-center items-center bg-gray-100">
-              <h1 className="animate-fade text-3xl text-gray-800 italic pb-2">
+            <div className="relative top-[30vh] w-full flex flex-col justify-center items-center bg-gray-100">
+              <h1 className="animate-fade text-3xl text-gray-700 italic pb-2">
                 Loading...
               </h1>
               <Lottie

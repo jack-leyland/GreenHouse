@@ -1,12 +1,4 @@
-from graphene import (
-    ObjectType,
-    String,
-    List,
-    Int,
-    Float,
-    Date,
-    DateTime,
-)
+from graphene import ObjectType, String, List, Int, Float, Date, DateTime, Boolean
 
 
 class Certificate(ObjectType):
@@ -173,6 +165,10 @@ class Recommendation(ObjectType):
     improvement_descr_text = String()
     improvement_id = String()
     improvement_id_text = String()
+    completed = Boolean()
+    cost = Float()
+    date = String()
+    postcode = String()
 
 
 class Timeseries(ObjectType):
@@ -202,3 +198,9 @@ class Improvement(ObjectType):
     date = String()
     improvement_id = String()
     postcode = String()
+
+
+class LocalImprovement(ObjectType):
+    improvement_id = String()
+    frequency = Float()
+    average_cost = Float()

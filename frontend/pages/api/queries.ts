@@ -112,13 +112,20 @@ export const GET_CERTIFICATES = gql`
 `;
 
 export const GET_REC_DATA = gql`
-  query get_data($queryParam: String!) {
+  query get_data($queryParam: String!, $queryPostcode: String!) {
     recommendations(lmk: $queryParam) {
-      lmkKey
-      indicativeCost
-      improvementIdText
-      improvementItem
+      date
+      postcode
       improvementId
+      improvementIdText
+      cost
+      completed
+      indicativeCost
+    }
+    localRecommendations(postcode: $queryPostcode) {
+      improvementId
+      averageCost
+      frequency
     }
     certificate(lmk: $queryParam) {
       address
@@ -133,3 +140,4 @@ export const GET_REC_DATA = gql`
     }
   }
 `;
+

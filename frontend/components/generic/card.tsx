@@ -11,6 +11,7 @@ interface props {
     w: string;
     h: string;
   };
+  innerStyle?: string;
 }
 
 export default function Card({
@@ -21,6 +22,7 @@ export default function Card({
   disableHoverAnimation = false,
   showShadow = true,
   minDims,
+  innerStyle
 }: props) {
   const hover = " hover:scale-105 hover:cursor-pointer";
   const shadow = " shadow-lg";
@@ -41,7 +43,7 @@ export default function Card({
       onMouseLeave={() => (onHover ? onHover(false) : null)}
       onClick={() => (onClick ? onClick(true) : null)}
     >
-      <div className="p-3 text-xs h-auto max-h-96 min-w-full">{children}</div>
+      <div className={"p-3 text-xs h-auto max-h-96 min-w-full " + innerStyle}>{children}</div>
     </div>
   );
 }

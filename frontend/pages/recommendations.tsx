@@ -1,57 +1,42 @@
 import { useQuery } from "@apollo/client";
 import { ReactElement, useEffect, useState } from "react";
 import Layout from "../components/generic/layout";
-import PageTitle from "../components/generic/pageTitle";
-import Sidebar from "../components/sidebar";
 import RecCostSummary from "../components/recommendations/recCostSummary";
 import RecCardGallery from "../components/recommendations/recsCardGallery";
 import Modal from "../components/generic/modal";
 import ExtraHouseInfo from "../components/dashboard/extraHouseInfo";
 import { useAppContext } from "../context/state";
-import { epcCertificateObject, epcRecommendationObject } from "../types";
+import {
+  epcCertificateObject,
+  epcRecommendationObject,
+  localRecommendationObject,
+} from "../types";
 import { GET_REC_DATA } from "./api/queries";
 import loadingJson from "../assets/animations/animation/loading.json";
 import errorJson from "../assets/animations/animation/error.json";
 import Lottie from "react-lottie-player";
 import DashboardWrapper from "../components/sidebarNew";
 
-function paginateRecommendations(
-  recs: Array<epcRecommendationObject>
-): Array<Array<epcRecommendationObject>> {
-  let recsPerPage = 3;
-  let paginated: Array<Array<epcRecommendationObject>> = [[]];
-
-  recs.forEach((elem) => {
-    if (paginated[paginated.length - 1].length < recsPerPage) {
-      if (elem.improvementId) {
-        paginated[paginated.length - 1].push(elem);
-      }
-    } else {
-      if (elem.improvementId) {
-        paginated.push([]);
-        paginated[paginated.length - 1].push(elem);
-      }
-    }
-  });
-  return paginated;
-}
-
 const Recommendations = () => {
   const GlobalContext = useAppContext();
+  const [screenWidth, setScreenWidth] = useState<number>(0);
   const [queryParam, setQueryParam] = useState<string | null>(null);
   const [isQueryError, setIsQueryError] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [recData, setRecData] = useState<Array<Array<epcRecommendationObject>>>(
-    [[]]
-  );
+  const [regionRecData, setRegionRecData] = useState<
+    Array<localRecommendationObject>
+  >([]);
+  const [recData, setRecData] = useState<Array<epcRecommendationObject>>([]);
   const [certificateData, setCertificateData] = useState<any>(null);
   const [address, setAddress] = useState<string>("");
   const [extraHouseInfo, setExtraHouseInfo] =
     useState<epcCertificateObject["ExtraInfo"]>();
+  const [queryPostcode, setQueryPostcode] =
+    useState<epcCertificateObject["ExtraInfo"]["postcode"]>();
 
-  const { loading, error, data } = useQuery(GET_REC_DATA, {
-    skip: !queryParam || isQueryError,
-    variables: { queryParam },
+  const { loading, error, data, refetch } = useQuery(GET_REC_DATA, {
+    skip: !queryParam || !queryPostcode || isQueryError,
+    variables: { queryParam, queryPostcode },
   });
 
   // Use context if there, if not get from cache. Setting query param triggers query. This happens on client side.
@@ -64,14 +49,18 @@ const Recommendations = () => {
 
     if (GlobalContext.extraHouseInfo) {
       setExtraHouseInfo(GlobalContext.extraHouseInfo);
+      setQueryPostcode(GlobalContext.extraHouseInfo.postcode);
     } else {
-      setExtraHouseInfo(JSON.parse(localStorage.extraHouseInfo));
+      let parsed = JSON.parse(localStorage.extraHouseInfo);
+      setExtraHouseInfo(parsed);
+      setQueryPostcode(parsed.postcode);
     }
   }, [GlobalContext.activeLmk, GlobalContext.extraHouseInfo]);
 
   useEffect(() => {
     if (data) {
-      setRecData(paginateRecommendations(data.recommendations));
+      setRegionRecData(data.localRecommendations);
+      setRecData(data.recommendations);
       setCertificateData(data.certificate);
     }
   }, [data]);
@@ -94,28 +83,45 @@ const Recommendations = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    const handleWindowResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  // Set initial screen size on client size component mount
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, []);
+  let mobileBreakpoint = 500;
+
   return (
     <>
       <DashboardWrapper
         pageTitle="Dashboard"
         subTitle={address}
         setModalContent={setShowModal}
+        currentPage="Recommendations"
       >
         {recData && certificateData ? (
-          <div className="flex flex-col bg-gray-100 text-gray-500">
+          <>
             <RecCostSummary data={certificateData} />
-            <RecCardGallery data={recData} />
-            {showModal && extraHouseInfo ? (
+            <RecCardGallery
+              data={recData}
+              regionData={regionRecData}
+              isMobile={screenWidth <= mobileBreakpoint}
+            />
+            {showModal && extraHouseInfo && (
               <Modal hideModal={() => setShowModal(false)}>
                 <ExtraHouseInfo data={extraHouseInfo} />
               </Modal>
-            ) : null}
-          </div>
+            )}
+          </>
         ) : (
           <>
             {/*Loading Display*/}
             {loading ? (
-              <div className="w-full flex flex-col justify-center items-center bg-gray-100">
+              <div className="relative top-[30vh] w-full h-full flex flex-col justify-center items-center bg-gray-100">
                 <h1 className="animate-fade text-3xl italic pb-2">
                   Loading...
                 </h1>
@@ -132,8 +138,7 @@ const Recommendations = () => {
                 {isQueryError && !data ? (
                   <div className="w-full flex flex-col justify-center items-center bg-gray-100">
                     <h1 className="animate-fade text-3xl font-bold pb-2">
-                      Oops, there was an error, try again later... [Dev Note:
-                      Query Error]
+                      Oops, there was an error, try again later...
                     </h1>
                     <Lottie
                       animationData={errorJson}
