@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { epcRecommendationObject } from '../../types';
-import { useAppContext } from '../../context/state';
-import { HeatingCategories } from '../../types';
-import RecForm from './recForm';
+import React, { useEffect, useState, useRef } from "react";
+import { epcRecommendationObject } from "../../types";
+import { useAppContext } from "../../context/state";
+import { HeatingCategories } from "../../types";
+import RecForm from "./recForm";
 
 interface props {
-  improvementId: epcRecommendationObject['improvementId'];
-  improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost?: epcRecommendationObject['indicativeCost'];
-  date?: epcRecommendationObject['date'];
-  cost?: epcRecommendationObject['cost'];
+  improvementId: epcRecommendationObject["improvementId"];
+  improvementIdText: epcRecommendationObject["improvementIdText"];
+  indicativeCost?: epcRecommendationObject["indicativeCost"];
+  date?: epcRecommendationObject["date"];
+  cost?: epcRecommendationObject["cost"];
   isMobile: boolean;
   isCompleted?: boolean;
   isLocal?: boolean;
@@ -32,10 +32,10 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
     }
 
     // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside as any);
+    document.addEventListener("mousedown", handleClickOutside as any);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside as any);
+      document.removeEventListener("mousedown", handleClickOutside as any);
     };
   }, [ref]);
 }
@@ -55,9 +55,9 @@ export default function Recommendation({
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
-  const [lmk, setLmk] = useState<string>('');
+  const [lmk, setLmk] = useState<string>("");
   const GlobalContext = useAppContext();
-  const [postcode, setPostcode] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>("");
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -83,17 +83,17 @@ export default function Recommendation({
   let category = HeatingCategories[improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
-    case 'Heating':
-      color = 'bg-red-500';
+    case "Heating":
+      color = "bg-red-500";
       break;
-    case 'Water':
-      color = 'bg-blue-500';
+    case "Water":
+      color = "bg-blue-500";
       break;
-    case 'Lighting':
-      color = 'bg-yellow-500';
+    case "Lighting":
+      color = "bg-yellow-500";
       break;
-    case 'Other':
-      color = 'bg-slate-500';
+    case "Other":
+      color = "bg-slate-500";
       break;
   }
 
@@ -108,8 +108,8 @@ export default function Recommendation({
   return (
     <div
       className={
-        'flex flex-row justify-center h-[400px] w-[300px] ' +
-        (isMobile ? 'mb-4' : 'mx-5 my-4')
+        "flex flex-row justify-center h-[400px] w-[300px] " +
+        (isMobile ? "mb-4" : "mx-5 my-4")
       }
       ref={wrapperRef}
     >
@@ -150,9 +150,9 @@ export default function Recommendation({
 }
 
 interface incompleteViewProps {
-  improvementId: epcRecommendationObject['improvementId'];
-  improvementIdText: epcRecommendationObject['improvementIdText'];
-  indicativeCost?: epcRecommendationObject['indicativeCost'];
+  improvementId: epcRecommendationObject["improvementId"];
+  improvementIdText: epcRecommendationObject["improvementIdText"];
+  indicativeCost?: epcRecommendationObject["indicativeCost"];
   lmk: string;
   showForm: boolean;
   postcode: string;
@@ -188,7 +188,7 @@ function IncompleteView({
       ) : (
         <div
           className={
-            'rounded-lg w-full text-white flex flex-col relative overflow-hidden ' +
+            "rounded-lg w-full text-white flex flex-col relative overflow-hidden " +
             color
           }
         >
@@ -213,11 +213,11 @@ function IncompleteView({
             <button
               onClick={showFormHandler}
               className={
-                'flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold ' +
-                (showForm ? 'bg-red-200' : 'bg-white')
+                "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+                (showForm ? "bg-red-200" : "bg-white")
               }
             >
-              {showForm ? 'Cancel' : "I've done this!"}
+              {showForm ? "Cancel" : "I've done this!"}
             </button>
           </div>
         </div>
@@ -227,10 +227,10 @@ function IncompleteView({
 }
 
 interface completedViewProps {
-  improvementIdText: epcRecommendationObject['improvementIdText'];
+  improvementIdText: epcRecommendationObject["improvementIdText"];
   category: string;
-  date?: epcRecommendationObject['date'];
-  cost?: epcRecommendationObject['cost'];
+  date?: epcRecommendationObject["date"];
+  cost?: epcRecommendationObject["cost"];
 }
 
 function CompletedView({
@@ -239,11 +239,11 @@ function CompletedView({
   cost,
   category,
 }: completedViewProps) {
-  let strippedDate = date?.replace(/"/g, '');
+  let strippedDate = date?.replace(/"/g, "");
   return (
     <div
       className={
-        'rounded-lg w-full text-white flex flex-col relative overflow-hidden bg-primary opacity-80'
+        "rounded-lg w-full text-white flex flex-col relative overflow-hidden bg-primary opacity-80"
       }
     >
       <div className="p-6 h-[40%]">
@@ -291,7 +291,7 @@ function NeighborhoodView({
   return (
     <div
       className={
-        'rounded-lg w-full text-white flex flex-col relative overflow-hidden ' +
+        "rounded-lg w-full text-white flex flex-col relative overflow-hidden " +
         color
       }
     >
@@ -312,10 +312,10 @@ function NeighborhoodView({
         </h2>
         <br />
         <h2 className="text-xs tracking-wide title-font mb-1 font-medium">
-          If you have also completed this upgrade, make sure you{' '}
+          If you have also completed this upgrade, make sure you{" "}
           <span
             className="text-blue-400 underline cursor-pointer"
-            onClick={() => setActiveView('Outstanding')}
+            onClick={() => setActiveView("Outstanding")}
           >
             let us know!
           </span>

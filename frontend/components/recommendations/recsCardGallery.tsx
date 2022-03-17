@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   epcRecommendationObject,
   localRecommendationObject,
-} from '../../types';
-import Recommendation from './recommendationCard';
-import { v4 as uuid } from 'uuid';
-import idTexts from '../../idTexts.json';
+} from "../../types";
+import Recommendation from "./recommendationCard";
+import { v4 as uuid } from "uuid";
+import idTexts from "../../idTexts.json";
 
 interface props {
   data: Array<epcRecommendationObject>;
@@ -14,7 +14,7 @@ interface props {
 }
 
 export default function RecCardGallery({ data, isMobile, regionData }: props) {
-  const [activeView, setActiveView] = useState<string>('Outstanding');
+  const [activeView, setActiveView] = useState<string>("Outstanding");
   const [recData, setRecData] = useState<Array<epcRecommendationObject>>(data);
   const [regionRecData, setRegionRecData] =
     useState<Array<localRecommendationObject>>(regionData);
@@ -44,7 +44,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
   // Could cause weird behavior if I'm wrong about how
   // epc sends these back
   function formatCostString(str: string): string {
-    let formatted = str.replace(/[?]/g, '£');
+    let formatted = str.replace(/[?]/g, "£");
     return formatted;
   }
   return (
@@ -54,39 +54,39 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
           <div className="w-[100%] h-[100%] flex justify-center items-center">
             <span
               className={
-                'h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 ' +
-                (activeView == 'Outstanding'
-                  ? 'bg-primary font-medium'
-                  : 'hover:bg-primary')
+                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                (activeView == "Outstanding"
+                  ? "bg-primary font-medium"
+                  : "hover:bg-primary")
               }
               onClick={() => {
-                setActiveView('Outstanding');
+                setActiveView("Outstanding");
               }}
             >
               Outstanding
             </span>
             <span
               className={
-                'h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 ' +
-                (activeView == 'Completed'
-                  ? 'bg-primary font-medium'
-                  : 'hover:bg-primary')
+                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                (activeView == "Completed"
+                  ? "bg-primary font-medium"
+                  : "hover:bg-primary")
               }
               onClick={() => {
-                setActiveView('Completed');
+                setActiveView("Completed");
               }}
             >
               Completed
             </span>
             <span
               className={
-                'h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 ' +
-                (activeView == 'Neighborhood'
-                  ? 'bg-primary font-medium'
-                  : 'hover:bg-primary')
+                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                (activeView == "Neighborhood"
+                  ? "bg-primary font-medium"
+                  : "hover:bg-primary")
               }
               onClick={() => {
-                setActiveView('Neighborhood');
+                setActiveView("Neighborhood");
               }}
             >
               Neighborhood Insights
@@ -95,25 +95,25 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
         </div>
       </div>
       <div className="flex justify-center animate-fade">
-        {' '}
+        {" "}
         <div className="w-[95%] flex flex-wrap justify-center items-center mt-2 sm:flex-row flex-col">
           {/* This is mildy hacky, might change later */}
-          {noRecs && activeView == 'Outstanding' && (
+          {noRecs && activeView == "Outstanding" && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               There are no available recommendations for this property!
             </div>
           )}
-          {!noRecs && noCompleted && activeView == 'Completed' && (
+          {!noRecs && noCompleted && activeView == "Completed" && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               {"You haven't reported any improvements yet!"}
             </div>
           )}
-          {noRecs && noCompleted && activeView == 'Completed' && (
+          {noRecs && noCompleted && activeView == "Completed" && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               There are no available recommendations for this property!
             </div>
           )}
-          {noRegionRecs && activeView == 'Neighborhood' && (
+          {noRegionRecs && activeView == "Neighborhood" && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               {
                 "Unfortunately, we haven't yet collected any data on improvements made in your neighborhood."
@@ -121,7 +121,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             </div>
           )}
           {recData.map((elem) => {
-            if (activeView == 'Outstanding') {
+            if (activeView == "Outstanding") {
               if (!elem.completed) {
                 return (
                   <Recommendation
@@ -134,7 +134,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
                   />
                 );
               }
-            } else if (activeView == 'Completed') {
+            } else if (activeView == "Completed") {
               if (elem.completed) {
                 return (
                   <Recommendation
@@ -152,7 +152,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             }
           })}
           {regionRecData &&
-            activeView == 'Neighborhood' &&
+            activeView == "Neighborhood" &&
             regionRecData.map((elem) => {
               return (
                 <Recommendation
