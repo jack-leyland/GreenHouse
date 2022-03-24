@@ -13,7 +13,7 @@ ENV DEBUG 1
 
 # set google credentials
 COPY add-google-credentials.sh /add-google-credentials.sh
-ENTRYPOINT ["sh", "/app/add-google-credentials.sh"]
+# ENTRYPOINT ["sh", "/app/add-google-credentials.sh"]
 
 # install dependencies
 COPY ./requirements.txt .
