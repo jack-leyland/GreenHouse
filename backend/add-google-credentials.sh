@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "Generating google_credentials.json from Heroku environment variable"
+echo "Generating google-credentials.json from Heroku environment variable"
 
-echo $GOOGLE_CREDENTIALS > google_credentials.json
+echo $GOOGLE_CREDENTIALS > google-credentials.json
 
 exec "$@"
 
