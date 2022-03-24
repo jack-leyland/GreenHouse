@@ -34,8 +34,9 @@ EPC_API_KEY = os.environ.get("EPC_API_KEY")
 
 ENV = os.environ.get("ENV")
 
-if ENV == "DEV":
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
+# if ENV == "DEV":
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/google_credentials.json"
 
 headers = {
     "Accept": "application/json",
