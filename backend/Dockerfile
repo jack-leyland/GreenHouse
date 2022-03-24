@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 ENV DEBUG 1
 
 # set google credentials
-COPY add-google-credentials.sh /app/add-google-credentials.sh
+COPY add-google-credentials.sh /add-google-credentials.sh
 ENTRYPOINT ["sh", "/app/add-google-credentials.sh"]
 
 # install dependencies
