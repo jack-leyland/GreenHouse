@@ -1,4 +1,4 @@
-#!/bin/sh
+# !/bin/sh
 
 echo "Generating google-credentials.json from Heroku environment variable"
 
@@ -15,4 +15,4 @@ exec "$@"
 # This is important in Docker containers for signals to be proxied correctly, 
 # otherwise we might end up with data loss or orphan processes. 
 
-#https://yeti.co/blog/Authorizing-Google-Cloud-Platform/
+# https://yeti.co/blog/Authorizing-Google-Cloud-Platform/
