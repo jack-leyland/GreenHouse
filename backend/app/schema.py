@@ -197,3 +197,4 @@ class Query(ObjectType):
 
 
 schema = Schema(query=Query, mutation=Mutation)
+
