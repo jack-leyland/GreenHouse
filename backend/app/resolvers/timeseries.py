@@ -54,5 +54,4 @@ def create_timeseries(data):
     results.average_annual_change_windows_environmental_eff = averages_dict[
         "WINDOWS_ENV_EFF"
     ]
-    print(results)
     return results
