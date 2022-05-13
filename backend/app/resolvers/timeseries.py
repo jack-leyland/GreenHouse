@@ -1,14 +1,17 @@
 from numpy import average
 from app.types import Timeseries
-from scripts.analysis import timeseries_data, convert_to_rating, timeseries_metrics
+from scripts.analysis import av_annual_rating_data, timeseries_data, convert_to_rating, timeseries_metrics
 
 
 def create_timeseries(data):
     # Get correct data and split into x
-    convert_to_rating(data, timeseries_metrics) #Converts categorical to numeric
-    averages_dict = timeseries_data(data)
+    convert_to_rating(data, timeseries_metrics) # Converts categorical to numeric
+    averages_dict = av_annual_rating_data(data)
     
+    # Create Timeseries object instance
     results = Timeseries()
+
+    # Assign average annual change p.y. from epcs with 2+ submissions per property 
     results.average_annual_change_lighting_energy_eff = averages_dict["LIGHTING_ENERGY_EFF"]
     results.average_annual_change_lighting_environmental_eff = averages_dict["LIGHTING_ENV_EFF"]
     results.average_annual_change_walls_energy_eff = averages_dict["WALLS_ENERGY_EFF"]
@@ -27,5 +30,8 @@ def create_timeseries(data):
     results.average_annual_change_second_heating_environmental_eff = averages_dict["SHEATING_ENV_EFF"]
     results.average_annual_change_windows_energy_eff = averages_dict["WINDOWS_ENERGY_EFF"]
     results.average_annual_change_windows_environmental_eff = averages_dict["WINDOWS_ENV_EFF"]
+
+    # Assign general average per year
+    timeseries_data(data)
 
     return results
