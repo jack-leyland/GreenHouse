@@ -1,37 +1,43 @@
-import React from 'react';
-import { useState } from 'react';
-import Card from '../generic/card';
-import { GiWindow, GiWaterDrop, GiFireplace } from 'react-icons/gi';
-import { BsLightbulb } from 'react-icons/bs';
-import FeatureCard from './featureCard';
-import type { epcCertificateObject } from '../../types';
+import React, { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
+import Card from "../generic/card";
+import { GiWindow, GiWaterDrop, GiFireplace } from "react-icons/gi";
+import { BsLightbulb } from "react-icons/bs";
+import FeatureCard from "./featureCard";
+import type {
+  epcCertificateObject,
+  packagedAnalyticsObject,
+} from "../../types";
 
 interface props {
-  data: epcCertificateObject['House'];
+  data: epcCertificateObject["House"];
+  analytics: packagedAnalyticsObject["house"];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function House({ data }: props) {
-  const [sidePanelType, setSidePanelType] = useState<string>('');
+export default function House({ data, analytics, setModalHandler }: props) {
+  const [sidePanelType, setSidePanelType] = useState<string>("");
 
   return (
-    <div className="flex flex-col w-full h-full px-6 gap-6 pb-6 relative">
-      <div className="flex justify-center w-full ">
-        <div className="grid grid-cols-6 grid-rows-7 w-full gap-2 w-2/3">
+    <div className="flex flex-col items-center w-full px-6 py-4 gap-6 pb-6 relative h-auto">
+      <div className="flex justify-center w-full">
+        {/* This max px is set for the house to stop it growing too wide on larger screen, so don't change it, looking at you Jarryd */}
+        <div className="grid grid-cols-6 grid-rows-7 gap-2 w-2/3 h-2/5 max-w-[400px]">
           {/*Roof*/}
           <div
             className="house-card-roof col-start-1 col-end-7 row-start-0 row-end-0 roof animate-fade hover:scale-105 hover:cursor-pointer rounded-lg"
             onClick={() => {
-              setSidePanelType('Roof');
+              setSidePanelType("Roof");
             }}
           ></div>
 
           {/*Walls*/}
           <Card
             style={
-              'col-start-1 col-end-2 row-start-2 row-end-7 bg-stone-200 wall'
+              "col-start-1 col-end-2 row-start-2 row-end-7 bg-stone-200 wall"
             }
             onClick={() => {
-              setSidePanelType('Walls');
+              setSidePanelType("Walls");
             }}
             disableHoverAnimation={false}
             showShadow={true}
@@ -39,34 +45,34 @@ export default function House({ data }: props) {
 
           <Card
             style={
-              'col-start-6 col-end-7 row-start-2 row-end-7 bg-stone-200 wall'
+              "col-start-6 col-end-7 row-start-2 row-end-7 bg-stone-200 wall"
             }
             onClick={() => {
-              setSidePanelType('Walls');
+              setSidePanelType("Walls");
             }}
             disableHoverAnimation={false}
             showShadow={true}
           ></Card>
 
           {/*Floor*/}
-          <div className={'col-start-2 col-end-6 row-start-6 flex items-end'}>
+          <div className={"col-start-2 col-end-6 row-start-6 flex items-end"}>
             <Card
-              style={'bg-[#c3a590] rounded-none floor'}
+              style={"bg-[#c3a590] rounded-none floor"}
               disableHoverAnimation={false}
               showShadow={true}
               onClick={() => {
-                setSidePanelType('Floor');
+                setSidePanelType("Floor");
               }}
             ></Card>
           </div>
 
           {/*Inner Cards*/}
           <Card
-            style={'col-start-2 col-end-4 row-start-2 row-end-4'}
+            style={"col-start-2 col-end-4 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
-              setSidePanelType('Windows');
+              setSidePanelType("Windows");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -75,11 +81,11 @@ export default function House({ data }: props) {
           </Card>
 
           <Card
-            style={'col-start-4 col-end-6 row-start-2 row-end-4'}
+            style={"col-start-4 col-end-6 row-start-2 row-end-4 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
-              setSidePanelType('Water');
+              setSidePanelType("Water");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -88,11 +94,11 @@ export default function House({ data }: props) {
           </Card>
 
           <Card
-            style={'col-start-2 col-end-4 row-start-4 row-end-6'}
+            style={"col-start-2 col-end-4 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
-              setSidePanelType('Heating');
+              setSidePanelType("Heating");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -101,11 +107,11 @@ export default function House({ data }: props) {
           </Card>
 
           <Card
-            style={'col-start-4 col-end-6 row-start-4 row-end-6'}
+            style={"col-start-4 col-end-6 row-start-4 row-end-6 border"}
             disableHoverAnimation={false}
-            showShadow={true}
+            showShadow={false}
             onClick={() => {
-              setSidePanelType('Lighting');
+              setSidePanelType("Lighting");
             }}
           >
             <div className="flex justify-center h-full items-center">
@@ -115,9 +121,14 @@ export default function House({ data }: props) {
         </div>
       </div>
 
-      <div className="w-full h-full relative">
-        <div className="w-full h-full absolute">
-          <FeatureCard data={data} type={sidePanelType} />
+      <div className="w-full">
+        <div className="w-full h-full">
+          <FeatureCard
+            data={data}
+            type={sidePanelType}
+            analytics={analytics}
+            setModalHandler={setModalHandler}
+          />
         </div>
       </div>
     </div>

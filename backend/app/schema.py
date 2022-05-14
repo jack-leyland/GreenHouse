@@ -1,35 +1,28 @@
-from graphene import (
-    ObjectType,
-    String,
-    Schema,
-    Field,
-    List,
-    Mutation,
-    Float,
-    Boolean,
-)
-import requests
-import environ
 import os
+
+import environ
 import pandas as pd
+import requests
 
 from google.cloud import bigquery
+from graphene import Boolean, Field, Float, List, Mutation, ObjectType, Schema, String
+from graphene_django import DjangoObjectType
 
-from app.types import (
-    Certificate,
-    Analytics,
-    Address,
-    Timeseries,
-    Improvement,
-    Recommendation,
-)
-
-from app.resolvers.analytics import create_analytics
+from app.models import CompletedRecommendation
 from app.resolvers.addresses import create_addresses
+from app.resolvers.analytics import create_analytics
 from app.resolvers.certificates import create_certificate
 from app.resolvers.recommendations import create_recommendations
 from app.resolvers.timeseries import create_timeseries
-from app.models import CompletedRecommendation
+from app.types import (
+    Address,
+    Analytics,
+    Certificate,
+    Improvement,
+    Recommendation,
+    Timeseries,
+    LocalImprovement,
+)
 
 # Set the project base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +31,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 EPC_API_KEY = os.environ.get("EPC_API_KEY")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
+
+ENV = os.environ.get("ENV")
+
+if ENV == "DEV":
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
 
 headers = {
     "Accept": "application/json",
@@ -47,23 +44,33 @@ headers = {
 
 payload = {}
 
+
 class AddImprovement(Mutation):
     class Arguments:
         cost = Float()
         date = String()
         lmk_key = String()
         improvement_id = String()
+        postcode = String()
 
     ok = Boolean()
     improvement = Field(lambda: Improvement)
 
-    def mutate(root, info, cost, date, lmk_key, improvement_id):
-        print(cost, date, lmk_key, improvement_id)
+    def mutate(root, info, cost, date, lmk_key, improvement_id, postcode):
+        print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+            cost=cost,
+            date=date,
+            lmk_key=lmk_key,
+            improvement_id=improvement_id,
+            postcode=postcode,
         )
         db_improvement = CompletedRecommendation(
-            cost=cost, date=date, lmk_key=lmk_key, improvement_id=improvement_id
+            cost=cost,
+            date=date,
+            lmk_key=lmk_key,
+            improvement_id=improvement_id,
+            postcode=postcode,
         )
         db_improvement.save()
         ok = True
@@ -75,12 +82,21 @@ class Mutation(ObjectType):
     add_improvement = AddImprovement.Field()
 
 
+class CompletedRecommendationType(DjangoObjectType):
+    class Meta:
+        model = CompletedRecommendation
+        fields = ("lmk_key", "improvement_id", "date", "cost", "postcode")
+
+
 class Query(ObjectType):
     address = Field(List(Address), postcode=String(default_value="N/A"))
     recommendations = Field(List(Recommendation), lmk=String(default_value="N/A"))
     analytics = Field(Analytics, lmk=String(default_value="N/A"))
     certificate = Field(Certificate, lmk=String(default_value="N/A"))
     big_query = Field(Timeseries)
+    local_recommendations = Field(
+        List(LocalImprovement), postcode=String(default_value="N/A")
+    )
 
     def resolve_analytics(root, info, lmk):
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
@@ -129,13 +145,15 @@ class Query(ObjectType):
         if not data:
             return {"Error": "Invalid LMK key"}
 
-        return create_recommendations(data)
+        completed_recs = CompletedRecommendation.objects.filter(lmk_key=lmk)
+
+        return create_recommendations(data, completed_recs)
 
     def resolve_big_query(root, info):
         client = bigquery.Client()
 
         query = """
-            SELECT * 
+            SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`
         """
 
@@ -150,6 +168,33 @@ class Query(ObjectType):
             )
         )
         return create_timeseries(local_df)
+
+    def resolve_local_recommendations(root, info, postcode):
+        area = postcode[:3]
+
+        if len(postcode) == 7:
+            area = postcode[:4]
+
+        completed_recs = CompletedRecommendation.objects.filter(
+            postcode__startswith=area
+        )
+        costs = {}
+
+        for rec in completed_recs:
+            if rec.improvement_id in costs:
+                costs[rec.improvement_id].append(rec.cost)
+            else:
+                costs[rec.improvement_id] = [rec.cost]
+
+        results = []
+        for id in costs:
+            result = LocalImprovement()
+            result.improvement_id = id
+            result.frequency = len(costs[id])
+            result.average_cost = sum(costs[id]) / result.frequency
+            results.append(result)
+
+        return results
 
 
 schema = Schema(query=Query, mutation=Mutation)

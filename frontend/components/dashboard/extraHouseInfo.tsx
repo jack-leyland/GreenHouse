@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { epcCertificateObject } from '../../types';
+import React, { useState, useEffect, useRef } from "react";
+import { epcCertificateObject } from "../../types";
 
 type renderConditionObject = {
   energyTariff: boolean;
@@ -9,7 +9,7 @@ type renderConditionObject = {
 };
 
 interface props {
-  data: epcCertificateObject['ExtraInfo'];
+  data: epcCertificateObject["ExtraInfo"];
 }
 
 export default function ExtraHouseInfo({ data }: props) {
@@ -25,7 +25,7 @@ export default function ExtraHouseInfo({ data }: props) {
       flatTopStorey: false,
     };
     if (data.flatStoreyCount) tempRenderConditions.flatStoreyCount = true;
-    if (data.energyTariff && data.energyTariff.toLowerCase() != 'unknown')
+    if (data.energyTariff && data.energyTariff.toLowerCase() != "unknown")
       tempRenderConditions.energyTariff = true;
     if (
       data.floorLevel &&
@@ -36,28 +36,30 @@ export default function ExtraHouseInfo({ data }: props) {
     }
     if (
       data.flatTopStorey &&
-      (data.flatTopStorey.toLowerCase() == 'n' ||
-        data.flatTopStorey.toLowerCase() == 'y')
+      (data.flatTopStorey.toLowerCase() == "n" ||
+        data.flatTopStorey.toLowerCase() == "y")
     ) {
       tempRenderConditions.flatTopStorey = true;
     }
     setRenderConditions(tempRenderConditions);
   }, [data]);
 
-  let divBaseStyle = 'mr-2 inline-block py-2';
-  let spanDarkLabel = 'text-zinc-800 font-bold';
+  let divBaseStyle = "mr-2 inline-block py-2 text-gray-600";
+  let spanDarkLabel = "text-gray-600 font-bold";
 
   //Potentially clean this up a tad, is a bit confusing atm
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col p-2">
       <div className={divBaseStyle}>
-        {' '}
+        <div className="font-bold text-lg pt-2 mb-2 w-full border border-x-0 border-t-0 text-gray-900">
+          Additional Information
+        </div>{" "}
         <span className={spanDarkLabel}>Last Inspection Date: </span>
         {data.inspectionDate}
       </div>
 
       <div className={divBaseStyle}>
-        {' '}
+        {" "}
         <span className={spanDarkLabel}>Property Type: </span>
         {data.propertyType}
       </div>
@@ -78,8 +80,8 @@ export default function ExtraHouseInfo({ data }: props) {
       </div>
 
       <div className={divBaseStyle}>
-        <span className={spanDarkLabel}>Energy Tariff:</span>{' '}
-        {renderConditions?.energyTariff ? data.energyTariff : 'Not available'}
+        <span className={spanDarkLabel}>Energy Tariff:</span>{" "}
+        {renderConditions?.energyTariff ? data.energyTariff : "Not available"}
       </div>
 
       {renderConditions?.flatStoreyCount ? (
@@ -92,14 +94,14 @@ export default function ExtraHouseInfo({ data }: props) {
       {renderConditions?.flatTopStorey ? (
         <div className={divBaseStyle}>
           <span className={spanDarkLabel}>Flat is Top Storey: </span>
-          {data.flatTopStorey.toLowerCase() == 'n' ? 'No' : 'Yes'}{' '}
+          {data.flatTopStorey.toLowerCase() == "n" ? "No" : "Yes"}{" "}
         </div>
       ) : null}
 
       {renderConditions?.floorLevel ? (
         <div className={divBaseStyle}>
           <span className={spanDarkLabel}>Floor Level: </span>
-          {parseInt(data.floorLevel)}{' '}
+          {parseInt(data.floorLevel)}{" "}
         </div>
       ) : null}
     </div>

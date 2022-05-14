@@ -85,6 +85,10 @@ export const GET_CERTIFICATES = gql`
       potentialEnergyEfficiency
     }
     analytics(lmk: $queryParam) {
+      meanCurrentEnergyEfficiency
+      meanCurrentEnergyRating
+      meanCurrentEnvironmentImpact
+      meanCurrentCo2Consumption
       meanCurrentEnergyConsumption
       meanCurrentHeatingCost
       meanCurrentHotWaterCost
@@ -107,19 +111,33 @@ export const GET_CERTIFICATES = gql`
   }
 `;
 
-export function buildCertificateQueryFromArray(queryParamArray: Array<string>) {
-  if (!queryParamArray.length) {
-    throw "Query Builder expects non-empty object!";
+export const GET_REC_DATA = gql`
+  query get_data($queryParam: String!, $queryPostcode: String!) {
+    recommendations(lmk: $queryParam) {
+      date
+      postcode
+      improvementId
+      improvementIdText
+      cost
+      completed
+      indicativeCost
+    }
+    localRecommendations(postcode: $queryPostcode) {
+      improvementId
+      averageCost
+      frequency
+    }
+    certificate(lmk: $queryParam) {
+      address
+      posttown
+      postcode
+      heatingCostPotential
+      heatingCostCurrent
+      lightingCostPotential
+      lightingCostCurrent
+      hotWaterCostPotential
+      hotWaterCostCurrent
+    }
   }
-  let queryString = `
-  query Certificate($queryParam: String!) {
-    certificate(name: $queryParam) {
-    `;
-  queryParamArray.forEach((param) => {
-    queryString.concat(param + "\n", queryString);
-  });
+`;
 
-  queryString.concat("\n" + "}" + "\n" + "}");
-
-  return gql`$queryString`;
-}

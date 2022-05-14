@@ -1,10 +1,8 @@
 name: Deploy
-
 on:
   push:
     branches:
       - main
-
 jobs:
   prettier:
     name: Run Prettier formatter
@@ -68,7 +66,7 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          max-line-length: "130"
+          max-line-length: "120"
 
   black-formatting:
     name: Black Formatting Test

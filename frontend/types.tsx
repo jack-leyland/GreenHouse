@@ -205,6 +205,7 @@ export interface epcCertificateObject extends Object {
 }
 
 export interface epcAnalyticsObject {
+  meanCurrentEnergyRating: string;
   meanCurrentEnergyEfficiency: number;
   meanCurrentEnvironmentImpact: number;
   meanCurrentEnergyConsumption: number;
@@ -226,6 +227,67 @@ export interface epcAnalyticsObject {
   normalisedCurrentLightingCost: Array<number>;
   normalisedCurrentHeatingCost: Array<number>;
   normalisedCurrentHotWaterCost: Array<number>;
+  meanFloorEnergyEff: number;
+  meanFloorEnvironmentalEff: number;
+  meanLightingEnergyEff: number;
+  meanLightingEnvironmentalEff: number;
+  meanMainHeatingEnergyEff: number;
+  meanMainHeatingEnvironmentalEff: number;
+  meanRoofEnergyEff: number;
+  meanRoofEnvironmentalEff: number;
+  meanWallsEnergyEff: number;
+  meanWallsEnvironmentalEff: number;
+  meanWaterEnergyEff: number;
+  meanWaterEnvironmentalEff: number;
+  meanWindowsEnergyEff: number;
+  meanWindowsEnvironmentalEff: number;
+}
+
+export interface packagedAnalyticsObject {
+  main: {
+    meanCurrentEnergyEfficiency: number;
+    meanCurrentEnergyRating: string;
+  };
+  environmental: {
+    meanCurrentEnergyConsumption: number;
+    meanCurrentEnvironmentImpact: number;
+    meanCurrentCo2Consumption: number;
+  };
+  cost: {
+    meanCurrentHeatingCost: number;
+    meanCurrentHotWaterCost: number;
+    meanCurrentLightingCost: number;
+  };
+  house: {
+    floor: {
+      meanFloorEnergyEff: number;
+      meanFloorEnvironmentalEff: number;
+    };
+    lighting: {
+      meanLightingEnergyEff: number;
+      meanLightingEnvironmentalEff: number;
+    };
+    heating: {
+      meanMainHeatingEnergyEff: number;
+      meanMainHeatingEnvironmentalEff: number;
+    };
+    water: {
+      meanWaterEnergyEff: number;
+      meanWaterEnvironmentalEff: number;
+    };
+    roof: {
+      meanRoofEnergyEff: number;
+      meanRoofEnvironmentalEff: number;
+    };
+    walls: {
+      meanWallsEnvironmentalEff: number;
+      meanWallsEnergyEff: number;
+    };
+    windows: {
+      meanWindowsEnergyEff: number;
+      meanWindowsEnvironmentalEff: number;
+    };
+  };
 }
 
 export interface epcRecommendationObject {
@@ -236,6 +298,16 @@ export interface epcRecommendationObject {
   improvementDescrText: string;
   improvementId: string;
   improvementIdText: string;
+  date: string;
+  cost: number;
+  postcode: string;
+  completed: boolean;
+}
+
+export interface localRecommendationObject {
+  frequency: number;
+  averageCost: number;
+  improvementId: string;
 }
 
 export interface EPCDictionary<Value> {
@@ -286,13 +358,13 @@ export const HeatingCategories: EPCDictionary<string> = {
 };
 
 export const epcColorDictionary: EPCDictionary<string> = {
-  A: 'epcA',
-  B: 'epcB',
-  C: 'epcC',
-  D: 'epcD',
-  E: 'epcE',
-  F: 'epcF',
-  G: 'epcG',
+  A: "epcA",
+  B: "epcB",
+  C: "epcC",
+  D: "epcD",
+  E: "epcE",
+  F: "epcF",
+  G: "epcG",
 };
 
 export const epcIndexDictionary: EPCDictionary<number> = {
@@ -303,6 +375,14 @@ export const epcIndexDictionary: EPCDictionary<number> = {
   E: 6,
   F: 7,
   G: 8,
+};
+
+export const starColors: EPCDictionary<string> = {
+  1: "rgb(239 68 68)",
+  2: "rgb(249 115 22)",
+  3: "rgb(234 179 8)",
+  4: "rgb(132 204 22)",
+  5: "rgb(34 197 94)",
 };
 
 export interface epcCertificateRecs {

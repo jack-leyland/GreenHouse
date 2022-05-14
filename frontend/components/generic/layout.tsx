@@ -1,16 +1,14 @@
-import React, { ReactNode } from 'react';
-import Head from 'next/head';
-import Footer from './footer';
+import React, { ReactNode } from "react";
+import Head from "next/head";
 
 type Props = {
   children: ReactNode;
-  footerFixed: boolean;
   title?: string;
 };
 
 // Must pass Layout a title prop based on page it is being applied to
 // This function wraps a page in the footer and applies the Head html
-export default function Layout({ children, title, footerFixed }: Props) {
+export default function Layout({ children, title }: Props) {
   return (
     <>
       <Head>
@@ -22,11 +20,7 @@ export default function Layout({ children, title, footerFixed }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>{children}</main>
-
-      <footer>
-        <Footer fixed={footerFixed} />
-      </footer>
+      <main className="h-full bg-gray-100">{children}</main>
     </>
   );
 }

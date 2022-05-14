@@ -7,9 +7,15 @@ module.exports = {
     placeholderColor: {
       darkGrey: "#444444",
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1220px",
+      xl: "1280px",
+    },
     extend: {
       screens: {
-        logoRender: '1150px',
+        logoRender: "1150px",
       },
       fontSize: {
         landingSearch: "1.1rem",
@@ -18,7 +24,12 @@ module.exports = {
         default: "6px",
       },
       colors: {
+        primary: "#3fad79",
+        heading: "text-gray-900",
+        body: "text-gray-600",
+        background: "bg-gray-100",
         logoGreen: "#09E85E",
+        logoGreenLight: "rgba(9, 232, 94, .4)",
         lightGreen: "#2AFC98",
         emerald: "#16C172",
         skyBlue: "#2DE1FC",
@@ -38,27 +49,32 @@ module.exports = {
         logoFont: ["Inter", "sans-serif"],
       },
       animation: {
-        fade: "fadeInGrow 2s ease-in-out",
+        fade: "fadeIn 1.5s ease-in-out",
+        fadeInGrow: "fadeInGrow 0.5s ease-in-out",
         shake: "shake .5s linear",
-        widthGrow: "widthGrow 3s ease-in-out forwards",
-        flyUp: "flyUp 4s ease-in-out forwards",
+        widthGrow: "widthGrow 1.5s ease-in-out forwards",
+        flyUp: "flyUp 2s ease-in-out forwards",
       },
       transitionProperty: {
         width: "width",
       },
       keyframes: (theme) => ({
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
         fadeInGrow: {
-          "0%": { opacity: 0, transform: "scale(0.1)" },
+          "0%": { opacity: 0, transform: "scale(0.8)" },
           "100%": { opacity: 1, transform: "scale(1)" },
         },
         widthGrow: {
           "0%": { width: 0 },
-          "70%": { width: 0 },
+          "10%": { width: 0 },
           "100%": { width: "100%" },
         },
         flyUp: {
           "0%": { top: "100px", opacity: 0, transform: "scale(1,1)" },
-          "70%": { top: "100px", opacity: 0, transform: "scale(1.1,0.9)" },
+          "50%": { top: "100px", opacity: 0, transform: "scale(1.1,0.9)" },
           "85%": { top: "5px", opacity: 0.75, transform: "scale(1.1,0.9)" },
           "90%": { top: "0px", opacity: 0.8, transform: "scale(1.05,.95)" },
           "95%": { top: "5px", opacity: 0.9, transform: "scale(1.05,.95)" },
@@ -90,5 +106,9 @@ module.exports = {
       }),
     },
   },
-  plugins: [require("tailwind-scrollbar-hide"), require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/forms"),
+  ],
 };

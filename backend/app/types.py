@@ -1,12 +1,5 @@
-from graphene import (
-    ObjectType,
-    String,
-    List,
-    Int,
-    Float,
-    Date,
-    DateTime,
-)
+from graphene import ObjectType, String, List, Int, Float, Date, DateTime, Boolean
+
 
 class Certificate(ObjectType):
     low_energy_fixed_light_count = Float()
@@ -18,11 +11,12 @@ class Certificate(ObjectType):
     unheated_corridor_length = Float()
     hot_water_cost_potential = Float()
     hot_water_cost_adjusted_potential = Float()
-    total_current_cost = Float()  # computed from hot water + lighting + heating
-    total_potential_cost = Float()  # computed from adjusted versions of the above
-    total_adjusted_potential_cost = (
-        Float()
-    )  # computed from adjusted versions of the above
+    # computed from hot water + lighting + heating
+    total_current_cost = Float()
+    # computed from adjusted versions of the above
+    total_potential_cost = Float()
+    # computed from adjusted versions of the above
+    total_adjusted_potential_cost = Float()
     construction_age_band = String()
     potential_energy_rating = String()
     mainheat_energy_eff = Float()
@@ -171,6 +165,10 @@ class Recommendation(ObjectType):
     improvement_descr_text = String()
     improvement_id = String()
     improvement_id_text = String()
+    completed = Boolean()
+    cost = Float()
+    date = String()
+    postcode = String()
 
 
 class Timeseries(ObjectType):
@@ -220,3 +218,10 @@ class Improvement(ObjectType):
     cost = Float()
     date = String()
     improvement_id = String()
+    postcode = String()
+
+
+class LocalImprovement(ObjectType):
+    improvement_id = String()
+    frequency = Float()
+    average_cost = Float()

@@ -1,59 +1,94 @@
-import React from 'react';
-import { GiWaterDrop, GiFireplace } from 'react-icons/gi';
-import { BsLightbulb } from 'react-icons/bs';
-import { epcCertificateObject } from '../../types';
+import React, { Dispatch, SetStateAction } from "react";
+import { GiWaterDrop, GiFireplace } from "react-icons/gi";
+import { BsLightbulb } from "react-icons/bs";
+import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
+import { AiFillQuestionCircle } from "react-icons/ai";
 
 interface props {
-  data: epcCertificateObject['House']['costs'];
+  data: epcCertificateObject["House"]["costs"];
+  analytics: packagedAnalyticsObject["cost"];
+  setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
-export default function CostSummary({ data }: props) {
+export default function CostSummary({
+  data,
+  analytics,
+  setModalHandler,
+}: props) {
+  const tdStyle = "border ";
+  const titleStyle =
+    "justify-center font-semibold text-base md:text-lg flex items-center gap-1";
+  const headStyle = tdStyle + "font-semibold md:text-lg";
+
   return (
-    <div className="py-2 px-1 h-full">
-      <div className="flex h-3/4">
-        <div className="w-1/3 h-full px-1 flex flex-col gap-2">
-          <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Heating <GiFireplace color="#eb6434" />{' '}
-          </div>
-          <div>
-            <b>Current Cost:</b> {data.heatingCostCurrent} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-          <div className="w-full border border-x-0 border-t-0"></div>
-          <div>
-            <b>Potential Cost:</b> {data.heatingCostPotential} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-        </div>
-        <div className="w-1/3 border border-y-0 h-full px-2 flex flex-col gap-2">
-          <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Hot Water <GiWaterDrop color="#34bdeb" />{' '}
-          </div>
-          <div>
-            <b>Current Cost:</b> {data.hotWaterCostCurrent} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-          <div className="w-full border border-x-0 border-t-0"></div>
-          <div>
-            <b>Potential Cost:</b> {data.hotWaterCostPotential} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-        </div>
-        <div className="w-1/3 h-full px-2 flex flex-col gap-2">
-          <div className="w-full justify-center text-sm font-bold pb-1 flex items-center gap-2">
-            Lighting <BsLightbulb color="#d4c328" />{' '}
-          </div>
-          <div>
-            <b>Current Cost:</b> {data.lightingCostCurrent} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-          <div className="w-full border border-x-0 border-t-0"></div>
-          <div>
-            <b>Potential Cost:</b> {data.lightingCostPotential} £/year
-          </div>
-          <div>This is ? more/less than people in your area are paying</div>
-        </div>
-      </div>
+    <div className="py-2 flex flex-col h-5/6">
+      <table className="h-full text-center">
+        <tr className="bg-gray-50">
+          <td className="bg-white flex justify-center items-center h-full">
+            <AiFillQuestionCircle
+              size={24}
+              className="hover:cursor-pointer"
+              onClick={() => setModalHandler("costs")}
+            />
+          </td>
+          <td className={headStyle}>Current Cost</td>
+          <td className={headStyle}>Potential Cost</td>
+          <td className={headStyle}>Area Average</td>
+        </tr>
+
+        <tbody>
+          <tr>
+            <td className={tdStyle}>
+              <div className={titleStyle}>
+                Heating <GiFireplace color="#eb6434" />
+              </div>
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.heatingCostCurrent}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.heatingCostPotential}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{analytics?.meanCurrentHeatingCost}</b>/year
+            </td>
+          </tr>
+
+          <tr className="bg-gray-50">
+            <td className={tdStyle}>
+              <div className={titleStyle}>
+                Hot Water <GiWaterDrop color="#34bdeb" />{" "}
+              </div>
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.hotWaterCostCurrent}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.hotWaterCostPotential}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{analytics?.meanCurrentHotWaterCost}</b>/year
+            </td>
+          </tr>
+
+          <tr>
+            <td className={tdStyle}>
+              <div className={titleStyle}>
+                Lighting <BsLightbulb color="#d4c328" />
+              </div>
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.lightingCostCurrent}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{data.lightingCostPotential}</b>/year
+            </td>
+            <td className={tdStyle}>
+              <b>£{analytics?.meanCurrentLightingCost}</b>/year
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
