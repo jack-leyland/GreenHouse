@@ -216,17 +216,15 @@ def av_annual_rating_data(dataframe, features = timeseries_metrics):
     return average_values 
 
 def timeseries_data(dataframe, features = timeseries_metrics, years = timeseries_L10_years):
+    
+    result = {}
+
     # Create a new column in dataframe with "years"
     dataframe["YEAR"] = pd.DatetimeIndex(dataframe["INSPECTION_DATE"]).year
 
     # # First filter the dataframe by the year
-    # for year in years:
-    
-    #     # Then take the average of each feature across years         
-    #     for feature in features:
-            
-
-
-
-    # print(dataframe["YEAR"])    
-    return
+    for feature in features:
+        mean = dataframe.groupby('YEAR')[feature].mean()
+        result[feature] = mean.tolist()
+        
+    return result

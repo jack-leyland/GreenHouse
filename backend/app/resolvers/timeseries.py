@@ -32,6 +32,26 @@ def create_timeseries(data):
     results.average_annual_change_windows_environmental_eff = averages_dict["WINDOWS_ENV_EFF"]
 
     # Assign general average per year
-    timeseries_data(data)
+    timeseries_dict = timeseries_data(data)
+
+    # Assign average ratings per year (2008 - 2021) 
+    results.average_timeseries_lighting_energy_eff = timeseries_dict["LIGHTING_ENERGY_EFF"]
+    results.average_timeseries_lighting_environmental_eff = timeseries_dict["LIGHTING_ENV_EFF"]
+    results.average_timeseries_walls_energy_eff = timeseries_dict["WALLS_ENERGY_EFF"]
+    results.average_timeseries_walls_environmental_eff = timeseries_dict["WALLS_ENV_EFF"]
+    results.average_timeseries_water_energy_eff = timeseries_dict["HOT_WATER_ENERGY_EFF"]
+    results.average_timeseries_water_environmental_eff = timeseries_dict["HOT_WATER_ENV_EFF"]
+    results.average_timeseries_floor_energy_eff = timeseries_dict["FLOOR_ENERGY_EFF"]
+    results.average_timeseries_floor_environmental_eff = timeseries_dict["FLOOR_ENV_EFF"]
+    results.average_timeseries_roof_energy_eff = timeseries_dict["ROOF_ENERGY_EFF"]
+    results.average_timeseries_roof_environmental_eff = timeseries_dict["ROOF_ENV_EFF"]
+    results.average_timeseries_main_heating_energy_eff = timeseries_dict["MAINHEAT_ENERGY_EFF"]
+    results.average_timeseries_main_heating_environmental_eff = timeseries_dict["MAINHEAT_ENV_EFF"]
+    results.average_timeseries_main_heating_controls_energy_eff = timeseries_dict["MAINHEATC_ENERGY_EFF"]
+    results.average_timeseries_main_heating_controls_environmental_eff = timeseries_dict["MAINHEATC_ENV_EFF"]
+    results.average_timeseries_second_heating_energy_eff = timeseries_dict["SHEATING_ENERGY_EFF"]
+    results.average_timeseries_second_heating_environmental_eff = timeseries_dict["SHEATING_ENV_EFF"]
+    results.average_timeseries_windows_energy_eff = timeseries_dict["WINDOWS_ENERGY_EFF"]
+    results.average_timeseries_windows_environmental_eff = timeseries_dict["WINDOWS_ENV_EFF"]
 
     return results
