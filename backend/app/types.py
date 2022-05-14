@@ -172,6 +172,8 @@ class Recommendation(ObjectType):
 
 
 class Timeseries(ObjectType):
+
+    # Average change per year for epcs with 2+ revisions
     average_annual_change_lighting_energy_eff = Float()
     average_annual_change_lighting_environmental_eff = Float()
     average_annual_change_walls_energy_eff = Float()
@@ -191,6 +193,25 @@ class Timeseries(ObjectType):
     average_annual_change_windows_energy_eff = Float()
     average_annual_change_windows_environmental_eff = Float()
 
+    # Last 10y time series (2012-2021) of average rating across whole set
+    average_timeseries_lighting_energy_eff = List(Float)
+    average_timeseries_lighting_environmental_eff = List(Float)
+    average_timeseries_walls_energy_eff = List(Float)
+    average_timeseries_walls_environmental_eff = List(Float)
+    average_timeseries_water_energy_eff = List(Float)
+    average_timeseries_water_environmental_eff = List(Float)
+    average_timeseries_floor_energy_eff = List(Float)
+    average_timeseries_floor_environmental_eff = List(Float)
+    average_timeseries_roof_energy_eff = List(Float)
+    average_timeseries_roof_environmental_eff = List(Float)
+    average_timeseries_main_heating_energy_eff = List(Float)
+    average_timeseries_main_heating_environmental_eff = List(Float)
+    average_timeseries_main_heating_controls_energy_eff = List(Float)
+    average_timeseries_main_heating_controls_environmental_eff = List(Float)
+    average_timeseries_second_heating_energy_eff = List(Float)
+    average_timeseries_second_heating_environmental_eff = List(Float)
+    average_timeseries_windows_energy_eff = List(Float)
+    average_timeseries_windows_environmental_eff = List(Float)
 
 class Improvement(ObjectType):
     lmk_key = String(required=True)
