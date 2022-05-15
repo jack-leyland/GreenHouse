@@ -155,6 +155,7 @@ class Analytics(ObjectType):
 class Address(ObjectType):
     lmk_key = String(required=True)
     address = String()
+    date = DateTime()
 
 
 class Recommendation(ObjectType):
