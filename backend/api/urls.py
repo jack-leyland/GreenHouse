@@ -24,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("ping/", ping, name="ping"),
     path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    # graphiql= os.environ.get("ENV") == "DEV"
 ]
