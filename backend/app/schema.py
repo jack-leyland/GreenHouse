@@ -156,7 +156,6 @@ class Query(ObjectType):
             SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`
         """
-
         local_df = (
             client.query(query)
             .result()
