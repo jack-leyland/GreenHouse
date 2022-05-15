@@ -141,3 +141,28 @@ export const GET_REC_DATA = gql`
   }
 `;
 
+
+export const GET_BQ_DATA = gql`
+  query big_query {
+    bigQuery {
+      averageAnnualChangeLightingEnergyEff
+      averageAnnualChangeLightingEnvironmentalEff
+      averageAnnualChangeWallsEnergyEff
+      averageAnnualChangeWallsEnvironmentalEff
+      averageAnnualChangeWaterEnergyEff
+      averageAnnualChangeWaterEnvironmentalEff
+      averageAnnualChangeFloorEnergyEff
+      averageAnnualChangeFloorEnvironmentalEff
+      averageAnnualChangeRoofEnergyEff
+      averageAnnualChangeRoofEnvironmentalEff
+      averageAnnualChangeMainHeatingEnergyEff
+      averageAnnualChangeMainHeatingEnvironmentalEff
+      averageAnnualChangeMainHeatingControlsEnergyEff
+      averageAnnualChangeMainHeatingControlsEnvironmentalEff
+      averageAnnualChangeSecondHeatingEnergyEff
+      averageAnnualChangeSecondHeatingEnvironmentalEff
+      averageAnnualChangeWindowsEnergyEff
+      averageAnnualChangeWindowsEnvironmentalEff
+    }
+  }
+`;
