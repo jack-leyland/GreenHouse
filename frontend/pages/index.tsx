@@ -17,6 +17,14 @@ const GET_ADDRESSES = gql`
   }
 `;
 
+const PING_SERVER = gql`
+  query ping($pingParam: String!) {
+    address(postcode: $pingParam) {
+      lmkKey
+    }
+  }
+`;
+
 type AddressObject = {
   address: string;
   lmkKey: string;
@@ -62,6 +70,9 @@ const Landing = () => {
     skip: !queryParam || isQueryError,
     variables: { queryParam },
   });
+
+  // Ping server with dummy postcode on page load
+  useQuery(PING_SERVER, {variables: { pingParam: "XXX XXX" }});
 
   const handleSearchSubmit = (): void => {
     if (!isValidPostcode(searchBoxText)) {
