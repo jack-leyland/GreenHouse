@@ -43,7 +43,6 @@ export function AppContextWrapper({ children }: ContextWrapperProps) {
         JSON.stringify(state.extraHouseInfo)
       );
     }
-
   }, [state]);
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;

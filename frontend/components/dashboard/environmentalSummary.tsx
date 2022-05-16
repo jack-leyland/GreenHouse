@@ -70,7 +70,6 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
     (data.energyConsumptionCurrent - data.energyConsumptionPotential) * 86.2
   );
 
-
   return (
     <div className="py-2 px-1 flex h-full">
       <div className="h-full flex flex-col pt-1 px-1">
