@@ -1,6 +1,13 @@
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { BsWrench, BsFillHouseFill, BsList, BsXLg } from "react-icons/bs";
+import {
+  BsWrench,
+  BsFillHouseFill,
+  BsList,
+  BsXLg,
+  BsQuestionCircle,
+  BsInfoCircle,
+} from "react-icons/bs";
 import Image from "next/image";
 import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
@@ -39,6 +46,18 @@ export default function DashboardWrapper({
       href: "/recommendations",
       icon: BsWrench,
       current: currentPage == "Recommendations",
+    },
+    {
+      name: "About us",
+      href: "/about",
+      icon: BsInfoCircle,
+      current: currentPage == "About us",
+    },
+    {
+      name: "FAQ",
+      href: "/faq",
+      icon: BsQuestionCircle,
+      current: currentPage == "FAQ",
     },
   ];
   return (

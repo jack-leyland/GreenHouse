@@ -44,7 +44,6 @@ const Main = () => {
     }
   }, []);
 
-  console.log(queryParam);
 
   useEffect(() => {
     if (data) {
