@@ -33,6 +33,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 EPC_API_KEY = os.environ.get("EPC_API_KEY")
 
 ENV = os.environ.get("ENV")
+FRONTEND_URL = "https://epc-site-frontend.vercel.app"
 
 if ENV == "DEV":
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api/.google_credentials.json"
@@ -47,11 +48,14 @@ payload = {}
 
 def verify_client(info):
     # print(f"env: {ENV}")
-    url = info.context.META["HTTP_REFERER"]
-    if ENV == "DEV":
-        return url.startswith("http://localhost:3000")
+    url = info.context.META.get("HTTP_REFERER")
+    if url == None:
+        return False
 
-    return url.startswith("https://epc-site-frontend.vercel.app")
+    if ENV != "DEV":
+        return url.startswith(FRONTEND_URL)
+
+    return True
 
 
 class AddImprovement(Mutation):
@@ -68,6 +72,7 @@ class AddImprovement(Mutation):
     def mutate(root, info, cost, date, lmk_key, improvement_id, postcode):
         if not verify_client(info):
             return None
+
         print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
             cost=cost,
@@ -219,4 +224,3 @@ class Query(ObjectType):
 
 
 schema = Schema(query=Query, mutation=Mutation)
-
