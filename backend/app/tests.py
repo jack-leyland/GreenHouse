@@ -20,7 +20,6 @@ class QueryTestCase(GraphQLTestCase):
             variables={"postcode": "SW66TF"},
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
     def test_certificate_query(self):
@@ -106,7 +105,6 @@ class QueryTestCase(GraphQLTestCase):
             },
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
     def test_recommendations_query(self):
@@ -129,7 +127,6 @@ class QueryTestCase(GraphQLTestCase):
             },
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
     def test_analytics_query(self):
@@ -167,7 +164,6 @@ class QueryTestCase(GraphQLTestCase):
             },
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
     def test_local_recommendations_query(self):
@@ -215,7 +211,6 @@ class QueryTestCase(GraphQLTestCase):
             """,
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
 
