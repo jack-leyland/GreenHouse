@@ -36,8 +36,7 @@ const About = () => {
       <br />
       <p>
         GreenHouse was created by 6 Imperial College London students as part of
-        the MSc Computing Group Project in the 2021-2022 Cohort. Links to their
-        profiles are listed below: <br /> <br />
+        the MSc Computing Group Project in the 2021-2022 Cohort. <br /> <br />
         Josh Cheng <br />
         Jarryd Cheso <br />
         Gen Hall <br />
