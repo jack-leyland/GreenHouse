@@ -47,8 +47,11 @@ payload = {}
 
 def verify_client(info):
     # print(f"env: {ENV}")
-    url = info.context.META["HTTP_REFERER"]
-    if ENV == "DEV":
+    url = info.context.META.get("HTTP_REFERER")
+    if url == None:
+        return False
+
+    if ENV != "DEV":
         return url.startswith("http://localhost:3000")
 
     return url.startswith("https://epc-site-frontend.vercel.app")
@@ -219,4 +222,3 @@ class Query(ObjectType):
 
 
 schema = Schema(query=Query, mutation=Mutation)
-

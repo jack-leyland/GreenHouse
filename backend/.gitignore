@@ -11,3 +11,5 @@ data/
 /app/resolvers/__pycache__/
 .DS_Store
 /api/.google_credentials.json
+staticfiles/
+static/
