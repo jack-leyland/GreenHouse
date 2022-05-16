@@ -217,3 +217,47 @@ class QueryTestCase(GraphQLTestCase):
 
         content = json.loads(response.content)
         self.assertResponseNoErrors(response)
+
+
+class MutationTestCase(GraphQLTestCase):
+    GRAPHQL_SCHEMA = schema
+    GRAPHQL_URL = "/graphql"
+
+    def test_improvement_mutation(self):
+        response = self.query(
+            """
+            mutation addImprovement(
+                $lmkKey: String!
+                $date: String!
+                $cost: Float!
+                $improvementId: String!
+                $postcode: String!
+            ) {
+                addImprovement(
+                    lmkKey: $lmkKey
+                    date: $date
+                    cost: $cost
+                    improvementId: $improvementId
+                    postcode: $postcode
+                    ) {
+                    ok
+                    improvement {
+                        lmkKey
+                        date
+                        cost
+                        improvementId
+                        postcode
+                    }
+                }
+            }
+            """,
+            variables={
+                "lmkKey": "03caacf3e712ce8428682340e06907fab1ed751090446397dc714a2fa3b4d571",
+                "date": '"2022-03-07"',
+                "cost": 999,
+                "improvementId": "19",
+                "postcode": "DA5 3PE",
+            },
+        )
+
+        self.assertResponseNoErrors(response)
