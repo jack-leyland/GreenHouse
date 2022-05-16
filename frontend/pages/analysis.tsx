@@ -29,7 +29,6 @@ const Main = () => {
   }
 
   function formatTimeseries(data: number[]) {
-    console.log(timeseriesData)
     return data.map((dataPoint: number, index: number) => {
       return {
         year: (2008 + index).toString(),
@@ -182,7 +181,7 @@ const Main = () => {
                       <div className="py-1">
                         {
                           categories.map((category: {name: string, value: string}) => (
-                            <Menu.Item>
+                            <Menu.Item key={category.name}>
                               {({ active }) => (
                                 <a
                                   onClick={e => {
