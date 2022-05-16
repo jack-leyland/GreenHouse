@@ -180,7 +180,6 @@ class QueryTestCase(GraphQLTestCase):
             variables={"postcode": "SW6 6TF"},
         )
 
-        content = json.loads(response.content)
         self.assertResponseNoErrors(response)
 
     def test_BQ_query(self):

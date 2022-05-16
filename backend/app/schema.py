@@ -49,7 +49,7 @@ payload = {}
 def verify_client(info):
     # print(f"env: {ENV}")
     url = info.context.META.get("HTTP_REFERER")
-    if url == None:
+    if url is None:
         return False
 
     if ENV != "DEV":
