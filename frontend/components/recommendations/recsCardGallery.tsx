@@ -49,7 +49,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
   }
   return (
     <>
-      <div className="sticky top-[68px] z-10 w-full h-[50px] flex justify-center animate-fade">
+      <div className="sticky top-[68px] z-10 w-full h-full flex justify-center animate-fade">
         <div className="w-[95%] flex justify-center items-center rounded-default bg-gray-200 pr-2 pl-2 ">
           <div className="flex  items-center">
             <span

@@ -92,7 +92,7 @@ export default function RecForm({
   return (
     <div
       className={
-        "h-full px-6 pt-6 rounded-lg text-gray-600 flex flex-col justify-center relative overflow-scroll bg-white " +
+        "h-full px-6 pt-6 rounded-lg text-gray-600 flex flex-col justify-center relative overflow-hidden bg-white " +
         (!data ? color : "")
       }
     >
@@ -106,7 +106,7 @@ export default function RecForm({
         </div>
       )}
       {!isSubmissionError && !loading && !data && (
-        <div className="h-full w-full overflow-y-scroll">
+        <div className="h-full w-full overflow-y-hidden">
           <span className="text-2xl py-2leading-none">{heading}</span>
           <div className="h-full flex-row space-between py-4">
             <Formik
