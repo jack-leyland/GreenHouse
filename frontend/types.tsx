@@ -399,24 +399,26 @@ export interface epcCertificateRecs {
 }
 
 export interface BQBarData {
-  name: string,
-  lightingEng: number,
-  lightingEnv: number,
-  wallsEng: number,
-  wallsEnv: number,
-  waterEng: number,
-  waterEnv: number,
-  floorEng: number,
-  floorEnv: number,
-  roofEng: number,
-  roofEnv: number,
-  heatingEng:number,
-  heatingEnv: number,
-  heatingContEng: number,
-  heatingContEnv: number,
-  heatingSecEng: number,
-  heatingSecEnv: number,
-  windowsEng: number,
-  windowsEnv: number,
-
+  name: string, value: number
 }
+
+export interface BQTimeSeriesData {
+  [key: string]: number[];
+  LightingEnergyEff: [number],
+  LightingEnvironmentalEff: [number],
+  WallsEnergyEff: [number],
+  WallsEnvironmentalEff: [number],
+  WaterEnergyEff: [number],
+  WaterEnvironmentalEff: [number],
+  FloorEnergyEff: [number],
+  FloorEnvironmentalEff: [number],
+  RoofEnergyEff: [number],
+  RoofEnvironmentalEff: [number],
+  MainHeatingEnergyEff: [number],
+  MainHeatingEnvironmentalEff: [number],
+  MainHeatingControlsEnergyEff: [number],
+  MainHeatingControlsEnvironmentalEff: [number],
+  WindowsEnergyEff: [number],
+  WindowsEnvironmentalEff: [number],
+}
+

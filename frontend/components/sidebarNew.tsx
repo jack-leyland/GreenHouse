@@ -1,6 +1,8 @@
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { BsWrench, BsFillHouseFill, BsList, BsXLg } from "react-icons/bs";
+import {DiGoogleAnalytics} from "react-icons/di";
+
 import Image from "next/image";
 import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
@@ -12,6 +14,7 @@ interface props {
   subTitle: string;
   setModalContent: any;
   currentPage: string;
+  analysis: boolean;
 }
 
 function classNames(...classes: any) {
@@ -24,6 +27,7 @@ export default function DashboardWrapper({
   subTitle,
   setModalContent,
   currentPage,
+  analysis
 }: props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -40,6 +44,12 @@ export default function DashboardWrapper({
       icon: BsWrench,
       current: currentPage == "Recommendations",
     },
+    {
+      name: "Analysis",
+      href: "/analysis",
+      icon: DiGoogleAnalytics,
+      current: currentPage == "Analysis",
+    }
   ];
   return (
     <>
@@ -194,6 +204,7 @@ export default function DashboardWrapper({
             <PageTitle
               title={pageTitle}
               subtitle={subTitle}
+              analysis={analysis}
               onClick={() => setModalContent("address")}
             />
           </div>
