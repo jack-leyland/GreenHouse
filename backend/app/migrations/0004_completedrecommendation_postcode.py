@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0003_remove_completedrecommendation_was_effective'),
+        ("app", "0003_remove_completedrecommendation_was_effective"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='completedrecommendation',
-            name='postcode',
-            field=models.CharField(default='', max_length=200),
+            model_name="completedrecommendation",
+            name="postcode",
+            field=models.CharField(default="", max_length=200),
         ),
     ]

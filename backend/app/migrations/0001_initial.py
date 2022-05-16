@@ -7,22 +7,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Recommendation',
+            name="Recommendation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('lmk_key', models.CharField(max_length=200)),
-                ('improvement_id', models.CharField(max_length=200)),
-                ('date', models.CharField(max_length=200)),
-                ('cost', models.FloatField()),
-                ('was_effective', models.BooleanField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("lmk_key", models.CharField(max_length=200)),
+                ("improvement_id", models.CharField(max_length=200)),
+                ("date", models.CharField(max_length=200)),
+                ("cost", models.FloatField()),
+                ("was_effective", models.BooleanField()),
             ],
             options={
-                'verbose_name': 'Completed Recommendation',
+                "verbose_name": "Completed Recommendation",
             },
         ),
     ]
