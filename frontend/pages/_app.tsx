@@ -11,7 +11,6 @@ import {
 import { AppContextWrapper } from "../context/state";
 
 const ENV: any = process.env["ENV"];
-console.log("environment:", process.env.NODE_ENV);
 
 const client = new ApolloClient({
   link: new (createHttpLink as any)({

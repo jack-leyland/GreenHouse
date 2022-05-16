@@ -397,3 +397,28 @@ export interface epcCertificateRecs {
   hotWaterCostPotential: number;
   hotWaterCostCurrent: number;
 }
+
+export interface BQBarData {
+  name: string, value: number
+}
+
+export interface BQTimeSeriesData {
+  [key: string]: number[];
+  LightingEnergyEff: [number],
+  LightingEnvironmentalEff: [number],
+  WallsEnergyEff: [number],
+  WallsEnvironmentalEff: [number],
+  WaterEnergyEff: [number],
+  WaterEnvironmentalEff: [number],
+  FloorEnergyEff: [number],
+  FloorEnvironmentalEff: [number],
+  RoofEnergyEff: [number],
+  RoofEnvironmentalEff: [number],
+  MainHeatingEnergyEff: [number],
+  MainHeatingEnvironmentalEff: [number],
+  MainHeatingControlsEnergyEff: [number],
+  MainHeatingControlsEnvironmentalEff: [number],
+  WindowsEnergyEff: [number],
+  WindowsEnvironmentalEff: [number],
+}
+
