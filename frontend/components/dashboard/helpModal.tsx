@@ -1,23 +1,23 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 interface props {
   type: string;
 }
 
 export default function HelpModal({ type }: props) {
   const titleStyling =
-    'font-bold text-lg pt-2 mb-2 w-full border border-x-0 border-t-0 text-gray-800';
-  const positionStyling = 'w-full flex flex-col p-2';
+    "font-bold text-lg pt-2 mb-2 w-full border border-x-0 border-t-0 text-gray-800";
+  const positionStyling = "w-full flex flex-col p-2";
 
   switch (type) {
-    case 'epcChart':
+    case "epcChart":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>EPC Ratings</div>
           <div className="py-1">
             Properties are given a Standard Assessment Procedure (SAP) score
             from 0-100 based on their energy efficiency. These scores broken
-            down into bands from A-G (for more info and to see the boundaries{' '}
+            down into bands from A-G (for more info and to see the boundaries{" "}
             <a
               className="text-blue-500"
               href="https://www.edfenergy.com/energy-efficiency/how-improve-your-epc-rating"
@@ -30,7 +30,7 @@ export default function HelpModal({ type }: props) {
             SAP scores take into account a number of different factors
             including, but not limited to: construction materials, heating
             systems, insulation, lighting, ventilation and air leakage. To see
-            more information about the SAP calculation see{' '}
+            more information about the SAP calculation see{" "}
             <a
               className="text-blue-500"
               href="https://www.gov.uk/guidance/standard-assessment-procedure"
@@ -41,7 +41,7 @@ export default function HelpModal({ type }: props) {
           </div>
         </div>
       );
-    case 'currentRating':
+    case "currentRating":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Current Rating</div>
@@ -52,22 +52,22 @@ export default function HelpModal({ type }: props) {
           </div>
         </div>
       );
-    case 'potentialRating':
+    case "potentialRating":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Potential Rating</div>
           <div className="py-1">
             Your potential rating is a projection of the SAP score you could
             achieve if you make all the suggested improvements to your house. To
-            see more about your potential improvements, see our{' '}
+            see more about your potential improvements, see our{" "}
             <Link href="/recommendations">
               <a className="text-blue-500">recommendations</a>
-            </Link>{' '}
+            </Link>{" "}
             page!
           </div>
         </div>
       );
-    case 'costs':
+    case "costs":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Current Costs</div>
@@ -79,10 +79,10 @@ export default function HelpModal({ type }: props) {
           <div className="py-1">
             <b>Potential costs</b> are projections of what your costs could be
             if you make all of the recommended improvements. To check out these
-            improvements see our{' '}
+            improvements see our{" "}
             <Link href="/recommendations">
               <a className="text-blue-500">recommendations</a>
-            </Link>{' '}
+            </Link>{" "}
             page!
           </div>
           <div className="py-1">
@@ -91,7 +91,7 @@ export default function HelpModal({ type }: props) {
           </div>
         </div>
       );
-    case 'featureEfficiency':
+    case "featureEfficiency":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Feature Efficiency</div>
@@ -104,7 +104,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'carbonProduction':
+    case "carbonProduction":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Carbon Production</div>
@@ -116,7 +116,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'genericFeature':
+    case "genericFeature":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>House Feature</div>
@@ -134,7 +134,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'windows':
+    case "windows":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Windows</div>
@@ -164,7 +164,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'lighting':
+    case "lighting":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Lighting</div>
@@ -194,7 +194,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'water':
+    case "water":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Water</div>
@@ -220,7 +220,7 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
-    case 'heating':
+    case "heating":
       return (
         <div className={positionStyling}>
           <div className={titleStyling}>Heating</div>
