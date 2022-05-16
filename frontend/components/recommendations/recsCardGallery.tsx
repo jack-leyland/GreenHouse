@@ -50,14 +50,14 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
   return (
     <>
       <div className="sticky top-[68px] z-10 w-full h-[50px] flex justify-center animate-fade">
-        <div className="w-[95%] flex items-center rounded-default bg-gray-200 pr-2 pl-2 ">
-          <div className="w-[100%] h-[100%] flex justify-center items-center">
+        <div className="w-[95%] flex justify-center items-center rounded-default bg-gray-200 pr-2 pl-2 ">
+          <div className="flex  items-center">
             <span
               className={
-                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
                 (activeView == "Outstanding"
-                  ? "bg-primary font-medium"
-                  : "hover:bg-primary")
+                  ? "bg-primary text-white"
+                  : "text-gray-500 hover:text-gray-700")
               }
               onClick={() => {
                 setActiveView("Outstanding");
@@ -67,10 +67,10 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             </span>
             <span
               className={
-                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
                 (activeView == "Completed"
-                  ? "bg-primary font-medium"
-                  : "hover:bg-primary")
+                  ? "bg-primary text-white"
+                  : "text-gray-500 hover:text-gray-700")
               }
               onClick={() => {
                 setActiveView("Completed");
@@ -80,16 +80,16 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             </span>
             <span
               className={
-                "h-[100%] text-xs sm:text-base mx-2 pl-2 pr-2 flex items-center rounded-default cursor-pointer opacity-80 " +
+                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
                 (activeView == "Neighborhood"
-                  ? "bg-primary font-medium"
-                  : "hover:bg-primary")
+                  ? "bg-primary text-white"
+                  : "text-gray-500 hover:text-gray-700")
               }
               onClick={() => {
                 setActiveView("Neighborhood");
               }}
             >
-              Neighborhood Insights
+              Area Insights
             </span>
           </div>
         </div>
