@@ -110,8 +110,7 @@ export default function Recommendation({
   return (
     <div
       className={
-        "flex flex-row justify-center h-[400px] w-[300px] " +
-        (isMobile ? "mb-4" : "mx-5 my-4")
+        "flex flex-row justify-center h-[400px] md:w-1/4 w-full md:px-4 py-3 "
       }
       ref={wrapperRef}
     >

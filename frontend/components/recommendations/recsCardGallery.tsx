@@ -95,7 +95,6 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
         </div>
       </div>
       <div className="flex justify-center animate-fade">
-        {" "}
         <div className="w-[95%] flex flex-wrap justify-center items-center mt-2 sm:flex-row flex-col">
           {/* This is mildy hacky, might change later */}
           {noRecs && activeView == "Outstanding" && (
