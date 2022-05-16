@@ -1,10 +1,17 @@
-import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import { BsWrench, BsFillHouseFill, BsList, BsXLg } from "react-icons/bs";
-import Image from "next/image";
-import PageTitle from "./generic/pageTitle";
-import House from "../assets/house.svg";
-import Link from "next/link";
+import { Fragment, useState } from 'react';
+import { Dialog, Menu, Transition } from '@headlessui/react';
+import {
+  BsWrench,
+  BsFillHouseFill,
+  BsList,
+  BsXLg,
+  BsQuestionCircle,
+  BsInfoCircle,
+} from 'react-icons/bs';
+import Image from 'next/image';
+import PageTitle from './generic/pageTitle';
+import House from '../assets/house.svg';
+import Link from 'next/link';
 
 interface props {
   children?: React.ReactChild | React.ReactChildren;
@@ -15,7 +22,7 @@ interface props {
 }
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function DashboardWrapper({
@@ -29,16 +36,28 @@ export default function DashboardWrapper({
 
   const navigation = [
     {
-      name: "Dashboard",
-      href: "/main",
+      name: 'Dashboard',
+      href: '/main',
       icon: BsFillHouseFill,
-      current: currentPage == "Dashboard",
+      current: currentPage == 'Dashboard',
     },
     {
-      name: "Recommendations",
-      href: "/recommendations",
+      name: 'Recommendations',
+      href: '/recommendations',
       icon: BsWrench,
-      current: currentPage == "Recommendations",
+      current: currentPage == 'Recommendations',
+    },
+    {
+      name: 'About us',
+      href: '/about',
+      icon: BsInfoCircle,
+      current: currentPage == 'About us',
+    },
+    {
+      name: 'FAQ',
+      href: '/faq',
+      icon: BsQuestionCircle,
+      current: currentPage == 'FAQ',
     },
   ];
   return (
@@ -112,17 +131,17 @@ export default function DashboardWrapper({
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         )}
                       >
                         <item.icon
                           className={classNames(
                             item.current
-                              ? "text-gray-300"
-                              : "text-gray-400 group-hover:text-gray-300",
-                            "mr-4 flex-shrink-0 h-6 w-6"
+                              ? 'text-gray-300'
+                              : 'text-gray-400 group-hover:text-gray-300',
+                            'mr-4 flex-shrink-0 h-6 w-6'
                           )}
                           aria-hidden="true"
                         />
@@ -160,17 +179,17 @@ export default function DashboardWrapper({
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
                     <item.icon
                       className={classNames(
                         item.current
-                          ? "text-gray-300"
-                          : "text-gray-400 group-hover:text-gray-300",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                          ? 'text-gray-300'
+                          : 'text-gray-400 group-hover:text-gray-300',
+                        'mr-3 flex-shrink-0 h-6 w-6'
                       )}
                       aria-hidden="true"
                     />
@@ -194,7 +213,7 @@ export default function DashboardWrapper({
             <PageTitle
               title={pageTitle}
               subtitle={subTitle}
-              onClick={() => setModalContent("address")}
+              onClick={() => setModalContent('address')}
             />
           </div>
 

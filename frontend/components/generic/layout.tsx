@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import Head from "next/head";
+import React, { ReactNode } from 'react';
+import Head from 'next/head';
 
 type Props = {
   children: ReactNode;
@@ -19,7 +19,6 @@ export default function Layout({ children, title }: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className="h-full bg-gray-100">{children}</main>
     </>
   );
