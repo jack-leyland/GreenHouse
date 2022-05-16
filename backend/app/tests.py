@@ -169,3 +169,20 @@ class QueryTestCase(GraphQLTestCase):
 
         content = json.loads(response.content)
         self.assertResponseNoErrors(response)
+
+    def test_local_recommendations_query(self):
+        response = self.query(
+            """
+            query recommendations($postcode: String!) {
+                localRecommendations(postcode: $postcode) {
+                    improvementId
+                    averageCost
+                    frequency
+                }
+            }
+            """,
+            variables={"postcode": "SW6 6TF"},
+        )
+
+        content = json.loads(response.content)
+        self.assertResponseNoErrors(response)
