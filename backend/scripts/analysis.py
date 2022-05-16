@@ -87,7 +87,7 @@ rating_number = {
     "Very Good": 5,
 }
 
-timeseries_L10_years = [
+L10_years = [
     2012,
     2013,
     2014,
@@ -163,7 +163,7 @@ def convert_from_SAP(sap_rating):
         return "A"
 
 
-def av_annual_rating_data(dataframe, features = timeseries_metrics):
+def av_annual_rating_data(dataframe, features=timeseries_metrics):
     dataframe.sort_values("ADDRESS")
     feature_averages = {}
     counts = {}
@@ -223,10 +223,11 @@ def av_annual_rating_data(dataframe, features = timeseries_metrics):
     average_values = {}
     for k, v in feature_averages.items():
         average_values[k] = v / counts[k] if counts[k] != 0 else 0
-    return average_values 
+    return average_values
 
-def timeseries_data(dataframe, features = timeseries_metrics, years = timeseries_L10_years):
-    
+
+def timeseries_data(dataframe, features=timeseries_metrics, years=L10_years):
+
     result = {}
 
     # Create a new column in dataframe with "years"
@@ -234,8 +235,7 @@ def timeseries_data(dataframe, features = timeseries_metrics, years = timeseries
 
     # # First filter the dataframe by the year
     for feature in features:
-        mean = dataframe.groupby('YEAR')[feature].mean()
+        mean = dataframe.groupby("YEAR")[feature].mean()
         result[feature] = mean.tolist()
-        
-    return result
 
+    return result

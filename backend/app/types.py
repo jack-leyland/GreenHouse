@@ -214,6 +214,7 @@ class Timeseries(ObjectType):
     average_timeseries_windows_energy_eff = List(Float)
     average_timeseries_windows_environmental_eff = List(Float)
 
+
 class Improvement(ObjectType):
     lmk_key = String(required=True)
     cost = Float()
