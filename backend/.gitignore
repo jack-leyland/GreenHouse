@@ -12,4 +12,3 @@ data/
 .DS_Store
 /api/.google_credentials.json
 staticfiles/
-static/
