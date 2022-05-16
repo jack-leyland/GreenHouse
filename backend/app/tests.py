@@ -186,3 +186,34 @@ class QueryTestCase(GraphQLTestCase):
 
         content = json.loads(response.content)
         self.assertResponseNoErrors(response)
+
+    def test_BQ_query(self):
+        response = self.query(
+            """
+            query bigquery {
+                bigQuery {
+                    averageAnnualChangeLightingEnergyEff
+                    averageAnnualChangeLightingEnvironmentalEff
+                    averageAnnualChangeWallsEnergyEff
+                    averageAnnualChangeWallsEnvironmentalEff
+                    averageAnnualChangeWaterEnergyEff
+                    averageAnnualChangeWaterEnvironmentalEff
+                    averageAnnualChangeFloorEnergyEff
+                    averageAnnualChangeFloorEnvironmentalEff
+                    averageAnnualChangeRoofEnergyEff
+                    averageAnnualChangeRoofEnvironmentalEff
+                    averageAnnualChangeMainHeatingEnergyEff
+                    averageAnnualChangeMainHeatingEnvironmentalEff
+                    averageAnnualChangeMainHeatingControlsEnergyEff
+                    averageAnnualChangeMainHeatingControlsEnvironmentalEff
+                    averageAnnualChangeSecondHeatingEnergyEff
+                    averageAnnualChangeSecondHeatingEnvironmentalEff
+                    averageAnnualChangeWindowsEnergyEff
+                    averageAnnualChangeWindowsEnvironmentalEff
+                }
+            }
+            """,
+        )
+
+        content = json.loads(response.content)
+        self.assertResponseNoErrors(response)
