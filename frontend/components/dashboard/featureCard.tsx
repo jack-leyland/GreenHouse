@@ -22,7 +22,6 @@ export default function FeatureCard({
   const titleStyling =
     'text-2xl font-bold px-2 pb-1 border border-t-0 border-x-0 flex items-center justify-between text-gray-900';
 
-  console.log(analytics);
   switch (type) {
     case 'Walls':
       return (

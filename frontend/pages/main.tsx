@@ -66,7 +66,6 @@ const Main = () => {
   useEffect(() => {
     if (error) {
       setIsQueryError(true);
-      console.log(error);
     }
   }, [error]);
 
