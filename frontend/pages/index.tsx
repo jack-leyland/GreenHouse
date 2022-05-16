@@ -72,7 +72,7 @@ const Landing = () => {
   });
 
   // Ping server with dummy postcode on page load
-  useQuery(PING_SERVER, {variables: { pingParam: "XXX XXX" }});
+  useQuery(PING_SERVER, { variables: { pingParam: "XXX XXX" } });
 
   const handleSearchSubmit = (): void => {
     if (!isValidPostcode(searchBoxText)) {
