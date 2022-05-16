@@ -84,17 +84,19 @@ export default function Recommendation({
   let color;
   switch (category) {
     case "Heating":
-      color = "bg-red-500";
+      color = "border-2 border-red-400";
       break;
     case "Water":
-      color = "bg-blue-500";
+      color = "border-2 border-blue-400";
       break;
     case "Lighting":
-      color = "bg-yellow-500";
+      color = "border-2 border-yellow-400";
       break;
     case "Other":
-      color = "bg-slate-500";
+      color = "border-2 border-slate-400";
       break;
+    default:
+      color = "border-2 border-gray-400";
   }
 
   function handleFormCancel() {
@@ -108,8 +110,7 @@ export default function Recommendation({
   return (
     <div
       className={
-        "flex flex-row justify-center h-[400px] w-[300px] " +
-        (isMobile ? "mb-4" : "mx-5 my-4")
+        "flex flex-row justify-center h-[450px] md:w-1/4 w-full md:mx-4 py-3 "
       }
       ref={wrapperRef}
     >
@@ -188,7 +189,7 @@ function IncompleteView({
       ) : (
         <div
           className={
-            "rounded-lg w-full text-white flex flex-col relative overflow-hidden " +
+            "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white " +
             color
           }
         >
@@ -200,11 +201,14 @@ function IncompleteView({
               {improvementIdText}
             </h1>
           </div>
-          <div className="w-full flex items-center justify-center p-6">
+          <div className="w-full flex items-center justify-center p-6 flex-col">
+            <div>
+              <h2 className="text-sm tracking-widest title-font mb-1 font-bold">
+                Estimated Cost
+              </h2>
+            </div>
             {indicativeCost ? (
-              <span className="text-center">
-                {indicativeCost} estimated cost
-              </span>
+              <span className="text-center">{indicativeCost}</span>
             ) : (
               <span>No indicative cost is available.</span>
             )}
@@ -213,7 +217,7 @@ function IncompleteView({
             <button
               onClick={showFormHandler}
               className={
-                "flex justify-center mt-auto text-black border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded font-bold " +
+                "flex justify-center mt-auto text-base  border-0 py-2 px-4 w-full rounded  hover:bg-opacity-100 bg-opacity-90 text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " +
                 (showForm ? "bg-red-200" : "bg-white")
               }
             >
@@ -243,7 +247,7 @@ function CompletedView({
   return (
     <div
       className={
-        "rounded-lg w-full text-white flex flex-col relative overflow-hidden bg-primary opacity-80"
+        "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden border-2 border-primary bg-white"
       }
     >
       <div className="p-6 h-[40%]">
@@ -291,7 +295,7 @@ function NeighborhoodView({
   return (
     <div
       className={
-        "rounded-lg w-full text-white flex flex-col relative overflow-hidden " +
+        "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white " +
         color
       }
     >

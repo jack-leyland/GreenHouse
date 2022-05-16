@@ -92,8 +92,8 @@ export default function RecForm({
   return (
     <div
       className={
-        "h-full px-6 pt-6 rounded-lg text-white flex flex-col justify-center relative overflow-hidden " +
-        (!data ? color : "bg-gray-400")
+        "h-full px-6 pt-6 rounded-lg text-gray-600 flex flex-col justify-center relative overflow-hidden bg-white " +
+        (!data ? color : "")
       }
     >
       {isSubmissionError && (
@@ -106,14 +106,9 @@ export default function RecForm({
         </div>
       )}
       {!isSubmissionError && !loading && !data && (
-        <div className="h-full w-full overflow-y-scroll scrollbar-hide">
-          <span className="top-[5px] text-[1.5rem] pb-4 mb-4 leading-none">
-            {heading}
-          </span>
-          <div className="h-full flex-row space-between mt-4">
-            <span className="text-lg mb-1 font-bold title-font">
-              Tell us more!
-            </span>
+        <div className="h-full w-full overflow-y-hidden">
+          <span className="text-2xl py-2leading-none">{heading}</span>
+          <div className="h-full flex-row space-between py-4">
             <Formik
               initialValues={{
                 cost: 0,
@@ -153,12 +148,10 @@ export default function RecForm({
                       name="cost"
                       type="number"
                       disabled={data ? true : false}
-                      className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      className="w-full bg-white rounded border border-gray-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                     {errors.cost && (
-                      <div className="w-full rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
-                        {errors.cost}
-                      </div>
+                      <div className="text-red-500 text-sm">{errors.cost}</div>
                     )}
                   </div>
                   <div className="relative mb-2">
@@ -169,46 +162,44 @@ export default function RecForm({
                       name="date"
                       type="date"
                       disabled={data ? true : false}
-                      className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      className="w-full bg-white rounded border border-gray-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     />
                     {errors.date && (
-                      <div className="w-full rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
-                        {errors.date}
-                      </div>
+                      <div className="text-red-500 text-sm">{errors.date}</div>
                     )}
                   </div>
                   <div className="relative mb-2">
-                    <label htmlFor="agree">
-                      Do you agree to share this data with us?
-                    </label>
-                    <div className="w-full flex justify-center items-center">
-                      <span className="mr-2 mb-1">I agree</span>{" "}
-                      <Field
-                        validate={validateAgreement}
-                        id="agree"
-                        name="agree"
-                        type="checkbox"
-                        disabled={data ? true : false}
-                        className="bg-white rounded border border-gray-300 focus:border-green-500 text-base outline-none "
-                      />
+                    <div className="w-full flex justify-center items-center flex-col py-2">
+                      <div>
+                        <span className="mr-2 mb-1">Agree to share data</span>{" "}
+                        <Field
+                          validate={validateAgreement}
+                          id="agree"
+                          name="agree"
+                          type="checkbox"
+                          disabled={data ? true : false}
+                          className="bg-white rounded border border-gray-300 focus:border-green-500 text-base outline-none "
+                        />
+                      </div>
+
                       {errors.agree && (
-                        <span className=" ml-2 rounded-default bg-gray-600 p-1 mt-1 text-sm flex justify-center">
+                        <span className="text-red-500 text-sm">
                           {errors.agree}
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className=" w-full flex justify-center">
+                  <div className=" w-full flex justify-center py-3">
                     <button
                       type="submit"
                       disabled={data ? true : false}
-                      className="mr-2 text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
+                      className="mr-2 w-1/2 text-white py-1 md:px-6 px-2 focus:outline-none rounded hover:bg-opacity-100 bg-opacity-90 bg-primary"
                     >
                       Submit
                     </button>
                     <button
                       onClick={cancelHandler}
-                      className="text-white bg-gray-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-400 rounded text-lg"
+                      className="text-white w-1/2 bg-gray-400 border-0 py-1 md:px-6 px-2 focus:outline-none hover:bg-red-400 rounded"
                     >
                       Cancel
                     </button>
