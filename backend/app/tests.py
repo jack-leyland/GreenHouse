@@ -131,3 +131,41 @@ class QueryTestCase(GraphQLTestCase):
 
         content = json.loads(response.content)
         self.assertResponseNoErrors(response)
+
+    def test_analytics_query(self):
+        response = self.query(
+            """
+            query analytics($lmk: String!) {
+                analytics(lmk: $lmk) {
+                    meanCurrentEnergyEfficiency
+                    meanCurrentEnergyRating
+                    meanCurrentEnvironmentImpact
+                    meanCurrentCo2Consumption
+                    meanCurrentEnergyConsumption
+                    meanCurrentHeatingCost
+                    meanCurrentHotWaterCost
+                    meanCurrentLightingCost
+                    meanWallsEnergyEff
+                    meanWallsEnvironmentalEff
+                    meanRoofEnergyEff
+                    meanRoofEnvironmentalEff
+                    meanWaterEnergyEff
+                    meanWaterEnvironmentalEff
+                    meanMainHeatingEnergyEff
+                    meanMainHeatingEnvironmentalEff
+                    meanLightingEnergyEff
+                    meanLightingEnvironmentalEff
+                    meanFloorEnergyEff
+                    meanFloorEnvironmentalEff
+                    meanWindowsEnergyEff
+                    meanWindowsEnvironmentalEff
+                }
+            }
+            """,
+            variables={
+                "lmk": "03caacf3e712ce8428682340e06907fab1ed751090446397dc714a2fa3b4d571"
+            },
+        )
+
+        content = json.loads(response.content)
+        self.assertResponseNoErrors(response)
