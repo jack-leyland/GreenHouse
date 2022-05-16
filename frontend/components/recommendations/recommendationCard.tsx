@@ -316,15 +316,6 @@ function NeighborhoodView({
           They have reported an average cost of <strong>£{averageCost}</strong>.
         </h2>
         <br />
-        <h2 className="text-xs tracking-wide title-font mb-1 font-medium">
-          If you have also completed this upgrade, make sure you{" "}
-          <span
-            className="text-blue-400 underline cursor-pointer"
-            onClick={() => setActiveView("Outstanding")}
-          >
-            let us know!
-          </span>
-        </h2>
       </div>
     </div>
   );
