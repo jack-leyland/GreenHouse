@@ -1,9 +1,9 @@
-import type { Fragment, ReactElement } from 'react';
-import { useState, useEffect } from 'react';
-import House from '../../assets/house.svg';
-import Link from 'next/link';
-import Router from 'next/router';
-import { useAppContext } from '../../context/state';
+import type { Fragment, ReactElement } from "react";
+import { useState, useEffect } from "react";
+import House from "../../assets/house.svg";
+import Link from "next/link";
+import Router from "next/router";
+import { useAppContext } from "../../context/state";
 
 export default function StaticHeader() {
   const GlobalContext = useAppContext();
