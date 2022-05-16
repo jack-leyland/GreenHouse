@@ -110,7 +110,8 @@ export default function Recommendation({
   return (
     <div
       className={
-        "flex flex-row justify-center h-[450px] md:w-1/4 w-full md:mx-4 py-3 "
+        "flex flex-row justify-center h-[400px] w-[300px] " +
+        (isMobile ? "mb-4" : "mx-5 my-4")
       }
       ref={wrapperRef}
     >
@@ -217,7 +218,7 @@ function IncompleteView({
             <button
               onClick={showFormHandler}
               className={
-                "flex justify-center mt-auto text-base  border-0 py-2 px-4 w-full rounded  hover:bg-opacity-100 bg-opacity-90 text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " +
+                "flex justify-center mt-auto text-xs md:text-base  border-0 py-2 px-4 w-full rounded  hover:bg-opacity-100 bg-opacity-90 text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " +
                 (showForm ? "bg-red-200" : "bg-white")
               }
             >

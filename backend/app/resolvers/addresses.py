@@ -20,7 +20,7 @@ def create_addresses(data):
                 if address.date >= other.date:
                     other = address
 
-        if repeat:
+        if not repeat:
             addresses.append(address)
 
     return addresses

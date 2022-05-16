@@ -21,7 +21,6 @@ export function AppContextWrapper({ children }: ContextWrapperProps) {
   };
 
   const setHouseInfo = (data: epcCertificateObject["ExtraInfo"]) => {
-    console.log(data);
     setState({ ...state, extraHouseInfo: data });
   };
 
@@ -44,8 +43,7 @@ export function AppContextWrapper({ children }: ContextWrapperProps) {
         JSON.stringify(state.extraHouseInfo)
       );
     }
-    console.log(localStorage.getItem("extraHouseInfo"));
-    console.log(state);
+
   }, [state]);
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
