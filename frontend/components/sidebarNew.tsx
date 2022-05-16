@@ -55,7 +55,7 @@ export default function DashboardWrapper({
       href: "/analysis",
       icon: DiGoogleAnalytics,
       current: currentPage == "Analysis",
-    }
+    },
     {
       name: "About us",
       href: "/about",
