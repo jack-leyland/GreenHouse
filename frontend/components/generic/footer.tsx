@@ -4,10 +4,10 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer>
-      <div className="w-[100vw] bg-black fixed bottom-0 h-[50px] flex justify-center items-center">
+      <div className="w-[100vw] bg-gray-900 gap-28 fixed bottom-0 h-[50px] flex justify-center items-center">
         <Link href="/about">
           <span className="text-white pr-3 cursor-pointer hover:underline">
-            About us
+            About Us
           </span>
         </Link>
         <Link href="/faq">

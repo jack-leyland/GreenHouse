@@ -167,17 +167,14 @@ const Main = () => {
         <>
           {/*Loading Display*/}
           {loading ? (
-            <div className="relative top-[30vh] w-full flex flex-col justify-center items-center bg-gray-100">
-              <h1 className="animate-fade text-3xl text-gray-700 italic pb-2">
-                Loading...
-              </h1>
-              <Lottie
-                loop
-                animationData={loadingJson}
-                play
-                style={{ width: 250, height: 250 }}
-              />
-            </div>
+              <div className="relative top-[20vh] w-full flex flex-col justify-center items-center bg-gray-100">
+                <Lottie
+                  loop
+                  animationData={loadingJson}
+                  play
+                  style={{ width: 300, height: 300 }}
+                />
+              </div>
           ) : (
             <>
               {/*Error Display*/}

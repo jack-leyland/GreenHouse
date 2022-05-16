@@ -20,7 +20,7 @@ interface props {
   subTitle: string;
   setModalContent: any;
   currentPage: string;
-  analysis: boolean;
+  analysis?: boolean;
 }
 
 function classNames(...classes: any) {
@@ -33,7 +33,7 @@ export default function DashboardWrapper({
   subTitle,
   setModalContent,
   currentPage,
-  analysis
+  analysis = false
 }: props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -51,16 +51,16 @@ export default function DashboardWrapper({
       current: currentPage == "Recommendations",
     },
     {
-      name: "Analysis",
+      name: "Regional Analysis",
       href: "/analysis",
       icon: DiGoogleAnalytics,
       current: currentPage == "Analysis",
     },
     {
-      name: "About us",
+      name: "About Us",
       href: "/about",
       icon: BsInfoCircle,
-      current: currentPage == "About us",
+      current: currentPage == "About Us",
     },
     {
       name: "FAQ",
