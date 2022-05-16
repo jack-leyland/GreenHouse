@@ -44,6 +44,16 @@ headers = {
 
 payload = {}
 
+
+def verify_client(info):
+    # print(f"env: {ENV}")
+    url = info.context.META["HTTP_REFERER"]
+    if ENV == "DEV":
+        return url.startswith("http://localhost:3000")
+
+    return url.startswith("https://epc-site-frontend.vercel.app")
+
+
 class AddImprovement(Mutation):
     class Arguments:
         cost = Float()
@@ -56,6 +66,8 @@ class AddImprovement(Mutation):
     improvement = Field(lambda: Improvement)
 
     def mutate(root, info, cost, date, lmk_key, improvement_id, postcode):
+        if not verify_client(info):
+            return None
         print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
             cost=cost,
@@ -98,6 +110,8 @@ class Query(ObjectType):
     )
 
     def resolve_analytics(root, info, lmk):
+        if not verify_client(info):
+            return None
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
@@ -117,6 +131,9 @@ class Query(ObjectType):
         return create_analytics(result)
 
     def resolve_address(root, info, postcode):
+        if not verify_client(info):
+            return None
+
         page_size = 1000
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/search?postcode={postcode}&size={page_size}"
         response = requests.request("GET", url, headers=headers, data=payload)
@@ -126,6 +143,8 @@ class Query(ObjectType):
         return create_addresses(data)
 
     def resolve_certificate(root, info, lmk):
+        if not verify_client(info):
+            return None
         url = f"https://epc.opendatacommunities.org/api/v1/domestic/certificate/{lmk}"
         response = requests.request("GET", url, headers=headers, data=payload)
         data = response.json()["rows"][0]
@@ -136,6 +155,8 @@ class Query(ObjectType):
         return create_certificate(data)
 
     def resolve_recommendations(root, info, lmk):
+        if not verify_client(info):
+            return None
         url = (
             f"https://epc.opendatacommunities.org/api/v1/domestic/recommendations/{lmk}"
         )
@@ -155,7 +176,6 @@ class Query(ObjectType):
             SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`
         """
-
         local_df = (
             client.query(query)
             .result()
@@ -169,6 +189,8 @@ class Query(ObjectType):
         return create_timeseries(local_df)
 
     def resolve_local_recommendations(root, info, postcode):
+        if not verify_client(info):
+            return None
         area = postcode[:3]
 
         if len(postcode) == 7:

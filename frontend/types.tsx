@@ -397,3 +397,26 @@ export interface epcCertificateRecs {
   hotWaterCostPotential: number;
   hotWaterCostCurrent: number;
 }
+
+export interface BQBarData {
+  name: string,
+  lightingEng: number,
+  lightingEnv: number,
+  wallsEng: number,
+  wallsEnv: number,
+  waterEng: number,
+  waterEnv: number,
+  floorEng: number,
+  floorEnv: number,
+  roofEng: number,
+  roofEnv: number,
+  heatingEng:number,
+  heatingEnv: number,
+  heatingContEng: number,
+  heatingContEnv: number,
+  heatingSecEng: number,
+  heatingSecEnv: number,
+  windowsEng: number,
+  windowsEnv: number,
+
+}
