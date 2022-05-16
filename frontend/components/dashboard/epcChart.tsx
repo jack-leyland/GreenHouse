@@ -34,7 +34,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
         <div className="row-start-1 flex items-center">
           <button
             onClick={() => setModalHandler('epcChart')}
-            className="mr-2 font-semibold md:text-base text-xs md:hover:no-underline hover:underline"
+            className="mr-2 font-semibold md:text-base text-xs hover:underline"
           >
             EPC Rating
           </button>
