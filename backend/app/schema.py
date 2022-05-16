@@ -47,7 +47,6 @@ payload = {}
 
 
 def verify_client(info):
-    # print(f"env: {ENV}")
     url = info.context.META.get("HTTP_REFERER")
     if url is None:
         return False
@@ -73,7 +72,6 @@ class AddImprovement(Mutation):
         if not verify_client(info):
             return None
 
-        print(cost, date, lmk_key, improvement_id, postcode)
         improvement = Improvement(
             cost=cost,
             date=date,
