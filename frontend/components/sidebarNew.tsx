@@ -8,7 +8,7 @@ import {
   BsQuestionCircle,
   BsInfoCircle,
 } from "react-icons/bs";
-import {DiGoogleAnalytics} from "react-icons/di";
+import { DiGoogleAnalytics } from "react-icons/di";
 import Image from "next/image";
 import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
@@ -33,7 +33,7 @@ export default function DashboardWrapper({
   subTitle,
   setModalContent,
   currentPage,
-  analysis = false
+  analysis = false,
 }: props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
