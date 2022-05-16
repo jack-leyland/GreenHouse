@@ -36,10 +36,10 @@ export default function RecCostSummary({ data }: props) {
         <div className="w-[95%] animate-fade">
           <div className="grid grid-cols-3 grid-rows-4 gap-1">
             <div className="col-start-1 col-end-4 row-start-1 row-end-1 text-center font-medium title-font tracking-wide bg-gray-200 rounded-default p-1">
-              Your potential savings by improvement category
+              Potential Savings
             </div>
             <div className="col-start-1 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font pb-1 mt-1 font-bold border-b border-black">
-              <span className="bg-yellow-500 pr-5 mr-5"></span>
+              <span className="bg-yellow-400 pr-5 mr-5"></span>
               Lighting
             </div>
             <div className="col-start-3 col-end-3 row-start-2 row-end-2 text-sm tracking-widest title-font pb-1 mt-1 border-b border-black">
@@ -56,7 +56,7 @@ export default function RecCostSummary({ data }: props) {
             </div>
 
             <div className="col-start-1 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font pb-1 mt-1 font-bold border-b border-black">
-              <span className="bg-red-500 pr-5 mr-5"></span>
+              <span className="bg-red-400 pr-5 mr-5"></span>
               Heating
             </div>
             <div className="col-start-3 col-end-3 row-start-3 row-end-3 text-sm tracking-widest title-font pb-1 mt-1 border-b border-black">
@@ -73,7 +73,7 @@ export default function RecCostSummary({ data }: props) {
             </div>
 
             <div className="col-start-1 col-end-3 row-start-4 row-end-4 text-sm tracking-widest title-font pb-1 mt-1 font-bold border-b border-black">
-              <span className="bg-blue-500 pr-5 mr-5"></span>
+              <span className="bg-blue-400 pr-5 mr-5"></span>
               Water
             </div>
             <div className="col-start-3 col-end-3 row-start-4 row-end-4 text-sm tracking-widest title-font pb-1 mt-1 border-b border-black">

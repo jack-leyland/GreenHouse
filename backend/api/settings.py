@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import dj_database_url
 import environ
+import sys
 
 # Initialise environment variables
 env = environ.Env()
@@ -110,10 +111,17 @@ DATABASES = {
 }
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
+# Use test DB
+if "test" in sys.argv:
+    DATABASE_URL = os.environ.get("TEST_DATABASE_URL")
+
 db_from_env = dj_database_url.config(
     default=DATABASE_URL, conn_max_age=500, ssl_require=True
 )
+
 DATABASES["default"].update(db_from_env)
+DATABASES["default"]["TEST"] = {"NAME": DATABASES["default"]["NAME"]}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -150,7 +158,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type

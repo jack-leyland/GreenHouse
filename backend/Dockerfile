@@ -11,6 +11,10 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 1
 
+# set google credentials
+COPY add-google-credentials.sh add-google-credentials.sh
+ENTRYPOINT ["sh", "add-google-credentials.sh"]
+
 # install dependencies
 COPY ./requirements.txt .
 RUN pip install --upgrade pip

@@ -155,6 +155,7 @@ class Analytics(ObjectType):
 class Address(ObjectType):
     lmk_key = String(required=True)
     address = String()
+    date = DateTime()
 
 
 class Recommendation(ObjectType):
@@ -212,6 +213,7 @@ class Timeseries(ObjectType):
     average_timeseries_second_heating_environmental_eff = List(Float)
     average_timeseries_windows_energy_eff = List(Float)
     average_timeseries_windows_environmental_eff = List(Float)
+
 
 class Improvement(ObjectType):
     lmk_key = String(required=True)
