@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import { epcRecommendationObject } from "../../types";
-import { useAppContext } from "../../context/state";
-import { HeatingCategories } from "../../types";
-import RecForm from "./recForm";
+import React, { useEffect, useState, useRef } from 'react';
+import { epcRecommendationObject } from '../../types';
+import { useAppContext } from '../../context/state';
+import { HeatingCategories } from '../../types';
+import RecForm from './recForm';
 
 interface props {
-  improvementId: epcRecommendationObject["improvementId"];
-  improvementIdText: epcRecommendationObject["improvementIdText"];
-  indicativeCost?: epcRecommendationObject["indicativeCost"];
-  date?: epcRecommendationObject["date"];
-  cost?: epcRecommendationObject["cost"];
+  improvementId: epcRecommendationObject['improvementId'];
+  improvementIdText: epcRecommendationObject['improvementIdText'];
+  indicativeCost?: epcRecommendationObject['indicativeCost'];
+  date?: epcRecommendationObject['date'];
+  cost?: epcRecommendationObject['cost'];
   isMobile: boolean;
   isCompleted?: boolean;
   isLocal?: boolean;
@@ -32,10 +32,10 @@ function useOutsideClick(ref: React.RefObject<HTMLDivElement>, handler: any) {
     }
 
     // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside as any);
+    document.addEventListener('mousedown', handleClickOutside as any);
     return () => {
       // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside as any);
+      document.removeEventListener('mousedown', handleClickOutside as any);
     };
   }, [ref]);
 }
@@ -55,9 +55,9 @@ export default function Recommendation({
 }: props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [showForm, setShowForm] = useState(false);
-  const [lmk, setLmk] = useState<string>("");
+  const [lmk, setLmk] = useState<string>('');
   const GlobalContext = useAppContext();
-  const [postcode, setPostcode] = useState<string>("");
+  const [postcode, setPostcode] = useState<string>('');
 
   useEffect(() => {
     if (GlobalContext.activeLmk) {
@@ -83,20 +83,20 @@ export default function Recommendation({
   let category = HeatingCategories[improvementId]; // This works, idk what to do with the error
   let color;
   switch (category) {
-    case "Heating":
-      color = "border-2 border-red-400";
+    case 'Heating':
+      color = 'border-2 border-red-400';
       break;
-    case "Water":
-      color = "border-2 border-blue-400";
+    case 'Water':
+      color = 'border-2 border-blue-400';
       break;
-    case "Lighting":
-      color = "border-2 border-yellow-400";
+    case 'Lighting':
+      color = 'border-2 border-yellow-400';
       break;
-    case "Other":
-      color = "border-2 border-slate-400";
+    case 'Other':
+      color = 'border-2 border-slate-400';
       break;
     default:
-      color = "border-2 border-gray-400";
+      color = 'border-2 border-gray-400';
   }
 
   function handleFormCancel() {
@@ -110,8 +110,8 @@ export default function Recommendation({
   return (
     <div
       className={
-        "flex flex-row justify-center h-[400px] w-[300px] " +
-        (isMobile ? "mb-4" : "mx-5 my-4")
+        'flex flex-row justify-center h-[400px] w-[300px] ' +
+        (isMobile ? 'mb-4' : 'mx-5 my-4')
       }
       ref={wrapperRef}
     >
@@ -152,9 +152,9 @@ export default function Recommendation({
 }
 
 interface incompleteViewProps {
-  improvementId: epcRecommendationObject["improvementId"];
-  improvementIdText: epcRecommendationObject["improvementIdText"];
-  indicativeCost?: epcRecommendationObject["indicativeCost"];
+  improvementId: epcRecommendationObject['improvementId'];
+  improvementIdText: epcRecommendationObject['improvementIdText'];
+  indicativeCost?: epcRecommendationObject['indicativeCost'];
   lmk: string;
   showForm: boolean;
   postcode: string;
@@ -190,7 +190,7 @@ function IncompleteView({
       ) : (
         <div
           className={
-            "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white " +
+            'rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white ' +
             color
           }
         >
@@ -218,11 +218,11 @@ function IncompleteView({
             <button
               onClick={showFormHandler}
               className={
-                "flex justify-center mt-auto text-xs md:text-base  border-0 py-2 px-4 w-full rounded hover:bg-opacity-100 bg-opacity-90 text-gray-700  hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 " +
-                (showForm ? "bg-red-200" : "bg-gray-200")
+                'flex justify-center mt-auto text-xs md:text-base  border-0 py-2 px-4 w-full rounded hover:bg-opacity-100 bg-opacity-90 text-gray-700  hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
+                (showForm ? 'bg-red-200' : 'bg-gray-200')
               }
             >
-              {showForm ? "Cancel" : "I've done this!"}
+              {showForm ? 'Cancel' : "I've done this!"}
             </button>
           </div>
         </div>
@@ -232,10 +232,10 @@ function IncompleteView({
 }
 
 interface completedViewProps {
-  improvementIdText: epcRecommendationObject["improvementIdText"];
+  improvementIdText: epcRecommendationObject['improvementIdText'];
   category: string;
-  date?: epcRecommendationObject["date"];
-  cost?: epcRecommendationObject["cost"];
+  date?: epcRecommendationObject['date'];
+  cost?: epcRecommendationObject['cost'];
 }
 
 function CompletedView({
@@ -244,11 +244,11 @@ function CompletedView({
   cost,
   category,
 }: completedViewProps) {
-  let strippedDate = date?.replace(/"/g, "");
+  let strippedDate = date?.replace(/"/g, '');
   return (
     <div
       className={
-        "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden border-2 border-primary bg-white"
+        'rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden border-2 border-primary bg-white'
       }
     >
       <div className="p-6 h-[40%]">
@@ -259,12 +259,13 @@ function CompletedView({
           {improvementIdText}
         </h1>
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
-          You completed this improvement on <strong>{strippedDate}</strong>.
-          Nice work!
+          You completed this improvement
+          {strippedDate ? ' on ' : ''}
+          {strippedDate ? <strong> {strippedDate}</strong> : ''}. Nice work!
         </h2>
         <br />
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
-          You let us know that it cost you <strong>£{cost}</strong>.
+          You let us know that it cost you <strong>£{cost?.toFixed(2)}</strong>.
         </h2>
         <br />
         <h2 className="text-xs tracking-wide title-font mb-1 font-bold">
@@ -291,12 +292,11 @@ function NeighborhoodView({
   frequency,
   category,
   color,
-  setActiveView,
 }: neighborhoodViewProps) {
   return (
     <div
       className={
-        "rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white " +
+        'rounded-lg w-full text-gray-600 flex flex-col relative overflow-hidden bg-white ' +
         color
       }
     >
@@ -313,7 +313,8 @@ function NeighborhoodView({
         </h2>
         <br />
         <h2 className="text-sm tracking-wide title-font mb-1 font-medium">
-          They have reported an average cost of <strong>£{averageCost}</strong>.
+          They have reported an average cost of{' '}
+          <strong>£{averageCost?.toFixed(2)}</strong>.
         </h2>
         <br />
       </div>

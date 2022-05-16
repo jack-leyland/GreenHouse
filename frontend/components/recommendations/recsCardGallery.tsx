@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   epcRecommendationObject,
   localRecommendationObject,
-} from "../../types";
-import Recommendation from "./recommendationCard";
-import { v4 as uuid } from "uuid";
-import idTexts from "../../idTexts.json";
+} from '../../types';
+import Recommendation from './recommendationCard';
+import { v4 as uuid } from 'uuid';
+import idTexts from '../../idTexts.json';
+import { AreaChart } from 'recharts';
+import { GiConsoleController } from 'react-icons/gi';
 
 interface props {
   data: Array<epcRecommendationObject>;
@@ -14,7 +16,7 @@ interface props {
 }
 
 export default function RecCardGallery({ data, isMobile, regionData }: props) {
-  const [activeView, setActiveView] = useState<string>("Outstanding");
+  const [activeView, setActiveView] = useState<string>('Outstanding');
   const [recData, setRecData] = useState<Array<epcRecommendationObject>>(data);
   const [regionRecData, setRegionRecData] =
     useState<Array<localRecommendationObject>>(regionData);
@@ -28,23 +30,32 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
   }, [data, regionData]);
 
   useEffect(() => {
-    if (recData.length == 0) {
-      setNoRecs(true);
-    }
-
     if (regionRecData.length == 0) {
       setNoRegionRecs(true);
     }
+    let allComplete = true;
+    let allInvalid = true;
 
     recData.forEach((elem) => {
-      if (elem.completed) setNoCompleted(false);
+      if (elem.completed) {
+        setNoCompleted(false);
+      } else {
+        allComplete = false;
+      }
+      if (elem.improvementId != '') {
+        allInvalid = false;
+      }
     });
+
+    if (allComplete || allInvalid) {
+      setNoRecs(true);
+    }
   }, [recData, regionRecData]);
 
   // Could cause weird behavior if I'm wrong about how
   // epc sends these back
   function formatCostString(str: string): string {
-    let formatted = str.replace(/[?]/g, "£");
+    let formatted = str.replace(/[?]/g, '£');
     return formatted;
   }
   return (
@@ -54,39 +65,39 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
           <div className="flex  items-center">
             <span
               className={
-                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
-                (activeView == "Outstanding"
-                  ? "bg-primary text-white"
-                  : "text-gray-500 hover:text-gray-700")
+                ' px-3 py-2 font-medium text-sm rounded-md cursor-pointer ' +
+                (activeView == 'Outstanding'
+                  ? 'bg-primary text-white'
+                  : 'text-gray-500 hover:text-gray-700')
               }
               onClick={() => {
-                setActiveView("Outstanding");
+                setActiveView('Outstanding');
               }}
             >
               Outstanding
             </span>
             <span
               className={
-                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
-                (activeView == "Completed"
-                  ? "bg-primary text-white"
-                  : "text-gray-500 hover:text-gray-700")
+                ' px-3 py-2 font-medium text-sm rounded-md cursor-pointer ' +
+                (activeView == 'Completed'
+                  ? 'bg-primary text-white'
+                  : 'text-gray-500 hover:text-gray-700')
               }
               onClick={() => {
-                setActiveView("Completed");
+                setActiveView('Completed');
               }}
             >
               Completed
             </span>
             <span
               className={
-                " px-3 py-2 font-medium text-sm rounded-md cursor-pointer " +
-                (activeView == "Neighborhood"
-                  ? "bg-primary text-white"
-                  : "text-gray-500 hover:text-gray-700")
+                ' px-3 py-2 font-medium text-sm rounded-md cursor-pointer ' +
+                (activeView == 'Neighborhood'
+                  ? 'bg-primary text-white'
+                  : 'text-gray-500 hover:text-gray-700')
               }
               onClick={() => {
-                setActiveView("Neighborhood");
+                setActiveView('Neighborhood');
               }}
             >
               Area Insights
@@ -97,22 +108,22 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
       <div className="flex justify-center animate-fade">
         <div className="w-[95%] flex flex-wrap justify-center items-center mt-2 sm:flex-row flex-col">
           {/* This is mildy hacky, might change later */}
-          {noRecs && activeView == "Outstanding" && (
+          {noRecs && activeView == 'Outstanding' && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               There are no available recommendations for this property!
             </div>
           )}
-          {!noRecs && noCompleted && activeView == "Completed" && (
+          {!noRecs && noCompleted && activeView == 'Completed' && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               {"You haven't reported any improvements yet!"}
             </div>
           )}
-          {noRecs && noCompleted && activeView == "Completed" && (
+          {noRecs && noCompleted && activeView == 'Completed' && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               There are no available recommendations for this property!
             </div>
           )}
-          {noRegionRecs && activeView == "Neighborhood" && (
+          {noRegionRecs && activeView == 'Neighborhood' && (
             <div className="flex w-full text-gray-500 justify-center mt-2">
               {
                 "Unfortunately, we haven't yet collected any data on improvements made in your neighborhood."
@@ -120,8 +131,8 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             </div>
           )}
           {recData.map((elem) => {
-            if (activeView == "Outstanding") {
-              if (!elem.completed) {
+            if (activeView == 'Outstanding') {
+              if (!elem.completed && elem.improvementId != '') {
                 return (
                   <Recommendation
                     indicativeCost={formatCostString(elem.indicativeCost)}
@@ -133,7 +144,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
                   />
                 );
               }
-            } else if (activeView == "Completed") {
+            } else if (activeView == 'Completed') {
               if (elem.completed) {
                 return (
                   <Recommendation
@@ -151,22 +162,24 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
             }
           })}
           {regionRecData &&
-            activeView == "Neighborhood" &&
+            activeView == 'Neighborhood' &&
             regionRecData.map((elem) => {
-              return (
-                <Recommendation
-                  averageCost={elem.averageCost}
-                  frequency={elem.frequency}
-                  improvementId={elem.improvementId}
-                  improvementIdText={
-                    (idTexts as any)[parseInt(elem.improvementId)]
-                  }
-                  key={uuid()}
-                  isMobile={isMobile}
-                  isLocal={true}
-                  setActiveView={setActiveView}
-                />
-              );
+              if (elem.improvementId != '') {
+                return (
+                  <Recommendation
+                    averageCost={elem.averageCost}
+                    frequency={elem.frequency}
+                    improvementId={elem.improvementId}
+                    improvementIdText={
+                      (idTexts as any)[parseInt(elem.improvementId)]
+                    }
+                    key={uuid()}
+                    isMobile={isMobile}
+                    isLocal={true}
+                    setActiveView={setActiveView}
+                  />
+                );
+              }
             })}
         </div>
       </div>
