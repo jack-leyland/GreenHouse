@@ -50,7 +50,7 @@ export default function CostSummary({
               <b>£{data.heatingCostPotential}</b>/year
             </td>
             <td className={tdStyle}>
-              <b>£{analytics?.meanCurrentHeatingCost}</b>/year
+              <b>£{analytics?.meanCurrentHeatingCost.toFixed(2)}</b>/year
             </td>
           </tr>
 
@@ -67,7 +67,7 @@ export default function CostSummary({
               <b>£{data.hotWaterCostPotential}</b>/year
             </td>
             <td className={tdStyle}>
-              <b>£{analytics?.meanCurrentHotWaterCost}</b>/year
+              <b>£{analytics?.meanCurrentHotWaterCost.toFixed(2)}</b>/year
             </td>
           </tr>
 
@@ -84,7 +84,7 @@ export default function CostSummary({
               <b>£{data.lightingCostPotential}</b>/year
             </td>
             <td className={tdStyle}>
-              <b>£{analytics?.meanCurrentLightingCost}</b>/year
+              <b>£{analytics?.meanCurrentLightingCost.toFixed(2)}</b>/year
             </td>
           </tr>
         </tbody>

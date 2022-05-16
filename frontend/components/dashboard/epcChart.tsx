@@ -131,7 +131,7 @@ export default function EpcChart({ data, analytics, setModalHandler }: props) {
           </div>
           <div className="flex flex-col justify-evenly">
             <div className="py-1 md:text-base text-xs ">
-              Score: <b>{analytics.meanCurrentEnergyEfficiency}</b>
+              Score: <b>{analytics.meanCurrentEnergyEfficiency.toFixed(1)}</b>
             </div>
             <div className="pb-2 md:text-base text-xs ">
               Rating: <b>{analytics.meanCurrentEnergyRating}</b>{' '}

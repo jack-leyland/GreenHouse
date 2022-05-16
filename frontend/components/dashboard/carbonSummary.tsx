@@ -76,7 +76,8 @@ export default function CarbonSummary({
           </div>
           <div className="py-1 md:text-base text-sm">
             The average for CO<sub>2</sub> production for your area is{' '}
-            <b>{analytics.meanCurrentCo2Consumption}</b> tonnes per year.
+            <b>{analytics.meanCurrentCo2Consumption.toFixed(1)}</b> tonnes per
+            year.
           </div>
         </div>
       </div>
