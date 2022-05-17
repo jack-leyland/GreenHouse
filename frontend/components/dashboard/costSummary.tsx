@@ -1,12 +1,12 @@
-import React, { Dispatch, SetStateAction } from "react";
-import { GiWaterDrop, GiFireplace } from "react-icons/gi";
-import { BsLightbulb } from "react-icons/bs";
-import { epcCertificateObject, packagedAnalyticsObject } from "../../types";
-import { AiFillQuestionCircle } from "react-icons/ai";
+import React, { Dispatch, SetStateAction } from 'react';
+import { GiWaterDrop, GiFireplace } from 'react-icons/gi';
+import { BsLightbulb } from 'react-icons/bs';
+import { epcCertificateObject, packagedAnalyticsObject } from '../../types';
+import { AiFillQuestionCircle } from 'react-icons/ai';
 
 interface props {
-  data: epcCertificateObject["House"]["costs"];
-  analytics: packagedAnalyticsObject["cost"];
+  data: epcCertificateObject['House']['costs'];
+  analytics: packagedAnalyticsObject['cost'];
   setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
@@ -15,20 +15,20 @@ export default function CostSummary({
   analytics,
   setModalHandler,
 }: props) {
-  const tdStyle = "border ";
+  const tdStyle = 'border ';
   const titleStyle =
-    "justify-center font-semibold text-base md:text-lg flex items-center gap-1";
-  const headStyle = tdStyle + "font-semibold md:text-lg";
+    'justify-center font-semibold text-base md:text-lg flex items-center gap-1';
+  const headStyle = tdStyle + 'font-semibold md:text-lg';
 
   return (
-    <div className="py-2 flex flex-col h-5/6 overflow-x-scroll">
+    <div className="py-2 flex flex-col h-5/6 overflow-x-scroll scrollbar-hide">
       <table className="h-full text-center">
         <tr className="bg-gray-50">
           <td className="bg-white flex justify-center items-center h-full">
             <AiFillQuestionCircle
               size={24}
               className="hover:cursor-pointer"
-              onClick={() => setModalHandler("costs")}
+              onClick={() => setModalHandler('costs')}
             />
           </td>
           <td className={headStyle}>Current Cost</td>
@@ -57,7 +57,7 @@ export default function CostSummary({
           <tr className="bg-gray-50">
             <td className={tdStyle}>
               <div className={titleStyle}>
-                Hot Water <GiWaterDrop color="#34bdeb" />{" "}
+                Hot Water <GiWaterDrop color="#34bdeb" />{' '}
               </div>
             </td>
             <td className={tdStyle}>
