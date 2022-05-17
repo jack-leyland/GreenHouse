@@ -75,7 +75,9 @@ export default function PageTitle({
                 More Details
               </button>
             ) : (
-              <h3 className="mr-6 text-4xl text-orange-400 overflow-hidden hidden sm:block">Beta</h3>
+              <h3 className="mr-6 text-4xl text-orange-400 overflow-hidden hidden sm:block">
+                Beta
+              </h3>
             )}
           </div>
         </div>

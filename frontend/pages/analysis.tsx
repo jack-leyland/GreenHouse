@@ -36,7 +36,7 @@ const Main = () => {
     "Lighting Energy Efficiency"
   );
   const [modalContent, setModalContent] = useState<string>("");
-  const [smallScreen, setSmallScreen] = useState(false)
+  const [smallScreen, setSmallScreen] = useState(false);
   const { loading, error, data } = useQuery(GET_BQ_DATA, {});
 
   function classNames(...classes: string[]) {
@@ -195,10 +195,10 @@ const Main = () => {
   }, [data]);
 
   useEffect(() => {
-    if(window.matchMedia("(max-width: 460px)").matches){
-      setSmallScreen(true)
+    if (window.matchMedia("(max-width: 460px)").matches) {
+      setSmallScreen(true);
     }
-  }, [])
+  }, []);
 
   return (
     <DashboardWrapper
@@ -216,27 +216,28 @@ const Main = () => {
                 <div className="px-4 font-medium text-xl items-center flex gap-3">
                   Average Household Improvement Per Year
                   <AiFillQuestionCircle
-                        size={16}
-                        className="hover:cursor-pointer"
-                        onClick={() => setModalContent("BQimprovements")}
-                      />
+                    size={16}
+                    className="hover:cursor-pointer"
+                    onClick={() => setModalContent("BQimprovements")}
+                  />
                 </div>
                 <div className="p-4 py-2 font-light text-sm text-left">
                   For households that have submitted 2+ EPC reports
                 </div>
-                {
-                  smallScreen ?
+                {smallScreen ? (
                   <div className="p-4 py-2 font-light text-sm text-left italic">
                     Tap on the bar to see the category.
-                  </div>  
-                  :
-                  null
-                }
+                  </div>
+                ) : null}
               </div>
               {barData && (
                 <ResponsiveContainer width={"100%"} height={520}>
                   <BarChart
-                    style={smallScreen ? {position: "relative"} : { position: "relative", left: "-100px" }}
+                    style={
+                      smallScreen
+                        ? { position: "relative" }
+                        : { position: "relative", left: "-100px" }
+                    }
                     layout="vertical"
                     width={560}
                     height={520}
@@ -257,7 +258,7 @@ const Main = () => {
                     <YAxis
                       type="category"
                       dataKey="name"
-                      width={ smallScreen ? 0 : 300}
+                      width={smallScreen ? 0 : 300}
                       tick={{ fontSize: 11 }}
                     />
                     <Bar dataKey="value" fill="#19b45a" />
@@ -281,7 +282,6 @@ const Main = () => {
                       Based on all EPC reports published in the region since
                       2008
                     </div>
-
                   </div>
                   <ResponsiveContainer width={"100%"} height={350}>
                     <LineChart
