@@ -23,19 +23,19 @@ export default function CostSummary({
   return (
     <div className="py-2 flex flex-col h-5/6 overflow-x-scroll scrollbar-hide">
       <table className="h-full text-center">
-      <tbody>
-        <tr className="bg-gray-50">
-          <td className="bg-white flex justify-center items-center h-full">
-            <AiFillQuestionCircle
-              size={24}
-              className="hover:cursor-pointer"
-              onClick={() => setModalHandler("costs")}
-            />
-          </td>
-          <td className={headStyle}>Current Cost</td>
-          <td className={headStyle}>Potential Cost</td>
-          <td className={headStyle}>Area Average</td>
-        </tr>
+        <tbody>
+          <tr className="bg-gray-50">
+            <td className="bg-white flex justify-center items-center h-full">
+              <AiFillQuestionCircle
+                size={24}
+                className="hover:cursor-pointer"
+                onClick={() => setModalHandler("costs")}
+              />
+            </td>
+            <td className={headStyle}>Current Cost</td>
+            <td className={headStyle}>Potential Cost</td>
+            <td className={headStyle}>Area Average</td>
+          </tr>
 
           <tr>
             <td className={tdStyle}>
