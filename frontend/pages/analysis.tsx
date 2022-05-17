@@ -44,7 +44,6 @@ const Main = () => {
   }
 
   function formatTimeseries(data: number[]) {
-    console.log(timeseriesData);
     return data.map((dataPoint: number, index: number) => {
       return {
         year: (2008 + index).toString(),
@@ -327,7 +326,7 @@ const Main = () => {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="overflow-scroll h-44 origin-top-right absolute right-0 w-64 md:top-5 bottom-20 mt-2 md:w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="overflow-scroll h-44 origin-top-right absolute right-0 w-64 lg:top-5 bottom-20 mt-2 md:w-96 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div className="py-1">
                             {categories.map(
                               (category: { name: string; value: string }) => (

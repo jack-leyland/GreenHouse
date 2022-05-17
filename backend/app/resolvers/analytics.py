@@ -75,5 +75,5 @@ def create_analytics(local_df):
     analytics.mean_windows_energy_eff = local_df["windows-energy-eff"].mean()
 
     analytics.mean_windows_environmental_eff = local_df["windows-env-eff"].mean()
-    print(analytics)
+
     return analytics
