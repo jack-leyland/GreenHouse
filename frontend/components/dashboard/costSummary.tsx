@@ -23,6 +23,7 @@ export default function CostSummary({
   return (
     <div className="py-2 flex flex-col h-5/6 overflow-x-scroll scrollbar-hide">
       <table className="h-full text-center">
+      <tbody>
         <tr className="bg-gray-50">
           <td className="bg-white flex justify-center items-center h-full">
             <AiFillQuestionCircle
@@ -36,7 +37,6 @@ export default function CostSummary({
           <td className={headStyle}>Area Average</td>
         </tr>
 
-        <tbody>
           <tr>
             <td className={tdStyle}>
               <div className={titleStyle}>
