@@ -66,7 +66,7 @@ export default function AddressList({
   }, [searchBoxText]);
 
   return (
-    <div className="h-[50vh] w-[35vw] max-w-[450px] min-w-[250px] rounded-default border-lightGrey bg-gray-50 drop-shadow-md">
+    <div className="relative h-[50vh] w-[35vw] max-w-[450px] min-w-[250px] rounded-default border-lightGrey bg-gray-50 drop-shadow-md">
       <div className="h-[45px] w-[100%] flex items-center justify-center cursor-pointer bg-lightGreen rounded-t-default font-semibold font-logoFont">
         <BackButton
           className="h-8 w-8 fill-gray-900 absolute left-[10px] transition-all duration-100 hover:h-[45px] hover:w-[45px]"
