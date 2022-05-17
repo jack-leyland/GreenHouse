@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { AiFillQuestionCircle } from 'react-icons/ai';
-import { MdOutlineSmartphone } from 'react-icons/md';
-import { GiCoalWagon } from 'react-icons/gi';
-import { AiFillCar } from 'react-icons/ai';
+import React, { Dispatch, SetStateAction } from "react";
+import { AiFillQuestionCircle } from "react-icons/ai";
+import { MdOutlineSmartphone } from "react-icons/md";
+import { GiCoalWagon } from "react-icons/gi";
+import { AiFillCar } from "react-icons/ai";
 import {
   Legend,
   RadarChart,
@@ -10,54 +10,54 @@ import {
   PolarRadiusAxis,
   PolarAngleAxis,
   PolarGrid,
-} from 'recharts';
-import { epcCertificateObject } from '../../types';
+} from "recharts";
+import { epcCertificateObject } from "../../types";
 
 interface props {
-  data: epcCertificateObject['House']['consumptionEnvEff'];
+  data: epcCertificateObject["House"]["consumptionEnvEff"];
   setModalHandler: Dispatch<SetStateAction<string>>;
 }
 
 export default function EnvironmentalSummary({ data, setModalHandler }: props) {
   const featureData = [
     {
-      feature: 'Windows',
+      feature: "Windows",
       rank: data.windowsEnvEff ? data.windowsEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Walls',
+      feature: "Walls",
       rank: data.wallsEnvEff ? data.wallsEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Roof',
+      feature: "Roof",
       rank: data.roofEnvEff ? data.roofEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Lighting',
+      feature: "Lighting",
       rank: data.lightingEnvEff ? data.lightingEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Heating',
+      feature: "Heating",
       rank: data.mainHeatEnvEff ? data.mainHeatEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Floor',
+      feature: "Floor",
       rank: data.floorEnvEff ? data.floorEnvEff : 0,
       total: 5,
     },
     {
-      feature: 'Water',
+      feature: "Water",
       rank: data.hotWaterEnvEff ? data.hotWaterEnvEff : 0,
       total: 5,
     },
   ];
 
-  const internationalNumberFormat = new Intl.NumberFormat('en-US');
+  const internationalNumberFormat = new Intl.NumberFormat("en-US");
   const kgsOfCoal = Math.round(
     (data.energyConsumptionCurrent - data.energyConsumptionPotential) /
       1.278 /
@@ -75,44 +75,44 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
       <div className="h-full flex flex-col pt-1 px-1">
         <div className="">
           <div className="pb-2 text-sm md:text-base">
-            Energy Consumption Current: <b>{data.energyConsumptionCurrent}</b>{' '}
+            Energy Consumption Current: <b>{data.energyConsumptionCurrent}</b>{" "}
             kWh/year
           </div>
           <div className="pb-2 text-sm md:text-base">
-            Energy Consumption Potential:{' '}
+            Energy Consumption Potential:{" "}
             <b>{data.energyConsumptionPotential}</b> kWh/year
           </div>
         </div>
         <div className="border border-x-0 border-t-0"></div>
 
         <div className="py-2 text-xs md:text-base">
-          You can potentially reduce your energy consumption by{' '}
+          You can potentially reduce your energy consumption by{" "}
           <b>
-            {data.energyConsumptionCurrent - data.energyConsumptionPotential}{' '}
+            {data.energyConsumptionCurrent - data.energyConsumptionPotential}{" "}
           </b>
           kWh/year.
         </div>
         <div className="py-2 text-xs md:text-base">This is equivalent to:</div>
         <div className="flex w-full justify-center gap-2 py-2">
           <div className="flex flex-col justify-center items-center w-1/3">
-            <MdOutlineSmartphone color={'#78abc4'} size={35} />
+            <MdOutlineSmartphone color={"#78abc4"} size={35} />
             <p className="text-center md:text-sm text-xs italic">
-              {internationalNumberFormat.format(phoneCharges)} smartphone{' '}
-              {phoneCharges > 1 ? 'charges' : 'charge'}
+              {internationalNumberFormat.format(phoneCharges)} smartphone{" "}
+              {phoneCharges > 1 ? "charges" : "charge"}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center w-1/3">
-            <AiFillCar color={'#963041'} size={35} />
+            <AiFillCar color={"#963041"} size={35} />
             <p className="text-center md:text-sm text-xs italic">
-              {internationalNumberFormat.format(carJourneys)} car{' '}
-              {carJourneys > 1 ? 'journeys' : 'journey'}
+              {internationalNumberFormat.format(carJourneys)} car{" "}
+              {carJourneys > 1 ? "journeys" : "journey"}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center w-1/3">
-            <GiCoalWagon color={'black'} size={35} />
+            <GiCoalWagon color={"black"} size={35} />
             <p className="text-center md:text-sm text-xs italic">
-              {internationalNumberFormat.format(kgsOfCoal)}{' '}
-              {kgsOfCoal > 1 ? 'kgs' : 'kg'} of coal
+              {internationalNumberFormat.format(kgsOfCoal)}{" "}
+              {kgsOfCoal > 1 ? "kgs" : "kg"} of coal
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
       <div className="mx-2">
         <div className="flex justify-center">
           <button
-            onClick={() => setModalHandler('carbonProduction')}
+            onClick={() => setModalHandler("carbonProduction")}
             className="mr-2 pt-2 font-semibold md:text-base text-sm md:hover:no-underline hover:underline"
           >
             Environmental Efficiency
@@ -131,7 +131,7 @@ export default function EnvironmentalSummary({ data, setModalHandler }: props) {
             <AiFillQuestionCircle
               size={16}
               className="hover:cursor-pointer"
-              onClick={() => setModalHandler('featureEfficiency')}
+              onClick={() => setModalHandler("featureEfficiency")}
             />
           </div>
         </div>
