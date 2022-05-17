@@ -23,7 +23,6 @@ def create_analytics(local_df):
     analytics = Analytics()
     analytics.number_of_houses = len(local_df)
     analytics.mean_current_energy_efficiency = local_df["current-energy-efficiency"].mean()
-    
     analytics.mean_current_energy_rating = convert_from_SAP(
         analytics.mean_current_energy_efficiency
     )

@@ -229,7 +229,7 @@ def av_annual_rating_data(dataframe, features=timeseries_metrics):
 def timeseries_data(dataframe, features=timeseries_metrics, years=L10_years):
 
     result = {}
-
+    
     # Create a new column in dataframe with "years"
     dataframe["YEAR"] = pd.DatetimeIndex(dataframe["INSPECTION_DATE"]).year
 
