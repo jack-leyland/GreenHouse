@@ -330,6 +330,36 @@ export default function HelpModal({ type }: props) {
         </div>
       );
 
+      case "BQimprovements":
+        return (
+          <div className={positionStyling}>
+            <div className={titleStyling}>Average Report Improvements</div>
+            <div className="py-1">
+            This chart looks at all properties in a particular area where there have been 2 or more EPC reports published since 2008, 
+            and compares the difference in ratings between the updated report and the original report. 
+            This is then adjusted into a per-year figure. For example, if lighting energy efficiency was 3 stars in a 2018 report for one property, 
+            and then 5 stars in a 2020 report for the same property, the chart would show a 1 star per year improvement in that metric.
+            </div>
+            <div className="py-1">
+            These improvements per-year are then averaged across the geographic region and returned in the chart below. 
+            Caution must be noted however that given the comparison is done only across addresses that have reported 2 or more reports, 
+            there is a selection skew of only houses that have performed significant enough home improvements to warrant an updated EPC. 
+            These results should therefore be viewed together with the aggregate chart on this page.
+            </div>
+          </div>
+        );
+
+        case "BQtimeseries":
+          return (
+            <div className={positionStyling}>
+              <div className={titleStyling}>EPC Report Trends</div>
+              <div className="py-1">
+              This chart shows the average ratings of all EPCs within the selected region conditional on inspection date from 2008 - 2021. 
+              The trend for each rating can be selected from the dropdown menu at the bottom of the chart.
+              </div>
+            </div>
+          );
+
     default:
       return null;
   }
