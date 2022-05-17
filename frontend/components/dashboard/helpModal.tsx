@@ -60,12 +60,9 @@ export default function HelpModal({ type }: props) {
             Your potential rating is a projection of the SAP score you could
             achieve if you make all the suggested improvements to your house. To
             see more about your potential improvements, see our{" "}
-            <a
-              className="text-blue-500"
-              href="https://epc-site-frontend.vercel.app/recommendations"
-            >
-              recommendations
-            </a>{" "}
+            <Link href="/recommendations">
+              <a className="text-blue-500">recommendations</a>
+            </Link>{" "}
             page!
           </div>
         </div>
@@ -83,12 +80,9 @@ export default function HelpModal({ type }: props) {
             <b>Potential costs</b> are projections of what your costs could be
             if you make all of the recommended improvements. To check out these
             improvements see our{" "}
-            <a
-              className="text-blue-500"
-              href="https://epc-site-frontend.vercel.app/recommendations"
-            >
-              recommendations
-            </a>{" "}
+            <Link href="/recommendations">
+              <a className="text-blue-500">recommendations</a>
+            </Link>{" "}
             page!
           </div>
           <div className="py-1">
@@ -332,6 +326,45 @@ export default function HelpModal({ type }: props) {
           <div className="py-1">
             <b>Secondary Heating Energy Efficiency:</b> Rating from 1-5 (5 being
             best, 0 being worst), for secondary heating energy efficiency.
+          </div>
+        </div>
+      );
+
+    case "BQimprovements":
+      return (
+        <div className={positionStyling}>
+          <div className={titleStyling}>Average Report Improvements</div>
+          <div className="py-1">
+            This chart looks at all properties in a particular area where there
+            have been 2 or more EPC reports published since 2008, and compares
+            the difference in ratings between the updated report and the
+            original report. This is then adjusted into a per-year figure. For
+            example, if lighting energy efficiency was 3 stars in a 2018 report
+            for one property, and then 5 stars in a 2020 report for the same
+            property, the chart would show a 1 star per year improvement in that
+            metric.
+          </div>
+          <div className="py-1">
+            These improvements per-year are then averaged across the geographic
+            region and returned in the chart below. Caution must be noted
+            however that given the comparison is done only across addresses that
+            have reported 2 or more reports, there is a selection skew of only
+            houses that have performed significant enough home improvements to
+            warrant an updated EPC. These results should therefore be viewed
+            together with the aggregate chart on this page.
+          </div>
+        </div>
+      );
+
+    case "BQtimeseries":
+      return (
+        <div className={positionStyling}>
+          <div className={titleStyling}>EPC Report Trends</div>
+          <div className="py-1">
+            This chart shows the average ratings of all EPCs within the selected
+            region conditional on inspection date from 2008 - 2021. The trend
+            for each rating can be selected from the dropdown menu at the bottom
+            of the chart.
           </div>
         </div>
       );

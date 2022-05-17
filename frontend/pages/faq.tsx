@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const FAQ = () => {
   return (
-    <div className="w-[80%] m-auto mt-4 overflow-y-scroll h-[80vh]">
+    <div className="w-[80%] m-auto mt-4 overflow-y-scroll h-[65vh] md:h-[80vh]">
       <h1 className="text-3xl font-medium text-gray-800">
         Frequently Asked Questions
       </h1>

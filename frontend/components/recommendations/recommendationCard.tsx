@@ -259,12 +259,13 @@ function CompletedView({
           {improvementIdText}
         </h1>
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
-          You completed this improvement on <strong>{strippedDate}</strong>.
-          Nice work!
+          You completed this improvement
+          {strippedDate ? " on " : ""}
+          {strippedDate ? <strong> {strippedDate}</strong> : ""}. Nice work!
         </h2>
         <br />
         <h2 className="text-sm tracking-wide title-font mb-1 font-bold">
-          You let us know that it cost you <strong>£{cost}</strong>.
+          You let us know that it cost you <strong>£{cost?.toFixed(2)}</strong>.
         </h2>
         <br />
         <h2 className="text-xs tracking-wide title-font mb-1 font-bold">
@@ -291,7 +292,6 @@ function NeighborhoodView({
   frequency,
   category,
   color,
-  setActiveView,
 }: neighborhoodViewProps) {
   return (
     <div
@@ -313,7 +313,8 @@ function NeighborhoodView({
         </h2>
         <br />
         <h2 className="text-sm tracking-wide title-font mb-1 font-medium">
-          They have reported an average cost of <strong>£{averageCost}</strong>.
+          They have reported an average cost of{" "}
+          <strong>£{averageCost?.toFixed(2)}</strong>.
         </h2>
         <br />
       </div>

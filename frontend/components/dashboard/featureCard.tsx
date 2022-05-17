@@ -53,7 +53,9 @@ export default function FeatureCard({
                     ? parseInt(data?.walls.wallsEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.walls?.meanWallsEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.walls?.meanWallsEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -62,7 +64,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.wallsEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.walls?.meanWallsEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.walls?.meanWallsEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>
@@ -99,7 +103,9 @@ export default function FeatureCard({
                     ? parseInt(data?.roof.roofEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.roof?.meanRoofEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.roof?.meanRoofEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -108,7 +114,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.roofEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.roof?.meanRoofEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.roof?.meanRoofEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>
@@ -147,7 +155,9 @@ export default function FeatureCard({
                     ? parseInt(data?.floor.floorEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.floor?.meanFloorEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.floor?.meanFloorEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -156,7 +166,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.floorEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.floor?.meanFloorEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.floor?.meanFloorEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>
@@ -207,7 +219,9 @@ export default function FeatureCard({
                     ? parseInt(data?.lighting.lightingEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.lighting.meanLightingEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.lighting.meanLightingEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -216,7 +230,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.lightingEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.lighting.meanLightingEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.lighting.meanLightingEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>
@@ -272,7 +288,9 @@ export default function FeatureCard({
                     ? parseInt(data?.heating.mainHeating.mainHeatEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.heating.meanMainHeatingEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.heating.meanMainHeatingEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -281,7 +299,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.mainHeatEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.heating.meanMainHeatingEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.heating.meanMainHeatingEnvironmentalEff.toFixed(1)
+                )}
               />
 
               <div className="py-2 font-bold text-lg w-full border border-x-0 border-t-0 text-gray-900">
@@ -420,7 +440,9 @@ export default function FeatureCard({
                     ? parseInt(data?.water.hotWaterEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.water.meanWaterEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.water.meanWaterEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -429,7 +451,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.hotWaterEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.water.meanWaterEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>
@@ -484,7 +508,9 @@ export default function FeatureCard({
                     ? parseInt(data?.windows.windowsEnergyEff)
                     : 0
                 }
-                areaAverage={analytics?.water.meanWaterEnergyEff}
+                areaAverage={parseFloat(
+                  analytics?.water.meanWaterEnergyEff.toFixed(1)
+                )}
               />
               <StarRating
                 title={"Environmental Efficiency"}
@@ -493,7 +519,9 @@ export default function FeatureCard({
                     ? parseInt(data?.consumptionEnvEff.windowsEnvEff)
                     : 0
                 }
-                areaAverage={analytics?.water.meanWaterEnvironmentalEff}
+                areaAverage={parseFloat(
+                  analytics?.water.meanWaterEnvironmentalEff.toFixed(1)
+                )}
               />
             </div>
           </div>

@@ -163,6 +163,22 @@ export const GET_BQ_DATA = gql`
       averageAnnualChangeSecondHeatingEnvironmentalEff
       averageAnnualChangeWindowsEnergyEff
       averageAnnualChangeWindowsEnvironmentalEff
+      averageTimeseriesLightingEnergyEff
+      averageTimeseriesLightingEnvironmentalEff
+      averageTimeseriesWallsEnergyEff
+      averageTimeseriesWallsEnvironmentalEff
+      averageTimeseriesWaterEnergyEff
+      averageTimeseriesWaterEnvironmentalEff
+      averageTimeseriesFloorEnergyEff
+      averageTimeseriesFloorEnvironmentalEff
+      averageTimeseriesRoofEnergyEff
+      averageTimeseriesRoofEnvironmentalEff
+      averageTimeseriesMainHeatingEnergyEff
+      averageTimeseriesMainHeatingEnvironmentalEff
+      averageTimeseriesMainHeatingControlsEnergyEff
+      averageTimeseriesMainHeatingControlsEnvironmentalEff
+      averageTimeseriesWindowsEnergyEff
+      averageTimeseriesWindowsEnvironmentalEff
     }
   }
 `;

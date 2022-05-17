@@ -6,6 +6,8 @@ import {
 import Recommendation from "./recommendationCard";
 import { v4 as uuid } from "uuid";
 import idTexts from "../../idTexts.json";
+import { AreaChart } from "recharts";
+import { GiConsoleController } from "react-icons/gi";
 
 interface props {
   data: Array<epcRecommendationObject>;
@@ -28,17 +30,26 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
   }, [data, regionData]);
 
   useEffect(() => {
-    if (recData.length == 0) {
-      setNoRecs(true);
-    }
-
     if (regionRecData.length == 0) {
       setNoRegionRecs(true);
     }
+    let allComplete = true;
+    let allInvalid = true;
 
     recData.forEach((elem) => {
-      if (elem.completed) setNoCompleted(false);
+      if (elem.completed) {
+        setNoCompleted(false);
+      } else {
+        allComplete = false;
+      }
+      if (elem.improvementId != "") {
+        allInvalid = false;
+      }
     });
+
+    if (allComplete || allInvalid) {
+      setNoRecs(true);
+    }
   }, [recData, regionRecData]);
 
   // Could cause weird behavior if I'm wrong about how
@@ -121,7 +132,7 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
           )}
           {recData.map((elem) => {
             if (activeView == "Outstanding") {
-              if (!elem.completed) {
+              if (!elem.completed && elem.improvementId != "") {
                 return (
                   <Recommendation
                     indicativeCost={formatCostString(elem.indicativeCost)}
@@ -153,20 +164,22 @@ export default function RecCardGallery({ data, isMobile, regionData }: props) {
           {regionRecData &&
             activeView == "Neighborhood" &&
             regionRecData.map((elem) => {
-              return (
-                <Recommendation
-                  averageCost={elem.averageCost}
-                  frequency={elem.frequency}
-                  improvementId={elem.improvementId}
-                  improvementIdText={
-                    (idTexts as any)[parseInt(elem.improvementId)]
-                  }
-                  key={uuid()}
-                  isMobile={isMobile}
-                  isLocal={true}
-                  setActiveView={setActiveView}
-                />
-              );
+              if (elem.improvementId != "") {
+                return (
+                  <Recommendation
+                    averageCost={elem.averageCost}
+                    frequency={elem.frequency}
+                    improvementId={elem.improvementId}
+                    improvementIdText={
+                      (idTexts as any)[parseInt(elem.improvementId)]
+                    }
+                    key={uuid()}
+                    isMobile={isMobile}
+                    isLocal={true}
+                    setActiveView={setActiveView}
+                  />
+                );
+              }
             })}
         </div>
       </div>

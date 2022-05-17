@@ -8,6 +8,7 @@ import {
   BsQuestionCircle,
   BsInfoCircle,
 } from "react-icons/bs";
+import { DiGoogleAnalytics } from "react-icons/di";
 import Image from "next/image";
 import PageTitle from "./generic/pageTitle";
 import House from "../assets/house.svg";
@@ -19,6 +20,7 @@ interface props {
   subTitle: string;
   setModalContent: any;
   currentPage: string;
+  analysis?: boolean;
 }
 
 function classNames(...classes: any) {
@@ -31,6 +33,7 @@ export default function DashboardWrapper({
   subTitle,
   setModalContent,
   currentPage,
+  analysis = false,
 }: props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -48,10 +51,16 @@ export default function DashboardWrapper({
       current: currentPage == "Recommendations",
     },
     {
-      name: "About us",
+      name: "Regional Analysis",
+      href: "/analysis",
+      icon: DiGoogleAnalytics,
+      current: currentPage == "Analysis",
+    },
+    {
+      name: "About Us",
       href: "/about",
       icon: BsInfoCircle,
-      current: currentPage == "About us",
+      current: currentPage == "About Us",
     },
     {
       name: "FAQ",
@@ -201,7 +210,7 @@ export default function DashboardWrapper({
           </div>
         </div>
         <div className="md:pl-64 flex flex-col">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow overflow-x-clip">
             <button
               type="button"
               className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -213,6 +222,7 @@ export default function DashboardWrapper({
             <PageTitle
               title={pageTitle}
               subtitle={subTitle}
+              analysis={analysis}
               onClick={() => setModalContent("address")}
             />
           </div>
