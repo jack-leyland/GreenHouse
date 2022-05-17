@@ -75,8 +75,8 @@ export default function PageTitle({
                 More Details
               </button>
             ) : (
-              <h3 className="mr-6 text-4xl text-orange-400 overflow-hidden hidden sm:block">
-                Beta
+              <h3 className="mr-6 text-sm lg:text-3xl italic text-orange-400 overflow-hidden hidden sm:block">
+                Beta <i className="text-sm italic">(Cambridge Only)</i>
               </h3>
             )}
           </div>
