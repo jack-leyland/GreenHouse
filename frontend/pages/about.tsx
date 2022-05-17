@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react';
-import Layout from '../components/generic/layout';
-import Footer from '../components/generic/footer';
-import StaticHeader from '../components/generic/staticHeader';
-import Link from 'next/link';
+import type { ReactElement } from "react";
+import Layout from "../components/generic/layout";
+import Footer from "../components/generic/footer";
+import StaticHeader from "../components/generic/staticHeader";
+import Link from "next/link";
 
 const About = () => {
   return (
@@ -22,7 +22,7 @@ const About = () => {
         made to your property, and interact with other homeowners like you to
         get an up-to-date view on the latest costs.
         <br /> <br />
-        To learn more about EPC certificates, check out our{' '}
+        To learn more about EPC certificates, check out our{" "}
         <Link href="/faq">
           <a className=" underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
             FAQ
@@ -50,7 +50,7 @@ const About = () => {
 
 About.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title={'GreenHouse | About us'}>
+    <Layout title={"GreenHouse | About us"}>
       <StaticHeader />
       {page}
       <Footer />

@@ -1,8 +1,8 @@
-import type { ReactElement } from 'react';
-import Layout from '../components/generic/layout';
-import Footer from '../components/generic/footer';
-import StaticHeader from '../components/generic/staticHeader';
-import Link from 'next/link';
+import type { ReactElement } from "react";
+import Layout from "../components/generic/layout";
+import Footer from "../components/generic/footer";
+import StaticHeader from "../components/generic/staticHeader";
+import Link from "next/link";
 
 const FAQ = () => {
   return (
@@ -25,7 +25,7 @@ const FAQ = () => {
         <br />
         Besides this, it also provides lots of helpful metrics on your
         property’s heating, lighting and energy costs, as well as some home
-        improvement recommendations. Explore our website to find out more!{' '}
+        improvement recommendations. Explore our website to find out more!{" "}
         <br />
         <br />
         <Link href="/">
@@ -56,7 +56,7 @@ const FAQ = () => {
       <p className="pl-2">
         To get a new EPC, you need to get assessed by a accredited domestic
         energy assessor, which can be sourced through the government’s search
-        tool{' '}
+        tool{" "}
         <Link href="https://getting-new-energy-certificate.service.gov.uk/find-an-assessor/type-of-property">
           <a className=" underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
             here.
@@ -102,7 +102,7 @@ const FAQ = () => {
 
 FAQ.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title={'GreenHouse | FAQ'}>
+    <Layout title={"GreenHouse | FAQ"}>
       <StaticHeader />
       {page}
       <Footer />

@@ -40,7 +40,7 @@ export default function PageTitle({
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="origin-top-left z-10 absolute right-20 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="origin-top-left z-10 absolute md:left-0 right-20 mt-2 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
                         {
                           <Menu.Item>
@@ -75,7 +75,9 @@ export default function PageTitle({
                 More Details
               </button>
             ) : (
-              <h3 className="mr-6 text-4xl text-orange-400 overflow-hidden hidden sm:block">Beta</h3>
+              <h3 className="mr-6 text-sm lg:text-3xl italic text-orange-400 overflow-hidden hidden sm:block">
+                Beta <i className="text-sm italic">(Cambridge Only)</i>
+              </h3>
             )}
           </div>
         </div>
