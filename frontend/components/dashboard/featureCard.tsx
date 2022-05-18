@@ -509,7 +509,7 @@ export default function FeatureCard({
                     : 0
                 }
                 areaAverage={parseFloat(
-                  analytics?.water.meanWaterEnergyEff.toFixed(1)
+                  analytics?.windows.meanWindowsEnergyEff.toFixed(1)
                 )}
               />
               <StarRating
@@ -520,7 +520,7 @@ export default function FeatureCard({
                     : 0
                 }
                 areaAverage={parseFloat(
-                  analytics?.water.meanWaterEnvironmentalEff.toFixed(1)
+                  analytics?.windows.meanWindowsEnvironmentalEff.toFixed(1)
                 )}
               />
             </div>
