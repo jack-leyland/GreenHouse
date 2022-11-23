@@ -1,4 +1,4 @@
-# !/bin/sh
+# !/bin/bash
 
 echo "Generating google-credentials.json from host environment variable"
 
