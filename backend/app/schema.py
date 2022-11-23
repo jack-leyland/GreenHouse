@@ -173,7 +173,7 @@ class Query(ObjectType):
         return create_recommendations(data, completed_recs)
 
     def resolve_big_query(root, info):
-        client = bigquery.Client.from_service_account_json(os.path.join(os.getcwd(),"../google-credentials.json"))
+        client = bigquery.Client.from_service_account_json("google-credentials.json")
 
         query = """
             SELECT *
