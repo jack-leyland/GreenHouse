@@ -4,6 +4,7 @@ import environ
 import pandas as pd
 import requests
 
+
 from google.cloud import bigquery
 from graphene import Boolean, Field, Float, List, Mutation, ObjectType, Schema, String
 from graphene_django import DjangoObjectType
@@ -173,11 +174,8 @@ class Query(ObjectType):
         return create_recommendations(data, completed_recs)
 
     def resolve_big_query(root, info):
-        try:
-            client = bigquery.Client.from_service_account_json("google-credentials.json")
-        except Exception as e:
-            print (str(e))
-            
+        client = bigquery.Client()
+
         query = """
             SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`

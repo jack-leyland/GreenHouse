@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "greenhouse-backend-production.up.railway.app"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://greenhouse-backend-production.up.railway.app"]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -44,7 +44,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://epc-site-frontend.vercel.app",
-    "https://epc-site-backend.herokuapp.com",
+    "https://greenhouse-backend-production.up.railway.app",
 ]
 
 CORS_ORIGIN_WHITELIST = [
