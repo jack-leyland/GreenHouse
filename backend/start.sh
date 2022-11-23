@@ -3,7 +3,7 @@
 echo "Generating google-credentials.json from host environment variable"
 
 echo $GOOGLE_CREDENTIALS > google-credentials.json
-ls
+
 exec "$@"
 
 eval "gunicorn api.wsgi:application --bind 0.0.0.0:$PORT"

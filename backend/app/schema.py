@@ -173,8 +173,11 @@ class Query(ObjectType):
         return create_recommendations(data, completed_recs)
 
     def resolve_big_query(root, info):
-        client = bigquery.Client.from_service_account_json("google-credentials.json")
-
+        try:
+            client = bigquery.Client.from_service_account_json("google-credentials.json")
+        except Exception as e:
+            print (str(e))
+            
         query = """
             SELECT *
             FROM `arcane-sentinel-340313.test_epc.cambridge`
