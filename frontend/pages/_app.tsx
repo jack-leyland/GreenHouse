@@ -16,7 +16,7 @@ const client = new ApolloClient({
   link: new (createHttpLink as any)({
     uri:
       process.env.NODE_ENV == 'development'
-        ? 'http://localhost:8000/graphql'
+        ? 'http://localhost:4411/graphql'
         : 'https://greenhouse-backend-production.up.railway.app/graphql',
   }),
   cache: new InMemoryCache(),
