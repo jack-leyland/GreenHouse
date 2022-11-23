@@ -2,7 +2,7 @@
 
 echo "Generating google-credentials.json from host environment variable"
 
-printf "%s" $GOOGLE_CREDENTIALS > google-credentials.json
+echo $GOOGLE_CREDENTIALS > google-credentials.json
 
 exec "$@"
 cat google-credentials.json
