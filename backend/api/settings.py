@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="foo")
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "epc-site-backend.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "greenhouse-backend-production.up.railway.app"]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
