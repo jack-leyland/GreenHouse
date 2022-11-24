@@ -38,6 +38,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://epc-site-frontend.vercel.app",
+    "https://greenhouse-backend-production.up.railway.app"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -51,6 +52,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://epc-site-frontend.vercel.app",
+    "https://greenhouse-backend-production.up.railway.app"
 ]
 
 # Application definition
